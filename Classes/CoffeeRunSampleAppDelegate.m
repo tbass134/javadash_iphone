@@ -304,8 +304,7 @@ static NSString* kAppId = @"189714094427611";
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     printf("applicationDidBecomeActive");
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    [[NSNotificationCenter defaultCenter] removeObserver:@"reloadData"];
-	//[[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
 }
 - (void)applicationWillTerminate:(UIApplication *)application {
 	//Clear the array when the app quits
