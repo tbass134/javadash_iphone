@@ -1,0 +1,849 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Starbucks</key>
+	<dict>
+		<key>Food</key>
+		<dict>
+			<key>Bakery</key>
+			<array>
+				<string>Apple Bran Muffin</string>
+				<string>Apple Fritter
+</string>
+				<string>Banana Nut Loaf</string>
+				<string>Birthday Cake Mini Doughnut</string>
+				<string>Blueberry Oat Bar</string>
+				<string>Blueberry Scone</string>
+				<string>Blueberry Streusel Muffin</string>
+				<string>Butter Croissant</string>
+				<string>Cheese Danish</string>
+				<string>Chocolate Chunk Cookie</string>
+				<string>Chocolate Croissant</string>
+				<string>Chocolate Old-Fashioned Doughnut</string>
+				<string>Cinnamon Chip Scone</string>
+				<string>Cranberry Orange Scone</string>
+				<string>Double Chocolate Brownie</string>
+				<string>Double Fudge Mini Doughnut</string>
+				<string>Double Fudge Mini Doughnut</string>
+				<string>Ginger Molasses Cookie</string>
+				<string>Iced Lemon Pound Cake</string>
+				<string>Mallorca Sweet Bread</string>
+				<string>Maple Oat Pecan Scone</string>
+				<string>Maple Oat Pecan Scone</string>
+				<string>Marshmallow Dream Bar</string>
+				<string>Morning Bun</string>
+				<string>Multigrain Bagel</string>
+				<string>Multigrain Bagel</string>
+				<string>Outrageous Oatmeal Cookie</string>
+				<string>Petite Vanilla Bean Scone</string>
+				<string>Plain Bagel</string>
+				<string>Pumpkin Bread</string>
+				<string>Pumpkin Cream Cheese Muffin</string>
+				<string>Pumpkin Scone</string>
+				<string>Raspberry Scone</string>
+				<string>Reduced-Fat Banana Chocolate Chip Coffee Cake</string>
+				<string>Reduced-Fat Cinnamon Swirl Coffee Cake</string>
+				<string>Reduced-Fat Very Berry Coffee Cake</string>
+				<string>Starbucks® Classic Coffee Cake</string>
+				<string>Zucchini Walnut Muffin</string>
+				<string>8-Grain Roll</string>
+			</array>
+			<key>Starbucks Petites</key>
+			<array>
+				<string>Birthday Cake Pop</string>
+				<string>Carrot Cake Mini Cupcake</string>
+				<string>Lemon Sweet Square</string>
+				<string>Peanut Butter Mini Cupcake</string>
+				<string>Red Velvet Whoopie Pie</string>
+				<string>Rocky Road Cake Pop</string>
+				<string>Salted Caramel Sweet Square</string>
+				<string>Tiramisu Cake Pop</string>
+			</array>
+			<key>Bistro Boxes</key>
+			<array>
+				<string>Cheese &amp; Fruit Bistro Box</string>
+				<string>Chicken &amp; Hummus Bistro Box</string>
+				<string>Chicken Lettuce Wraps Bistro Box</string>
+				<string>Chipotle Chicken Wraps Bistro Box</string>
+				<string>Protein Bistro Box</string>
+				<string>Salumi &amp; Cheese Bistro Box</string>
+				<string>Sesame Noodles Bistro Box</string>
+				<string>Tuna Salad</string>
+			</array>
+			<key>Hot Breakfast</key>
+			<array>
+				<string>Bacon &amp; Gouda Artisan Breakfast Sandwich</string>
+				<string>Brown Sugar Topping for Starbucks® Perfect Oatmeal</string>
+				<string>Dried Fruit Topping for Starbucks® Perfect Oatmeal</string>
+				<string>Ham &amp; Cheddar Artisan Breakfast Sandwich</string>
+				<string>Nut Medley Topping for Starbucks® Perfect Oatmeal</string>
+				<string>Reduced-Fat Turkey Bacon, White Cheddar &amp; Cage-Free Egg White Classic Breakfast Sandwich</string>
+				<string>Sausage &amp; Cheddar Classic Breakfast Sandwich</string>
+				<string>Spinach, Feta &amp; Cage-Free Egg White Breakfast Wrap</string>
+				<string>Starbucks® Perfect Oatmeal</string>
+				<string>Veggie &amp; Monterey Jack Artisan Breakfast Sandwich</string>
+			</array>
+			<key>Salads</key>
+			<array>
+				<string>Deluxe Fruit Blend</string>
+			</array>
+			<key>Sandwiches, Panini &amp; Wraps</key>
+			<array>
+				<string>Ham &amp; Swiss Panini</string>
+				<string>Roasted Tomato &amp; Mozzarella Panini</string>
+				<string>Roasted Vegetable Panini</string>
+				<string>Tarragon Chicken Salad Sandwich</string>
+				<string>Turkey &amp; Swiss Sandwich</string>
+			</array>
+			<key>Ice Cream</key>
+			<array>
+				<string>Caramel Macchiato Ice Cream</string>
+				<string>Coffee Ice Cream</string>
+				<string>Java Chip Frappuccino® Ice Cream</string>
+				<string>Mocha Frappuccino® Ice Cream</string>
+				<string>Peppermint Mocha Ice Cream</string>
+				<string>Signature Hot Chocolate Ice Cream</string>
+				<string>Strawberries &amp; Crème Frappuccino® Ice Cream</string>
+				<string>Vanilla Bean Frappuccino® Ice Cream</string>
+			</array>
+			<key>Yogurt Parfaits</key>
+			<array>
+				<string>Dark Cherry Yogurt Parfait</string>
+				<string>Greek Yogurt Honey Parfait</string>
+				<string>Strawberry &amp; Blueberry Yogurt Parfait</string>
+			</array>
+		</dict>
+		<key>Drinks</key>
+		<dict>
+			<key>Drink Options</key>
+			<dict>
+				<key>Milk</key>
+				<array>
+					<string>Nonfat</string>
+					<string>1%</string>
+					<string>2%</string>
+					<string>Whole</string>
+					<string>Soy</string>
+					<string>Breve</string>
+					<string>Heavy Cream</string>
+				</array>
+				<key>Add-ins</key>
+				<array>
+					<string>1% milk</string>
+					<string>2% milk</string>
+					<string>Banana</string>
+					<string>Equal®</string>
+					<string>Frappuccino® Chips</string>
+					<string>Half-and-Half</string>
+					<string>Heavy Cream</string>
+					<string>Honey</string>
+					<string>Ice</string>
+					<string>Matcha Green Tea Powder</string>
+					<string>Soy Milk</string>
+					<string>Splenda®</string>
+					<string>Strawberry Fruit Juice</string>
+					<string>Sugar</string>
+					<string>Sugar In The Raw®</string>
+					<string>Sweet &apos;n Low®</string>
+					<string>Vanilla Bean Powder</string>
+					<string>Water</string>
+					<string>Whole Milk</string>
+				</array>
+				<key>Preparation</key>
+				<array>
+					<string>Double Blended</string>
+					<string>Double Cup</string>
+					<string>Ristretto</string>
+					<string>Stirred</string>
+					<string>Upside Down</string>
+					<string>Other (custom)</string>
+				</array>
+				<key>Toppings</key>
+				<array>
+					<string>Caramel Brulee Topping *</string>
+					<string>Caramel Drizzle</string>
+					<string>Chocolate Curls *</string>
+					<string>Chocolate Powder</string>
+					<string>Cinnamon Powder</string>
+					<string>Ginger Topping *</string>
+					<string>Mocha Drizzle</string>
+					<string>Nutmeg Powder</string>
+					<string>Peppermint Whipped Cream *</string>
+					<string>Pumpkin Spice Topping *</string>
+					<string>Sea Salt Topping *</string>
+					<string>Sprinkles</string>
+					<string>Vanilla Powder</string>
+					<string>Whipped Cream</string>
+				</array>
+				<key>Syrups</key>
+				<array>
+					<string>Caramel Brulee Syrup *</string>
+					<string>Caramel Syrup</string>
+					<string>Chai Concentrate</string>
+					<string>Cinnamon Dolce Syrup</string>
+					<string>Classic Syrup</string>
+					<string>Dark Cherry Syrup *</string>
+					<string>Gingerbread Syrup *</string>
+					<string>Hazelnut Syrup</string>
+					<string>Mocha Syrup</string>
+					<string>Peppermint Syrup</string>
+					<string>Peppermint Syrup</string>
+					<string>Raspberry Syrup</string>
+					<string>Strawberry Fruit Sauce</string>
+					<string>Sugar Free Cinnamon Dolce Syrup</string>
+					<string>Sugar Free Gingerbread Syrup *</string>
+					<string>Sugar Free Mocha Syrup</string>
+					<string>Sugar Free Vanilla Syrup</string>
+					<string>Toffee Nut Syrup</string>
+					<string>Vanilla Syrup</string>
+					<string>White Chocolate Mocha Syrup</string>
+				</array>
+				<key>Ristretto</key>
+				<false/>
+				<key>Caffeine</key>
+				<array>
+					<string>Regular</string>
+					<string>1/3</string>
+					<string>1/2</string>
+					<string>2/3</string>
+					<string>Decaf</string>
+				</array>
+				<key>Size</key>
+				<array>
+					<string>Short</string>
+					<string>Tall</string>
+					<string>Grande</string>
+					<string>Venti</string>
+				</array>
+			</dict>
+			<key>Iced</key>
+			<dict>
+				<key>Tea</key>
+				<dict>
+					<key>Tea Lattes</key>
+					<array>
+						<string>Tazo® Green Tea Latte</string>
+						<string>Tazo® Awake™ Tea Latte</string>
+						<string>Tazo® Chai Tea Latte</string>
+						<string>Tazo® Chai Eggnog Latte</string>
+					</array>
+					<key>Iced Tea Lemonade</key>
+					<array>
+						<string>Tazo® Shaken Iced Black Tea Lemonde</string>
+						<string>Tazo® Shaken Iced Green Tea Lemonade</string>
+						<string>Tazo® Shaken Iced Passion Black Tea Lemonade</string>
+					</array>
+					<key>Iced Tea</key>
+					<array>
+						<string>Tazo® Shaken Iced Black Tea</string>
+						<string>Tazo® Shaken Iced Green Tea</string>
+						<string>Tazo® Shaken Iced Passion Tea</string>
+					</array>
+				</dict>
+				<key>Espresso</key>
+				<dict>
+					<key>Signature Expresso</key>
+					<array>
+						<string>Caramel Macchiato</string>
+						<string>Cinnamon Dolce Latte</string>
+						<string>Eggnog Latte</string>
+						<string>Flavored Caffe Latte</string>
+						<string>Ginerbread Latte</string>
+						<string>Pumkin Spice Latte</string>
+						<string>Salted Caramel Mocha</string>
+						<string>Skinny Caramel Latte</string>
+						<string>Skinny Caramel Macchinato</string>
+						<string>Skinny Cinnamon Dolce Latte</string>
+						<string>Skinny Flavored Latte</string>
+						<string>Skinny Hazelnut Dolce Lattee</string>
+						<string>Skinny Latte</string>
+						<string>Skinny Vanilla Latte</string>
+						<string>White Chocolate Mocha</string>
+					</array>
+					<key>Classic Espresso</key>
+					<array>
+						<string>Caffé Americano</string>
+						<string>Caffé Latte</string>
+						<string>Caffé Mocha</string>
+					</array>
+				</dict>
+				<key>Brewed Coffee</key>
+				<array>
+					<string>Iced Brewed Coffee</string>
+					<string>Iced Coffee with Milk</string>
+				</array>
+				<key>Frappuccino Blended Beverages</key>
+				<array>
+					<string>Espresso</string>
+					<string>Double Chocolaty Chip</string>
+					<string>Coffee Light</string>
+					<string>Coffee</string>
+					<string>Cinnamon Dolce Light</string>
+					<string>Cinnamon Dolce</string>
+					<string>Cinnamon Dolce Crème</string>
+					<string>Caramel Light</string>
+					<string>Caramel</string>
+					<string>Caffe Vanilla Light</string>
+					<string>Caffe Vanilla</string>
+					<string>Extra Coffee Caramel</string>
+					<string>Java Chip</string>
+					<string>Java Chip Light</string>
+					<string>Mocha</string>
+					<string>Mocha Light</string>
+					<string>Pumpkin Spice Crème</string>
+					<string>Pumpkin Spice</string>
+					<string>Strawberries and Crème</string>
+					<string>Tazo Chai Crème</string>
+					<string>Tazo Green Tea Crème</string>
+					<string>Toffee Mocha Light</string>
+					<string>Toffee Mocha</string>
+					<string>Vanilla Bean Crème</string>
+					<string>White Chocolate Crème</string>
+					<string>White Chocolate Mocha</string>
+				</array>
+				<key>Bottled Drinks</key>
+				<array>
+					<string>Starbucks Doubleshot® Energy+Mocha Drink</string>
+					<string>Starbucks Doubleshot® Espresso Drink</string>
+					<string>Starbucks Doubleshot® Light Espresso Drink</string>
+					<string>Starbucks Doubleshot® Energy+Vanilla Drink</string>
+					<string>Starbucks® Bottled Mocha Frappuccino® Coffee Drink</string>
+					<string>Starbucks® Bottled Coffee Frappuccino® Coffee Drink</string>
+					<string>Starbucks® Bottled Vanilla Frappuccino® Coffee Drink</string>
+					<string>Starbucks® Bottled Dark Chocolate Mocha Frappuccino® Coffee Drink</string>
+					<string>Starbucks Doubleshot® Energy+Coffee Drink</string>
+					<string>Starbucks Doubleshot® Energy+Cinnamon Dolce Drink</string>
+				</array>
+				<key>Vivanno Smoothies</key>
+				<array>
+					<string>Orange Mango Smoothie</string>
+					<string>Chocolate Smoothie</string>
+					<string>Strawberry Smoothie</string>
+				</array>
+				<key>Other Drinks</key>
+				<dict>
+					<key>Juice</key>
+					<array>
+						<string>Cold Apple Juice</string>
+					</array>
+					<key>Milk</key>
+					<array>
+						<string>Milk</string>
+					</array>
+				</dict>
+			</dict>
+			<key>Hot</key>
+			<dict>
+				<key>Other Drinks</key>
+				<dict>
+					<key>Juice</key>
+					<array>
+						<string>Caramel Apple Spice</string>
+						<string>Steamed Apple Juice</string>
+					</array>
+					<key>Milk</key>
+					<array/>
+					<key>New item</key>
+					<string>Flavored Streamed Milk</string>
+					<key>Chocolates</key>
+					<array>
+						<string>White Hot Chocolate</string>
+						<string>Salted Caramel Hot Chocolate</string>
+						<string>Hot Chocolate</string>
+					</array>
+				</dict>
+				<key>Tea</key>
+				<dict>
+					<key>Tea Lattes</key>
+					<array>
+						<string>Tazo® Vanilla Rooibos Brewed Tea</string>
+						<string>Tazo® Green Tea Latte</string>
+						<string>Tazo® Earl Grey Tea Latte</string>
+						<string>Tazo® Awake™ Tea Latte</string>
+						<string>Tazo® Chai Tea Latte</string>
+					</array>
+					<key>Brewed Tea</key>
+					<array>
+						<string>Tazo® Awake™ Brewed Tea</string>
+						<string>Tazo® Calm™ Brewed Tea</string>
+						<string>Tazo® China Green Tips Brewed Tea</string>
+						<string>Tazo® Earl Grey Brewed Tea</string>
+						<string>Tazo® Orange Blossom Brewed Tea</string>
+						<string>Tazo® Passion™ Brewed Tea</string>
+						<string>Tazo® Refresh™ Brewed Tea</string>
+						<string>Tazo® Vanilla Rooibos Brewed Tea</string>
+						<string>Tazo® Zen™ Brewed Tea</string>
+					</array>
+				</dict>
+				<key>Espresso</key>
+				<dict>
+					<key>Signature Expresso</key>
+					<array>
+						<string>Caramel Macchiato</string>
+						<string>Cinnamon Dolce Latte</string>
+						<string>Eggnog Latte</string>
+						<string>Flavored Caffe Latte</string>
+						<string>Ginerbread Latte</string>
+						<string>Pumkin Spice Latte</string>
+						<string>Salted Caramel Mocha</string>
+						<string>Skinny Caramel Latte</string>
+						<string>Skinny Caramel Macchinato</string>
+						<string>Skinny Cinnamon Dolce Latte</string>
+						<string>Skinny Flavored Latte</string>
+						<string>Skinny Hazelnut Dolce Lattee</string>
+						<string>Skinny Latte</string>
+						<string>Skinny Vanilla Latte</string>
+						<string>White Chocolate Mocha</string>
+					</array>
+					<key>Classic Espresso</key>
+					<array>
+						<string>Espresso</string>
+						<string>Espresso Con Panna</string>
+						<string>Espresso Macchiato</string>
+						<string>Caramel Macchiato</string>
+						<string>Cappuccino</string>
+						<string>Caffé Americano</string>
+						<string>Caffé Latte</string>
+						<string>Caffé Mocha</string>
+					</array>
+				</dict>
+				<key>Brewed Coffee</key>
+				<array>
+					<string>Bold Pick of the Day</string>
+					<string>Café Misto</string>
+					<string>Decaf Pike Place Roast</string>
+					<string>Pike Place Roast</string>
+				</array>
+			</dict>
+		</dict>
+	</dict>
+	<key>Dunkin Donuts</key>
+	<dict>
+		<key>Food</key>
+		<dict>
+			<key>Breakfast Sandwiches</key>
+			<array>
+				<string>Sausage</string>
+				<string>Egg and Cheese with Ham</string>
+				<string>Egg and Cheese with Sausage</string>
+				<string>Egg and Cheese with Bacon</string>
+				<string>Egg and Cheese</string>
+			</array>
+			<key>Hash Browns</key>
+			<array>
+				<string>Hash Browns</string>
+			</array>
+			<key>Flatbread</key>
+			<array>
+				<string>Chicken Parmesan</string>
+				<string>Turkey, Chedder &amp; Bacon</string>
+				<string>Ham &amp; Cheese</string>
+				<string>Grilled Cheese</string>
+				<string>Egg White, Turkey Sausage &amp; Cheese</string>
+				<string>Egg White, Veggie &amp; Cheese</string>
+			</array>
+			<key>Bagels</key>
+			<array>
+				<string>Plain</string>
+				<string>Sesame</string>
+				<string>Poppyseed</string>
+				<string>Everything</string>
+				<string>Garlic</string>
+				<string>Cinnamon Raisin</string>
+				<string>Salt</string>
+				<string>Multigrain</string>
+				<string>Onion</string>
+				<string>Sour Cream and Onion</string>
+				<string>Wheat</string>
+				<string>Mixed (only if quantity &gt; 1)</string>
+			</array>
+			<key>Cookies &amp; Other Baked Items</key>
+			<array>
+				<string>Oatmeal Raisin Cookie</string>
+				<string>Chocolate Chunk Cookie</string>
+				<string>Brownie</string>
+			</array>
+			<key>Fancies</key>
+			<array>
+				<string>Apple Fritter</string>
+				<string>Coffee Roll</string>
+				<string>Éclair</string>
+				<string>Long John</string>
+				<string>Bowtie</string>
+			</array>
+			<key>Muffins</key>
+			<array>
+				<string>Reduced Fat Blueberry</string>
+				<string>Chocolate Chip</string>
+				<string>Bran</string>
+				<string>Corn</string>
+				<string>Coffee Cake</string>
+				<string>Blueberry</string>
+			</array>
+			<key>Danish</key>
+			<array>
+				<string>Cheese</string>
+				<string>Strawberry Cheese</string>
+				<string>Apple</string>
+			</array>
+			<key>Donut Sticks</key>
+			<array>
+				<string>Glazed</string>
+				<string>Chocolate Glazed</string>
+				<string>Plain Cake</string>
+				<string>Jelly Filled</string>
+				<string>Powdered</string>
+				<string>Cinnamon</string>
+			</array>
+			<key>Munchkins™</key>
+			<array>
+				<string>Glazed</string>
+				<string>Chocolate Glazed</string>
+				<string>Powdered</string>
+				<string>Mixed</string>
+				<string>Cinnamon</string>
+				<string>Sugar Raised</string>
+			</array>
+			<key>Donuts</key>
+			<array>
+				<string>Strawberry Sprinkles</string>
+				<string>Chocolate Glazed</string>
+				<string>Powdered</string>
+				<string>Sugar Raised</string>
+				<string>Rainbow Sprinkles</string>
+				<string>Chocolate Frosted</string>
+				<string>Old Fashioned</string>
+				<string>Glazed</string>
+				<string>Blueberry Frosted</string>
+				<string>Marble Frosted</string>
+				<string>Cinnamon</string>
+				<string>French Cruller</string>
+				<string>Boston Crème</string>
+				<string>Apple and Spice</string>
+				<string>Jelly</string>
+				<string>Toffee For Your Coffee</string>
+			</array>
+		</dict>
+		<key>Drinks</key>
+		<dict>
+			<key>Drink Options</key>
+			<dict>
+				<key>Size</key>
+				<array>
+					<string>Small</string>
+					<string>Medium</string>
+					<string>Large</string>
+					<string>Extra Large</string>
+				</array>
+				<key>Add Turbo Shot™ of Espresso</key>
+				<false/>
+				<key>Sweetener</key>
+				<array>
+					<string>None</string>
+					<string>Sugar</string>
+					<string>Sweet n&apos; Low™</string>
+					<string>Equal®</string>
+					<string>Splenda®</string>
+				</array>
+				<key>Flavor Shot</key>
+				<array>
+					<string>Blueberry</string>
+					<string>Cinnamon</string>
+					<string>French Vanilla</string>
+					<string>Raspberry</string>
+					<string>Caramel</string>
+					<string>Coconut</string>
+					<string>Hazelnut</string>
+					<string>Toasted Almond</string>
+				</array>
+				<key>Blend</key>
+				<array>
+					<string>Original</string>
+					<string>Dunkin Decaf®</string>
+				</array>
+				<key>Milk</key>
+				<array>
+					<string>None</string>
+					<string>Cream</string>
+					<string>Whole Milk</string>
+					<string>Skim Milk</string>
+				</array>
+			</dict>
+			<key>Hot</key>
+			<dict>
+				<key>Tea</key>
+				<array>
+					<string>Regular</string>
+					<string>Decaffienated</string>
+					<string>English Breakfast</string>
+					<string>Green Tea</string>
+					<string>Earl Grey</string>
+				</array>
+				<key>Turbo Shot</key>
+				<dict>
+					<key>Turbo Shot</key>
+					<string></string>
+				</dict>
+				<key>Hot Chocolate</key>
+				<dict>
+					<key>Hot Chocolate</key>
+					<string></string>
+				</dict>
+				<key>Dunkaccino</key>
+				<array>
+					<string>Blueberry</string>
+					<string>Caramel</string>
+					<string>Hazelnut</string>
+					<string>Cinnamon</string>
+					<string>Original</string>
+					<string>Toasted Almond</string>
+					<string>Raspberry</string>
+					<string>Coconut</string>
+					<string>French Vanilla</string>
+					<string>Dunkin Decaf®</string>
+					<string>Mocha</string>
+				</array>
+				<key>Cappuccino</key>
+				<array>
+					<string>Caramel</string>
+					<string>Cinnamon</string>
+					<string>Hazelnut</string>
+					<string>Raspberry</string>
+					<string>Toasted Almond</string>
+					<string>French Vanilla</string>
+					<string>Coconut</string>
+					<string>Mocha</string>
+				</array>
+				<key>Coffee</key>
+				<array>
+					<string>Dunkin Decaf®</string>
+					<string>Original</string>
+					<string>Caramel</string>
+					<string>Cinnamon</string>
+					<string>Hazelnut</string>
+					<string>Raspberry</string>
+					<string>French Vanilla</string>
+					<string>Toasted Almond</string>
+					<string>Blueberry</string>
+					<string>Mocha</string>
+					<string>Coconut</string>
+				</array>
+				<key>Espresso</key>
+				<array>
+					<string>Espresso</string>
+				</array>
+				<key>Latte</key>
+				<array>
+					<string>Caramel Swirl</string>
+					<string>Mocha Raspberry</string>
+					<string>Mocha Spice</string>
+					<string>Mocha Swirl</string>
+					<string>Pumpkin</string>
+					<string>Vanilla</string>
+					<string>Caramel Mocha</string>
+					<string>Original</string>
+				</array>
+				<key>Latte Lite</key>
+				<array>
+					<string>Blueberry</string>
+					<string>Cinnamon</string>
+					<string>French Vanilla</string>
+					<string>Caramel</string>
+					<string>Coconut</string>
+					<string>Raspberry</string>
+					<string>Toasted Almond</string>
+					<string>Hazelnut</string>
+				</array>
+				<key>Box O&apos; Joe®</key>
+				<array>
+					<string>Caramel</string>
+					<string>Cinnamon</string>
+					<string>Blueberry</string>
+					<string>Hazelnut</string>
+					<string>Raspberry</string>
+					<string>Toasted Almond</string>
+					<string>French Vanilla</string>
+					<string>Coconut</string>
+				</array>
+			</dict>
+			<key>Iced</key>
+			<dict>
+				<key>Iced Tea</key>
+				<array>
+					<string>None</string>
+					<string>Raspberry</string>
+					<string>Peach</string>
+				</array>
+				<key>Iced Sweet Tea</key>
+				<array>
+					<string>None</string>
+					<string>Raspberry</string>
+					<string>Peach</string>
+				</array>
+				<key>Coolatta®</key>
+				<array>
+					<string>Fruit</string>
+					<string>Vanilla Bean</string>
+					<string>Coffee</string>
+					<string>Tropicana Orange</string>
+					<string>Strawberry</string>
+				</array>
+				<key>Coffee</key>
+				<array>
+					<string>Original</string>
+					<string>Dunkin Decaf®</string>
+					<string>Caramel</string>
+					<string>Blueberry</string>
+					<string>Cinnamon</string>
+					<string>Hazelnut</string>
+					<string>Raspberry</string>
+					<string>Toasted Almond</string>
+					<string>Coconut</string>
+					<string>Mocha</string>
+					<string>French Vanilla</string>
+				</array>
+				<key>Iced Latte</key>
+				<array>
+					<string>Blueberry</string>
+					<string>Caramel</string>
+					<string>Caramel Swirl</string>
+					<string>Cinnamon</string>
+					<string>Hazelnut</string>
+					<string>Raspberry</string>
+					<string>Toasted Almond</string>
+					<string>French Vanilla</string>
+					<string>Coconut</string>
+					<string>Mocha</string>
+					<string>Mocha Swirl</string>
+				</array>
+				<key>Iced Latte Lite</key>
+				<array>
+					<string>Caramel</string>
+					<string>Cinnamon</string>
+					<string>Hazelnut</string>
+					<string>Raspberry</string>
+					<string>Toasted Almond</string>
+					<string>French Vanilla</string>
+					<string>Mocha</string>
+					<string>Coconut</string>
+					<string>Blueberry</string>
+				</array>
+				<key>Frozen Cappuccino</key>
+				<array>
+					<string>Caramel</string>
+					<string>Mocha</string>
+					<string>Original</string>
+				</array>
+			</dict>
+		</dict>
+	</dict>
+	<key>Generic</key>
+	<dict>
+		<key>Drinks</key>
+		<dict>
+			<key>Drink Options</key>
+			<dict>
+				<key>Add Shot of Espresso</key>
+				<false/>
+				<key>Sweetener</key>
+				<array>
+					<string>None</string>
+					<string>Sugar</string>
+					<string>Sweet n&apos; Low™</string>
+					<string>Equal®</string>
+					<string>Splenda®</string>
+				</array>
+				<key>Blend</key>
+				<array>
+					<string>Original</string>
+					<string>Decaf</string>
+				</array>
+				<key>Milk</key>
+				<array>
+					<string>None</string>
+					<string>Cream</string>
+					<string>Whole Milk</string>
+					<string>Skim Milk</string>
+					<string>1%</string>
+					<string>2%</string>
+				</array>
+				<key>Size</key>
+				<array>
+					<string>Small</string>
+					<string>Medium</string>
+					<string>Large</string>
+					<string>Extra Large</string>
+				</array>
+			</dict>
+			<key>Hot</key>
+			<dict>
+				<key>Coffee</key>
+				<array>
+					<string>Brewed Coffee</string>
+					<string>Flavored Coffee (please specify)</string>
+				</array>
+				<key>Tea</key>
+				<array>
+					<string>Green Tea</string>
+					<string>Black Tea</string>
+				</array>
+				<key>Espresso</key>
+				<array>
+					<string>Espresso</string>
+				</array>
+				<key>Latte</key>
+				<array>
+					<string>Blueberry</string>
+					<string>Cinnamon</string>
+					<string>Raspberry</string>
+					<string>Caramel</string>
+					<string>French Vanilla</string>
+					<string>Hazelnut</string>
+					<string>Toasted Almond</string>
+					<string>Coconut</string>
+				</array>
+				<key>Cappuccino</key>
+				<array>
+					<string>Toasted Almond</string>
+					<string>Hazelnut</string>
+					<string>Coconut</string>
+					<string>Caramel</string>
+					<string>Raspberry</string>
+					<string>French Vanilla</string>
+					<string>Cinnamon</string>
+					<string>Blueberry</string>
+				</array>
+				<key>Hot Chocolate</key>
+				<array>
+					<string>Hot Chocolate</string>
+				</array>
+			</dict>
+			<key>Iced</key>
+			<dict>
+				<key>Coffee</key>
+				<array>
+					<string>Flavored Coffee (please specify)</string>
+					<string>Brewed Coffee</string>
+				</array>
+				<key>Iced Tea</key>
+				<array>
+					<string>Sweetened</string>
+					<string>Unsweetened</string>
+				</array>
+				<key>Iced Latte</key>
+				<array>
+					<string>Cinnamon</string>
+					<string>Cinnamon</string>
+					<string>French Vanilla</string>
+					<string>Caramel</string>
+					<string>Coconut</string>
+					<string>Toasted Almond</string>
+					<string>Hazelnut</string>
+					<string>Raspberry</string>
+				</array>
+			</dict>
+		</dict>
+	</dict>
+</dict>
+</plist>

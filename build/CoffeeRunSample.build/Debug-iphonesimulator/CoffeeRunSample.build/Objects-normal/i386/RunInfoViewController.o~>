@@ -1,0 +1,10 @@
+/Users/thung/Documents/PROJECTS LOCAL/CoffeeRun/JavaDash_iphone/Classes/RunInfoViewController.m:20: error: no declaration of property 'yelp_img' found in the interface
+/Users/thung/Documents/PROJECTS LOCAL/CoffeeRun/JavaDash_iphone/Classes/RunInfoViewController.m: In function '-[RunInfoViewController viewDidLoad]':
+/Users/thung/Documents/PROJECTS LOCAL/CoffeeRun/JavaDash_iphone/Classes/RunInfoViewController.m:49: error: 'yelp_img' undeclared (first use in this function)
+/Users/thung/Documents/PROJECTS LOCAL/CoffeeRun/JavaDash_iphone/Classes/RunInfoViewController.m:49: error: (Each undeclared identifier is reported only once
+/Users/thung/Documents/PROJECTS LOCAL/CoffeeRun/JavaDash_iphone/Classes/RunInfoViewController.m:49: error: for each function it appears in.)
+/Users/thung/Documents/PROJECTS LOCAL/CoffeeRun/JavaDash_iphone/Classes/RunInfoViewController.m:100: warning: 'NSArray' may not respond to '-allKeys'
+/Users/thung/Documents/PROJECTS LOCAL/CoffeeRun/JavaDash_iphone/Classes/RunInfoViewController.m:100: warning: (Messages without a matching method signature
+/Users/thung/Documents/PROJECTS LOCAL/CoffeeRun/JavaDash_iphone/Classes/RunInfoViewController.m:100: warning: will be assumed to return 'id' and accept
+/Users/thung/Documents/PROJECTS LOCAL/CoffeeRun/JavaDash_iphone/Classes/RunInfoViewController.m:100: warning: '...' as arguments.)
+/Users/thung/Documents/PROJECTS LOCAL/CoffeeRun/JavaDash_iphone/Classes/RunInfoViewController.m:106: warning: 'NSArray' may not respond to '-objectForKey:'

@@ -1,0 +1,28 @@
+TIPA
+v7
+r1
+
+N/Users/Antonio/Desktop/CoffeeRunSample(New)/build/CoffeeRunSample.build/Debug-iphonesimulator/IPA.build/Script-45AAD53D12EA208A006F90DC.sh
+c00000000000000000000000000000000
+t2
+s0
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/Debug-iphonesimulator/IPA.build/Script-45AAD53D12EA208A006F90DC.sh
+c00000000000000000000000000000000
+t2
+s0
+
+N/Users/thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/Debug-iphonesimulator/IPA.build/Script-45AAD53D12EA208A006F90DC.sh
+c00000000000000000000000000000000
+t2
+s0
+
+CPhaseScriptExecution "Run Script" "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/Debug-iphonesimulator/IPA.build/Script-45AAD53D12EA208A006F90DC.sh"
+r0
+
+CPhaseScriptExecution "Run Script" "/Users/thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/Debug-iphonesimulator/IPA.build/Script-45AAD53D12EA208A006F90DC.sh"
+r0
+
+CPhaseScriptExecution "Run Script" /Users/Antonio/Desktop/CoffeeRunSample(New)/build/CoffeeRunSample.build/Debug-iphonesimulator/IPA.build/Script-45AAD53D12EA208A006F90DC.sh
+r0
+

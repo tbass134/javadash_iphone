@@ -1,0 +1,2 @@
+/Volumes/Dark Bear Interactive/CoffeeRun/CoffeeRunSample(New)/Classes/FriendsTableListView.m: In function '-[FriendsTableListView tableView:cellForRowAtIndexPath:]':
+/Volumes/Dark Bear Interactive/CoffeeRun/CoffeeRunSample(New)/Classes/FriendsTableListView.m:102: warning: local declaration of 'tableView' hides instance variable

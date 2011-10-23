@@ -1,0 +1,1372 @@
+TCoffeeRunSample
+v7
+r0
+t317698422.040433
+cCheck dependencies
+cProcessInfoPlistFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/Info.plist" CoffeeRunSample-Info.plist
+cCompileXIB "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/MainWindow.xib"
+cCompileXIB "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/CoffeeRunSampleViewController.xib"
+cCpResource build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/BumpAPIAssets.bundle Classes/BumpAPIAssets.bundle
+cCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/da.lproj/BumpApiLocalizable.strings" Classes/Localizations/da.lproj/BumpApiLocalizable.strings
+cCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/de.lproj/BumpApiLocalizable.strings" Classes/Localizations/de.lproj/BumpApiLocalizable.strings
+cCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/el.lproj/BumpApiLocalizable.strings" Classes/Localizations/el.lproj/BumpApiLocalizable.strings
+cCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/en.lproj/BumpApiLocalizable.strings" Classes/Localizations/en.lproj/BumpApiLocalizable.strings
+cCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/es.lproj/BumpApiLocalizable.strings" Classes/Localizations/es.lproj/BumpApiLocalizable.strings
+cCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/fr.lproj/BumpApiLocalizable.strings" Classes/Localizations/fr.lproj/BumpApiLocalizable.strings
+cCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/he.lproj/BumpApiLocalizable.strings" Classes/Localizations/he.lproj/BumpApiLocalizable.strings
+cCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/it.lproj/BumpApiLocalizable.strings" Classes/Localizations/it.lproj/BumpApiLocalizable.strings
+cCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/ja.lproj/BumpApiLocalizable.strings" Classes/Localizations/ja.lproj/BumpApiLocalizable.strings
+cCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/ko.lproj/BumpApiLocalizable.strings" Classes/Localizations/ko.lproj/BumpApiLocalizable.strings
+cCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/nl.lproj/BumpApiLocalizable.strings" Classes/Localizations/nl.lproj/BumpApiLocalizable.strings
+cCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/no.lproj/BumpApiLocalizable.strings" Classes/Localizations/no.lproj/BumpApiLocalizable.strings
+cCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/pl.lproj/BumpApiLocalizable.strings" Classes/Localizations/pl.lproj/BumpApiLocalizable.strings
+cCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/pt.lproj/BumpApiLocalizable.strings" Classes/Localizations/pt.lproj/BumpApiLocalizable.strings
+cCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/ru.lproj/BumpApiLocalizable.strings" Classes/Localizations/ru.lproj/BumpApiLocalizable.strings
+cCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/sv.lproj/BumpApiLocalizable.strings" Classes/Localizations/sv.lproj/BumpApiLocalizable.strings
+cCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/zh-Hans.lproj/BumpApiLocalizable.strings" Classes/Localizations/zh-Hans.lproj/BumpApiLocalizable.strings
+cCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/zh-Hant.lproj/BumpApiLocalizable.strings" Classes/Localizations/zh-Hant.lproj/BumpApiLocalizable.strings
+cCpResource build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/Localization-ReadMe.txt Classes/Localizations/Localization-ReadMe.txt
+cCompileXIB "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.xib"
+cCompileXIB "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/RunDetails.xib"
+cCopyPlistFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/CoffeeList.plist" Classes/plists/CoffeeList.plist
+cCompileXIB "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeOrderTableViewController.xib"
+cCompileXIB "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/NameListViewController.xib"
+cProcessPCH /var/folders/CW/CW15OtLOG2uaYSrCFo2tqE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CoffeeRunSample_Prefix-dfwjkaoifbxpvggdcafghumnlzch/CoffeeRunSample_Prefix.pch.gch CoffeeRunSample_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
+cDataModelCompile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/CoffeeRun.mom" "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/CoffeeRun.xcdatamodel"
+cCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/main.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/main.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/CoffeeRunSampleAppDelegate.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleAppDelegate.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/CoffeeRunSampleViewController.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/Utils.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Utils.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/MapViewController.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/CoffeeLocation.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeLocation.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/NSObject+SBJSON.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/NSObject+SBJSON.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/NSString+SBJSON.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/NSString+SBJSON.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/SBJSON.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJSON.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/SBJsonBase.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJsonBase.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/SBJsonParser.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJsonParser.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/SBJsonWriter.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJsonWriter.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/ParkPlaceMark.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/ParkPlaceMark.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/FriendsList.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/FriendsList.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/RunDetails.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/RunDetails.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/ComapanyList.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/ComapanyList.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/CoffeeOrderTableViewController.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeOrderTableViewController.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/NameListViewController.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/NameListViewController.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/SavedDrinksList.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/SavedDrinksList.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+cLd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/CoffeeRunSample" normal i386
+cGenerateDSYMFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app.dSYM" "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/CoffeeRunSample"
+cTouch "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app"
+
+N/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk
+c000000004CC128950000000000000110
+t1287727253
+s272
+
+N/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/AudioToolbox.framework/AudioToolbox
+c000000004CC1224600000000001EA9C0
+t1287725638
+s2009536
+
+N/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/CoreData.framework/CoreData
+c000000004CC122A000000000001D6CE0
+t1287725728
+s1928416
+
+N/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/CoreData.framework/Headers/CoreData.h
+c000000004CC12294000000000000046B
+t1287725716
+s1131
+
+N/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+c000000004CC12246000000000029B310
+t1287725638
+s2732816
+
+N/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/CoreLocation.framework/CoreLocation
+c000000004CC127E80000000000074190
+t1287727080
+s475536
+
+N/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/CoreLocation.framework/Headers/CoreLocation.h
+c000000004CC127DD00000000000001D0
+t1287727069
+s464
+
+N/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c000000004CC1226D000000000029D5D0
+t1287725677
+s2741712
+
+N/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
+c000000004CC1225F0000000000001466
+t1287725663
+s5222
+
+N/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/MapKit.framework/Headers/MKReverseGeocoder.h
+c000000004CC1294D00000000000006F1
+t1287727437
+s1777
+
+N/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/MapKit.framework/Headers/MapKit.h
+c000000004CC1294D00000000000002FE
+t1287727437
+s766
+
+N/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/MapKit.framework/MapKit
+c000000004CC12977000000000017E7F0
+t1287727479
+s1566704
+
+N/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/QuartzCore.framework/QuartzCore
+c000000004CC12431000000000015CDB0
+t1287726129
+s1428912
+
+N/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
+c000000004CC1281F0000000000000AA1
+t1287727135
+s2721
+
+N/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/UIKit.framework/UIKit
+c000000004CC12883000000000074D7B0
+t1287727235
+s7657392
+
+N/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/usr/lib/libsqlite3.dylib
+c000000004CC109D90000000000092C20
+t1287719385
+s601120
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/BumpAPI.h
+c000000004CF54D6600000000000015C2
+t1291144550
+s5570
+i<Foundation/Foundation.h>
+i"Bumper.h"
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/BumpAPIAssets.bundle
+c000000004D38BDC20000000000000220
+t1295564226
+s544
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Bumper.h
+c000000004CF54D66000000000000032D
+t1291144550
+s813
+i<Foundation/Foundation.h>
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeLocation.h
+c000000004D19174800000000000007DA
+t1293489992
+s2010
+i<Foundation/Foundation.h>
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeLocation.m
+c000000004D19170C0000000000000221
+t1293489932
+s545
+i"CoffeeLocation.h"
+i"JSON.h"
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeOrderTableViewController.h
+c000000004D3A07E400000000000002A1
+t1295648740
+s673
+i<UIKit/UIKit.h>
+i"SavedDrinksList.h"
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeOrderTableViewController.m
+c000000004D3A09520000000000001B8A
+t1295649106
+s7050
+i"CoffeeOrderTableViewController.h"
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeOrderTableViewController.xib
+c000000004D385FC60000000000004FD3
+t1295540166
+s20435
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleAppDelegate.h
+c000000004D39FCEA0000000000000576
+t1295645930
+s1398
+i<UIKit/UIKit.h>
+i<CoreData/CoreData.h>
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleAppDelegate.m
+c000000004D39FE9E0000000000002A18
+t1295646366
+s10776
+i"CoffeeRunSampleAppDelegate.h"
+i"CoffeeRunSampleViewController.h"
+i"Utils.h"
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.h
+c000000004D39FCF40000000000000617
+t1295645940
+s1559
+i<UIKit/UIKit.h>
+i<CoreData/CoreData.h>
+i"BumpAPI.h"
+i"Bumper.h"
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m
+c000000004D3F79EF00000000000015F2
+t1296005615
+s5618
+i"CoffeeRunSampleViewController.h"
+i"MapViewController.h"
+i"Utils.h"
+i<MapKit/MapKit.h>
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/ComapanyList.h
+c000000004D2CCA0000000000000000E6
+t1294780928
+s230
+i<Foundation/Foundation.h>
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/ComapanyList.m
+c000000004D2CCD48000000000000012C
+t1294781768
+s300
+i"ComapanyList.h"
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/FriendsList.h
+c000000004D277F0000000000000000F2
+t1294434048
+s242
+i<UIKit/UIKit.h>
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/FriendsList.m
+c000000004D2787B000000000000008EC
+t1294436272
+s2284
+i"FriendsList.h"
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/JSON.h
+c000000004B93BE5E00000000000008F9
+t1267973726
+s2297
+i"SBJSON.h"
+i"NSObject+SBJSON.h"
+i"NSString+SBJSON.h"
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/NSObject+SBJSON.h
+c000000004B93BE5E0000000000000A01
+t1267973726
+s2561
+i<Foundation/Foundation.h>
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/NSObject+SBJSON.m
+c000000004B93BE5E000000000000089E
+t1267973726
+s2206
+i"NSObject+SBJSON.h"
+i"SBJsonWriter.h"
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/NSString+SBJSON.h
+c000000004B93BE5E0000000000000916
+t1267973726
+s2326
+i<Foundation/Foundation.h>
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/NSString+SBJSON.m
+c000000004B93BE5E000000000000087D
+t1267973726
+s2173
+i"NSString+SBJSON.h"
+i"SBJsonParser.h"
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJSON.h
+c000000004B93BE5E0000000000000AED
+t1267973726
+s2797
+i<Foundation/Foundation.h>
+i"SBJsonParser.h"
+i"SBJsonWriter.h"
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJSON.m
+c000000004B93BE5E0000000000001ABC
+t1267973726
+s6844
+i"SBJSON.h"
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJsonBase.h
+c000000004B93BE5E0000000000000B82
+t1267973726
+s2946
+i<Foundation/Foundation.h>
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJsonBase.m
+c000000004B93BE5E0000000000000AC1
+t1267973726
+s2753
+i"SBJsonBase.h"
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJsonParser.h
+c000000004B93BE5E0000000000000C0B
+t1267973726
+s3083
+i<Foundation/Foundation.h>
+i"SBJsonBase.h"
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJsonParser.m
+c000000004B93C6A400000000000036D0
+t1267975844
+s14032
+i"SBJsonParser.h"
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJsonWriter.h
+c000000004B93BE5E0000000000001140
+t1267973726
+s4416
+i<Foundation/Foundation.h>
+i"SBJsonBase.h"
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJsonWriter.m
+c000000004B93BE5E0000000000001F26
+t1267973726
+s7974
+i"SBJsonWriter.h"
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/Localization-ReadMe.txt
+c000000004CF54D660000000000000517
+t1291144550
+s1303
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/da.lproj/BumpApiLocalizable.strings
+c000000004CF54D66000000000000099F
+t1291144550
+s2463
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/de.lproj/BumpApiLocalizable.strings
+c000000004CF54D660000000000000A49
+t1291144550
+s2633
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/el.lproj/BumpApiLocalizable.strings
+c000000004CF54D6600000000000009EF
+t1291144550
+s2543
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/en.lproj/BumpApiLocalizable.strings
+c000000004CF54D6600000000000009F6
+t1291144550
+s2550
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/es.lproj/BumpApiLocalizable.strings
+c000000004CF54D660000000000000A45
+t1291144550
+s2629
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/fr.lproj/BumpApiLocalizable.strings
+c000000004CF54D6600000000000009FD
+t1291144550
+s2557
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/he.lproj/BumpApiLocalizable.strings
+c000000004CF54D660000000000000967
+t1291144550
+s2407
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/it.lproj/BumpApiLocalizable.strings
+c000000004CF54D660000000000000A3D
+t1291144550
+s2621
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/ja.lproj/BumpApiLocalizable.strings
+c000000004CF54D660000000000000929
+t1291144550
+s2345
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/ko.lproj/BumpApiLocalizable.strings
+c000000004CF54D660000000000000925
+t1291144550
+s2341
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/nl.lproj/BumpApiLocalizable.strings
+c000000004CF54D660000000000000A3B
+t1291144550
+s2619
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/no.lproj/BumpApiLocalizable.strings
+c000000004CF54D6600000000000009BD
+t1291144550
+s2493
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/pl.lproj/BumpApiLocalizable.strings
+c000000004CF54D6600000000000009C3
+t1291144550
+s2499
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/pt.lproj/BumpApiLocalizable.strings
+c000000004CF54D6600000000000009C1
+t1291144550
+s2497
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/ru.lproj/BumpApiLocalizable.strings
+c000000004CF54D6600000000000009E9
+t1291144550
+s2537
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/sv.lproj/BumpApiLocalizable.strings
+c000000004CF54D6600000000000009BD
+t1291144550
+s2493
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/zh-Hans.lproj/BumpApiLocalizable.strings
+c000000004CF54D6600000000000008BF
+t1291144550
+s2239
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/zh-Hant.lproj/BumpApiLocalizable.strings
+c000000004CF54D6600000000000008BD
+t1291144550
+s2237
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.h
+c000000004D2CD778000000000000083B
+t1294784376
+s2107
+i<UIKit/UIKit.h>
+i<MapKit/MapKit.h>
+i<MapKit/MKReverseGeocoder.h>
+i<CoreLocation/CoreLocation.h>
+i"CoffeeLocation.h"
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m
+c000000004D39F11E000000000000354A
+t1295642910
+s13642
+i"MapViewController.h"
+i"ParkPlaceMark.h"
+i"RunDetails.h"
+i"JSON.h"
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.xib
+c000000004D3882CB0000000000009D42
+t1295549131
+s40258
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/NameListViewController.h
+c000000004D3868A00000000000000163
+t1295542432
+s355
+i<UIKit/UIKit.h>
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/NameListViewController.m
+c000000004D389EA00000000000000E6E
+t1295556256
+s3694
+i"NameListViewController.h"
+i"CoffeeOrderTableViewController.h"
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/NameListViewController.xib
+c000000004D3866E2000000000000187D
+t1295541986
+s6269
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/ParkPlaceMark.h
+c000000004D1AD1CE0000000000000270
+t1293603278
+s624
+i<Foundation/Foundation.h>
+i<MapKit/MapKit.h>
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/ParkPlaceMark.m
+c000000004D1AD1F000000000000001D0
+t1293603312
+s464
+i"ParkPlaceMark.h"
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/RunDetails.h
+c000000004D2B7CC4000000000000022A
+t1294695620
+s554
+i<UIKit/UIKit.h>
+i"FriendsList.h"
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/RunDetails.m
+c000000004D3A06A00000000000000CFB
+t1295648416
+s3323
+i"RunDetails.h"
+i"NameListViewController.h"
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/RunDetails.xib
+c000000004D2B3B280000000000003E61
+t1294678824
+s15969
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/SavedDrinksList.h
+c000000004D3A0A880000000000000172
+t1295649416
+s370
+i<Foundation/Foundation.h>
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/SavedDrinksList.m
+c000000004D3CC5C100000000000004FD
+t1295828417
+s1277
+i"SavedDrinksList.h"
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Utils.h
+c000000004D182BFE0000000000000106
+t1293429758
+s262
+i<Foundation/Foundation.h>
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Utils.m
+c000000004D182BFE000000000000067D
+t1293429758
+s1661
+i"Utils.h"
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/libBumpAPI.a
+c000000004CF54D66000000000223057C
+t1291144550
+s35849596
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/plists/CoffeeList.plist
+c000000004D389D5800000000000060EF
+t1295555928
+s24815
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/CoffeeRun.xcdatamodel
+c000000004D3A0AC20000000000000088
+t1295649474
+s136
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/CoffeeRunSampleViewController.xib
+c000000004D2B80C00000000000008889
+t1294696640
+s34953
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/CoffeeRunSample_Prefix.pch
+c000000004D07936800000000000000C7
+t1292342120
+s199
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/MainWindow.xib
+c000000004D2773600000000000006440
+t1294431072
+s25664
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app
+t1296005622
+s1122
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app.dSYM
+t1296005622
+s102
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/BumpAPIAssets.bundle
+t1296005616
+s544
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/CoffeeList.plist
+t1296005617
+s9044
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/CoffeeOrderTableViewController.nib
+t1296005618
+s971
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/CoffeeRun.mom
+t1296005619
+s488
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/CoffeeRunSample
+t1296005621
+s4727684
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/CoffeeRunSampleViewController.nib
+t1296005616
+s2718
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/Info.plist
+t1296005615
+s631
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/Localization-ReadMe.txt
+t1296005617
+s1303
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/MainWindow.nib
+t1296005616
+s1139
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/MapViewController.nib
+t1296005618
+s3094
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/NameListViewController.nib
+t1296005618
+s764
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/PkgInfo
+t1296005615
+s8
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/RunDetails.nib
+t1296005617
+s1811
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/da.lproj/BumpApiLocalizable.strings
+t1296005616
+s497
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/de.lproj/BumpApiLocalizable.strings
+t1296005616
+s729
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/el.lproj/BumpApiLocalizable.strings
+t1296005616
+s716
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/en.lproj/BumpApiLocalizable.strings
+t1296005616
+s286
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/es.lproj/BumpApiLocalizable.strings
+t1296005616
+s620
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/fr.lproj/BumpApiLocalizable.strings
+t1296005616
+s698
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/he.lproj/BumpApiLocalizable.strings
+t1296005616
+s572
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/it.lproj/BumpApiLocalizable.strings
+t1296005616
+s659
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/ja.lproj/BumpApiLocalizable.strings
+t1296005616
+s571
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/ko.lproj/BumpApiLocalizable.strings
+t1296005616
+s567
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/nl.lproj/BumpApiLocalizable.strings
+t1296005616
+s603
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/no.lproj/BumpApiLocalizable.strings
+t1296005616
+s554
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/pl.lproj/BumpApiLocalizable.strings
+t1296005616
+s653
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/pt.lproj/BumpApiLocalizable.strings
+t1296005616
+s595
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/ru.lproj/BumpApiLocalizable.strings
+t1296005616
+s714
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/sv.lproj/BumpApiLocalizable.strings
+t1296005617
+s693
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/zh-Hans.lproj/BumpApiLocalizable.strings
+t1296005617
+s459
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/zh-Hant.lproj/BumpApiLocalizable.strings
+t1296005617
+s457
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/CoffeeLocation.o
+t1296005619
+s32356
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/CoffeeOrderTableViewController.o
+t1296005620
+s56088
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/CoffeeRunSample.LinkFileList
+c000000004D3F79EF0000000000000E39
+t1296005615
+s3641
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/CoffeeRunSampleAppDelegate.o
+t1296005619
+s86984
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/CoffeeRunSampleViewController.o
+t1296005619
+s78108
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/ComapanyList.o
+t1296005620
+s7016
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/FriendsList.o
+t1296005620
+s45972
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/MapViewController.o
+t1296005620
+s103876
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/NSObject+SBJSON.o
+t1296005620
+s8384
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/NSString+SBJSON.o
+t1296005620
+s8304
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/NameListViewController.o
+t1296005620
+s50596
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/ParkPlaceMark.o
+t1296005620
+s16748
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/RunDetails.o
+t1296005620
+s51488
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/SBJSON.o
+t1296005620
+s20172
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/SBJsonBase.o
+t1296005620
+s13304
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/SBJsonParser.o
+t1296005620
+s36012
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/SBJsonWriter.o
+t1296005620
+s25640
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/SavedDrinksList.o
+t1296005620
+s11376
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/Utils.o
+t1296005619
+s10936
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/main.o
+t1296005619
+s6388
+
+N/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/main.m
+c000000004D0793680000000000000166
+t1292342120
+s358
+i<UIKit/UIKit.h>
+
+N/var/folders/CW/CW15OtLOG2uaYSrCFo2tqE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CoffeeRunSample_Prefix-dfwjkaoifbxpvggdcafghumnlzch/CoffeeRunSample_Prefix.pch.gch
+t1296005619
+s15453392
+
+NCoffeeRunSample-Info.plist
+c000000004D0844FE000000000000037D
+t1292387582
+s893
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies317698415#317698415#0(0"0(0#1#0"7142823858204516352#0"0#
+
+CCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/CoffeeLocation.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeLocation.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+s317698419.883642
+e317698419.976622
+r1
+xCompileC
+xbuild/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/CoffeeLocation.o
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeLocation.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@101"Compile /Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeLocation.m317698419#317698419#0(0"0(0#0#93"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeLocation.m8619775296#2595"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-generated-files.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-own-target-headers.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-all-target-headers.hmap" -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-project-headers.hmap" "-F/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/include" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources/i386" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources" -include /var/folders/CW/CW15OtLOG2uaYSrCFo2tqE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CoffeeRunSample_Prefix-dfwjkaoifbxpvggdcafghumnlzch/CoffeeRunSample_Prefix.pch -c "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeLocation.m" -o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/CoffeeLocation.o"0#
+
+CCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/CoffeeOrderTableViewController.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeOrderTableViewController.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+s317698420.468998
+e317698420.574864
+r1
+xCompileC
+xbuild/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/CoffeeOrderTableViewController.o
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeOrderTableViewController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+o/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeOrderTableViewController.m: In function '-[CoffeeOrderTableViewController tableView:didSelectRowAtIndexPath:]':
+o/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeOrderTableViewController.m:175: warning: unused variable 'newCell'
+lSLF07#2@117"Compile /Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeOrderTableViewController.m317698420#317698420#0(345"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeOrderTableViewController.m: In function '-[CoffeeOrderTableViewController tableView:didSelectRowAtIndexPath:]':/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeOrderTableViewController.m:175: warning: unused variable 'newCell'1(22@25"Unused variable 'newCell'317698420#195#150#0(6@109"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeOrderTableViewController.m317341906#175#0#175#0#19"unused variable '*'0(0#0#109"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeOrderTableViewController.m8619781408#2627"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-generated-files.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-own-target-headers.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-all-target-headers.hmap" -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-project-headers.hmap" "-F/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/include" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources/i386" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources" -include /var/folders/CW/CW15OtLOG2uaYSrCFo2tqE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CoffeeRunSample_Prefix-dfwjkaoifbxpvggdcafghumnlzch/CoffeeRunSample_Prefix.pch -c "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeOrderTableViewController.m" -o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/CoffeeOrderTableViewController.o"0#
+
+CCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/CoffeeRunSampleAppDelegate.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleAppDelegate.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+s317698419.672010
+e317698419.803579
+r1
+xCompileC
+xbuild/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/CoffeeRunSampleAppDelegate.o
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleAppDelegate.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+o/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleAppDelegate.m:291: warning: property 'nav' requires method '-nav' to be defined - use @synthesize, @dynamic or provide a method implementation
+o/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleAppDelegate.m:291: warning: property 'nav' requires the method 'setNav:' to be defined - use @synthesize, @dynamic or provide a method implementation
+lSLF07#2@113"Compile /Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleAppDelegate.m317698419#317698419#0(477"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleAppDelegate.m:291: warning: property 'nav' requires method '-nav' to be defined - use @synthesize, @dynamic or provide a method implementation/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleAppDelegate.m:291: warning: property 'nav' requires the method 'setNav:' to be defined - use @synthesize, @dynamic or provide a method implementation2(22@114"Property 'nav' requires method '-nav' to be defined - use @synthesize, @dynamic or provide a method implementation317698419#0#235#0(6@105"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleAppDelegate.m317339166#291#0#291#0#0"0(22@121"Property 'nav' requires the method 'setNav:' to be defined - use @synthesize, @dynamic or provide a method implementation317698419#235#242#0(6@105"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleAppDelegate.m317339166#291#0#291#0#0"0(0#0#105"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleAppDelegate.m8621711264#2619"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-generated-files.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-own-target-headers.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-all-target-headers.hmap" -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-project-headers.hmap" "-F/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/include" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources/i386" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources" -include /var/folders/CW/CW15OtLOG2uaYSrCFo2tqE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CoffeeRunSample_Prefix-dfwjkaoifbxpvggdcafghumnlzch/CoffeeRunSample_Prefix.pch -c "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleAppDelegate.m" -o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/CoffeeRunSampleAppDelegate.o"0#
+
+CCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/CoffeeRunSampleViewController.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+s317698419.701842
+e317698419.854057
+r1
+xCompileC
+xbuild/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/CoffeeRunSampleViewController.o
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+o/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m: In function '-[CoffeeRunSampleViewController bumpDataReceived:]':
+o/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m:76: warning: 'Utils' may not respond to '+printDict:'
+o/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m:76: warning: (Messages without a matching method signature
+o/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m:76: warning: will be assumed to return 'id' and accept
+o/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m:76: warning: '...' as arguments.)
+o/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m: At top level:
+o/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m:197: warning: property 'bump_btn' requires method '-bump_btn' to be defined - use @synthesize, @dynamic or provide a method implementation
+o/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m:197: warning: property 'bump_btn' requires the method 'setBump_btn:' to be defined - use @synthesize, @dynamic or provide a method implementation
+o/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m:197: warning: incomplete implementation of class 'CoffeeRunSampleViewController'
+o/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m:197: warning: method definition for '-startGame' not found
+lSLF07#2@116"Compile /Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m317698419#317698419#0(1799"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m: In function '-[CoffeeRunSampleViewController bumpDataReceived:]':/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m:76: warning: 'Utils' may not respond to '+printDict:'/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m:76: warning: (Messages without a matching method signature/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m:76: warning: will be assumed to return 'id' and accept/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m:76: warning: '...' as arguments.)/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m: At top level:/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m:197: warning: property 'bump_btn' requires method '-bump_btn' to be defined - use @synthesize, @dynamic or provide a method implementation/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m:197: warning: property 'bump_btn' requires the method 'setBump_btn:' to be defined - use @synthesize, @dynamic or provide a method implementation/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m:197: warning: incomplete implementation of class 'CoffeeRunSampleViewController'/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m:197: warning: method definition for '-startGame' not found7(22@40"'Utils' may not respond to '+printDict:'317698419#176#163#0(6@108"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m317698415#76#0#76#0#26"'*' may not respond to '*'0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)317698419#339#168#0(6@108"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m317698415#76#0#76#0#0"0(23@13"At top level:317698419#814#124#0(6@108"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m317698415#0#0#0#0#0"0(22@124"Property 'bump_btn' requires method '-bump_btn' to be defined - use @synthesize, @dynamic or provide a method implementation317698419#938#248#0(6@108"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m317698415#197#0#197#0#0"0(22@131"Property 'bump_btn' requires the method 'setBump_btn:' to be defined - use @synthesize, @dynamic or provide a method implementation317698419#1186#255#0(6@108"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m317698415#197#0#197#0#0"0(22@66"Incomplete implementation of class 'CoffeeRunSampleViewController'317698419#1441#190#0(6@108"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m317698415#197#0#197#0#38"incomplete implementation of class '*'0(22@44"Method definition for '-startGame' not found317698419#1631#168#0(6@108"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m317698415#197#0#197#0#35"method definition for '*' not found0(0#0#108"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m8619708032#2625"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-generated-files.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-own-target-headers.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-all-target-headers.hmap" -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-project-headers.hmap" "-F/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/include" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources/i386" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources" -include /var/folders/CW/CW15OtLOG2uaYSrCFo2tqE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CoffeeRunSample_Prefix-dfwjkaoifbxpvggdcafghumnlzch/CoffeeRunSample_Prefix.pch -c "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeRunSampleViewController.m" -o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/CoffeeRunSampleViewController.o"0#
+
+CCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/ComapanyList.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/ComapanyList.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+s317698420.406328
+e317698420.468899
+r1
+xCompileC
+xbuild/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/ComapanyList.o
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/ComapanyList.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+o/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/ComapanyList.m: In function '-[ComapanyList getCompany]':
+o/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/ComapanyList.m:16: warning: unused variable 'coffeeDict'
+o/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/ComapanyList.m:18: warning: control reaches end of non-void function
+lSLF07#2@99"Compile /Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/ComapanyList.m317698420#317698420#0(415"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/ComapanyList.m: In function '-[ComapanyList getCompany]':/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/ComapanyList.m:16: warning: unused variable 'coffeeDict'/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/ComapanyList.m:18: warning: control reaches end of non-void function2(22@28"Unused variable 'coffeeDict'317698420#135#134#0(6@91"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/ComapanyList.m316474568#16#0#16#0#19"unused variable '*'0(22@40"Control reaches end of non-void function317698420#269#146#0(6@91"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/ComapanyList.m316474568#18#0#18#0#40"control reaches end of non-void function0(0#0#91"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/ComapanyList.m8606942336#2591"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-generated-files.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-own-target-headers.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-all-target-headers.hmap" -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-project-headers.hmap" "-F/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/include" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources/i386" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources" -include /var/folders/CW/CW15OtLOG2uaYSrCFo2tqE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CoffeeRunSample_Prefix-dfwjkaoifbxpvggdcafghumnlzch/CoffeeRunSample_Prefix.pch -c "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/ComapanyList.m" -o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/ComapanyList.o"0#
+
+CCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/FriendsList.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/FriendsList.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+s317698420.292076
+e317698420.406237
+r1
+xCompileC
+xbuild/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/FriendsList.o
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/FriendsList.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@98"Compile /Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/FriendsList.m317698420#317698420#0(0"0(0#0#90"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/FriendsList.m8614605408#2589"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-generated-files.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-own-target-headers.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-all-target-headers.hmap" -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-project-headers.hmap" "-F/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/include" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources/i386" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources" -include /var/folders/CW/CW15OtLOG2uaYSrCFo2tqE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CoffeeRunSample_Prefix-dfwjkaoifbxpvggdcafghumnlzch/CoffeeRunSample_Prefix.pch -c "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/FriendsList.m" -o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/FriendsList.o"0#
+
+CCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/MapViewController.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+s317698419.854257
+e317698420.068404
+r1
+xCompileC
+xbuild/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/MapViewController.o
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+o/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m:405: warning: incomplete implementation of class 'MapViewController'
+o/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m:405: warning: method definition for '+calloutHeight' not found
+o/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m:405: warning: method definition for '+annotationPadding' not found
+o/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m:405: warning: incomplete implementation of class 'MapViewController'
+o/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m:405: warning: method definition for '-getCoffeeList' not found
+o/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m:405: warning: method definition for '-locationError:' not found
+o/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m:405: warning: method definition for '-locationUpdate:' not found
+o/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m:405: warning: method definition for '-showMap:' not found
+lSLF07#2@104"Compile /Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m317698419#317698420#0(1294"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m:405: warning: incomplete implementation of class 'MapViewController'/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m:405: warning: method definition for '+calloutHeight' not found/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m:405: warning: method definition for '+annotationPadding' not found/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m:405: warning: incomplete implementation of class 'MapViewController'/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m:405: warning: method definition for '-getCoffeeList' not found/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m:405: warning: method definition for '-locationError:' not found/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m:405: warning: method definition for '-locationUpdate:' not found/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m:405: warning: method definition for '-showMap:' not found8(22@54"Incomplete implementation of class 'MapViewController'317698419#0#166#0(6@96"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m317335710#405#0#405#0#38"incomplete implementation of class '*'0(22@48"Method definition for '+calloutHeight' not found317698419#166#160#0(6@96"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m317335710#405#0#405#0#35"method definition for '*' not found0(22@52"Method definition for '+annotationPadding' not found317698419#326#164#0(6@96"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m317335710#405#0#405#0#35"method definition for '*' not found0(22@54"Incomplete implementation of class 'MapViewController'317698419#490#166#0(6@96"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m317335710#405#0#405#0#38"incomplete implementation of class '*'0(22@48"Method definition for '-getCoffeeList' not found317698419#656#160#0(6@96"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m317335710#405#0#405#0#35"method definition for '*' not found0(22@49"Method definition for '-locationError:' not found317698419#816#161#0(6@96"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m317335710#405#0#405#0#35"method definition for '*' not found0(22@50"Method definition for '-locationUpdate:' not found317698419#977#162#0(6@96"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m317335710#405#0#405#0#35"method definition for '*' not found0(22@43"Method definition for '-showMap:' not found317698419#1139#155#0(6@96"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m317335710#405#0#405#0#35"method definition for '*' not found0(0#0#96"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m8621803168#2601"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-generated-files.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-own-target-headers.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-all-target-headers.hmap" -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-project-headers.hmap" "-F/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/include" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources/i386" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources" -include /var/folders/CW/CW15OtLOG2uaYSrCFo2tqE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CoffeeRunSample_Prefix-dfwjkaoifbxpvggdcafghumnlzch/CoffeeRunSample_Prefix.pch -c "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.m" -o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/MapViewController.o"0#
+
+CCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/NSObject+SBJSON.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/NSObject+SBJSON.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+s317698419.976717
+e317698420.030217
+r1
+xCompileC
+xbuild/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/NSObject+SBJSON.o
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/NSObject+SBJSON.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@107"Compile /Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/NSObject+SBJSON.m317698419#317698420#0(0"0(0#0#99"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/NSObject+SBJSON.m8621721696#2602"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-generated-files.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-own-target-headers.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-all-target-headers.hmap" -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-project-headers.hmap" "-F/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/include" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources/i386" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources" -include /var/folders/CW/CW15OtLOG2uaYSrCFo2tqE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CoffeeRunSample_Prefix-dfwjkaoifbxpvggdcafghumnlzch/CoffeeRunSample_Prefix.pch -c "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/NSObject+SBJSON.m" -o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/NSObject+SBJSON.o"0#
+
+CCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/NSString+SBJSON.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/NSString+SBJSON.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+s317698420.030328
+e317698420.105730
+r1
+xCompileC
+xbuild/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/NSString+SBJSON.o
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/NSString+SBJSON.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@107"Compile /Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/NSString+SBJSON.m317698420#317698420#0(0"0(0#0#99"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/NSString+SBJSON.m8608944416#2602"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-generated-files.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-own-target-headers.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-all-target-headers.hmap" -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-project-headers.hmap" "-F/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/include" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources/i386" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources" -include /var/folders/CW/CW15OtLOG2uaYSrCFo2tqE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CoffeeRunSample_Prefix-dfwjkaoifbxpvggdcafghumnlzch/CoffeeRunSample_Prefix.pch -c "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/NSString+SBJSON.m" -o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/NSString+SBJSON.o"0#
+
+CCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/NameListViewController.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/NameListViewController.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+s317698420.493621
+e317698420.595443
+r1
+xCompileC
+xbuild/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/NameListViewController.o
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/NameListViewController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@109"Compile /Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/NameListViewController.m317698420#317698420#0(0"0(0#0#101"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/NameListViewController.m8617965440#2611"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-generated-files.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-own-target-headers.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-all-target-headers.hmap" -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-project-headers.hmap" "-F/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/include" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources/i386" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources" -include /var/folders/CW/CW15OtLOG2uaYSrCFo2tqE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CoffeeRunSample_Prefix-dfwjkaoifbxpvggdcafghumnlzch/CoffeeRunSample_Prefix.pch -c "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/NameListViewController.m" -o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/NameListViewController.o"0#
+
+CCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/ParkPlaceMark.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/ParkPlaceMark.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+s317698420.290536
+e317698420.378649
+r1
+xCompileC
+xbuild/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/ParkPlaceMark.o
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/ParkPlaceMark.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@100"Compile /Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/ParkPlaceMark.m317698420#317698420#0(0"0(0#0#92"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/ParkPlaceMark.m8621994112#2593"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-generated-files.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-own-target-headers.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-all-target-headers.hmap" -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-project-headers.hmap" "-F/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/include" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources/i386" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources" -include /var/folders/CW/CW15OtLOG2uaYSrCFo2tqE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CoffeeRunSample_Prefix-dfwjkaoifbxpvggdcafghumnlzch/CoffeeRunSample_Prefix.pch -c "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/ParkPlaceMark.m" -o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/ParkPlaceMark.o"0#
+
+CCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/RunDetails.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/RunDetails.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+s317698420.378826
+e317698420.493524
+r1
+xCompileC
+xbuild/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/RunDetails.o
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/RunDetails.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@97"Compile /Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/RunDetails.m317698420#317698420#0(0"0(0#0#89"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/RunDetails.m8615306400#2587"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-generated-files.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-own-target-headers.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-all-target-headers.hmap" -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-project-headers.hmap" "-F/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/include" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources/i386" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources" -include /var/folders/CW/CW15OtLOG2uaYSrCFo2tqE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CoffeeRunSample_Prefix-dfwjkaoifbxpvggdcafghumnlzch/CoffeeRunSample_Prefix.pch -c "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/RunDetails.m" -o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/RunDetails.o"0#
+
+CCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/SBJSON.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJSON.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+s317698420.068565
+e317698420.148611
+r1
+xCompileC
+xbuild/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/SBJSON.o
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJSON.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@98"Compile /Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJSON.m317698420#317698420#0(0"0(0#0#90"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJSON.m8618027744#2584"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-generated-files.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-own-target-headers.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-all-target-headers.hmap" -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-project-headers.hmap" "-F/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/include" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources/i386" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources" -include /var/folders/CW/CW15OtLOG2uaYSrCFo2tqE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CoffeeRunSample_Prefix-dfwjkaoifbxpvggdcafghumnlzch/CoffeeRunSample_Prefix.pch -c "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJSON.m" -o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/SBJSON.o"0#
+
+CCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/SBJsonBase.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJsonBase.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+s317698420.105842
+e317698420.189304
+r1
+xCompileC
+xbuild/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/SBJsonBase.o
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJsonBase.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@102"Compile /Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJsonBase.m317698420#317698420#0(0"0(0#0#94"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJsonBase.m8607548288#2592"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-generated-files.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-own-target-headers.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-all-target-headers.hmap" -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-project-headers.hmap" "-F/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/include" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources/i386" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources" -include /var/folders/CW/CW15OtLOG2uaYSrCFo2tqE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CoffeeRunSample_Prefix-dfwjkaoifbxpvggdcafghumnlzch/CoffeeRunSample_Prefix.pch -c "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJsonBase.m" -o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/SBJsonBase.o"0#
+
+CCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/SBJsonParser.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJsonParser.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+s317698420.148712
+e317698420.290438
+r1
+xCompileC
+xbuild/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/SBJsonParser.o
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJsonParser.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@104"Compile /Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJsonParser.m317698420#317698420#0(0"0(0#0#96"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJsonParser.m8614713248#2596"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-generated-files.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-own-target-headers.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-all-target-headers.hmap" -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-project-headers.hmap" "-F/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/include" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources/i386" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources" -include /var/folders/CW/CW15OtLOG2uaYSrCFo2tqE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CoffeeRunSample_Prefix-dfwjkaoifbxpvggdcafghumnlzch/CoffeeRunSample_Prefix.pch -c "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJsonParser.m" -o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/SBJsonParser.o"0#
+
+CCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/SBJsonWriter.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJsonWriter.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+s317698420.189388
+e317698420.292009
+r1
+xCompileC
+xbuild/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/SBJsonWriter.o
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJsonWriter.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@104"Compile /Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJsonWriter.m317698420#317698420#0(0"0(0#0#96"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJsonWriter.m8621939264#2596"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-generated-files.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-own-target-headers.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-all-target-headers.hmap" -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-project-headers.hmap" "-F/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/include" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources/i386" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources" -include /var/folders/CW/CW15OtLOG2uaYSrCFo2tqE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CoffeeRunSample_Prefix-dfwjkaoifbxpvggdcafghumnlzch/CoffeeRunSample_Prefix.pch -c "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/JSON/SBJsonWriter.m" -o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/SBJsonWriter.o"0#
+
+CCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/SavedDrinksList.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/SavedDrinksList.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+s317698420.575123
+e317698420.629299
+r1
+xCompileC
+xbuild/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/SavedDrinksList.o
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/SavedDrinksList.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@102"Compile /Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/SavedDrinksList.m317698420#317698420#0(0"0(0#0#94"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/SavedDrinksList.m8605192512#2597"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-generated-files.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-own-target-headers.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-all-target-headers.hmap" -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-project-headers.hmap" "-F/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/include" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources/i386" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources" -include /var/folders/CW/CW15OtLOG2uaYSrCFo2tqE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CoffeeRunSample_Prefix-dfwjkaoifbxpvggdcafghumnlzch/CoffeeRunSample_Prefix.pch -c "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/SavedDrinksList.m" -o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/SavedDrinksList.o"0#
+
+CCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/Utils.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Utils.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+s317698419.803671
+e317698419.883550
+r1
+xCompileC
+xbuild/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/Utils.o
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Utils.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@92"Compile /Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Utils.m317698419#317698419#0(0"0(0#0#84"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Utils.m8609072416#2577"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-generated-files.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-own-target-headers.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-all-target-headers.hmap" -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-project-headers.hmap" "-F/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/include" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources/i386" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources" -include /var/folders/CW/CW15OtLOG2uaYSrCFo2tqE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CoffeeRunSample_Prefix-dfwjkaoifbxpvggdcafghumnlzch/CoffeeRunSample_Prefix.pch -c "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Utils.m" -o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/Utils.o"0#
+
+CCompileC build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/main.o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/main.m" normal i386 objective-c com.apple.compilers.gcc.4_2
+s317698419.517904
+e317698419.701749
+r1
+xCompileC
+xbuild/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/main.o
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/main.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@83"Compile /Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/main.m317698419#317698419#0(0"0(0#0#75"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/main.m8614742592#2567"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-generated-files.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-own-target-headers.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-all-target-headers.hmap" -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-project-headers.hmap" "-F/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/include" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources/i386" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources" -include /var/folders/CW/CW15OtLOG2uaYSrCFo2tqE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CoffeeRunSample_Prefix-dfwjkaoifbxpvggdcafghumnlzch/CoffeeRunSample_Prefix.pch -c "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/main.m" -o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/main.o"0#
+
+CCompileXIB "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeOrderTableViewController.xib"
+s317698417.952512
+e317698418.462263
+r1
+xCompileXIB
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeOrderTableViewController.xib
+lSLF07#2@53"CompileXIB Classes/CoffeeOrderTableViewController.xib317698417#317698418#0(0"0(0#0#111"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeOrderTableViewController.xib8617390624#759"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.2    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/CoffeeOrderTableViewController.nib" "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/CoffeeOrderTableViewController.xib" --sdk /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk0#
+
+CCompileXIB "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.xib"
+s317698417.019390
+e317698418.348162
+r1
+xCompileXIB
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.xib
+lSLF07#2@40"CompileXIB Classes/MapViewController.xib317698417#317698418#0(0"0(0#0#98"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.xib8620173888#733"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.2    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/MapViewController.nib" "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/MapViewController.xib" --sdk /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk0#
+
+CCompileXIB "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/NameListViewController.xib"
+s317698418.348241
+e317698418.809305
+r1
+xCompileXIB
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/NameListViewController.xib
+lSLF07#2@45"CompileXIB Classes/NameListViewController.xib317698418#317698418#0(0"0(0#0#103"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/NameListViewController.xib8617393536#743"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.2    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/NameListViewController.nib" "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/NameListViewController.xib" --sdk /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk0#
+
+CCompileXIB "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/RunDetails.xib"
+s317698417.065750
+e317698417.900233
+r1
+xCompileXIB
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/RunDetails.xib
+lSLF07#2@33"CompileXIB Classes/RunDetails.xib317698417#317698417#0(0"0(0#0#91"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/RunDetails.xib8619710112#719"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.2    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/RunDetails.nib" "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/RunDetails.xib" --sdk /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk0#
+
+CCompileXIB "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/CoffeeRunSampleViewController.xib"
+s317698415.591793
+e317698416.467940
+r1
+xCompileXIB
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/CoffeeRunSampleViewController.xib
+lSLF07#2@44"CompileXIB CoffeeRunSampleViewController.xib317698415#317698416#0(0"0(0#0#102"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/CoffeeRunSampleViewController.xib8621731488#749"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.2    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/CoffeeRunSampleViewController.nib" "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/CoffeeRunSampleViewController.xib" --sdk /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk0#
+
+CCompileXIB "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/MainWindow.xib"
+s317698415.566808
+e317698416.301417
+r1
+xCompileXIB
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/MainWindow.xib
+lSLF07#2@25"CompileXIB MainWindow.xib317698415#317698416#0(0"0(0#0#83"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/MainWindow.xib7306640073509784576#711"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.2    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/MainWindow.nib" "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/MainWindow.xib" --sdk /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk0#
+
+CCopyPlistFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/CoffeeList.plist" Classes/plists/CoffeeList.plist
+s317698417.900319
+e317698417.952426
+r1
+xCopyPlistFile
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/CoffeeList.plist
+xClasses/plists/CoffeeList.plist
+lSLF07#2@36"Copy Classes/plists/CoffeeList.plist317698417#317698417#0(0"0(0#0#100"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/plists/CoffeeList.plist8617891968#509"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copyplist --convert binary1 Classes/plists/CoffeeList.plist --outdir "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app"0#
+
+CCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/da.lproj/BumpApiLocalizable.strings" Classes/Localizations/da.lproj/BumpApiLocalizable.strings
+s317698416.302647
+e317698416.679399
+r1
+xCopyStringsFile
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/da.lproj/BumpApiLocalizable.strings
+xClasses/Localizations/da.lproj/BumpApiLocalizable.strings
+oClasses/Localizations/da.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-16
+lSLF07#2@62"Copy Classes/Localizations/da.lproj/BumpApiLocalizable.strings317698416#317698416#0(159"Classes/Localizations/da.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-160(0#0#126"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/da.lproj/BumpApiLocalizable.strings8621710432#617"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv ICONV /usr/bin/iconv    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding binary Classes/Localizations/da.lproj/BumpApiLocalizable.strings --outdir "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/da.lproj"0#
+
+CCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/de.lproj/BumpApiLocalizable.strings" Classes/Localizations/de.lproj/BumpApiLocalizable.strings
+s317698416.555447
+e317698416.705369
+r1
+xCopyStringsFile
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/de.lproj/BumpApiLocalizable.strings
+xClasses/Localizations/de.lproj/BumpApiLocalizable.strings
+oClasses/Localizations/de.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-16
+lSLF07#2@62"Copy Classes/Localizations/de.lproj/BumpApiLocalizable.strings317698416#317698416#0(159"Classes/Localizations/de.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-160(0#0#126"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/de.lproj/BumpApiLocalizable.strings8619656448#617"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv ICONV /usr/bin/iconv    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding binary Classes/Localizations/de.lproj/BumpApiLocalizable.strings --outdir "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/de.lproj"0#
+
+CCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/el.lproj/BumpApiLocalizable.strings" Classes/Localizations/el.lproj/BumpApiLocalizable.strings
+s317698416.679483
+e317698416.722215
+r1
+xCopyStringsFile
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/el.lproj/BumpApiLocalizable.strings
+xClasses/Localizations/el.lproj/BumpApiLocalizable.strings
+oClasses/Localizations/el.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-16
+lSLF07#2@62"Copy Classes/Localizations/el.lproj/BumpApiLocalizable.strings317698416#317698416#0(159"Classes/Localizations/el.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-160(0#0#126"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/el.lproj/BumpApiLocalizable.strings8614572736#617"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv ICONV /usr/bin/iconv    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding binary Classes/Localizations/el.lproj/BumpApiLocalizable.strings --outdir "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/el.lproj"0#
+
+CCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/en.lproj/BumpApiLocalizable.strings" Classes/Localizations/en.lproj/BumpApiLocalizable.strings
+s317698416.705515
+e317698416.756677
+r1
+xCopyStringsFile
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/en.lproj/BumpApiLocalizable.strings
+xClasses/Localizations/en.lproj/BumpApiLocalizable.strings
+oClasses/Localizations/en.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-16
+lSLF07#2@62"Copy Classes/Localizations/en.lproj/BumpApiLocalizable.strings317698416#317698416#0(159"Classes/Localizations/en.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-160(0#0#126"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/en.lproj/BumpApiLocalizable.strings8607273568#617"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv ICONV /usr/bin/iconv    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding binary Classes/Localizations/en.lproj/BumpApiLocalizable.strings --outdir "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/en.lproj"0#
+
+CCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/es.lproj/BumpApiLocalizable.strings" Classes/Localizations/es.lproj/BumpApiLocalizable.strings
+s317698416.722307
+e317698416.770587
+r1
+xCopyStringsFile
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/es.lproj/BumpApiLocalizable.strings
+xClasses/Localizations/es.lproj/BumpApiLocalizable.strings
+oClasses/Localizations/es.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-16
+lSLF07#2@62"Copy Classes/Localizations/es.lproj/BumpApiLocalizable.strings317698416#317698416#0(159"Classes/Localizations/es.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-160(0#0#126"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/es.lproj/BumpApiLocalizable.strings8621846880#617"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv ICONV /usr/bin/iconv    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding binary Classes/Localizations/es.lproj/BumpApiLocalizable.strings --outdir "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/es.lproj"0#
+
+CCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/fr.lproj/BumpApiLocalizable.strings" Classes/Localizations/fr.lproj/BumpApiLocalizable.strings
+s317698416.756767
+e317698416.799837
+r1
+xCopyStringsFile
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/fr.lproj/BumpApiLocalizable.strings
+xClasses/Localizations/fr.lproj/BumpApiLocalizable.strings
+oClasses/Localizations/fr.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-16
+lSLF07#2@62"Copy Classes/Localizations/fr.lproj/BumpApiLocalizable.strings317698416#317698416#0(159"Classes/Localizations/fr.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-160(0#0#126"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/fr.lproj/BumpApiLocalizable.strings8621675008#617"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv ICONV /usr/bin/iconv    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding binary Classes/Localizations/fr.lproj/BumpApiLocalizable.strings --outdir "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/fr.lproj"0#
+
+CCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/he.lproj/BumpApiLocalizable.strings" Classes/Localizations/he.lproj/BumpApiLocalizable.strings
+s317698416.770677
+e317698416.817072
+r1
+xCopyStringsFile
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/he.lproj/BumpApiLocalizable.strings
+xClasses/Localizations/he.lproj/BumpApiLocalizable.strings
+oClasses/Localizations/he.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-16
+lSLF07#2@62"Copy Classes/Localizations/he.lproj/BumpApiLocalizable.strings317698416#317698416#0(159"Classes/Localizations/he.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-160(0#0#126"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/he.lproj/BumpApiLocalizable.strings8619816000#617"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv ICONV /usr/bin/iconv    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding binary Classes/Localizations/he.lproj/BumpApiLocalizable.strings --outdir "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/he.lproj"0#
+
+CCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/it.lproj/BumpApiLocalizable.strings" Classes/Localizations/it.lproj/BumpApiLocalizable.strings
+s317698416.799985
+e317698416.838867
+r1
+xCopyStringsFile
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/it.lproj/BumpApiLocalizable.strings
+xClasses/Localizations/it.lproj/BumpApiLocalizable.strings
+oClasses/Localizations/it.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-16
+lSLF07#2@62"Copy Classes/Localizations/it.lproj/BumpApiLocalizable.strings317698416#317698416#0(159"Classes/Localizations/it.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-160(0#0#126"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/it.lproj/BumpApiLocalizable.strings8617967040#617"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv ICONV /usr/bin/iconv    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding binary Classes/Localizations/it.lproj/BumpApiLocalizable.strings --outdir "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/it.lproj"0#
+
+CCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/ja.lproj/BumpApiLocalizable.strings" Classes/Localizations/ja.lproj/BumpApiLocalizable.strings
+s317698416.817187
+e317698416.858842
+r1
+xCopyStringsFile
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/ja.lproj/BumpApiLocalizable.strings
+xClasses/Localizations/ja.lproj/BumpApiLocalizable.strings
+oClasses/Localizations/ja.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-16
+lSLF07#2@62"Copy Classes/Localizations/ja.lproj/BumpApiLocalizable.strings317698416#317698416#0(159"Classes/Localizations/ja.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-160(0#0#126"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/ja.lproj/BumpApiLocalizable.strings8614401216#617"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv ICONV /usr/bin/iconv    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding binary Classes/Localizations/ja.lproj/BumpApiLocalizable.strings --outdir "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/ja.lproj"0#
+
+CCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/ko.lproj/BumpApiLocalizable.strings" Classes/Localizations/ko.lproj/BumpApiLocalizable.strings
+s317698416.838955
+e317698416.883439
+r1
+xCopyStringsFile
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/ko.lproj/BumpApiLocalizable.strings
+xClasses/Localizations/ko.lproj/BumpApiLocalizable.strings
+oClasses/Localizations/ko.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-16
+lSLF07#2@62"Copy Classes/Localizations/ko.lproj/BumpApiLocalizable.strings317698416#317698416#0(159"Classes/Localizations/ko.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-160(0#0#126"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/ko.lproj/BumpApiLocalizable.strings8607337568#617"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv ICONV /usr/bin/iconv    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding binary Classes/Localizations/ko.lproj/BumpApiLocalizable.strings --outdir "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/ko.lproj"0#
+
+CCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/nl.lproj/BumpApiLocalizable.strings" Classes/Localizations/nl.lproj/BumpApiLocalizable.strings
+s317698416.858964
+e317698416.899870
+r1
+xCopyStringsFile
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/nl.lproj/BumpApiLocalizable.strings
+xClasses/Localizations/nl.lproj/BumpApiLocalizable.strings
+oClasses/Localizations/nl.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-16
+lSLF07#2@62"Copy Classes/Localizations/nl.lproj/BumpApiLocalizable.strings317698416#317698416#0(159"Classes/Localizations/nl.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-160(0#0#126"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/nl.lproj/BumpApiLocalizable.strings8603692224#617"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv ICONV /usr/bin/iconv    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding binary Classes/Localizations/nl.lproj/BumpApiLocalizable.strings --outdir "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/nl.lproj"0#
+
+CCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/no.lproj/BumpApiLocalizable.strings" Classes/Localizations/no.lproj/BumpApiLocalizable.strings
+s317698416.883586
+e317698416.925397
+r1
+xCopyStringsFile
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/no.lproj/BumpApiLocalizable.strings
+xClasses/Localizations/no.lproj/BumpApiLocalizable.strings
+oClasses/Localizations/no.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-16
+lSLF07#2@62"Copy Classes/Localizations/no.lproj/BumpApiLocalizable.strings317698416#317698416#0(159"Classes/Localizations/no.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-160(0#0#126"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/no.lproj/BumpApiLocalizable.strings8617497920#617"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv ICONV /usr/bin/iconv    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding binary Classes/Localizations/no.lproj/BumpApiLocalizable.strings --outdir "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/no.lproj"0#
+
+CCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/pl.lproj/BumpApiLocalizable.strings" Classes/Localizations/pl.lproj/BumpApiLocalizable.strings
+s317698416.899955
+e317698416.938275
+r1
+xCopyStringsFile
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/pl.lproj/BumpApiLocalizable.strings
+xClasses/Localizations/pl.lproj/BumpApiLocalizable.strings
+oClasses/Localizations/pl.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-16
+lSLF07#2@62"Copy Classes/Localizations/pl.lproj/BumpApiLocalizable.strings317698416#317698416#0(159"Classes/Localizations/pl.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-160(0#0#126"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/pl.lproj/BumpApiLocalizable.strings8616696128#617"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv ICONV /usr/bin/iconv    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding binary Classes/Localizations/pl.lproj/BumpApiLocalizable.strings --outdir "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/pl.lproj"0#
+
+CCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/pt.lproj/BumpApiLocalizable.strings" Classes/Localizations/pt.lproj/BumpApiLocalizable.strings
+s317698416.925499
+e317698416.964411
+r1
+xCopyStringsFile
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/pt.lproj/BumpApiLocalizable.strings
+xClasses/Localizations/pt.lproj/BumpApiLocalizable.strings
+oClasses/Localizations/pt.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-16
+lSLF07#2@62"Copy Classes/Localizations/pt.lproj/BumpApiLocalizable.strings317698416#317698416#0(159"Classes/Localizations/pt.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-160(0#0#126"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/pt.lproj/BumpApiLocalizable.strings8615193792#617"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv ICONV /usr/bin/iconv    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding binary Classes/Localizations/pt.lproj/BumpApiLocalizable.strings --outdir "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/pt.lproj"0#
+
+CCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/ru.lproj/BumpApiLocalizable.strings" Classes/Localizations/ru.lproj/BumpApiLocalizable.strings
+s317698416.938372
+e317698416.982855
+r1
+xCopyStringsFile
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/ru.lproj/BumpApiLocalizable.strings
+xClasses/Localizations/ru.lproj/BumpApiLocalizable.strings
+oClasses/Localizations/ru.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-16
+lSLF07#2@62"Copy Classes/Localizations/ru.lproj/BumpApiLocalizable.strings317698416#317698416#0(159"Classes/Localizations/ru.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-160(0#0#126"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/ru.lproj/BumpApiLocalizable.strings8614651584#617"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv ICONV /usr/bin/iconv    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding binary Classes/Localizations/ru.lproj/BumpApiLocalizable.strings --outdir "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/ru.lproj"0#
+
+CCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/sv.lproj/BumpApiLocalizable.strings" Classes/Localizations/sv.lproj/BumpApiLocalizable.strings
+s317698416.964522
+e317698417.018445
+r1
+xCopyStringsFile
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/sv.lproj/BumpApiLocalizable.strings
+xClasses/Localizations/sv.lproj/BumpApiLocalizable.strings
+oClasses/Localizations/sv.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-16
+lSLF07#2@62"Copy Classes/Localizations/sv.lproj/BumpApiLocalizable.strings317698416#317698417#0(159"Classes/Localizations/sv.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-160(0#0#126"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/sv.lproj/BumpApiLocalizable.strings8609022080#617"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv ICONV /usr/bin/iconv    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding binary Classes/Localizations/sv.lproj/BumpApiLocalizable.strings --outdir "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/sv.lproj"0#
+
+CCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/zh-Hans.lproj/BumpApiLocalizable.strings" Classes/Localizations/zh-Hans.lproj/BumpApiLocalizable.strings
+s317698416.982954
+e317698417.016707
+r1
+xCopyStringsFile
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/zh-Hans.lproj/BumpApiLocalizable.strings
+xClasses/Localizations/zh-Hans.lproj/BumpApiLocalizable.strings
+oClasses/Localizations/zh-Hans.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-16
+lSLF07#2@67"Copy Classes/Localizations/zh-Hans.lproj/BumpApiLocalizable.strings317698416#317698417#0(164"Classes/Localizations/zh-Hans.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-160(0#0#131"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/zh-Hans.lproj/BumpApiLocalizable.strings8621804736#627"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv ICONV /usr/bin/iconv    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding binary Classes/Localizations/zh-Hans.lproj/BumpApiLocalizable.strings --outdir "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/zh-Hans.lproj"0#
+
+CCopyStringsFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/zh-Hant.lproj/BumpApiLocalizable.strings" Classes/Localizations/zh-Hant.lproj/BumpApiLocalizable.strings
+s317698417.017065
+e317698417.065668
+r1
+xCopyStringsFile
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/zh-Hant.lproj/BumpApiLocalizable.strings
+xClasses/Localizations/zh-Hant.lproj/BumpApiLocalizable.strings
+oClasses/Localizations/zh-Hant.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-16
+lSLF07#2@67"Copy Classes/Localizations/zh-Hant.lproj/BumpApiLocalizable.strings317698417#317698417#0(164"Classes/Localizations/zh-Hant.lproj/BumpApiLocalizable.strings: warning: the specified encoding is utf-8, but file contents appear to be UTF-16; treating as UTF-160(0#0#131"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/zh-Hant.lproj/BumpApiLocalizable.strings8621901376#627"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv ICONV /usr/bin/iconv    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding binary Classes/Localizations/zh-Hant.lproj/BumpApiLocalizable.strings --outdir "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/zh-Hant.lproj"0#
+
+CCpResource build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/BumpAPIAssets.bundle Classes/BumpAPIAssets.bundle
+s317698416.301500
+e317698416.555287
+r1
+xCpResource
+xbuild/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/BumpAPIAssets.bundle
+xClasses/BumpAPIAssets.bundle
+lSLF07#2@33"Copy Classes/BumpAPIAssets.bundle317698416#317698416#0(0"0(0#0#97"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/BumpAPIAssets.bundle8621982176#621"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/BumpAPIAssets.bundle" "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app"0#
+
+CCpResource build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/Localization-ReadMe.txt Classes/Localizations/Localization-ReadMe.txt
+s317698417.018503
+e317698417.047312
+r1
+xCpResource
+xbuild/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/Localization-ReadMe.txt
+xClasses/Localizations/Localization-ReadMe.txt
+lSLF07#2@50"Copy Classes/Localizations/Localization-ReadMe.txt317698417#317698417#0(0"0(0#0#114"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/Localization-ReadMe.txt8621509920#638"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes/Localizations/Localization-ReadMe.txt" "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app"0#
+
+CDataModelCompile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/CoffeeRun.mom" "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/CoffeeRun.xcdatamodel"
+s317698419.516825
+e317698419.671916
+r1
+xDataModelCompile
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/CoffeeRun.mom
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/CoffeeRun.xcdatamodel
+lSLF07#2@98"Compile /Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/CoffeeRun.xcdatamodel317698419#317698419#0(0"0(0#0#90"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/CoffeeRun.xcdatamodel8617923424#523"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/usr/bin/momc -XD_MOMC_TARGET_VERSION=10.6 "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/CoffeeRun.xcdatamodel" "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/CoffeeRun.mom"0#
+
+CGenerateDSYMFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app.dSYM" "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/CoffeeRunSample"
+s317698421.646404
+e317698422.036019
+r1
+xGenerateDSYMFile
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app.dSYM
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/CoffeeRunSample
+lSLF07#2@159"GenerateDSYMFile build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app.dSYM build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/CoffeeRunSample317698421#317698422#0(0"0(0#0#145"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/CoffeeRunSample8619643776#547"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/usr/bin/dsymutil "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/CoffeeRunSample" -o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app.dSYM"0#
+
+CLd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/CoffeeRunSample" normal i386
+s317698420.629374
+e317698421.646313
+r1
+xLd
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/CoffeeRunSample
+xnormal
+xi386
+lSLF07#2@150"Link /Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/CoffeeRunSample317698420#317698421#0(0"0(0#0#0"8615198784#1385"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv MACOSX_DEPLOYMENT_TARGET 10.6    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -arch i386 -isysroot /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk "-L/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator" "-L/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/Classes" "-F/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator" -filelist "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/Objects-normal/i386/CoffeeRunSample.LinkFileList" -mmacosx-version-min=10.6 -Xlinker -objc_abi_version -Xlinker 2 -framework Foundation -framework UIKit -framework CoreGraphics -lBumpAPI -lsqlite3 -framework CoreLocation -framework AudioToolbox -framework QuartzCore -framework MapKit -framework CoreData -o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/CoffeeRunSample"0#
+
+CProcessInfoPlistFile "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/Info.plist" CoffeeRunSample-Info.plist
+s317698415.495735
+e317698415.566709
+r1
+xProcessInfoPlistFile
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/Info.plist
+xCoffeeRunSample-Info.plist
+lSLF07#2@34"Process CoffeeRunSample-Info.plist317698415#317698415#0(0"0(0#0#95"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/CoffeeRunSample-Info.plist7381192185345963008#637"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility CoffeeRunSample-Info.plist -genpkginfo "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/PkgInfo" -expandbuildsettings -format binary -platform iphonesimulator -o "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app/Info.plist"0#
+
+CProcessPCH /var/folders/CW/CW15OtLOG2uaYSrCFo2tqE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CoffeeRunSample_Prefix-dfwjkaoifbxpvggdcafghumnlzch/CoffeeRunSample_Prefix.pch.gch CoffeeRunSample_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
+s317698418.809525
+e317698419.516724
+r1
+xProcessPCH
+x/var/folders/CW/CW15OtLOG2uaYSrCFo2tqE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CoffeeRunSample_Prefix-dfwjkaoifbxpvggdcafghumnlzch/CoffeeRunSample_Prefix.pch.gch
+xCoffeeRunSample_Prefix.pch
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@37"Precompile CoffeeRunSample_Prefix.pch317698418#317698419#0(0"0(0#0#95"/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/CoffeeRunSample_Prefix.pch8620075968#2406"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-generated-files.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-own-target-headers.hmap" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-all-target-headers.hmap" -iquote "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/CoffeeRunSample-project-headers.hmap" "-F/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/include" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources/i386" "-I/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/CoffeeRunSample.build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.build/DerivedSources" -c "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/CoffeeRunSample_Prefix.pch" -o /var/folders/CW/CW15OtLOG2uaYSrCFo2tqE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CoffeeRunSample_Prefix-dfwjkaoifbxpvggdcafghumnlzch/CoffeeRunSample_Prefix.pch.gch0#
+
+CTouch "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app"
+s317698422.036202
+e317698422.040388
+r1
+xTouch
+x/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app
+lSLF07#2@135"Touch /Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app317698422#317698422#0(0"0(0#0#0"8609077440#375"    cd "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)"    setenv PATH "/Developer_3_2_5/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer_3_2_5/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c "/Users/Thung/Documents/PROJECTS LOCAL/CoffeeRun/CoffeeRunSample(New)/build/AdHoc_Distribution-iphonesimulator/CoffeeRunSample.app"0#
+

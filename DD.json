@@ -1,0 +1,200 @@
+{
+	
+		"Company":
+			{
+				"Name":"Dunkin Donuts",
+					"Beverage":
+						{
+							"Name":"Coffee",
+							"Size": [
+								"Small",
+								"Medium",
+								"Large"
+								],
+							"Temperature": [
+								"Hot",
+								"Cold"
+							],
+							"Milk": [
+								"None",
+								"Skim",
+								"Regular",
+								"Cream"
+							],
+							"Sweetener": [
+								"None",
+								"Sugar",
+								"Splenda"
+							],
+							"Flavor": [
+								"Blueberry",
+								"Caramel",
+								"Cinnamon",
+								"Hazelnut",
+								"Toasted Almond",
+								"French Vanilla",
+								"Coconut",
+								"Pumpkin",
+								"Mocha",
+								"Gingerbread (seasonal)",
+								"Dunkin' Dark Roast (iced only)"							
+							]
+						},
+						"Beverage":
+						{
+							"Name":"Espresso Drinks",
+							"Size": [
+								"Small",
+								"Medium",
+								"Large"
+								],
+							"Temperature": [
+								"Hot",
+								"Cold"
+							],
+							"Milk": [
+								"None(Expresso)",
+								"Skim",
+								"Regular"
+							],
+							"Caffiene": [
+								"Regular",
+								"Decaf"
+							],
+							"Sweetener": [
+								"None",
+								"Sugar",
+								"Splenda"
+							],
+							"Flavor": [
+								"Espresso",
+								"Latte",
+								"Cappuccino",
+								"Mocha Spice Latte",
+								"Vanilla Latte",
+								"Mocha Raspberry Latte",
+								"Caramel Swirl Latte",
+								"Mocha Swirl Latte",
+								"Latte Lite",
+								"Vanilla Latte Lite",
+								"Pumpkin Latte (seasonal)",
+								"Gingerbread Latte (seasonal)",
+								"Caramel Apple (seasonal)"
+							]
+							
+						},
+						"Beverage":
+						{
+							"Name":"Coolata",
+							"Size": [
+								"Small",
+								"Medium",
+								"Large"
+								],
+							"Temperature": [
+								"Hot",
+								"Cold"
+							],
+							"Milk": [
+								"None(Expresso)",
+								"Skim",
+								"Regular",
+								"Cream"
+							],
+							"Caffiene": [
+								"Regular",
+								"Decaf"
+							],
+							
+							"Flavor": [
+								"Vanilla Bean",
+								"Coffee",
+								"Tropicana Orange",
+								"Strawberry"
+							]
+						},
+						"Beverage":
+						{
+							"Name":"Dunkaccino",
+							"Size": [
+								"Small"
+								]
+						},
+						"Beverage":
+						{
+							"Name":"Hot Chocolate",
+							"Size": [
+								"Small",
+								"Medium",
+								"Large"
+								]	
+						},
+						"Beverage":
+						{
+							"Name":"Turbo Shot ™",
+							"Size": [
+								"Small",
+								"Medium",
+								"Large",
+								"Extra Large"
+								]
+						},
+						"Beverage":
+						{
+							"Name":"Vanilla Chai",
+							"Size": [
+								"Small",
+								"Medium",
+								"Large"
+								]
+						},
+						"Beverage":
+						{
+							"Name":"White Hot Chocolate",
+							"Size": [
+								"Small",
+								"Medium",
+								"Large"
+							]
+						},
+						"Beverage":
+						{
+							"Name":"Tea",
+							"Size": [
+								"Small",
+								"Medium",
+								"Large",
+								"Extra Large"
+								],
+							"Temperature": [
+								"Hot",
+								"Cold"
+							],
+							"Milk": [
+								"None",
+								"Skim",
+								"Regular",
+								"Cream"
+							],
+							"Sweetener": [
+								"None",
+								"Sugar",
+								"Splenda"
+							],
+							"Caffiene": [
+								"Regular",
+								"Decaf"
+							],
+							"Flavor": [
+								"Freshly Brewed",
+								"Sweet",
+								"Earl Grey",
+								"English Breakfast",
+								"Green",
+								"Raspberry Flavored",
+								"Peach Flavored"	
+							]
+							
+						}
+				}
+	}

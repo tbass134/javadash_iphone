@@ -1,0 +1,3 @@
+/Volumes/Dark Bear Interactive/CoffeeRun/CoffeeRunSample(New)/Classes/Utils.m:127: warning: incomplete implementation of class 'Utils'
+/Volumes/Dark Bear Interactive/CoffeeRun/CoffeeRunSample(New)/Classes/Utils.m:127: warning: method definition for '+hideLoading' not found
+/Volumes/Dark Bear Interactive/CoffeeRun/CoffeeRunSample(New)/Classes/Utils.m:127: warning: method definition for '+showLoading:' not found
