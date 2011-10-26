@@ -79,6 +79,7 @@
     RELEASE_SAFELY(photo_);
     RELEASE_SAFELY(getContactInfoButton_);
     
+    [load release];
     [super dealloc];
 }
 
@@ -103,9 +104,15 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
+    load = [[Loading alloc]init];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(getUserInfo) 
                                                  name:@"getUserInfo"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(facebookDidLogin) 
+                                                 name:@"facebookDidLogin"
                                                object:nil];
     
     // Signup button
@@ -459,6 +466,7 @@
 #pragma mark - Others
 -(IBAction)connectFacebook:(id)sender
 {
+    [load showLoading:@"Loading" inView:self.view];
     if([UIAppDelegate.facebook isSessionValid])
     {
         UIAppDelegate.fb_tag = @"me";
@@ -468,8 +476,14 @@
         [UIAppDelegate.facebook authorize:UIAppDelegate.permissions];
 }
 #pragma mark - FaceBook
+-(void)facebookDidLogin
+{
+    UIAppDelegate.fb_tag = @"me";
+    [UIAppDelegate.facebook requestWithGraphPath:@"me" andDelegate:UIAppDelegate];
+}
 -(void)getUserInfo
 {
+    [load hideLoading];
     NSLog(@"getUserInfo %@",UIAppDelegate.fb_me);
     NSString *firstName = [UIAppDelegate.fb_me objectForKey:@"first_name"];
     NSString *lastName = [UIAppDelegate.fb_me objectForKey:@"last_name"];
@@ -505,10 +519,9 @@
 -(void)saveFBId
 {
     //Store this in a UserDefaults since we'll need it again
-    NSString *fbid= [UIAppDelegate.fb_me objectForKey:@"id"];
-    
-    NSLog(@"fbid %@",fbid);
+    fbid= [[UIAppDelegate.fb_me objectForKey:@"id"]retain];    
     return;
+    NSLog(@"fbid %@",fbid);
     [[NSUserDefaults standardUserDefaults]setValue:@"FB_ID" forKey:fbid];
     
     int ts = [[NSDate date] timeIntervalSince1970];
@@ -555,7 +568,7 @@
     
     NSString *userName = [NSString stringWithFormat:@"%@ %@",self.nameTextField.text,self.lastNameTextField.text];
      int ts = [[NSDate date] timeIntervalSince1970];
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/updateUserInfo.php?deviceid=%@&name=%@&email=%@&enable_email=%d&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],[Utils urlencode:userName],self.emailTextField.text,self.enableEmail.on,ts]]
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/updateUserInfo.php?deviceid=%@&name=%@&email=%@&enable_email=%d&fb=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],[Utils urlencode:userName],self.emailTextField.text,self.enableEmail.on,fbid,ts]]
 														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
 													   timeoutInterval:60.0];
     
@@ -579,8 +592,12 @@
     }
     else if([tag isEqualToString:@"getFBImage"])
     {
+        printf("Got image");
         UIImage* _image = [UIImage imageWithData: data];
-        CGSize sz = CGSizeMake(80, 80);
+		CGSize sz = CGSizeMake(80, 80);
+		//UIImage *smallImage = [Utils imageWithImage:_image scaledToSize:sz];
+		//image.image = smallImage;
+        
         self.photo = [Utils imageWithImage:_image scaledToSize:sz];
         [self.photoButton setImage:self.photo forState:UIControlStateNormal];
         
@@ -738,9 +755,7 @@
     else
         self.enableEmail.enabled = NO;
     
-    
-	//Get the users contact image( UNTESTESTED TH 061711)
-	NSData* imageData = (NSData*)ABPersonCopyImageData(person);
+    NSData* imageData = (NSData*)ABPersonCopyImageData(person);
 	if(imageData != NULL)
 	{
 		UIImage* _image = [UIImage imageWithData: imageData];

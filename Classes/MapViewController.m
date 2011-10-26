@@ -45,6 +45,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+    search_view.hidden = YES;
     cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(searchCancel:)];
 
     limit = 20;
@@ -546,6 +547,7 @@
 #pragma mark Search Bar
 - (void) searchBarTextDidBeginEditing:(UISearchBar *)theSearchBar {
 	
+    search_view.hidden = NO;
 	//Add the done button.
     self.navigationItem.rightBarButtonItem = cancel;
 }
@@ -564,6 +566,7 @@
 }
 -(void)searchCancel:(id)sender
 {
+    search_view.hidden = YES;
     searchBar.text = @"";
     self.navigationItem.rightBarButtonItem = nil;
 	[searchBar resignFirstResponder];

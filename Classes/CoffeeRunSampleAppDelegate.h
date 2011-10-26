@@ -34,7 +34,7 @@ FBSessionDelegate,AdWhirlDelegate> {
     DBSignupViewController *dbSignupViewController;
 	NSString *deviceToken;
 	NSString *deviceAlias;
-	NSMutableArray *coffee_orders_array;
+	//NSMutableArray *coffee_orders_array;
     
     
     
@@ -64,7 +64,7 @@ FBSessionDelegate,AdWhirlDelegate> {
 @property (nonatomic, retain) NSString *deviceToken;
 @property (nonatomic, retain) NSString *deviceAlias;
 
-@property (nonatomic, retain) NSMutableArray *coffee_orders_array;
+//@property (nonatomic, retain) NSMutableArray *coffee_orders_array;
 
 @property (nonatomic,assign) BOOL didPurchaseApp;
 

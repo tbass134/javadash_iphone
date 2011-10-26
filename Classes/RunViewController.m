@@ -70,6 +70,7 @@
 		
 -(void)checkForOrders
 {
+    printf("checkForOrders Called");
 	//every time we go to this screen, we need to know if an order has been sent,
 	//If so, change the Label
 	int ts = [[NSDate date] timeIntervalSince1970];
@@ -120,6 +121,7 @@
     
      self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reloadData:)];
     
+
 	Order *order = [Order sharedOrder];
     NSLog(@"[order currentOrder] %@",[order currentOrder]);
 	if([order currentOrder] == NULL)
@@ -136,7 +138,7 @@
 	Order *order = [Order sharedOrder];
 	NSDictionary *user_order = [order currentOrder];
 	
-	//[Utils printDict:user_order];
+	[Utils printDict:user_order];
 	if([user_order objectForKey:@"run"] != NULL)
 	{
 		if([[[order currentOrder] objectForKey:@"run"]objectForKey:@"id"])

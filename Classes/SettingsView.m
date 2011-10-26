@@ -84,12 +84,14 @@
 #pragma mark
 -(IBAction)removeAds:(id)sender
 {
+    /*
 #if debug
     [[NSUserDefaults standardUserDefaults]setValue:[NSNumber numberWithBool:YES] forKey:@"didPurchaseApp"];
     CoffeeRunSampleAppDelegate *appDelegate  = (CoffeeRunSampleAppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate checkForAppPurchase];
     return;
 #endif
+     */
     
     [[MKStoreManager sharedManager] buyFeature:kFeatureAId onComplete:^(NSString* purchasedFeature) { 
 #if debug

@@ -24,6 +24,7 @@
 	IBOutlet UISegmentedControl *seg_control;
 	IBOutlet UIBarButtonItem *reloadLocation_btn;
 	IBOutlet UISearchBar *searchBar;
+    IBOutlet UIView *search_view;
 	
 	SummaryTableViewController *parent;
 	

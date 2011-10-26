@@ -11,6 +11,7 @@
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "FriendsInfo.h"
+#import "Loading.h"
 
 @protocol DBSignupViewControllerDelegate <NSObject>
 @required
@@ -68,7 +69,8 @@
     UIBarButtonItem *signUp_btn;
     UIBarButtonItem *cancel_btn;
 
-        
+    Loading *load;
+    NSString *fbid;
    
     
 }

@@ -34,7 +34,7 @@ static NSString* kAppId = @"189714094427611";
 @synthesize tabBarController;
 
 //This store the coffee Orders
-@synthesize coffee_orders_array;
+//@synthesize coffee_orders_array;
 
 @synthesize facebook = _facebook,permissions = _permissions;
 @synthesize fb_friends,fb_me,fb_tag;
@@ -77,18 +77,17 @@ static NSString* kAppId = @"189714094427611";
 	
 	//Alloc the coffee_orders_array
 	
-	self.coffee_orders_array = [[NSMutableArray alloc]init];
+	//self.coffee_orders_array = [[NSMutableArray alloc]init];
     
-	
-	if(debug)
-    {
-        [self initTesting];
-        [[NSUserDefaults standardUserDefaults]setValue:@"6607b4cc259f117dd348678a50d2e984a1d7a8f8557bf315cd6b45c1c6c904e7"forKey:@"_UALastDeviceToken"];
-        [[NSUserDefaults standardUserDefaults] setValue:@"tony" forKey:@"FIRSTNAME"];
-        [[NSUserDefaults standardUserDefaults] setValue:@"hung" forKey:@"LASTNAME"];
-        [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"NUMBER"];
-        [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"EMAIL"];
-    }
+    [self initTesting];
+    /*
+    [[NSUserDefaults standardUserDefaults]setValue:@"6607b4cc259f117dd348678a50d2e984a1d7a8f8557bf315cd6b45c1c6c904e7"forKey:@"_UALastDeviceToken"];
+    [[NSUserDefaults standardUserDefaults] setValue:@"tony" forKey:@"FIRSTNAME"];
+    [[NSUserDefaults standardUserDefaults] setValue:@"hung" forKey:@"LASTNAME"];
+    [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"NUMBER"];
+    [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"EMAIL"];
+     */
+
     
 	if(![Utils checkIfContactAdded])
 	{
@@ -276,7 +275,7 @@ static NSString* kAppId = @"189714094427611";
 	}
     
    // printf("Should be called Reload Data");
-	//NSLog(@"message %@",message);
+	NSLog(@"message %@",message);
 	//[[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
 	
 /*	
@@ -304,11 +303,11 @@ static NSString* kAppId = @"189714094427611";
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     printf("applicationDidBecomeActive");
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
+	//[[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
 }
 - (void)applicationWillTerminate:(UIApplication *)application {
 	//Clear the array when the app quits
-	self.coffee_orders_array = nil;
+	//self.coffee_orders_array = nil;
 }
 
 #pragma mark Testing
@@ -318,7 +317,7 @@ static NSString* kAppId = @"189714094427611";
 	friends.managedObjectContext = self.managedObjectContext;
     
     
-	//if(![[NSUserDefaults standardUserDefaults] valueForKey:@"add_temp_friend"])
+    if(![[NSUserDefaults standardUserDefaults] valueForKey:@"add_temp_friend"])
 	{
 		//Test Friend
 		NSDictionary *temp_dict = [[NSDictionary alloc]initWithObjectsAndKeys:@"Tony 2",@"FIRSTNAME",@"home",@"LASTNAME",@"",@"NUMBER",@"", @"EMAIL",@"b76cc8ae0270c31e99112e8ec823711a41bec4e508a9d74b76edcc290a5b7f45",@"TOKEN", nil];
@@ -326,12 +325,10 @@ static NSString* kAppId = @"189714094427611";
 		{
 			[[NSUserDefaults standardUserDefaults]setValue:[NSNumber numberWithBool:1] forKey:@"add_temp_friend"];
 			//[Utils showAlert:@"Added" withMessage:[NSString stringWithFormat:@"%@ %@ has been added to your friends list",[dict objectForKey:@"FIRSTNAME"],[dict objectForKey:@"LASTNAME"]] inView:self.view];
-            #if debug
 			NSLog(@"friend Added");
-            #endif
 		}
 	} 
-	
+	/*
 	if([[[NSUserDefaults standardUserDefaults]stringForKey:@"is_runner"]boolValue])
 	{
 		//Runner
@@ -351,6 +348,7 @@ static NSString* kAppId = @"189714094427611";
 		[[NSUserDefaults standardUserDefaults] setValue:@"8457297292" forKey:@"NUMBER"];
         [[NSUserDefaults standardUserDefaults] setValue:@"tbass134@gmail.com" forKey:@"EMAIL"];
 	}
+     */
 	[friends release];
 	
 }
@@ -477,6 +475,7 @@ static NSString* kAppId = @"189714094427611";
         self.didPurchaseApp = YES;
         [self hideAdView];
     }
+    NSLog(@"self.didPurchaseApp %d",self.didPurchaseApp);
 }
 
 #pragma mark -
@@ -607,7 +606,7 @@ static NSString* kAppId = @"189714094427611";
 	[managedObjectModel release];
 	[persistentStoreCoordinator release];
 	
-	[self.coffee_orders_array release];
+	//[self.coffee_orders_array release];
     	
     [super dealloc];
 }
