@@ -17,8 +17,18 @@
 #import "Appirater.h"
 
 
+
 #define kApplicationKey @"V1IdApIgQ_WuhReygjVqBg"
 #define kApplicationSecret @"lMYfECKyQGypK1MzGOf6Ew"
+
+
+//AdWhirl Constants
+#define kSampleAppKey @"ec8e031962fe4384837daf3c8905045c"
+//#define kSampleAppKey @"2e8d7eed0b1b102d96dc5b26aef5c1e9"
+#define kSampleConfigURL @"http://mob.adwhirl.com/getInfo.php"
+#define kSampleImpMetricURL @"http://met.adwhirl.com/exmet.php"
+#define kSampleClickMetricURL @"http://met.adwhirl.com/exclick.php"
+#define kSampleCustomAdURL @"http://mob.adwhirl.com/custom.php"
 
 // Your Facebook APP Id must be set before running this example
 // See http://www.facebook.com/developers/createapp.php
@@ -80,13 +90,13 @@ static NSString* kAppId = @"189714094427611";
 	//self.coffee_orders_array = [[NSMutableArray alloc]init];
     
     [self initTesting];
-    /*
+    
     [[NSUserDefaults standardUserDefaults]setValue:@"6607b4cc259f117dd348678a50d2e984a1d7a8f8557bf315cd6b45c1c6c904e7"forKey:@"_UALastDeviceToken"];
     [[NSUserDefaults standardUserDefaults] setValue:@"tony" forKey:@"FIRSTNAME"];
     [[NSUserDefaults standardUserDefaults] setValue:@"hung" forKey:@"LASTNAME"];
     [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"NUMBER"];
     [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"EMAIL"];
-     */
+     
 
     
 	if(![Utils checkIfContactAdded])
@@ -183,6 +193,15 @@ static NSString* kAppId = @"189714094427611";
     [self.window makeKeyAndVisible];
 }	
 
+-(void)checkForAppPurchase
+{
+    if([[[NSUserDefaults standardUserDefaults]valueForKey:@"didPurchaseApp"]boolValue])
+    {
+        self.didPurchaseApp = YES;
+        [self hideAdView];
+    }
+    NSLog(@"self.didPurchaseApp %d",self.didPurchaseApp);
+}
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)_deviceToken {
 	
@@ -423,8 +442,12 @@ static NSString* kAppId = @"189714094427611";
     }
 }
 - (NSString *)adWhirlApplicationKey {
-    return self.adWhirlKey;
+    return kSampleAppKey;
 }
+- (NSURL *)adWhirlConfigURL {
+    return [NSURL URLWithString:kSampleConfigURL];
+}
+
 
 - (UIViewController *)viewControllerForPresentingModalView {
     return myTabBarController;
@@ -437,14 +460,15 @@ static NSString* kAppId = @"189714094427611";
     printf("adWhirlDidDismissFullScreenModal");
 	myTabBarController.view.frame =  CGRectMake(0,70, 320, 461-50); 
 	//adView.view.frame = CGRectMake(0,20, kAdWhirlViewWidth, kAdWhirlViewHeight); 
-	
-	
+}
+- (BOOL)adWhirlTestMode {
+    return NO;
 }
 
 - (void)adWhirlDidReceiveAd:(AdWhirlView *)awv{
-#if debug
+//#if debug
 	NSLog(@"adWhirlDidReceiveAd");
-#endif
+//#endif
 	//[[UIApplication sharedApplication] setStatusBarHidden:YES animated:YES];
 	//	[self performSelector:@selector(resetNav) withObject:nil afterDelay:.3];
 	if(!self.adsLoaded) {
@@ -468,15 +492,7 @@ static NSString* kAppId = @"189714094427611";
 	}
 }
 
--(void)checkForAppPurchase
-{
-    if([[[NSUserDefaults standardUserDefaults]valueForKey:@"didPurchaseApp"]boolValue])
-    {
-        self.didPurchaseApp = YES;
-        [self hideAdView];
-    }
-    NSLog(@"self.didPurchaseApp %d",self.didPurchaseApp);
-}
+
 
 #pragma mark -
 #pragma mark Facebook

@@ -22,13 +22,15 @@
 
 #import "AsyncImageView2.h"
 
-#define kYelpSearchTerm @"Coffee Shop"
+#define kYelpSearchTerm @"Coffee Shops"
+#define FIELDS_COUNT 2
 
 @implementation MapViewController
-@synthesize mapView,tableView,seg_control,reloadLocation_btn,searchBar;
+@synthesize mapView,tableView,seg_control,reloadLocation_btn/*,searchBar*/;
 @synthesize tableDataSource,currentLocation;
 @synthesize favorites_array;
 @synthesize fetchedResultsController, managedObjectContext;
+@synthesize keyboardToolbar;
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -45,8 +47,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-    search_view.hidden = YES;
-    cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(searchCancel:)];
+    
+    noResultsFound.hidden = YES;
+    cancel_btn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(searchCancel:)];
 
     limit = 20;
     offset = 0;
@@ -62,6 +65,42 @@
 	
 	load = [[Loading alloc]init];
 	self.favorites_array = [FavoriteLocations getAllFavoriteLocations];
+    
+    // Keyboard toolbar
+    if (keyboardToolbar == nil) {
+        keyboardToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 38.0f)];
+        keyboardToolbar.barStyle = UIBarStyleBlackTranslucent;
+        
+        UIBarButtonItem *previousBarItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"previous", @"")
+                                                                            style:UIBarButtonItemStyleBordered
+                                                                           target:self
+                                                                           action:@selector(previousField:)];
+        
+        UIBarButtonItem *nextBarItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"next", @"")
+                                                                        style:UIBarButtonItemStyleBordered
+                                                                       target:self
+                                                                       action:@selector(nextField:)];
+        
+        UIBarButtonItem *spaceBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                      target:nil
+                                                                                      action:nil];
+        
+        UIBarButtonItem *doneBarItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"done", @"")
+                                                                        style:UIBarButtonItemStyleDone
+                                                                       target:self
+                                                                       action:@selector(resignKeyboard:)];
+        
+        [keyboardToolbar setItems:[NSArray arrayWithObjects:previousBarItem, nextBarItem, spaceBarItem, doneBarItem, nil]];
+        
+        name_txt.inputAccessoryView = keyboardToolbar;
+        loc_txt.inputAccessoryView = keyboardToolbar;
+                
+        [previousBarItem release];
+        [nextBarItem release];
+        [spaceBarItem release];
+        [doneBarItem release];
+    }
+
 }
 
 
@@ -122,7 +161,7 @@
     // test that the horizontal accuracy does not indicate an invalid measurement
     if (newLocation.horizontalAccuracy < 0) return;
     // test the measurement to see if it is more accurate than the previous measurement
-    if (self.currentLocation == nil || self.currentLocation.horizontalAccuracy > newLocation.horizontalAccuracy) {
+    //if (self.currentLocation == nil || self.currentLocation.horizontalAccuracy > newLocation.horizontalAccuracy) {
         // store the location as the "best effort"
         self.currentLocation = newLocation;
         NSLog(@",self.currentLocation %@",self.currentLocation);
@@ -146,32 +185,20 @@
             // we can also cancel our previous performSelector:withObject:afterDelay: - it's no longer necessary
             [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopUpdatingLocation:) object:nil];
         }
-    
-        //NSLog(@"latitude %+.6f, longitude %+.6f\n",newLocation.coordinate.latitude,newLocation.coordinate.longitude);
-
-        NSString *coords = [NSString stringWithFormat:@"%f,%f",newLocation.coordinate.latitude,newLocation.coordinate.longitude];
-
-        NSString *searchTerm;
-        if(searchText != NULL && ![searchText isEqualToString:@""])
-        searchTerm = searchText;
-        else
-        searchTerm = coords;
         
-        [self loadData:kYelpSearchTerm loc:searchTerm];
-
-        //if(![[[NSUserDefaults standardUserDefaults]stringForKey:@"is_debug"]boolValue])
-        //[self loadData:searchTerm loc:coords];
-        /*
-
-        MKReverseGeocoder* theGeocoder = [[MKReverseGeocoder alloc] initWithCoordinate:newLocation.coordinate];
-        theGeocoder.delegate = self;
-        [theGeocoder start];
-        [theGeocoder release];
-        */
-         
-    }
+         loc_txt.text = @"Current Location";
+         NSString *coords = [NSString stringWithFormat:@"%f,%f",newLocation.coordinate.latitude,newLocation.coordinate.longitude];
+        
+    [self dismissSearchView];
+    
+        self.tableDataSource = nil;
+        [self.tableView reloadData];
+        [self loadData:kYelpSearchTerm loc:coords];
+        
+   // }
 
 }
+
 - (void)stopUpdatingLocation:(NSString *)state {
 	
     [locationManager stopUpdatingLocation];
@@ -183,8 +210,13 @@
     [locationManager stopUpdatingLocation];
     [Utils showAlert:@"Could not load current location" withMessage:nil inView:self.view];
     
-    if(debug)
-        [self loadData:nil loc:@"10977"];
+    loadingView.hidden = YES;
+    noResultsFound.hidden = NO;
+    mapView.hidden = YES;
+    tableView.hidden = YES;
+    search_view.hidden = YES;
+    //if(debug)
+     //   [self loadData:nil loc:@"10977"];
     
 
 	
@@ -194,6 +226,7 @@
 - (void)reverseGeocoder:(MKReverseGeocoder*)geocoder didFindPlacemark:(MKPlacemark*)place
 {
     NSLog(@"place %@", place.postalCode);
+    loc_txt.text = place.postalCode;
 	
 	CLLocationCoordinate2D userlocation=[place coordinate];
 	/*Region and Zoom*/
@@ -216,31 +249,20 @@
 
 -(void)loadData:(NSString *)term loc:(NSString *)l
 {
-	  //[[Tracker sharedTracker]trackPageView:[NSString stringWithFormat:@"/app_mapview_loadData_with_search_term_%@",term]];
-        
-        [load showLoading:@"Loading" inView:self.view];
-        [self loadYelp:kYelpSearchTerm loc:l];
+    
+    if([term isEqualToString:@""])
+        term = kYelpSearchTerm;
+    name_txt.text = term;
+    
+    if([l isEqualToString:@"Current Location"])
+    {
+        l  = [NSString stringWithFormat:@"%f,%f",self.currentLocation.coordinate.latitude,self.currentLocation.coordinate.longitude];
+        loc_txt.text = @"Current Location";
+    }
+    [load showLoading:@"Loading" inView:self.view];
+        [self loadYelp:term loc:l];
+
    }
-
-- (void)processSuccessful:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data{
-	
-    
-    
-	if(success && [tag isEqualToString:@"YELP"])
-	{
-       
-        [[Tracker sharedTracker]trackPageView:@"/app_mapview_MapDataLoaded"];
-		NSString *json_str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-		[self loadDataFromJSONStr:json_str];
-		[[NSUserDefaults standardUserDefaults]setValue:json_str forKey:@"yelp"];
-        //[json_str release];
-	}
-	else {
-		
-	}
-
-	
-}
 
 #pragma mark YELP API
 - (void)loadYelp:(NSString *)term loc:(NSString *)l {
@@ -279,7 +301,6 @@
     
     _yelpResponseData = [[NSMutableData alloc] init];
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-        
     [connection release];
     [request release];
 }
@@ -302,6 +323,9 @@
     
     [load hideLoading];
      loadingView.hidden = YES;
+    noResultsFound.hidden = YES;
+    self.tableView.hidden = NO;
+    self.mapView.hidden = NO;
     NSString *json_str = [[NSString alloc] initWithData:_yelpResponseData encoding:NSUTF8StringEncoding];
     //NSLog(@"json_str %@",json_str);
     SBJSON *parser = [[SBJSON alloc] init];
@@ -312,6 +336,11 @@
     if([yelp_dict objectForKey:@"error"] != NULL)
     {
         [Utils showAlert:@"Could not load data" withMessage:@"Please try again" inView:nil];
+        noResultsFound.hidden = NO;
+        self.tableView.hidden = YES;
+        self.mapView.hidden = YES;
+        [self.view sendSubviewToBack:search_view];
+        
         return;
     }
     
@@ -542,36 +571,6 @@
 -(void)annotationViewClick:(id)sender
 {
 }
-
-#pragma mark 
-#pragma mark Search Bar
-- (void) searchBarTextDidBeginEditing:(UISearchBar *)theSearchBar {
-	
-    search_view.hidden = NO;
-	//Add the done button.
-    self.navigationItem.rightBarButtonItem = cancel;
-}
-- (void) searchBarSearchButtonClicked:(UISearchBar *)theSearchBar {
-	
-    printf("searchBarSearchButtonClicked");
-    self.navigationItem.rightBarButtonItem = cancel;
-    offset = 0;
-	searchText = [searchBar.text retain];
-	//NSString *coords = [NSString stringWithFormat:@"%f,%f",self.currentLocation.coordinate.latitude,self.currentLocation.coordinate.longitude];
-    
-    self.tableDataSource = nil;
-	[self loadData:nil loc:searchText];
-	[searchBar resignFirstResponder];
-
-}
--(void)searchCancel:(id)sender
-{
-    search_view.hidden = YES;
-    searchBar.text = @"";
-    self.navigationItem.rightBarButtonItem = nil;
-	[searchBar resignFirstResponder];
-
-}
 -(void)goNext
 {
 	FriendsList *runDetailsViewController = [[FriendsList alloc] initWithNibName:@"RunDetails" bundle:nil];
@@ -597,10 +596,7 @@
         return [self.tableDataSource count]+1;
     else
         return [self.tableDataSource count];
- 
 }
-
-
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -926,45 +922,123 @@
     }
 	
 }
+#pragma mark Keyboard layout
+- (void)resignKeyboard:(id)sender
+{
+    id firstResponder = [self getFirstResponder];
+    if ([firstResponder isKindOfClass:[UITextField class]]) {
+        [firstResponder resignFirstResponder];
+        [self animateView:1];
+        [self.view sendSubviewToBack:search_view];
+        self.navigationItem.rightBarButtonItem = nil;
+        
+        self.tableDataSource = nil;
+        [self.tableView setDelegate:self];
+        [self.tableView reloadData];
+        [self loadData:name_txt.text loc:loc_txt.text];
+    }
+}
 
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
+- (void)previousField:(id)sender
+{
+    id firstResponder = [self getFirstResponder];
+    if ([firstResponder isKindOfClass:[UITextField class]]) {
+        NSUInteger tag = [firstResponder tag];
+        NSUInteger previousTag = tag == 1 ? 1 : tag - 1;
+        [self checkBarButton:previousTag];
+        [self animateView:previousTag];
+        UITextField *previousField = (UITextField *)[self.view viewWithTag:previousTag];
+        [previousField becomeFirstResponder];
+        //[self checkSpecialFields:previousTag];
+    }
+}
+
+- (void)nextField:(id)sender
+{
+    id firstResponder = [self getFirstResponder];
+    if ([firstResponder isKindOfClass:[UITextField class]]) {
+        NSUInteger tag = [firstResponder tag];
+        NSUInteger nextTag = tag == FIELDS_COUNT ? FIELDS_COUNT : tag + 1;
+        [self checkBarButton:nextTag];
+        [self animateView:nextTag];
+        UITextField *nextField = (UITextField *)[self.view viewWithTag:nextTag];
+        [nextField becomeFirstResponder];
+        // [self checkSpecialFields:nextTag];
+    }
+}
+
+- (id)getFirstResponder
+{
+    NSUInteger index = 0;
+    while (index <= FIELDS_COUNT) {
+        UITextField *textField = (UITextField *)[self.view viewWithTag:index];
+        if ([textField isFirstResponder]) {
+            return textField;
+        }
+        index++;
+    }
+    
+    return NO;
+}
+
+- (void)animateView:(NSUInteger)tag
+{
+    CGRect rect = self.view.frame;
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
+    
+    if (tag > 3) {
+        rect.origin.y = -44.0f * (tag - 3);
+    } else {
+        rect.origin.y = 0;
+    }
+    self.view.frame = rect;
+    [UIView commitAnimations];
+}
+
+- (void)checkBarButton:(NSUInteger)tag
+{
+    UIBarButtonItem *previousBarItem = (UIBarButtonItem *)[[self.keyboardToolbar items] objectAtIndex:0];
+    UIBarButtonItem *nextBarItem = (UIBarButtonItem *)[[self.keyboardToolbar items] objectAtIndex:1];
+    
+    [previousBarItem setEnabled:tag == 1 ? NO : YES];
+    [nextBarItem setEnabled:tag == FIELDS_COUNT ? NO : YES];
+}
+
+-(void)searchCancel:(id)sender
+{
+    [self dismissSearchView];
+}
+
+-(void)dismissSearchView
+{
+    self.navigationItem.rightBarButtonItem = nil;
+    [self.view sendSubviewToBack:search_view];
+    id firstResponder = [self getFirstResponder];
+    if ([firstResponder isKindOfClass:[UITextField class]]) {
+        [firstResponder resignFirstResponder];
+        [self animateView:1];
+    }
+
+}
 
 
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
- 
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source.
- [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
- }   
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
- }   
- }
- */
+#pragma mark - UITextFieldDelegate
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    NSUInteger tag = [textField tag];
+    [self animateView:tag];
+    [self checkBarButton:tag];
+    self.navigationItem.rightBarButtonItem = cancel_btn;
+    [self.view bringSubviewToFront:search_view];
+}
 
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
- }
- */
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
 
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
+    return YES;
+}
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -989,17 +1063,7 @@
 	if (row == count) 
     {
         offset +=20;
-        NSString *coords = [NSString stringWithFormat:@"%f,%f",self.currentLocation.coordinate.latitude,self.currentLocation.coordinate.longitude];
-       
-        NSString *searchTerm;
-        
-        if(![searchBar.text isEqualToString:@""] && searchBar.text !=NULL)
-            searchTerm = searchBar.text;
-        else
-            searchTerm = coords;
-    
-
-        [self loadData:kYelpSearchTerm loc:searchTerm];
+        [self loadData:name_txt.text loc:loc_txt.text];
         NSIndexPath *selected = [self.tableView indexPathForSelectedRow];
         if (selected) {
             [self.tableView deselectRowAtIndexPath:selected animated:YES];

@@ -16,38 +16,32 @@
 #import "Loading.h"
 #import "SummaryTableViewController.h"
 
-@interface MapViewController : UIViewController<MKMapViewDelegate,UITableViewDataSource, UITableViewDelegate,CLLocationManagerDelegate,MKReverseGeocoderDelegate,UISearchBarDelegate> {
+@interface MapViewController : UIViewController<MKMapViewDelegate,UITableViewDataSource, UITableViewDelegate,CLLocationManagerDelegate,MKReverseGeocoderDelegate,UITextFieldDelegate/*,UISearchBarDelegate*/> {
 
     IBOutlet UIView *loadingView;
 	IBOutlet MKMapView *mapView;
 	IBOutlet UITableView *tableView;
 	IBOutlet UISegmentedControl *seg_control;
 	IBOutlet UIBarButtonItem *reloadLocation_btn;
-	IBOutlet UISearchBar *searchBar;
-    IBOutlet UIView *search_view;
-	
+    UIBarButtonItem *cancel_btn;
 	SummaryTableViewController *parent;
-	
-	
-	
+
 	NSMutableDictionary *yelp_dict;
 	CLLocationManager *locationManager;
 	MKPlacemark *mPlacemark;
-	
-	
+    
 	URLConnection *conn;
-   // NSMutableData* data;
 	
 	NSMutableArray *tableDataSource;
 	CoffeeLocation *location;
 	Loading *load;	
+    IBOutlet UILabel *noResultsFound;
+    
 	//Core Data
 	NSFetchedResultsController *fetchedResultsController;
 	NSManagedObjectContext *managedObjectContext;
 	
 	NSString *searchText;
-	
-		
 	NSDictionary *selected_location;
 	CLLocation *currentLocation;
 	
@@ -58,20 +52,25 @@
     int offset;
     int sort;
     int total;
-    UIBarButtonItem *cancel;
     
     NSMutableData *_yelpResponseData;
+    
+    IBOutlet UIView *search_view;
+    IBOutlet UITextField *name_txt;
+    IBOutlet UITextField *loc_txt;
+    UIToolbar *keyboardToolbar;
 
 }
 @property (retain,nonatomic) MKMapView *mapView;
 @property (retain,nonatomic) UITableView *tableView;
 @property (retain,nonatomic) UISegmentedControl *seg_control;
 @property (retain,nonatomic) UIBarButtonItem *reloadLocation_btn;
-@property (retain,nonatomic) UISearchBar *searchBar;
+//@property (retain,nonatomic) UISearchBar *searchBar;
 
 @property(nonatomic,retain)NSMutableArray *tableDataSource;
 @property(nonatomic,retain)CLLocation *currentLocation;
 @property (nonatomic, retain) NSMutableArray *favorites_array;
+@property (nonatomic, retain)UIToolbar *keyboardToolbar;
 
 
 
@@ -98,4 +97,13 @@
 -(void)loadFavoriteLocation:(NSDictionary *)dict;
 -(void)updateTable:(NSMutableDictionary *)obj;
 
+
+
+- (void)resignKeyboard:(id)sender;
+- (void)previousField:(id)sender;
+- (void)nextField:(id)sender;
+- (id)getFirstResponder;
+- (void)animateView:(NSUInteger)tag;
+- (void)checkBarButton:(NSUInteger)tag;
+-(void)dismissSearchView;
 @end
