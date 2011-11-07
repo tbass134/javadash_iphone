@@ -17,7 +17,6 @@
 #import "Utils.h"
 #import "Constants.h"
 #import "DashSummary.h"
-#import "Tracker.h"
 #import "OAuthConsumer.h"
 
 #import "AsyncImageView2.h"
@@ -117,14 +116,12 @@
 		printf("showMap");
 		tableView.hidden = YES;
 		mapView.hidden =NO;
-        [[Tracker sharedTracker]trackPageView:@"/app_mapview_showMap"];
         
 	}
 	if(seg_control.selectedSegmentIndex == 0){
 		printf("Show list");
 		tableView.hidden = NO;
 		mapView.hidden = YES;
-       [[Tracker sharedTracker]trackPageView:@"/app_mapview_showList"];
 	}
 	
 }
@@ -135,7 +132,6 @@
 }
 -(IBAction)showFavorites:(id)sender
 {
-    [[Tracker sharedTracker]trackPageView:@"/app_mapview_showFavorites"];
 	FavoritesTableViewController *favoritesViewController = [[FavoritesTableViewController alloc] initWithNibName:nil bundle:nil];
 	favoritesViewController.managedObjectContext = self.managedObjectContext;
 	// Pass the selected object to the new view controller.
@@ -189,8 +185,7 @@
          loc_txt.text = @"Current Location";
          NSString *coords = [NSString stringWithFormat:@"%f,%f",newLocation.coordinate.latitude,newLocation.coordinate.longitude];
         
-    [self dismissSearchView];
-    
+        [self dismissSearchView];
         self.tableDataSource = nil;
         [self.tableView reloadData];
         [self loadData:kYelpSearchTerm loc:coords];
@@ -215,38 +210,8 @@
     mapView.hidden = YES;
     tableView.hidden = YES;
     search_view.hidden = YES;
-    //if(debug)
-     //   [self loadData:nil loc:@"10977"];
-    
 
-	
 }
-#pragma mark -
-#pragma mark reverseGeocoder
-- (void)reverseGeocoder:(MKReverseGeocoder*)geocoder didFindPlacemark:(MKPlacemark*)place
-{
-    NSLog(@"place %@", place.postalCode);
-    loc_txt.text = place.postalCode;
-	
-	CLLocationCoordinate2D userlocation=[place coordinate];
-	/*Region and Zoom*/
-	MKCoordinateRegion region;
-	MKCoordinateSpan span;
-	span.latitudeDelta=0.2;
-	span.longitudeDelta=0.2;
-	
-	region.span=span;
-	region.center=userlocation;
-	[mapView setRegion:region animated:TRUE];
-    [locationManager stopUpdatingLocation];
-	
-	
-}
-- (void)reverseGeocoder:(MKReverseGeocoder*)geocoder didFailWithError:(NSError*)error
-{
-    NSLog(@"Could not retrieve the specified place information.\n");
-}
-
 -(void)loadData:(NSString *)term loc:(NSString *)l
 {
     
@@ -327,7 +292,6 @@
     self.tableView.hidden = NO;
     self.mapView.hidden = NO;
     NSString *json_str = [[NSString alloc] initWithData:_yelpResponseData encoding:NSUTF8StringEncoding];
-    //NSLog(@"json_str %@",json_str);
     SBJSON *parser = [[SBJSON alloc] init];
     yelp_dict= [[parser objectWithString:json_str error:nil]retain];
     total = [[yelp_dict objectForKey:@"total"]intValue];
@@ -348,8 +312,8 @@
     
     float lng = [[[[yelp_dict objectForKey:@"region"]objectForKey:@"center"]objectForKey:@"longitude"]floatValue];
     
-    NSLog(@"lat %f",lat);
-    NSLog(@"lng %f",lng);
+    //NSLog(@"lat %f",lat);
+    //NSLog(@"lng %f",lng);
     CLLocation *tempLocation = [[CLLocation alloc] initWithLatitude: lat longitude:lng];
     
     CLLocationCoordinate2D userlocation=[tempLocation coordinate];
@@ -422,14 +386,7 @@
     
     [self.tableView setDelegate:self];
     [self.tableView reloadData];
-    
-    //self.tableDataSource = [yelp_dict objectForKey:@"businesses"];
-    //[self.tableView reloadData];
-
 }
-
-
-
 -(void)loadDataFromJSONStr:(NSString *)str
 {
    
@@ -457,8 +414,6 @@
         [self.tableDataSource addObject:items];
         location = [[CoffeeLocation alloc]init];
         NSMutableDictionary *obj = items;
-        //NSLog(@"obj.name %@", [obj objectForKey:@"name"]);
-
         location.rating_img_url			= [obj objectForKey:@"rating_img_url"];
         location.country_code			= [obj objectForKey:@"country_code"];
         location.id						= [obj objectForKey:@"id"];
@@ -503,11 +458,7 @@
    
     
     [self.tableView setDelegate:self];
-    [self.tableView reloadData];
-
-    //self.tableDataSource = [yelp_dict objectForKey:@"businesses"];
-    //[self.tableView reloadData];
-      
+    [self.tableView reloadData];      
 }
 -(BOOL)checkForFavorites:(NSString *)str
 {
@@ -555,11 +506,8 @@
 		ParkPlaceMark* theAnnotation;
 		theAnnotation = (ParkPlaceMark *) view.annotation;
 		
-		//NSLog(@"theAnnotation %@",theAnnotation.location_dict);
 		selected_location = theAnnotation.location_dict;
-		
 		//[Utils printDict:selected_location];
-		
 		DashSummary *dash = [DashSummary instance];
 		[[dash getDict]setValue:selected_location forKey:@"selected_location"];
 		NSLog(@"dash %@", [dash getDict]);
@@ -567,9 +515,6 @@
 	}
 
 	
-}
--(void)annotationViewClick:(id)sender
-{
 }
 -(void)goNext
 {
@@ -894,7 +839,6 @@
 			printf("turn it off");
             if([FavoriteLocations removeFromList:obj])
             {
-                [[Tracker sharedTracker]trackPageView:@"/app_mapview_location_removed_bookmark"];
                 [[[yelp_dict objectForKey:@"businesses"] objectAtIndex:indexPath.row] setValue:[NSNumber numberWithBool:0] forKey:@"checked"];
                 [obj setValue:[NSNumber numberWithBool:0] forKey:@"checked"];
                 image = [UIImage imageNamed:@"star.png"];
@@ -904,7 +848,6 @@
 		else {
 			printf("Turn it on");
 			[FavoriteLocations writeDataToFile:obj];
-            [[Tracker sharedTracker]trackPageView:@"/app_mapview_location_added_bookmark"];
 			[[[yelp_dict objectForKey:@"businesses"] objectAtIndex:indexPath.row] setValue:[NSNumber numberWithBool:1] forKey:@"checked"];	
 			image = [UIImage imageNamed:@"star_active.png"];
 			[obj setValue:[NSNumber numberWithBool:1] forKey:@"checked"];

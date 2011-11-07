@@ -53,4 +53,5 @@
 -(IBAction)updateProfile:(id)sender;
 -(IBAction)goFacebook:(id)sender;
 -(void)readFriendsData;
+-(void)appPurchased;
 @end

@@ -10,7 +10,6 @@
 #import "CoffeeDetailsView.h"
 #import "Utils.h"
 #import "Order.h"
-#import "Tracker.h"
 @implementation NameListViewController
 @synthesize companyName;
 @synthesize orderType;
@@ -33,7 +32,6 @@
 	appDelegate = [[UIApplication sharedApplication] delegate];
 	companyName =[[[[NSUserDefaults standardUserDefaults] valueForKey:@"Current Order Dict"]objectForKey:@"data"]objectForKey:@"selected_name"];
 	
-	[[Tracker sharedTracker]trackPageView:[NSString stringWithFormat:@"/app_NameListViewController_viewing_%@",companyName]];
 	
     Order *order = [Order sharedOrder];
 	NSDictionary *user_order = [order currentOrder];
@@ -174,7 +172,6 @@
     
     CoffeeDetailsView *listView   = [[CoffeeDetailsView alloc]initWithNibName:nil bundle:nil];
 	listView.drink = drink_dict;    
-    //[[Tracker sharedTracker]trackPageView:[NSString stringWithFormat:@"/app_NameListViewController_btn_clicked_%@",listView.beverage]];
 	[self.navigationController pushViewController:listView animated:YES];
     [drink_dict release];
 	[listView release];

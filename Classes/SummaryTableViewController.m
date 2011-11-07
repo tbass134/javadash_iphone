@@ -23,8 +23,6 @@
 #import "Order.h"
 #import "Utils.h"
 
-#import "Tracker.h"
-
 #import "CoffeeRunSampleViewController.h"
 
 
@@ -199,9 +197,7 @@
 	
 	}
 -(void)completeSummary:(id)sender
-{
-    [[Tracker sharedTracker]trackPageView:@"/app_createRun"];
-    
+{    
 	DashSummary *dash = [DashSummary instance];
 	
 	NSMutableDictionary *dash_dict = [dash getDict]; 
@@ -300,8 +296,13 @@
 	//every time we go to this screen, we need to know if an order has been sent,
 	//If so, change the Label
 	int ts = [[NSDate date] timeIntervalSince1970];
+    /*
 	NSString *userName = [NSString stringWithFormat:@"%@ %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"FIRSTNAME"],[[NSUserDefaults standardUserDefaults]valueForKey:@"LASTNAME"]];
 	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&name=%@&platform=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],[Utils urlencode:userName],@"IOS",ts]]
+														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
+													   timeoutInterval:60.0];
+     */
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],ts]]
 														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
 													   timeoutInterval:60.0];
 	URLConnection *conn = [[URLConnection alloc]init];

@@ -17,7 +17,6 @@
 #import "Utils.h"
 #import "ItemsViewController.h"
 #import "DrinkOrders.h"
-#import "Tracker.h"
 
 #import "CoffeeRunSampleAppDelegate.h"
 
@@ -85,9 +84,14 @@
 	//printf("Order has been edited");
 	
 	int ts = [[NSDate date] timeIntervalSince1970];
+    /*
 	NSString *userName = [NSString stringWithFormat:@"%@ %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"FIRSTNAME"],[[NSUserDefaults standardUserDefaults]valueForKey:@"LASTNAME"]];
 	//NSLog(@"userName %@",[Utils urlencode:userName]);
 	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&name=%@&platform=%@&i=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],[Utils urlencode:userName],@"IOS",ts]]
+														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
+													   timeoutInterval:60.0];
+     */
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],ts]]
 														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
 													   timeoutInterval:60.0];
 	//NSLog(@"url %@", [request URL]);
@@ -166,7 +170,6 @@
 	if(orders_count >0)
 	{
         noOrdersView.hidden = YES;
-        [[Tracker sharedTracker]trackPageView:@"/app_ViewCurrentOrdersView_hasOrder"];
 		//Save this dictionary into Drink Orders sp we can edit it
 		[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"];
 		

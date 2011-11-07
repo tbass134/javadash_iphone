@@ -4,6 +4,22 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>30x-Gear.png</key>
+		<data>
+		PJInPWJK55y11J9UD1miYMPm3ew=
+		</data>
+		<key>30x-Marker.png</key>
+		<data>
+		DH3SQU7jK36gtuC4qknhv7hzDPI=
+		</data>
+		<key>AdViewController.nib</key>
+		<data>
+		7Ah2yf08fD+MBitXiZ5m3sVKBco=
+		</data>
+		<key>AdWhirlWebBrowser.nib</key>
+		<data>
+		+spX6VWHp9iz7Iv4tA18Ir4icQ4=
+		</data>
 		<key>BumpAPIAssets.bundle/bump_hand.png</key>
 		<data>
 		jZBnqoRFVPky5RbB5to7Uzh8LvQ=
@@ -64,89 +80,165 @@
 		<data>
 		3Apbzda9cM3UNby+/CyjpwjjGXo=
 		</data>
-		<key>CoffeeOrderTableViewController.nib</key>
+		<key>CoffeeList2.plist</key>
 		<data>
-		fdG7QVX0QToluwXWJMr1544jbis=
+		LFmb1Za36oTpdmQhImnaZipJqBo=
 		</data>
 		<key>CoffeeRun.mom</key>
 		<data>
-		N8rN4ByaJID9iIEzJqXpa4k9iGM=
+		NiLMnDsjYUJ4jl5ik1REvQabD+Q=
 		</data>
 		<key>CoffeeRunSampleViewController.nib</key>
 		<data>
-		mPoGCxPbF89BuWvfiEdT7dlQWw8=
+		Zz6QhW8Y5874k8IAtqJkp3XhaCw=
 		</data>
 		<key>CustomOrderViewController.nib</key>
 		<data>
-		ChMNaL0pxLy5x8AHNDzOZ4AghYY=
+		5pq8kNNjfe1VSFO6ebcLkNcKONQ=
+		</data>
+		<key>DBSignupViewController.nib</key>
+		<data>
+		HDI3/UtMgg/1VERXPgJIogtCL4A=
+		</data>
+		<key>FBConnect.bundle/images/LoginNormal.png</key>
+		<data>
+		Xn2Aj7+hEycSFfOR0JzspZH6IK4=
+		</data>
+		<key>FBConnect.bundle/images/LoginNormal@2x.png</key>
+		<data>
+		5uNxJYEm7Gt4y4a84cEolsVx6FM=
+		</data>
+		<key>FBConnect.bundle/images/LoginPressed.png</key>
+		<data>
+		4ILL1CwjxKWs3GkovVjVan/KNAM=
+		</data>
+		<key>FBConnect.bundle/images/LoginPressed@2x.png</key>
+		<data>
+		kpdLuDQiFoynl222kJ4z1CuoJjs=
+		</data>
+		<key>FBConnect.bundle/images/LoginWithFacebookNormal.png</key>
+		<data>
+		MbzQzif67aUPjmBq/Sg5v6fbJJw=
+		</data>
+		<key>FBConnect.bundle/images/LoginWithFacebookNormal@2x.png</key>
+		<data>
+		Ehx5qORgbYDh+ue+zHJDahxeQCs=
+		</data>
+		<key>FBConnect.bundle/images/LoginWithFacebookPressed.png</key>
+		<data>
+		ObNhYatCm5Fdvc7QnZS55fMDwSA=
+		</data>
+		<key>FBConnect.bundle/images/LoginWithFacebookPressed@2x.png</key>
+		<data>
+		FtOBmQp+Y1Hwv5beDpoHG7bWVMg=
+		</data>
+		<key>FBConnect.bundle/images/LogoutNormal.png</key>
+		<data>
+		szoKbdV4lJYDZCdhmMtsmsIXABk=
+		</data>
+		<key>FBConnect.bundle/images/LogoutNormal@2x.png</key>
+		<data>
+		Eq4sTvLUx4GyuyQT+JuKC5khcPo=
+		</data>
+		<key>FBConnect.bundle/images/LogoutPressed.png</key>
+		<data>
+		W7KlDgF+VWcbQdDkfv7z2G2VInw=
+		</data>
+		<key>FBConnect.bundle/images/LogoutPressed@2x.png</key>
+		<data>
+		Z5L2NbnAH8E9HkatRsdMbgQtp0M=
+		</data>
+		<key>FBConnect.bundle/images/runaround_image.jpg</key>
+		<data>
+		4p7yau/dHLv8k6U7gbMCiq79+QM=
+		</data>
+		<key>FBDialog.bundle/images/close.png</key>
+		<data>
+		M4sLIAMmRkHGBwOXHPbqxF3V3VY=
+		</data>
+		<key>FBDialog.bundle/images/fbicon.png</key>
+		<data>
+		O10PJ3vPkAdypNUGk3PgmTOlWLg=
+		</data>
+		<key>FacebookViewController.nib</key>
+		<data>
+		nybex83aBLFGhSmj2YMjzTH6Mkc=
 		</data>
 		<key>FriendsTableListView.nib</key>
 		<data>
-		AxxWwN0jZ9ceWKL72zQE7fiEVC8=
-		</data>
-		<key>GetUserContactView.nib</key>
-		<data>
-		gYu8BtAGWTaDS1KTDbwl9e9+YME=
+		radOO/kdfVVRH2QC15yMBsZrk1E=
 		</data>
 		<key>InfoViewController.nib</key>
 		<data>
-		xi2ofB/gl0t172YEjkDzrqcT8k8=
+		tg3kNuFbEnZuxAzaA5NDZcPP4SQ=
 		</data>
 		<key>ItemsViewController.nib</key>
 		<data>
-		EUQtynG/wg3VHIb6Dula4c5FQFQ=
+		P28mgCh1C5pbh2Y0GZSwyuQ6s0c=
 		</data>
 		<key>Localization-ReadMe.txt</key>
 		<data>
 		VU6keRWsqK7OX7nVjQ6S6gm5Z8g=
 		</data>
+		<key>MKStoreKitConfigs.plist</key>
+		<data>
+		9iLHIwYNbLlHTFDi0ra2SNvg+5k=
+		</data>
 		<key>MainWindow.nib</key>
 		<data>
-		QJPnAVtJMqummgYj6d1mqKDwjn8=
+		e8/L62r1jTwDoC62W4IYcCEDGS0=
 		</data>
 		<key>MapViewController.nib</key>
 		<data>
-		GFt/BgNDq0sCCMAvcTbuPH+oe4U=
+		XOqkp/uSYqSQZ44aDgyBoueHxbQ=
 		</data>
 		<key>NameListViewController.nib</key>
 		<data>
-		VZdOokvaT0xig3u0J2dul+SdsGU=
+		nORHz2/6h8l+IG8DV+2OPt5fOks=
+		</data>
+		<key>OrdersViewController.nib</key>
+		<data>
+		NEqI0BJXFy34oQ5K99+JmB68qTM=
 		</data>
 		<key>PkgInfo</key>
 		<data>
 		n57qDP4tZfLD1rCS43W0B4LQjzE=
 		</data>
+		<key>Powered_By_Yelp_Yellow.png</key>
+		<data>
+		gN7+AnFfUxtkxACRb3E2PteqAnM=
+		</data>
 		<key>RunDetails.nib</key>
 		<data>
-		aXSq8Zdfn4Y772RaRuFxUTwpgZQ=
+		mSIC7G5X8v/rj2S8hsVF9zxwObI=
 		</data>
-		<key>RunInfoViewController.nib</key>
+		<key>RunViewController.nib</key>
 		<data>
-		Boz1S/yjr5LgtfdTkZBIZRocwJQ=
-		</data>
-		<key>SVSegmentedControl.bundle/inner-shadow.png</key>
-		<data>
-		JXWI1BpdjMW4tVP1Ty3Mx5d+onU=
-		</data>
-		<key>SVSegmentedControl.bundle/inner-shadow@2x.png</key>
-		<data>
-		rJSQPkmIe46se94tuQIrZWc4GNk=
+		IF82xs/yzKPjeSvXzBVFEYiAY74=
 		</data>
 		<key>SelectTimeView.nib</key>
 		<data>
-		VGRkQ8FxHpEvaHkQT/K8UnLJA5A=
-		</data>
-		<key>Settings.bundle/Root.plist</key>
-		<data>
-		cM45ZkacZ5a8yVpdNpy/SeDoXjc=
-		</data>
-		<key>Settings.bundle/en.lproj/Root.strings</key>
-		<data>
-		t4KY9Gh4uIiOv7VnHtRrKEuPRY8=
+		HErWKJ19slqqdzTDVN+gzhBZ/8M=
 		</data>
 		<key>SettingsView.nib</key>
 		<data>
-		MTCoK/VRe/nJNwPwMYDSiIfGJHY=
+		8Loszofv9AqJU7dWYjXru+CoMCk=
+		</data>
+		<key>SummaryTableViewController.nib</key>
+		<data>
+		ZefwvoXSotJoNsW5+ZxBvmHDOeE=
+		</data>
+		<key>ViewCurrentOrdersTableViewController.nib</key>
+		<data>
+		rr3DtaRY+90nQWzH8UvDzjRz29c=
+		</data>
+		<key>background.png</key>
+		<data>
+		0Dzr6g7PXdKQpXVXAiMs+t4PnIs=
+		</data>
+		<key>background@2x.png</key>
+		<data>
+		KJyvPxDMdyqZwHPbZb58m56YaEI=
 		</data>
 		<key>bottomRow.png</key>
 		<data>
@@ -155,6 +247,10 @@
 		<key>bottomRowSelected.png</key>
 		<data>
 		kSSMx2H497CDiO+2RDkzqNI+Foc=
+		</data>
+		<key>btn-back-step2.png</key>
+		<data>
+		sXCr5Fsbqo4p9rFW/l/W76zfGNI=
 		</data>
 		<key>da.lproj/BumpApiLocalizable.strings</key>
 		<data>
@@ -170,7 +266,7 @@
 		</data>
 		<key>embedded.mobileprovision</key>
 		<data>
-		/7k9DGDRXtnjZS3LpSuzKPVD4dM=
+		g0HNqH3p2aLqXew9Ccp581F9kxE=
 		</data>
 		<key>en.lproj/BumpApiLocalizable.strings</key>
 		<data>
@@ -279,6 +375,10 @@
 		<key>topRowSelected.png</key>
 		<data>
 		RBjvUyeDwKDOtNJceDaAvGcSZow=
+		</data>
+		<key>yelp_logo_50x25.png</key>
+		<data>
+		KMaxvgdk2JtanYjvb5OyYkNIr50=
 		</data>
 		<key>zh-Hans.lproj/BumpApiLocalizable.strings</key>
 		<data>

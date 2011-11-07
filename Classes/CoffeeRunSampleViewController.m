@@ -18,7 +18,6 @@
 #import "Order.h"
 
 #import "InfoViewController.h"
-#import "Tracker.h"
 
 #import "SummaryTableViewController.h"
 #define VIEW_ORDER @"View Order"
@@ -143,11 +142,17 @@
 		//every time we go to this screen, we need to know if an order has been sent,
 		//If so, change the Label
 		int ts = [[NSDate date] timeIntervalSince1970];
+        /*
 		NSString *userName = [NSString stringWithFormat:@"%@ %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"FIRSTNAME"],[[NSUserDefaults standardUserDefaults]valueForKey:@"LASTNAME"]];
 		NSLog(@"userName %@",[Utils urlencode:userName]);
 		NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&name=%@&platform=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],[Utils urlencode:userName],@"IOS",ts]]
 															   cachePolicy:NSURLRequestReturnCacheDataElseLoad
 														   timeoutInterval:60.0];
+         */
+        
+        NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],ts]]
+                                                               cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                                           timeoutInterval:60.0];
 		NSLog(@"url %@", [request URL]);
 		URLConnection *conn = [[URLConnection alloc]init];
 		conn.tag =@"GetOrders";
@@ -193,7 +198,6 @@
 	
 	if([tag isEqualToString:@"cancelRun"])
 	{
-        [[Tracker sharedTracker]trackPageView:@"/app_runCancel"];
 		printf("Run Canceled");
 		[Utils showAlert:@"Previous Run Canceled" withMessage:nil inView:self.view];
 		[self startRun];
@@ -216,7 +220,6 @@
 
 	if([user_order objectForKey:@"run"] != NULL)
 	{
-        [[Tracker sharedTracker]trackPageView:@"/app_receievedRunInfo"];
 		view_order_btn.enabled = YES;
 		//If this device started a run, change the button to show the summary of all people who have orders
 		//Also need to check if there are any attenedes who have orders

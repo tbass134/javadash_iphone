@@ -133,11 +133,21 @@ static CGFloat _DefaultForeColor[kForeColorArraySize] = {
 };
 
 static CGFloat _BlackOpaqueForeColor[kForeColorArraySize] = {	
-	/* Stop 1 */ .01, .01, .01, 1,
-	/* Stop 2 */ .11, .11, .11, 1,
-	/* Stop 3 */ .16, .16, .16, 1,
-	/* Stop 4 */ .29, .29, .29, 1
+	/* Stop 1 */ .301, .227, 0, 1,
+	/* Stop 1 */ .301, .227, 0, 1,
+	/* Stop 1 */ .301, .227, 0, 1,
+	/* Stop 1 */ .301, .227, 0, 1,
 };
+
+//Orginal Black COlor
+/*
+ static CGFloat _BlackOpaqueForeColor[kForeColorArraySize] = {	
+ .01, .01, .01, 1,
+ .11, .11, .11, 1,
+ .16, .16, .16, 1,
+ .29, .29, .29, 1
+ };
+ */
 
 static CGFloat _BlueContrastForeColor[kForeColorArraySize] = {	
 	/* Stop 1 */ .37, .37, .37, 1,

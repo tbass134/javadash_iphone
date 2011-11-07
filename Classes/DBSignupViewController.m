@@ -115,6 +115,11 @@
                                                  name:@"facebookDidLogin"
                                                object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(fbDidNotLogin) 
+                                                 name:@"fbDidNotLogin"
+                                               object:nil];
+    
     // Signup button
     signUp_btn = [[UIBarButtonItem alloc]initWithTitle:@"Update" style:UIBarButtonItemStyleDone target:self action:@selector(signup:)];
     signUp_btn.enabled = NO;
@@ -478,8 +483,15 @@
 #pragma mark - FaceBook
 -(void)facebookDidLogin
 {
+    [load hideLoading];
+    printf("facebookDidLogin");
     UIAppDelegate.fb_tag = @"me";
     [UIAppDelegate.facebook requestWithGraphPath:@"me" andDelegate:UIAppDelegate];
+}
+-(void)fbDidNotLogin
+{
+    printf("fbDidNotLogin");
+     [load hideLoading];
 }
 -(void)getUserInfo
 {
@@ -520,7 +532,6 @@
 {
     //Store this in a UserDefaults since we'll need it again
     fbid= [[UIAppDelegate.fb_me objectForKey:@"id"]retain];    
-    return;
     NSLog(@"fbid %@",fbid);
     [[NSUserDefaults standardUserDefaults]setValue:@"FB_ID" forKey:fbid];
     
@@ -566,9 +577,8 @@
 		[[NSUserDefaults standardUserDefaults] setObject:image_data forKey:@"IMAGE"];
 	}
     
-    NSString *userName = [NSString stringWithFormat:@"%@ %@",self.nameTextField.text,self.lastNameTextField.text];
-     int ts = [[NSDate date] timeIntervalSince1970];
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/updateUserInfo.php?deviceid=%@&name=%@&email=%@&enable_email=%d&fb=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],[Utils urlencode:userName],self.emailTextField.text,self.enableEmail.on,fbid,ts]]
+    /*
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/addUser.php?deviceid=%@&name=%@&email=%@&enable_email=%d&fb=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],[Utils urlencode:userName],self.emailTextField.text,self.enableEmail.on,fbid,ts]]
 														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
 													   timeoutInterval:60.0];
     
@@ -577,7 +587,28 @@
 	conn.tag =@"GetOrders";
 	[conn setDelegate:self];
 	[conn initWithRequest:request];
-
+     */
+    NSString *userName = [NSString stringWithFormat:@"%@ %@",self.nameTextField.text,self.lastNameTextField.text];
+    NSString *user_info = [NSString stringWithFormat:@"name=%@&deviceid=%@&email=%@&enable_email_use=%d&platform=%@&fbid=%d",
+                           [Utils urlencode:userName],
+                           [[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],
+                           self.emailTextField.text,
+                           self.enableEmail.on,
+                           @"IOS",
+                           fbid,
+                           nil];
+    
+    NSLog(@"user_info %@",user_info);
+    NSData *postData = [user_info dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/addUser.php?",baseDomain]]
+                                                           cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                                       timeoutInterval:60.0];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:postData];
+    URLConnection *conn = [[URLConnection alloc]init];
+    conn.tag = @"sendFriendData";
+    [conn setDelegate:self];
+    [conn initWithRequest:request];
     [self resignKeyboard:nil];    
 }
 -(void)goBack

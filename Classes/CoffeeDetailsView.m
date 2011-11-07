@@ -6,13 +6,13 @@
 //  Copyright 2011 Dark Bear Interactive. All rights reserved.
 //
 
+#import "CoffeeRunSampleAppDelegate.h"
 #import "CoffeeDetailsView.h"
 #import "Order.h"
 #import "MyUISegmentController.h"
 #import "DrinkOrders.h"
 #import "Utils.h"
 #import "SavedDrinksList.h"
-#import "Tracker.h"
 
 
 #define UITEXTVIEWTAG 101
@@ -49,9 +49,7 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     
-	
-    [[Tracker sharedTracker]trackPageView:@"/app_CoffeeDetailsView_loaded"];
-	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(addOrder:)]autorelease];
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(addOrder:)]autorelease];
 	
     
     switch_array = [[NSMutableArray alloc]init];
@@ -102,7 +100,8 @@
                 viewHeight = 74;
             MyUISegmentController *oneRowControl = [[MyUISegmentController alloc]initWithFrame:CGRectMake(0, 20, 310, viewHeight)];
             oneRowControl.selected_key = theKey;
-            [oneRowControl setColorScheme:SCRSegmentColorSchemeBlueContrast];
+            //This is now a solid brown color.
+            [oneRowControl setColorScheme:SCRSegmentColorSchemeBlackOpaque];
             if([keys count] ==2)
             {
                 oneRowControl.rowCount = 1;
@@ -216,9 +215,17 @@
     for (UIView *view in scroll.subviews)
         j+=view.frame.size.height;
     
-	[scroll setContentSize:CGSizeMake(self.view.frame.size.width, j+50)];
+	CoffeeRunSampleAppDelegate *appDelegate = (CoffeeRunSampleAppDelegate*)[[UIApplication sharedApplication] delegate];
+
+    if(appDelegate.adsLoaded)
+        [scroll setContentSize:CGSizeMake(self.view.frame.size.width, j+100)];
+    else
+        [scroll setContentSize:CGSizeMake(self.view.frame.size.width, j+50)];
 	[scroll release];
 	
+    
+    if(edit_order_dict == NULL)
+        [self autoSelectFirstValue];
     [super viewDidLoad];
 }
 - (IBAction)selectedIndexChanged:(id)sender {
@@ -242,8 +249,21 @@
 	}
 	else
 		[savedDrink setObject:item forKey:key];
-    
-    
+}
+-(void)autoSelectFirstValue
+{
+    for (id theKey in coffee_dict)
+    {
+        if([[coffee_dict objectForKey:theKey] isKindOfClass:[NSArray class]])
+        { 
+            NSDictionary *option_dict = [coffee_dict objectForKey:theKey];
+            NSString *key = theKey;
+            NSString *item = [option_dict objectAtIndex:0];
+            [savedDrink setObject:item forKey:key];
+        }
+    }
+
+    NSLog(@"savedDrink %@",savedDrink);
 }
 -(void)setValueForSegment:(id)sender
 {
@@ -296,7 +316,6 @@
     #if debug
     NSLog(@"drink %@",[drink_orders getArray]);
 #endif
-    [[Tracker sharedTracker]trackPageView:@"/app_CoffeeDetailsView_orderAdded"];
     [Utils showAlert:@"Order Added" withMessage:nil inView:self.view];
     
 	[self.navigationController dismissModalViewControllerAnimated:YES];

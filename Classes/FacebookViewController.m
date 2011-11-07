@@ -40,6 +40,20 @@
         followAll_btn = [[UIBarButtonItem alloc]initWithTitle:@"Follow all" style:UIBarButtonItemStyleDone target:self action:@selector(followAll)];
         
         self.navigationItem.rightBarButtonItem = cancel_btn;
+        
+        
+        if([UIAppDelegate.facebook isSessionValid])
+        {
+            self.navigationItem.leftBarButtonItem = done_btn;
+            self.navigationItem.rightBarButtonItem = followAll_btn;
+            UIAppDelegate.fb_tag = @"me/friends";
+            [UIAppDelegate.facebook requestWithGraphPath:@"me/friends" andDelegate:UIAppDelegate];
+        }
+        else
+        {
+            [self login];
+        }
+
 }
     return self;
 }
@@ -94,6 +108,7 @@
 }
 -(void)loadFriendsList
 {
+    NSLog(@"users_dict %@",users_dict);
     self.table_view.hidden = NO;
     urlArray = [[NSMutableArray alloc]init];
     images = [[NSMutableArray alloc] init];
@@ -103,9 +118,12 @@
     for(int i=0;i<[friends count];i++){
         
          NSDictionary *friendDict = [friends objectAtIndex:i];
+        //NSLog(@"friendDict %@",[friendDict objectForKey:@"id"]);
+       
         for(id user in users_dict)
-        {            
-            if([[friendDict objectForKey:@"id"]isEqualToString:[user objectForKey:@"id"]]) ////Test:10904809 
+        {
+             //NSLog(@"User id %@",[user objectForKey:@"id"]);
+            if([[friendDict objectForKey:@"id"]isEqualToString:[user objectForKey:@"fb_id"]]) ////Test:10904809 
             {
                 NSMutableDictionary *friend = [[NSMutableDictionary alloc]init];
                 [friend setValue:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture",[friendDict objectForKey:@"id"]] forKey:@"url"];
@@ -154,19 +172,7 @@
 #pragma mark - Facebook
 - (IBAction)fbButtonClick:(id)sender {
     
-    if([UIAppDelegate.facebook isSessionValid])
-    {
-        self.navigationItem.leftBarButtonItem = done_btn;
-        self.navigationItem.rightBarButtonItem = followAll_btn;
-        UIAppDelegate.fb_tag = @"me/friends";
-        [UIAppDelegate.facebook requestWithGraphPath:@"me/friends" andDelegate:UIAppDelegate];
-    }
-    else
-    {
-        self.navigationItem.leftBarButtonItem = cancel_btn;
-        [self login];
-    }
-        
+           
 }
 
 -(void)facebookDidLogin:(NSNotification *) notification
@@ -175,9 +181,6 @@
     
 }
 - (void)fbDidLogin {
-    _getUserInfoButton.hidden = NO;
-    _fbButton.isLoggedIn = YES;
-    [_fbButton updateImage];
 }
 - (IBAction)getUserInfo:(id)sender {
     UIAppDelegate.fb_tag = @"me/friends";
@@ -329,9 +332,6 @@
 - (void)viewDidLoad
 {
     self.table_view.hidden = YES;
-    _fbButton.isLoggedIn = NO;
-    [_fbButton updateImage];
-    _getUserInfoButton.hidden = YES;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 }
@@ -357,7 +357,6 @@
 }
 -(void)dealloc
 {
-    [_fbButton release];
     [super dealloc];
 }
 

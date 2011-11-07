@@ -112,7 +112,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 					</object>
 					<object class="IBUIView" id="448086443">
 						<reference key="NSNextResponder" ref="734495954"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">-2147483356</int>
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUILabel" id="267516970">
 								<reference key="NSNextResponder" ref="448086443"/>
@@ -202,7 +202,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 					<object class="IBUIButton" id="997860468">
 						<reference key="NSNextResponder" ref="152514617"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{171, 184}, {135, 145}}</string>
+						<string key="NSFrame">{{171, 184}, {120, 120}}</string>
 						<reference key="NSSuperview" ref="152514617"/>
 						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -238,7 +238,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 					<object class="IBUIButton" id="38243696">
 						<reference key="NSNextResponder" ref="152514617"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{12, 28}, {143, 141}}</string>
+						<string key="NSFrame">{{12, 28}, {120, 120}}</string>
 						<reference key="NSSuperview" ref="152514617"/>
 						<reference key="NSNextKeyView" ref="242654547"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -259,7 +259,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 					<object class="IBUIButton" id="242654547">
 						<reference key="NSNextResponder" ref="152514617"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{163, 27}, {143, 144}}</string>
+						<string key="NSFrame">{{171, 28}, {120, 120}}</string>
 						<reference key="NSSuperview" ref="152514617"/>
 						<reference key="NSNextKeyView" ref="859520999"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -280,7 +280,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 					<object class="IBUIButton" id="859520999">
 						<reference key="NSNextResponder" ref="152514617"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 184}, {143, 144}}</string>
+						<string key="NSFrame">{{20, 184}, {120, 120}}</string>
 						<reference key="NSSuperview" ref="152514617"/>
 						<reference key="NSNextKeyView" ref="997860468"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -523,8 +523,8 @@ AAgACAAIAAEAAQABAAE</bytes>
 						<array class="NSMutableArray" key="children">
 							<reference ref="997860468"/>
 							<reference ref="859520999"/>
-							<reference ref="242654547"/>
 							<reference ref="38243696"/>
+							<reference ref="242654547"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Place Order View</string>
@@ -572,7 +572,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">27</int>
+			<int key="maxID">33</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>

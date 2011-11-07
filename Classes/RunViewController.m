@@ -23,7 +23,6 @@
 
 #import "Constants.h"
 
-#import "Tracker.h"
 #import "TapkuLibrary.h"
 
 #import "MapViewController.h"
@@ -49,7 +48,6 @@
 @synthesize fetchedResultsController, managedObjectContext;
 //View Run
 @synthesize yelp_img,run_info_txt,run_time_txt,table_view;
-@synthesize run_countdown_timer;
 
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -74,12 +72,20 @@
 	//every time we go to this screen, we need to know if an order has been sent,
 	//If so, change the Label
 	int ts = [[NSDate date] timeIntervalSince1970];
+    
+    
+    //TH 11/2/11 - May not need to send all user info to server, since the data is sent on startup
+    //              Just send device id
+    /*
 	NSString *userName = [NSString stringWithFormat:@"%@ %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"FIRSTNAME"],[[NSUserDefaults standardUserDefaults]valueForKey:@"LASTNAME"]];
     NSString *email =[[NSUserDefaults standardUserDefaults]valueForKey:@"EMAIL"];
     
     BOOL enable_email = [[[NSUserDefaults standardUserDefaults]valueForKey:@"ENABLE_EMAIL"]boolValue];
-   
 	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&name=%@&email=%@&enable_email=%d&platform=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],[Utils urlencode:userName],email,enable_email,@"IOS",ts]]
+														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
+													   timeoutInterval:60.0];
+     */
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],ts]]
 														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
 													   timeoutInterval:60.0];
 
@@ -89,7 +95,8 @@
 	[conn setDelegate:self];
 	[conn initWithRequest:request];
 	
-	[load showLoading:@"Loading" inView:self.view];
+    if(load != nil)
+        [load showLoading:@"Loading" inView:self.view];
 }
 
 -(void)startRun
@@ -123,7 +130,7 @@
     
 
 	Order *order = [Order sharedOrder];
-    NSLog(@"[order currentOrder] %@",[order currentOrder]);
+    //NSLog(@"[order currentOrder] %@",[order currentOrder]);
 	if([order currentOrder] == NULL)
 		[self checkForOrders];
 	else
@@ -183,7 +190,6 @@
     else
     {
         run_time_txt.text = @"Order Ended";
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showOptions:)];
     }
 	//Only show the orders if this device is the runner
 	if([[user_order objectForKey:@"is_runner"] intValue] == 1)
@@ -198,7 +204,6 @@
 		static NSString *CellIdentifier = @"Cell";	
 		if(orders_count >0)
 		{
-            [[Tracker sharedTracker]trackPageView:@"/app_runInfoView_hasOrders"];
             
 			//Save this dictionary into Drink Orders sp we can edit it
 			[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"];
@@ -271,19 +276,22 @@
     
     
 }
-- (void)startTimer {
-    printf("startTimer");
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateTimer:) userInfo:NULL repeats:YES];
+-(void)startTimer {
+	
+	if (run_countdown_timer) {
+		[run_countdown_timer invalidate];
+		run_countdown_timer=nil;
+	}
     
-    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
-    self.run_countdown_timer = timer;
-    // [timer release];
+	run_countdown_timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTimer:) userInfo:nil repeats:YES];	
 }
-- (void)stopTimer {
-    printf("stopTimer");
-    [self.run_countdown_timer invalidate];
-    self.run_countdown_timer = nil;
+
+-(void)stopTimer {
+	
+    if (run_countdown_timer){ [run_countdown_timer invalidate];
+		run_countdown_timer=nil;}
 }
+
 - (void)updateTimer:(NSTimer *)myTimer{
     //NSDate *now = [NSDate date];
     //NSDate *now =  [NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
@@ -295,7 +303,7 @@
         NSDateComponents *components = [gregorian components:unitFlags fromDate:[NSDate date] toDate:run_date options:0];
         run_time_txt.text = [NSString stringWithFormat:@"Days:%02d Hours:%02d Mins:%02d Seconds:%02d", components.day, components.hour, components.minute, components.second ];
         
-        if(components.day<0 && components.hour <0 && components.minute <0 && components.second)
+        if(components.day<=0 && components.hour <=0 && components.minute <=0 && components.second <=0)
         {
             run_time_txt.text = @"Order Ended";
             [self stopTimer];
@@ -317,6 +325,7 @@
     }
 }
 -(void)completeRun{
+    
     Order *order = [Order sharedOrder];
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/completerun.php?deviceid=%@&run_id=%@",
                                                                                              baseDomain,
@@ -339,7 +348,9 @@
 
 - (void)processSuccessful:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
 {
-    // NSLog(@"data %@",[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
+    printf("\n");
+    NSLog(@"data %@",[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
+    printf("\n");
 	[load hideLoading];
 	
     
@@ -391,9 +402,7 @@
 	{
 		if(success)
         {
-            
-            [[Tracker sharedTracker]trackPageView:@"/app_runInfoView_completedOrder"];
-			[Utils showAlert:nil withMessage:@"Order Completed" inView:self.view];
+            [Utils showAlert:nil withMessage:@"Order Completed" inView:self.view];
             //[self checkForOrders];
             
             [self checkForOrders];
@@ -544,9 +553,7 @@
 	
 }
 -(void)completeSummary:(id)sender
-{
-    [[Tracker sharedTracker]trackPageView:@"/app_createRun"];
-    
+{    
 	DashSummary *dash = [DashSummary instance];
 	
 	NSMutableDictionary *dash_dict = [dash getDict]; 
@@ -572,17 +579,16 @@
 	{
 		[device_id_array addObject:[[[dash_dict objectForKey:@"selected_friends"] objectAtIndex:i]valueForKey:@"device_id"]];
 	}
+	NSLog(@"device_id_array %@",device_id_array);
+    
 	
+    //Make sure we have data before we send it
+    if([dash_dict objectForKey:@"selected_date"] == NULL || [dash_dict objectForKey:@"selected_location"] == NULL || [dash_dict objectForKey:@"selected_friends"] == NULL || address == NULL || selected_yelp_id == NULL)
+    {
+        [Utils showAlert:@"NO Data" withMessage:@"Please add info to Run" inView:self.view];
+        return;
+    }
 	
-	if(![[[NSUserDefaults standardUserDefaults]stringForKey:@"is_debug"]boolValue])
-	{
-		//Make sure we have data before we send it
-		if([dash_dict objectForKey:@"selected_date"] == NULL || [dash_dict objectForKey:@"selected_location"] == NULL || [dash_dict objectForKey:@"selected_friends"] == NULL || address == NULL || selected_yelp_id == NULL)
-		{
-			[Utils showAlert:@"NO Data" withMessage:@"Please add info to Run" inView:self.view];
-			return;
-		}
-	}
 	//Send a push to all devices
 	NSString *push_type = @"doOrder";
 	NSString *runnerInfo = [NSString stringWithFormat:@"first_name=%@&last_name=%@&deviceid=%@&selected_date=%@&selected_name=%@&selected_address=%@&selected_url=%@&selected_yelp_id=%@",
@@ -602,6 +608,9 @@
 	
 	[request setHTTPMethod:@"POST"];
 	NSString *post_str = [NSString stringWithFormat:@"device_tokens=%@&push_type=%@&%@",[device_id_array componentsJoinedByString:@","],push_type,runnerInfo];
+    
+    NSLog(@"post_str %@",post_str);
+    
 	[request setHTTPBody:[post_str dataUsingEncoding:NSUTF8StringEncoding]]; 
 	URLConnection *conn = [[URLConnection alloc]init];
 	conn.tag =@"startRun";
@@ -609,6 +618,7 @@
 	[conn initWithRequest:request];
 
 	[load showLoading:@"Sending Order" inView:self.view];
+    
     
 }
 
@@ -732,6 +742,11 @@
     
     CoffeeRunSampleAppDelegate *appDelegate  = (CoffeeRunSampleAppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate showAdView];
+    [self startTimer];
+}
+-(void)viewDidDisappear:(BOOL)animated
+{
+     //[self stopTimer];
 }
 
 - (void)didReceiveMemoryWarning {

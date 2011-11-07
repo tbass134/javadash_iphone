@@ -18,7 +18,6 @@
 #import "EditOrderView.h"
 #import "TapkuLibrary.h"
 #import "URLConnection.h"
-#import "Tracker.h"
 #import "DrinkOrders.h"
 #import "SavedDrinksList.h"
 
@@ -30,11 +29,12 @@
 #import "NameListViewController.h"
 #import "CustomOrderViewController.h"
 #import "CoffeeDetailsView.h"
-
+#import "MutipleOrdersTableView.h"
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 320.0f
 #define CELL_CONTENT_MARGIN 10.0f
+#define CURRENT_TAB_INDEX 1
 
 @implementation OrdersViewController
 //ViewCurrentOrders
@@ -60,15 +60,9 @@
 	//every time we go to this screen, we need to know if an order has been sent,
 	//If so, change the Label
     int ts = [[NSDate date] timeIntervalSince1970];
-	NSString *userName = [NSString stringWithFormat:@"%@ %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"FIRSTNAME"],[[NSUserDefaults standardUserDefaults]valueForKey:@"LASTNAME"]];
-    
-    NSString *email =[[NSUserDefaults standardUserDefaults]valueForKey:@"EMAIL"];
-    BOOL enable_email = [[[NSUserDefaults standardUserDefaults]valueForKey:@"ENABLE_EMAIL"]boolValue];
-    
-	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&name=%@&email=%@&enable_email=%d&platform=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],[Utils urlencode:userName],email,enable_email,@"IOS",ts]]
+        NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],ts]]
 														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
-					
-                                                       timeoutInterval:60.0];
+													   timeoutInterval:60.0];
 #if debug
 	NSLog(@"url %@", [request URL]);
 #endif
@@ -87,7 +81,8 @@
     {
         if(!success)
         {
-            [Utils showAlert:@"Could not connect to server" withMessage:@"Please try again" inView:self.view];
+            if(self.navigationController.tabBarController.selectedIndex ==CURRENT_TAB_INDEX)
+                [Utils showAlert:@"Could not connect to server" withMessage:@"Please try again" inView:self.view];
             return;
         }
         
@@ -100,13 +95,15 @@
         [json_str release];
         if([order currentOrder] == NULL)
         {
-            [Utils showAlert:@"Error Loading Data" withMessage:@"Please try again" inView:self.view];
+            if(self.navigationController.tabBarController.selectedIndex ==CURRENT_TAB_INDEX)
+                [Utils showAlert:@"Error Loading Data" withMessage:@"Please try again" inView:self.view];
             return;
         }
             
          if(![[[order currentOrder] objectForKey:@"run"]objectForKey:@"id"])
          {
-             [Utils showAlert:@"No Orders Available" withMessage:nil inView:self.view];
+             if(self.navigationController.tabBarController.selectedIndex ==CURRENT_TAB_INDEX)
+                 [Utils showAlert:@"No Orders Available" withMessage:nil inView:self.view];
              return;
          }
         [self gotoScreen];
@@ -114,8 +111,8 @@
 	
     if([tag isEqualToString:@"submitOrder"])
     {
-        [[Tracker sharedTracker]trackPageView:@"/app_ItemsViewController_orderAdded"];        
-        [Utils showAlert:@"Order Added" withMessage:nil inView:self.view];
+        if(self.navigationController.tabBarController.selectedIndex ==CURRENT_TAB_INDEX)
+            [Utils showAlert:@"Order Added" withMessage:nil inView:self.view];
         
         DrinkOrders *drink_orders = [DrinkOrders instance];
         [drink_orders clearArray];
@@ -144,7 +141,9 @@
 	NSDictionary *user_order = [order currentOrder];
 	if(![[user_order objectForKey:@"run"]objectForKey:@"id"])
 	{
-		[Utils showAlert:@"No Runs Available" withMessage:nil inView:self.view];
+        if(self.navigationController.tabBarController.selectedIndex ==CURRENT_TAB_INDEX)
+            [Utils showAlert:@"No Runs Available" withMessage:nil inView:self.view];
+        noOrdersView.hidden = YES;
 		return;
 	}
 	if([user_order objectForKey:@"run"] != NULL)
@@ -156,12 +155,19 @@
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
+
+    send_order = [[UIBarButtonItem alloc]initWithTitle:@"Send Order" style:UIBarButtonItemStyleDone target:self action:@selector(sendOrder:)];
     
-    noOrdersView.hidden = YES;
+    addOrder_btn = [[UIBarButtonItem alloc]
+                     initWithTitle:@"Add to Order" style:UIBarButtonItemStylePlain target:self action:@selector(placeOrder:)];
+    reload = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reloadData:)];
     
+    goback = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(goBack:)];
+    
+    self.navigationItem.rightBarButtonItem = reload;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"reloadData" object:nil];
 
-     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reloadData:)];
+    
     
     //Event listener to update order when an order has been editied
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OrderEdited:) name:@"OrderEdited" object:nil];
@@ -185,9 +191,7 @@
 #pragma mark ViewCurrentOrders
 -(void)initViewCurrentOrders
 {
-    addOrder_btn = [[[UIBarButtonItem alloc]
-                   initWithTitle:@"Add to Order" style:UIBarButtonItemStylePlain target:self action:@selector(placeOrder:)]autorelease];
-    
+
 	self.navigationItem.rightBarButtonItem = addOrder_btn;
     [self loadOrderData];
     
@@ -204,9 +208,8 @@
 	//printf("Order has been edited");
 	
 	int ts = [[NSDate date] timeIntervalSince1970];
-	NSString *userName = [NSString stringWithFormat:@"%@ %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"FIRSTNAME"],[[NSUserDefaults standardUserDefaults]valueForKey:@"LASTNAME"]];
-	//NSLog(@"userName %@",[Utils urlencode:userName]);
-	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&name=%@&platform=%@&i=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],[Utils urlencode:userName],@"IOS",ts]]
+    
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],ts]]
 														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
 													   timeoutInterval:60.0];
 	//NSLog(@"url %@", [request URL]);
@@ -287,7 +290,7 @@
 	if(orders_count >0)
 	{
         noOrdersView.hidden = YES;
-        [[Tracker sharedTracker]trackPageView:@"/app_ViewCurrentOrdersView_hasOrder"];
+        current_orders_table.hidden = NO;
 		//Save this dictionary into Drink Orders sp we can edit it
 		[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"];
 		
@@ -351,7 +354,11 @@
 		}
 	}
     else
-        noOrdersView.hidden = NO;
+    {
+        noOrdersView.hidden = YES;
+        current_orders_table.hidden = NO;
+    }
+    
 	[current_orders_table reloadData];
     current_orders_table.delegate = self;
     current_orders_table.dataSource = self;
@@ -430,19 +437,20 @@
 		{
             
             NSDictionary *drink_dict = [[[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"]objectAtIndex:indexPath.row]objectForKey:@"drink"];
-            
-            /*
-             "Add Shot of Espresso" = 1;
-             Blend = Decaf;
-             Size = Medium;
-             Sweetener = Sugar;
-             beverage = Caramel;
-             drink = Latte;
-             "drink_type" = Hot;
-             timestamp = 1316480874;
-             */
+            //NSLog(@"drink_dict %@",drink_dict);
+            //NSLog(@"count %i",[drink_dict count]);
+            //NSLog(@"NSArray %d",[drink_dict isKindOfClass:[NSArray class]]);
             
             
+           if([drink_dict count] >1 && [drink_dict isKindOfClass:[NSArray class]])
+           {
+               //Push the new mutiple Order Table View
+               MutipleOrdersTableView *mutiView   = [[MutipleOrdersTableView alloc]initWithNibName:@"MutipleOrdersTableView" bundle:nil];
+               mutiView.selected_index = indexPath.row;
+               [self.navigationController pushViewController:mutiView animated:YES];
+           }
+           else
+           {     
             NSString *companyName = [Utils getCompanyName:[[[[order currentOrder]objectForKey:@"run"] objectForKey:@"location"]objectForKey:@"name"]];
              
              NSDictionary *options_dict = [[NSDictionary alloc]initWithObjectsAndKeys:companyName,@"companyName",[drink_dict objectForKey:@"drink_type"],@"drink_type",[drink_dict objectForKey:@"beverage"],@"beverage",[drink_dict objectForKey:@"drink"],@"drink",nil];
@@ -452,6 +460,7 @@
              listView.drink = options_dict;
              listView.edit_order_dict = drink_dict;
              [self.navigationController pushViewController:listView animated:YES];
+           }
                          
             
 		}
@@ -461,14 +470,11 @@
 }
 
 
-
-
 #pragma mark Place Order
 -(void)initPlaceOrder
 {
-    [[Tracker sharedTracker]trackPageView:@"/app_ItemsViewController"];
-	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(sendOrder:)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(goBack:)];
+	self.navigationItem.rightBarButtonItem = send_order;
+    self.navigationItem.leftBarButtonItem = goback;
 }
 -(void)goBack:(id)sender
 {
@@ -482,7 +488,6 @@
 -(void)sendOrder:(id)sender
 {
 	//printf("send Order");
-	[[Tracker sharedTracker]trackPageView:@"/app_ItemsViewController_sendOrder"];
 	Order *order = [Order sharedOrder];
 	//This is the data that got returned from the server when we first went to view the run.. Called  getOrder.php from CurrentRunViewController
 	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/placeorder.php",baseDomain]]
@@ -519,7 +524,11 @@
 		[conn initWithRequest:request];
 	}
     else
-        [Utils showAlert:@"No Orders Added"withMessage:@"Please add a order" inView:self.view];
+    {
+        if(self.navigationController.tabBarController.selectedIndex ==CURRENT_TAB_INDEX)
+            [Utils showAlert:@"No Orders Added"withMessage:@"Please add a order" inView:self.view];
+    }
+        
     
 	//NSLog(@"order id %@",[[[order currentOrder]objectForKey:@"run"]objectForKey:@"id"]);
     
@@ -544,7 +553,6 @@
 }
 -(IBAction)showDrinkList
 {
-    [[Tracker sharedTracker]trackPageView:@"/app_ItemsViewController_showDrinkList_btn_clicked"];
 	NameListViewController *orderView   = [[NameListViewController alloc]initWithNibName:@"NameListViewController" bundle:nil];
 	orderView.orderType = @"Drinks";
 	//Pass the Dictionary we got from the server
@@ -556,7 +564,6 @@
 }
 -(IBAction)showCustomList
 {
-    [[Tracker sharedTracker]trackPageView:@"/app_ItemsViewController_showCustomList_btn_clicked"];
 	CustomOrderViewController *customOrder   = [[CustomOrderViewController alloc]initWithNibName:@"CustomOrderViewController" bundle:nil];
 	UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:customOrder];
 	[self.navigationController presentModalViewController:nav animated:YES];
@@ -565,7 +572,6 @@
 }
 -(IBAction)showYourOrderList
 {
-    [[Tracker sharedTracker]trackPageView:@"/app_ItemsViewController_showYourOrderList_btn_clicked"];
 	YourOrderTableViewController *showOrder   = [[YourOrderTableViewController alloc]initWithNibName:nil bundle:nil];
 	showOrder.type = NULL;
 	[self.navigationController pushViewController:showOrder animated:YES];
@@ -573,7 +579,6 @@
 }
 -(IBAction)showFavoritesList
 {
-    [[Tracker sharedTracker]trackPageView:@"/app_ItemsViewController_showFavoritesList_btn_clicked"];
 	YourOrderTableViewController *showOrder   = [[YourOrderTableViewController alloc]initWithNibName:nil bundle:nil];
 	showOrder.type = @"favorites";
 	[self.navigationController pushViewController:showOrder animated:YES];

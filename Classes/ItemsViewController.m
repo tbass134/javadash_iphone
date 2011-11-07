@@ -17,7 +17,6 @@
 #import "URLConnection.h"
 #import "SavedDrinksList.h"
 #import "Utils.h"
-#import "Tracker.h"
 
 #import "ViewCurrentOrdersTableView.h"
 
@@ -40,14 +39,12 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[Tracker sharedTracker]trackPageView:@"/app_ItemsViewController"];
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(sendOrder:)];
 }
 
 -(void)sendOrder:(id)sender
 {
 	//printf("send Order");
-	[[Tracker sharedTracker]trackPageView:@"/app_ItemsViewController_sendOrder"];
 	Order *order = [Order sharedOrder];
 	//This is the data that got returned from the server when we first went to view the run.. Called  getOrder.php from CurrentRunViewController
 	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/placeorder.php",baseDomain]]
@@ -96,9 +93,7 @@
 }
 - (void)processSuccessful:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
 {
-	
-    [[Tracker sharedTracker]trackPageView:@"/app_ItemsViewController_orderAdded"];
-	NSLog(@"data %@",[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
+    NSLog(@"data %@",[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
     
 	[Utils showAlert:@"Order Added" withMessage:nil inView:self.view];
 	
@@ -143,7 +138,6 @@
 }
 -(IBAction)showDrinkList
 {
-    [[Tracker sharedTracker]trackPageView:@"/app_ItemsViewController_showDrinkList_btn_clicked"];
 	NameListViewController *orderView   = [[NameListViewController alloc]initWithNibName:@"NameListViewController" bundle:nil];
 	orderView.orderType = @"Drinks";
 	//Pass the Dictionary we got from the server
@@ -155,7 +149,6 @@
 }
 -(IBAction)showCustomList
 {
-    [[Tracker sharedTracker]trackPageView:@"/app_ItemsViewController_showCustomList_btn_clicked"];
 	CustomOrderViewController *customOrder   = [[CustomOrderViewController alloc]initWithNibName:@"CustomOrderViewController" bundle:nil];
 	UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:customOrder];
 	[self.navigationController presentModalViewController:nav animated:YES];
@@ -164,7 +157,6 @@
 }
 -(IBAction)showYourOrderList
 {
-    [[Tracker sharedTracker]trackPageView:@"/app_ItemsViewController_showYourOrderList_btn_clicked"];
 	YourOrderTableViewController *showOrder   = [[YourOrderTableViewController alloc]initWithNibName:nil bundle:nil];
 	showOrder.type = NULL;
 	[self.navigationController pushViewController:showOrder animated:YES];
@@ -172,7 +164,6 @@
 }
 -(IBAction)showFavoritesList
 {
-    [[Tracker sharedTracker]trackPageView:@"/app_ItemsViewController_showFavoritesList_btn_clicked"];
 	YourOrderTableViewController *showOrder   = [[YourOrderTableViewController alloc]initWithNibName:nil bundle:nil];
 	showOrder.type = @"favorites";
 	[self.navigationController pushViewController:showOrder animated:YES];

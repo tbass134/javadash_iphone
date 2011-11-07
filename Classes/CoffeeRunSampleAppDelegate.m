@@ -13,8 +13,8 @@
 #import "OrdersViewController.h"
 #import "Utils.h"
 #import "Constants.h"
-#import "Tracker.h"
 #import "Appirater.h"
+#import "FlurryAnalytics.h"
 
 
 
@@ -56,7 +56,6 @@ static NSString* kAppId = @"189714094427611";
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
-
     
     //Facebook
     _permissions =  [[NSArray arrayWithObjects:
@@ -71,11 +70,8 @@ static NSString* kAppId = @"189714094427611";
 #endif
     _facebook.accessToken = accessToken;
     _facebook.expirationDate = expirationDate;
-
-
-    
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-     [[Tracker sharedTracker]trackPageView:@"/app_launched"];
+    [FlurryAnalytics startSession:@"MUMH27DFIF94MBXYY19G"];
 	
     
 
@@ -89,24 +85,15 @@ static NSString* kAppId = @"189714094427611";
 	
 	//self.coffee_orders_array = [[NSMutableArray alloc]init];
     
+#if TARGET_IPHONE_SIMULATOR
     [self initTesting];
-    
-    [[NSUserDefaults standardUserDefaults]setValue:@"6607b4cc259f117dd348678a50d2e984a1d7a8f8557bf315cd6b45c1c6c904e7"forKey:@"_UALastDeviceToken"];
-    [[NSUserDefaults standardUserDefaults] setValue:@"tony" forKey:@"FIRSTNAME"];
-    [[NSUserDefaults standardUserDefaults] setValue:@"hung" forKey:@"LASTNAME"];
-    [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"NUMBER"];
-    [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"EMAIL"];
-     
-
-    
+#else
 	if(![Utils checkIfContactAdded])
 	{
-       
         dbSignupViewController = [[DBSignupViewController alloc] initWithNibName:@"DBSignupViewController" bundle:nil];
         dbSignupViewController.gotoContactInfo = NO;
         [dbSignupViewController setDelegate:self];
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:dbSignupViewController];
-        
 		
 		// Add the tab bar controller's current view as a subview of the window
 		[window addSubview:nav.view];
@@ -115,7 +102,7 @@ static NSString* kAppId = @"189714094427611";
 	else {
 		[self loadUI];
 	}
-	
+#endif	
     // call the Appirater class
     [Appirater appLaunched];
     
@@ -125,7 +112,7 @@ static NSString* kAppId = @"189714094427611";
 -(void)userDataAdded
 {
 	printf("userDataAddeds");
-    [[Tracker sharedTracker]trackPageView:@"/app_userDataAdded"];
+    [[NSUserDefaults standardUserDefaults]setValue:[NSNumber numberWithBool:1] forKey:@"user_added"];
 	[dbSignupViewController.view removeFromSuperview];
 	[self loadUI];
 }
@@ -173,6 +160,7 @@ static NSString* kAppId = @"189714094427611";
     [self.window addSubview:myTabBarController.view];
     [self checkForAppPurchase];
     
+    //NSLog(@"self.didPurchaseApp %d",self.didPurchaseApp);
 
     if(!self.didPurchaseApp)
     {
@@ -197,10 +185,11 @@ static NSString* kAppId = @"189714094427611";
 {
     if([[[NSUserDefaults standardUserDefaults]valueForKey:@"didPurchaseApp"]boolValue])
     {
+        self.adWhirlKey = @"";
         self.didPurchaseApp = YES;
-        [self hideAdView];
+        [adView.view removeFromSuperview];
+        myTabBarController.view.frame =  CGRectMake(0,0, 320, 480); 
     }
-    NSLog(@"self.didPurchaseApp %d",self.didPurchaseApp);
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)_deviceToken {
@@ -210,9 +199,9 @@ static NSString* kAppId = @"189714094427611";
 						  stringByReplacingOccurrencesOfString: @"<" withString: @""] 
 						 stringByReplacingOccurrencesOfString: @">" withString: @""] 
 						stringByReplacingOccurrencesOfString: @" " withString: @""];
-    #if debug
+    #if TARGET_IPHONE_SIMULATOR
 	NSLog(@"Device Token: %@", self.deviceToken);
-#endif
+    #endif
 	if ([application enabledRemoteNotificationTypes] == UIRemoteNotificationTypeNone) {
 		NSLog(@"Notifications are disabled for this application. Not registering with Urban Airship");
 		return;
@@ -259,9 +248,9 @@ static NSString* kAppId = @"189714094427611";
     [userDefaults setValue: self.deviceToken forKey: @"_UALastDeviceToken"];
     [userDefaults setValue: self.deviceAlias forKey: @"_UALastAlias"];
 
-    #if debug
+    #if TARGET_IPHONE_SIMULATOR
 	NSLog(@"getDeviceInfo %@", [self getDeviceInfo]);
-#endif
+    #endif
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
@@ -295,7 +284,7 @@ static NSString* kAppId = @"189714094427611";
     
    // printf("Should be called Reload Data");
 	NSLog(@"message %@",message);
-	//[[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
 	
 /*	
 	UIAlertView *push_alert = [[UIAlertView alloc] initWithTitle:@"Java Dash"
@@ -322,7 +311,7 @@ static NSString* kAppId = @"189714094427611";
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     printf("applicationDidBecomeActive");
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-	//[[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
 }
 - (void)applicationWillTerminate:(UIApplication *)application {
 	//Clear the array when the app quits
@@ -333,45 +322,50 @@ static NSString* kAppId = @"189714094427611";
 -(void)initTesting
 {
 	FriendsInfo *friends = [[FriendsInfo alloc]init];
+    [friends setDelegate:self];
 	friends.managedObjectContext = self.managedObjectContext;
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    if(![[NSUserDefaults standardUserDefaults] valueForKey:@"add_temp_friend"])
-	{
-		//Test Friend
-		NSDictionary *temp_dict = [[NSDictionary alloc]initWithObjectsAndKeys:@"Tony 2",@"FIRSTNAME",@"home",@"LASTNAME",@"",@"NUMBER",@"", @"EMAIL",@"b76cc8ae0270c31e99112e8ec823711a41bec4e508a9d74b76edcc290a5b7f45",@"TOKEN", nil];
-		if([friends insertFriendData:temp_dict])
-		{
-			[[NSUserDefaults standardUserDefaults]setValue:[NSNumber numberWithBool:1] forKey:@"add_temp_friend"];
-			//[Utils showAlert:@"Added" withMessage:[NSString stringWithFormat:@"%@ %@ has been added to your friends list",[dict objectForKey:@"FIRSTNAME"],[dict objectForKey:@"LASTNAME"]] inView:self.view];
-			NSLog(@"friend Added");
-		}
-	} 
-	/*
-	if([[[NSUserDefaults standardUserDefaults]stringForKey:@"is_runner"]boolValue])
-	{
-		//Runner
-		[[NSUserDefaults standardUserDefaults]setValue:@"b76cc8ae0270c31e99112e8ec823711a41bec4e508a9d74b76edcc290a5b7f45"forKey:@"_UALastDeviceToken"];
-		[[NSUserDefaults standardUserDefaults] setValue:@"Test" forKey:@"FIRSTNAME"];
-		[[NSUserDefaults standardUserDefaults] setValue:@"Runner" forKey:@"LASTNAME"];
-		[[NSUserDefaults standardUserDefaults] setValue:@"8457297292" forKey:@"NUMBER"];
-        [[NSUserDefaults standardUserDefaults] setValue:@"tbass134@gmail.com" forKey:@"EMAIL"];
-        
-	}
-	else
-	{
-		//Attendee
-		[[NSUserDefaults standardUserDefaults]setValue:@"6607b4cc259f117dd348678a50d2e984a1d7a8f8557bf315cd6b45c1c6c904e7"forKey:@"_UALastDeviceToken"];
-		[[NSUserDefaults standardUserDefaults] setValue:@"Test" forKey:@"FIRSTNAME"];
-		[[NSUserDefaults standardUserDefaults] setValue:@"Attendee" forKey:@"LASTNAME"];
-		[[NSUserDefaults standardUserDefaults] setValue:@"8457297292" forKey:@"NUMBER"];
-        [[NSUserDefaults standardUserDefaults] setValue:@"tbass134@gmail.com" forKey:@"EMAIL"];
-	}
-     */
+    [defaults setValue:@"6607b4cc259f117dd348678a50d2e984a1d7a8f8557bf315cd6b45c1c6c904e7"forKey:@"_UALastDeviceToken"];
+    [defaults setValue:@"tony" forKey:@"FIRSTNAME"];
+    [defaults setValue:@"hung" forKey:@"LASTNAME"];
+    [defaults setValue:@"" forKey:@"NUMBER"];
+    [defaults setValue:@"tbass134@gmail.com" forKey:@"EMAIL"];
+    [defaults setValue:[NSNumber numberWithBool:YES] forKey:@"ENABLE_EMAIL"];
+
+    
+    //Add my info
+    NSDictionary *my_dict = [[NSDictionary alloc]initWithObjectsAndKeys:
+                            [defaults valueForKey:@"FIRSTNAME"],@"FIRSTNAME",
+                            [defaults valueForKey:@"LASTNAME"],@"LASTNAME",
+                            [defaults valueForKey:@"EMAIL"], @"EMAIL",
+                            [defaults valueForKey:@"_UALastDeviceToken"],@"TOKEN",
+                            [NSNumber numberWithBool:[[defaults valueForKey:@"ENABLE_EMAIL"]boolValue]],@"ENABLE_EMAIL",nil];
+                               
+    if([friends insertFriendData:my_dict])
+        printf("My Data Added");
+    
+    //Test Friend
+    NSDictionary *temp_dict = [[NSDictionary alloc]initWithObjectsAndKeys:@"Tony",@"FIRSTNAME",@"home",@"LASTNAME",@"tbass134@yahoo.com", @"EMAIL",@"b76cc8ae0270c31e99112e8ec823711a41bec4e508a9d74b76edcc290a5b7f45",@"TOKEN",[NSNumber numberWithBool:YES],@"ENABLE_EMAIL", nil];
+    if([friends insertFriendData:temp_dict])
+        [[NSUserDefaults standardUserDefaults]setValue:[NSNumber numberWithBool:1] forKey:@"user_added"];
+	 
 	[friends release];
+    
+   
 	
 }
-
+- (void)friendDataLoaded:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
+{
+    printf("UserData Loaded");
+    if(!UILoaded)
+    {
+        [self loadUI];
+        UILoaded = YES;
+    }
+     
+}
 #pragma mark -
 #pragma mark Core Data 
 //Explicitly write Core Data accessors
@@ -435,6 +429,8 @@ static NSString* kAppId = @"189714094427611";
 }
 -(void)showAdView
 {
+    if(self.didPurchaseApp)
+        return;
     if(adView.view != nil)
     {
         if(self.adsLoaded)
@@ -521,6 +517,7 @@ static NSString* kAppId = @"189714094427611";
  */
 -(void)fbDidNotLogin:(BOOL)cancelled {
     NSLog(@"did not login");
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"fbDidNotLogin" object:self];
 }
 // FBRequestDelegate
 

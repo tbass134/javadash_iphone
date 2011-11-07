@@ -28,7 +28,6 @@
 	IBOutlet UITableView *view_run_table;
 	
 	NSMutableArray *orders_cells;
-	
     
     NSTimer *run_countdown_timer;
     NSDate *run_date;
@@ -51,7 +50,6 @@
 @property(nonatomic,retain)IBOutlet UITextView *run_info_txt;
 @property(nonatomic,retain)IBOutlet UITextView *run_time_txt;
 @property(nonatomic,retain)IBOutlet UITableView *table_view;
-@property(nonatomic,retain)NSTimer *run_countdown_timer;
 
 
 

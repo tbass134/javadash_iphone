@@ -1,9 +1,10 @@
+/*
 #import "SCRURLConnection.h"
 #import "SCRMemoryManagement.h"
 
 NSString *const kSCRURLConnectionDomain = @"com.screencustoms.SCRURLConnection.ErrorDomain";
 
-@interface SCRURLConnection (/* Private methods */)
+@interface SCRURLConnection ( Private methods )
 
 - (void)reportError:(NSError *)error;
 
@@ -134,3 +135,4 @@ NSString *const kSCRURLConnectionDomain = @"com.screencustoms.SCRURLConnection.E
 }
 
 @end
+ */

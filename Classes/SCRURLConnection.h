@@ -1,3 +1,4 @@
+/*
 extern NSString * const kSCRURLConnectionDomain;
 
 enum
@@ -38,3 +39,4 @@ typedef void (^ SCRURLFailedHandler)(SCRURLConnection *connection, NSError *erro
 - (BOOL)SCRURLConnectionIsCancelled;
 
 @end
+*/

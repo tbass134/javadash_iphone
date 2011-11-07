@@ -32,6 +32,14 @@
 	IBOutlet UIButton *custom_btn;
 	IBOutlet UIButton *your_order_btn;
 	IBOutlet UIButton *favorite_btn;
+    
+    //Multiple Orders tableView
+    IBOutlet UIView *mutiple_orders_view;
+    IBOutlet UITableView *multiple_orders_table_view;
+    
+    UIBarButtonItem *send_order;
+    UIBarButtonItem *goback;
+    UIBarButtonItem *reload;
 
 }
 //Core Data

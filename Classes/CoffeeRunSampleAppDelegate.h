@@ -50,6 +50,8 @@ FBSessionDelegate,AdWhirlDelegate> {
     AdViewController *adView;
     BOOL adsLoaded;
     BOOL didPurchaseApp;
+    
+    BOOL UILoaded;
 
 	
 }

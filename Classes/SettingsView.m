@@ -8,7 +8,6 @@
 
 #import "SettingsView.h"
 #import "Utils.h"
-#import "Tracker.h"
 #import "DBSignupViewController.h"
 #import "CoffeeRunSampleAppDelegate.h"
 #import "DBSignupViewController.h"
@@ -84,17 +83,14 @@
 #pragma mark
 -(IBAction)removeAds:(id)sender
 {
-    /*
-#if debug
-    [[NSUserDefaults standardUserDefaults]setValue:[NSNumber numberWithBool:YES] forKey:@"didPurchaseApp"];
-    CoffeeRunSampleAppDelegate *appDelegate  = (CoffeeRunSampleAppDelegate *)[[UIApplication sharedApplication]delegate];
-    [appDelegate checkForAppPurchase];
+    
+#if TARGET_IPHONE_SIMULATOR
+    [self appPurchased];
     return;
 #endif
-     */
     
     [[MKStoreManager sharedManager] buyFeature:kFeatureAId onComplete:^(NSString* purchasedFeature) { 
-#if debug
+#if TARGET_IPHONE_SIMULATOR
         NSLog(@"Purchased: %@", purchasedFeature);
 #endif        
         //tell the server about the purchase.
@@ -108,6 +104,7 @@
                                                            timeoutInterval:60.0];
         
         URLConnection *conn = [[URLConnection alloc]init];
+        conn.tag = @"purchaseApp";
         [conn setDelegate:self];
         [conn initWithRequest:request];
         
@@ -124,16 +121,26 @@
 		[Utils showAlert:@"Could not save data to server" withMessage:@"Please try again" inView:self.view];
 		return;
 	}
-    
-    NSString * json_str  = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    if([json_str isEqualToString:@"1"])
+    if([tag isEqualToString:@"purchaseApp"])
     {
-        printf("Success");
-        [[NSUserDefaults standardUserDefaults]setValue:[NSNumber numberWithBool:YES] forKey:@"didPurchaseApp"];
-        CoffeeRunSampleAppDelegate *appDelegate  = (CoffeeRunSampleAppDelegate *)[[UIApplication sharedApplication]delegate];
-        [appDelegate checkForAppPurchase];
+        NSString * json_str  = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        if([json_str isEqualToString:@"1"])
+        {
+            printf("Success");
+            [self appPurchased];
+        }
     }
+}
+-(void)appPurchased
+{
+    [[NSUserDefaults standardUserDefaults]setValue:[NSNumber numberWithBool:YES] forKey:@"didPurchaseApp"];
+    CoffeeRunSampleAppDelegate *appDelegate  = (CoffeeRunSampleAppDelegate *)[[UIApplication sharedApplication]delegate];
     
+    self.navigationItem.rightBarButtonItem = nil;
+    [appDelegate checkForAppPurchase];
+   // [self.view setNeedsDisplay];
+    [self viewDidAppear:YES];
+
 }
 
 #pragma mark BumpAPI
@@ -141,10 +148,11 @@
 -(IBAction)testBump:(id)sender
 {
 	if([friends checkIfContactAdded])	{
-        [[Tracker sharedTracker]trackPageView:@"/app_bump_btn_clicked"];
 		bumpObject = [BumpAPI sharedInstance];
 		[self startBump];
 	}
+    else
+        printf("Contact not added");
 }
 -(IBAction)updateProfile:(id)sender
 {
@@ -183,7 +191,6 @@
 	{
 		if([friends insertFriendData:responseDictionary])
 		{
-            [[Tracker sharedTracker]trackPageView:@"/app_bump_userDataAdded"];
 			[Utils showAlert:@"Added" withMessage:[NSString stringWithFormat:@"%@ %@ has been added to your friends list",[responseDictionary objectForKey:@"FIRSTNAME"],[responseDictionary objectForKey:@"LASTNAME"]] inView:self.view];
 			[self stopBump];
 			
@@ -291,7 +298,6 @@
 		[alert release];
 	}
 }
-
 
 
 #pragma mark -
