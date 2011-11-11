@@ -14,6 +14,10 @@
 #import "Utils.h"
 #import "SavedDrinksList.h"
 
+#import "Constants.h"
+#import "URLConnection.h"
+#import "JSON.h"
+
 
 #define UITEXTVIEWTAG 101
 #define FAVESWITCHTAG 201
@@ -24,6 +28,8 @@
 @implementation CoffeeDetailsView
 @synthesize drink;
 @synthesize edit_order_dict;
+@synthesize orderType;
+@synthesize selected_index;
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 /*
@@ -299,7 +305,6 @@
         [savedDrink setObject:[NSNumber numberWithBool:_switch.on] forKey:[switches_dict objectForKey:@"theKey"]];	
     }
     
-    
 	[savedDrink setObject:[drink objectForKey:@"beverage"] forKey:@"beverage"];
     [savedDrink setObject:[drink objectForKey:@"drink_type"] forKey:@"drink_type"];
      [savedDrink setObject:[drink objectForKey:@"drink"] forKey:@"drink"];
@@ -316,9 +321,48 @@
     #if debug
     NSLog(@"drink %@",[drink_orders getArray]);
 #endif
-    [Utils showAlert:@"Order Added" withMessage:nil inView:self.view];
+    
+    if(edit_order_dict !=NULL)
+    {
+        Order *order = [Order sharedOrder];
+        
+        
+        //This order was editied, need to send the new data to the server
+        int ts = [[NSDate date] timeIntervalSince1970];
+        NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/placeorder.php?ts=%i",baseDomain,ts]]
+                                                               cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                                           timeoutInterval:60.0];
+        
+        [request setHTTPMethod:@"POST"];
+        
+        SBJSON *parser = [[SBJSON alloc] init];	
+        NSString *order_str = [parser stringWithObject:savedDrink];
+        [parser release];
+        
+        NSDictionary *selected_drink = [[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"]objectAtIndex:selected_index];
+        NSLog(@"selected_drink %@",selected_drink);
+        
+        NSString *post_str = [NSString stringWithFormat:@"device_id=%@&run_id=%@&order=%@&updateOrder=1&order_id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"_UALastDeviceToken"],	[[[order currentOrder]objectForKey:@"run"]objectForKey:@"id"],order_str,[selected_drink objectForKey:@"order_id"]];
+        [request setHTTPBody:[post_str dataUsingEncoding:NSUTF8StringEncoding]]; 
+        NSLog(@"post_str %@",post_str);
+        NSLog(@"url %@", [request URL]);
+        
+        URLConnection *conn = [[URLConnection alloc]init];
+        conn.tag =@"editOrder";
+        [conn setDelegate:self];
+        [conn initWithRequest:request];
+    }
+    else
+        [Utils showAlert:@"Order Added" withMessage:nil inView:self.view];
     
 	[self.navigationController dismissModalViewControllerAnimated:YES];
+}
+- (void)processSuccessful:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
+{
+    //[Utils showAlert:@"Order Updated" withMessage:nil inView:self.view];
+     [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderEdited" object:self];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 //implementation

@@ -21,6 +21,8 @@
 	
     NSDictionary *drink;
     NSDictionary *edit_order_dict;
+    int selected_index;
+    NSString *orderType;
 	NSMutableArray *sections_array;
 	
     CGPoint svos;
@@ -34,6 +36,8 @@
 }
 @property(nonatomic,retain) NSDictionary *drink;
 @property(nonatomic,retain) NSDictionary *edit_order_dict;
+@property(nonatomic,retain)NSString *orderType;
+@property(nonatomic,assign)int selected_index;
 
 @property (nonatomic, retain) IBOutlet SCRSegmentedControl *oneRowControl, *twoRowControl, *threeRowControl;
 @property (nonatomic, retain) IBOutlet UILabel *valueLabel;

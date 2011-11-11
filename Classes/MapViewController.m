@@ -494,7 +494,7 @@
 
 	}
 	UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-	[rightButton addTarget:self action:@selector(annotationViewClick:) forControlEvents:UIControlEventTouchUpInside];
+	//[rightButton addTarget:self action:@selector(annotationViewClick:) forControlEvents:UIControlEventTouchUpInside];
 	annView.rightCalloutAccessoryView = rightButton;
 	
 	return annView;

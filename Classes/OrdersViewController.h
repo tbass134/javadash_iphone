@@ -40,6 +40,7 @@
     UIBarButtonItem *send_order;
     UIBarButtonItem *goback;
     UIBarButtonItem *reload;
+    BOOL order_ended;
 
 }
 //Core Data

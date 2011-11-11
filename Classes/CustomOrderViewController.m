@@ -8,9 +8,15 @@
 
 #import "CustomOrderViewController.h"
 #import "DrinkOrders.h"
+#import "Order.h"
+#import "URLConnection.h"
+#import "JSON.h"
+#import "Constants.h"
 
 @implementation CustomOrderViewController
-@synthesize text_field,label,saveBtn;
+@synthesize text_view,label,saveBtn;
+@synthesize edit_order_dict;
+@synthesize selected_index;
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 /*
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -26,31 +32,83 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	appDelegate = [[UIApplication sharedApplication] delegate];
-	self.text_field.delegate = self;
-	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(close:)];
+	self.text_view.delegate = self;
+    
+    if(edit_order_dict != NULL)
+        self.text_view.text = [edit_order_dict objectForKey:@"CustomOrder"];
 
 	
     [super viewDidLoad];
 }
 -(IBAction)saveOrder
 {
-	printf("saveOrder");
-	NSMutableDictionary *savedDrink = [[NSMutableDictionary alloc]init];
-	NSString *timestamp = [NSString stringWithFormat:@"%0.0f", [[NSDate date] timeIntervalSince1970]];
-	[savedDrink setObject:timestamp forKey:@"timestamp"];
-	[savedDrink setObject:text_field.text forKey:@"CustomOrder"];
-	
-	DrinkOrders *drink_orders = [DrinkOrders instance];
-	[[drink_orders getArray]addObject:savedDrink];
+    if(edit_order_dict != NULL)
+    {
+        [edit_order_dict setObject:text_view.text forKey:@"CustomOrder"];
+        DrinkOrders *drink_orders = [DrinkOrders instance];
+        NSLog(@"drink_orders %@",drink_orders);
+        
+    
+        Order *order = [Order sharedOrder];
+        //This order was editied, need to send the new data to the server
+        int ts = [[NSDate date] timeIntervalSince1970];
+        NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/placeorder.php?ts=%i",baseDomain,ts]]
+                                                               cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                                           timeoutInterval:60.0];
+        
+        [request setHTTPMethod:@"POST"];
+        
+        SBJSON *parser = [[SBJSON alloc] init];	
+        NSString *order_str = [parser stringWithObject:edit_order_dict];
+        [parser release];
+        
+         NSDictionary *selected_drink = [[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"]objectAtIndex:selected_index];
+        
+        
+        NSString *post_str = [NSString stringWithFormat:@"device_id=%@&run_id=%@&order=%@&updateOrder=1&order_id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"_UALastDeviceToken"],	[[[order currentOrder]objectForKey:@"run"]objectForKey:@"id"],order_str,[selected_drink objectForKey:@"order_id"]];
+        [request setHTTPBody:[post_str dataUsingEncoding:NSUTF8StringEncoding]]; 
+        NSLog(@"post_str %@",post_str);
+        NSLog(@"url %@", [request URL]);
+        
+        URLConnection *conn = [[URLConnection alloc]init];
+        conn.tag =@"editOrder";
+        [conn setDelegate:self];
+        [conn initWithRequest:request];
+        
+    }
+    else
+    {
+        printf("saveOrder");
+        NSMutableDictionary *savedDrink = [[NSMutableDictionary alloc]init];
+        NSString *timestamp = [NSString stringWithFormat:@"%0.0f", [[NSDate date] timeIntervalSince1970]];
+        [savedDrink setObject:timestamp forKey:@"timestamp"];
+        [savedDrink setObject:text_view.text forKey:@"CustomOrder"];
+        
+        DrinkOrders *drink_orders = [DrinkOrders instance];
+        [[drink_orders getArray]addObject:savedDrink];
+    }
+     
 	[self.navigationController dismissModalViewControllerAnimated:YES];
 }
--(void)close:(id)sender
+
+
+- (void)processSuccessful:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
 {
-	[self dismissModalViewControllerAnimated:YES];
-}
--(BOOL)textFieldShouldReturn:(UITextField *)tf {
-	[tf resignFirstResponder];
-	return YES;
+    //[Utils showAlert:@"Order Updated" withMessage:nil inView:self.view];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderEdited" object:self];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}   
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range  replacementText:(NSString *)text
+{
+	if (range.length==0) {
+		if ([text isEqualToString:@"\n"]) {
+			[textView resignFirstResponder];
+			return NO;
+		}
+	}
+	
+    return YES;
 }
 /*
 // Override to allow orientations other than the default portrait orientation.

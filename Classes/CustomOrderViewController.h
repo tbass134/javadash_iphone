@@ -9,16 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "CoffeeRunSampleAppDelegate.h"
 
-@interface CustomOrderViewController : UIViewController<UITextFieldDelegate> {
+@interface CustomOrderViewController : UIViewController<UITextViewDelegate> {
 
-	IBOutlet UITextField *text_field;
+	IBOutlet UITextView *text_view;
 	IBOutlet UILabel *label;
 	IBOutlet UIButton *saveBtn;
 	CoffeeRunSampleAppDelegate *appDelegate;
+    
+    NSDictionary *edit_order_dict;
+    int selected_index;
 }
-@property(nonatomic,retain)UITextField *text_field;
+@property(nonatomic,retain)UITextView *text_view;
 @property(nonatomic,retain)UILabel *label;
 @property(nonatomic,retain)UIButton *saveBtn;
-
+@property(nonatomic,assign)int selected_index;
+@property(nonatomic,retain)NSDictionary *edit_order_dict;
 -(IBAction)saveOrder;
 @end

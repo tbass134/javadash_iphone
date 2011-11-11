@@ -10,6 +10,9 @@
 #import "DrinkOrders.h"
 #import "SavedDrinksList.h"
 #import "TapkuLibrary.h"
+#import "Utils.h"
+#import "CoffeeDetailsView.h"
+#import "Order.h"
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 320.0f
@@ -74,7 +77,6 @@
 		{
             TKLabelTextViewCell *cell1 = [[TKLabelTextViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier];
 			NSMutableString *str = [[NSMutableString alloc]init];
-            
             
 			NSArray *order_dict = [self.coffee_orders_array objectAtIndex:i];
             if(order_dict == (id)[NSNull null])
@@ -265,14 +267,23 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
+    
     /*
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-    [detailViewController release];
-    */
+    Order *order = [Order sharedOrder];
+    NSString *companyName = [Utils getCompanyName:[[[[order currentOrder]objectForKey:@"run"] objectForKey:@"location"]objectForKey:@"name"]];
+    
+    NSDictionary *selected_drink = [self.coffee_orders_array objectAtIndex:indexPath.row];
+    NSDictionary *options_dict = [[NSDictionary alloc]initWithObjectsAndKeys:companyName,@"companyName",[selected_drink objectForKey:@"drink_type"],@"drink_type",[selected_drink objectForKey:@"beverage"],@"beverage",[selected_drink objectForKey:@"drink"],@"drink",nil];
+    
+    
+    CoffeeDetailsView *listView   = [[CoffeeDetailsView alloc]initWithNibName:nil bundle:nil];
+    listView.drink = options_dict;
+    listView.edit_order_dict = selected_drink;
+    listView.orderType = self.type;
+    [self.navigationController pushViewController:listView animated:YES];
+     */
+
+   
 }
 
 

@@ -34,12 +34,9 @@
 }
 -(void)clearArray
 {
-	if(globalArray != nil)
-	{
-		globalArray = nil;
-		globalArray = [[NSMutableArray alloc]init];
+    globalArray = nil;
+    globalArray = [[NSMutableArray alloc]init];
 
-	}
 }
 
 @end

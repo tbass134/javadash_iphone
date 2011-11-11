@@ -18,6 +18,7 @@
 #import "DashSummary.h"
 
 #import "Order.h"
+#import "DrinkOrders.h"
 #import "AsyncImageView2.h"
 #import "TapkuLibrary.h"
 
@@ -293,8 +294,6 @@
 }
 
 - (void)updateTimer:(NSTimer *)myTimer{
-    //NSDate *now = [NSDate date];
-    //NSDate *now =  [NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
     if(run_date != NULL)
     {
         
@@ -307,7 +306,12 @@
         {
             run_time_txt.text = @"Order Ended";
             [self stopTimer];
-            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showOptions:)];
+            Order *order = [Order sharedOrder];
+            NSDictionary *user_order = [[order currentOrder]objectForKey:@"run"];
+            if([[user_order objectForKey:@"is_runner"] intValue] == 1)
+            {
+                self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showOptions:)];
+            }
         }
     }
     
@@ -404,6 +408,10 @@
         {
             [Utils showAlert:nil withMessage:@"Order Completed" inView:self.view];
             //[self checkForOrders];
+            
+            //Clear the drink orders array
+            DrinkOrders *drink_orders = [DrinkOrders instance];
+            [drink_orders clearArray];
             
             [self checkForOrders];
                         

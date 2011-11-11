@@ -114,8 +114,12 @@
         if(self.navigationController.tabBarController.selectedIndex ==CURRENT_TAB_INDEX)
             [Utils showAlert:@"Order Added" withMessage:nil inView:self.view];
         
+        self.navigationItem.leftBarButtonItem = nil;
         DrinkOrders *drink_orders = [DrinkOrders instance];
         [drink_orders clearArray];
+        
+        NSMutableArray *drink_orders_array  = [drink_orders getArray];
+        NSLog(@"drink_orders_array %@",drink_orders_array);
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
 	}
@@ -205,7 +209,7 @@
 }
 -(void)OrderEdited:(id)sender
 {
-	//printf("Order has been edited");
+	printf("Order has been edited");
 	
 	int ts = [[NSDate date] timeIntervalSince1970];
     
@@ -225,6 +229,11 @@
 -(void)loadOrderData
 {
     printf("calling loadData\n");
+    //Clear drink orders array
+    DrinkOrders *drink_orders = [DrinkOrders instance];
+    [drink_orders clearArray];
+
+    
 	Order *order = [Order sharedOrder];
 	NSDictionary *user_order = [[order currentOrder]objectForKey:@"run"];
 	//NSLog(@"user_order %@",user_order);
@@ -251,14 +260,16 @@
     
     if ([[NSDate date] compare:run_date] == NSOrderedAscending)
     {
+        order_ended = NO;
         addOrder_btn.enabled = YES;
     }
     else
     {
+        order_ended = YES;
         addOrder_btn.enabled = NO;
     }
 
-	
+	NSLog(@"order_ended %d",order_ended);
 	//If the device is a ATTENDEE, show the run info
 	if([[user_order objectForKey:@"is_runner"] intValue] == 0)
 	{
@@ -424,7 +435,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-	//NSLog(@"indexPath.section %i",indexPath.section);
+	NSLog(@"indexPath.section %i",indexPath.section);
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if(order_ended)
+    {
+        [Utils showAlert:@"Order Has Ended" withMessage:@"You cannot edit an order that has been completed" inView:self.view];
+        return;
+    }
 	
 	if(indexPath.section ==1)
 	{
@@ -437,39 +455,61 @@
 		{
             
             NSDictionary *drink_dict = [[[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"]objectAtIndex:indexPath.row]objectForKey:@"drink"];
-            //NSLog(@"drink_dict %@",drink_dict);
-            //NSLog(@"count %i",[drink_dict count]);
-            //NSLog(@"NSArray %d",[drink_dict isKindOfClass:[NSArray class]]);
+            NSLog(@"drink_dict %@",drink_dict);
             
+            NSLog(@"count %i",[drink_dict count]);
+            NSLog(@"NSArray %d",[drink_dict isKindOfClass:[NSArray class]]);
+            //NSLog(@"Custom Ordder %@",[drink_dict objectForKey:@"CustomOrder"]);
             
-           if([drink_dict count] >1 && [drink_dict isKindOfClass:[NSArray class]])
-           {
-               //Push the new mutiple Order Table View
-               MutipleOrdersTableView *mutiView   = [[MutipleOrdersTableView alloc]initWithNibName:@"MutipleOrdersTableView" bundle:nil];
-               mutiView.selected_index = indexPath.row;
-               [self.navigationController pushViewController:mutiView animated:YES];
-           }
-           else
-           {     
-            NSString *companyName = [Utils getCompanyName:[[[[order currentOrder]objectForKey:@"run"] objectForKey:@"location"]objectForKey:@"name"]];
+            if([drink_dict isKindOfClass:[NSDictionary class]])
+            {
+                if([drink_dict objectForKey:@"CustomOrder"] != nil)
+                {
+                    
+                    CustomOrderViewController *customOrder   = [[CustomOrderViewController alloc]initWithNibName:@"CustomOrderViewController" bundle:nil];
+                    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:customOrder];
+                    customOrder.edit_order_dict = drink_dict;
+                    customOrder.selected_index = indexPath.row;
+                    //[self.navigationController presentModalViewController:nav animated:YES];
+                    [self.navigationController pushViewController:customOrder animated:YES];
+                    [customOrder release];
+                    [nav release];
+                    return;
+                     
+                }
+            }
+        
+                NSLog(@"count %i",[drink_dict count]);
+                NSLog(@"NSArray %d",[drink_dict isKindOfClass:[NSArray class]]);
+                
+                
+               if([drink_dict count] >1 && [drink_dict isKindOfClass:[NSArray class]])
+               {
+                    //Push the new mutiple Order Table View
+                    MutipleOrdersTableView *mutiView   = [[MutipleOrdersTableView alloc]initWithNibName:@"MutipleOrdersTableView" bundle:nil];
+                    mutiView.selected_index = indexPath.row;
+                    [self.navigationController pushViewController:mutiView animated:YES];
+                   
+               }
+               else
+               {     
+                   
+                NSString *companyName = [Utils getCompanyName:[[[[order currentOrder]objectForKey:@"run"] objectForKey:@"location"]objectForKey:@"name"]];
+                 
+                 NSDictionary *options_dict = [[NSDictionary alloc]initWithObjectsAndKeys:companyName,@"companyName",[drink_dict objectForKey:@"drink_type"],@"drink_type",[drink_dict objectForKey:@"beverage"],@"beverage",[drink_dict objectForKey:@"drink"],@"drink",nil];
+                 
+                
+                 CoffeeDetailsView *listView   = [[CoffeeDetailsView alloc]initWithNibName:nil bundle:nil];
+                 listView.drink = options_dict;
+                 listView.edit_order_dict = drink_dict;
+                   listView.selected_index = indexPath.row;
+                 [self.navigationController pushViewController:listView animated:YES];
+                    
+               }
+            }
              
-             NSDictionary *options_dict = [[NSDictionary alloc]initWithObjectsAndKeys:companyName,@"companyName",[drink_dict objectForKey:@"drink_type"],@"drink_type",[drink_dict objectForKey:@"beverage"],@"beverage",[drink_dict objectForKey:@"drink"],@"drink",nil];
-             
-            
-             CoffeeDetailsView *listView   = [[CoffeeDetailsView alloc]initWithNibName:nil bundle:nil];
-             listView.drink = options_dict;
-             listView.edit_order_dict = drink_dict;
-             [self.navigationController pushViewController:listView animated:YES];
-           }
-                         
-            
-		}
-        else
-            [tableView deselectRowAtIndexPath:indexPath animated:YES]; 
-	}
+		}           
 }
-
-
 #pragma mark Place Order
 -(void)initPlaceOrder
 {
@@ -482,6 +522,7 @@
     if(place_over_view.superview)
         [place_over_view removeFromSuperview];
     [self.view addSubview:current_orders_view];
+    
     [self initViewCurrentOrders];
     
 }
@@ -501,6 +542,7 @@
 	
 	DrinkOrders *drink_orders = [DrinkOrders instance];
 	NSMutableArray *drink_orders_array  = [drink_orders getArray];
+    NSLog(@"drink_orders_array %@",drink_orders_array);
     
 	for(int i=0;i<[drink_orders_array count];i++)
 	{
@@ -544,10 +586,6 @@
 			[SavedDrinksList writeDataToFile:[drink_orders_array objectAtIndex:i]];
 		}
 	}
-	
-	//Remove the order from memory
-	//[[DrinkOrders instance] clearArray];
-	
 	
 	[self.navigationController dismissModalViewControllerAnimated:YES];
 }
