@@ -55,6 +55,9 @@
 		452CA17E1447DDF400B7FC70 /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 452CA1741447DDF400B7FC70 /* FBDialog.m */; };
 		452CA17F1447DDF400B7FC70 /* FBLoginDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 452CA1761447DDF400B7FC70 /* FBLoginDialog.m */; };
 		452CA1801447DDF400B7FC70 /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 452CA1781447DDF400B7FC70 /* FBRequest.m */; };
+		452D3A0A14704A270058AA45 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 452D3A0914704A270058AA45 /* Settings.bundle */; };
+		452D3A1414707D050058AA45 /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 452D3A1114707D050058AA45 /* NSString+MD5Addition.m */; };
+		452D3A1514707D050058AA45 /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 452D3A1314707D050058AA45 /* UIDevice+IdentifierAddition.m */; };
 		452DB9E81465DC0A0030F7C9 /* MutipleOrdersTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 452DB9E61465DC060030F7C9 /* MutipleOrdersTableView.m */; };
 		452DB9E91465DC0A0030F7C9 /* MutipleOrdersTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 452DB9E71465DC080030F7C9 /* MutipleOrdersTableView.xib */; };
 		4531C40C13DB431F00BD246C /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 4531C40513DB431F00BD246C /* background.png */; };
@@ -92,6 +95,7 @@
 		4588A25212B8063500863541 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4588A25112B8063500863541 /* CoreLocation.framework */; };
 		4588A25712B8064800863541 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4588A25612B8064800863541 /* AudioToolbox.framework */; };
 		4588A25D12B8066500863541 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4588A25C12B8066500863541 /* QuartzCore.framework */; };
+		458CBD071474A7210057B063 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 458CBD051474A7210057B063 /* libTestFlight.a */; };
 		458D1D5C13A950FD00243581 /* MyUISegmentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 458D1D5B13A950FD00243581 /* MyUISegmentController.m */; };
 		459C0C7312FA3A4100108705 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 459C0C7212FA3A4100108705 /* Constants.m */; };
 		459C560813183038008F6BDD /* CustomOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 459C560613183038008F6BDD /* CustomOrderViewController.m */; };
@@ -360,6 +364,11 @@
 		452CA1761447DDF400B7FC70 /* FBLoginDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLoginDialog.m; sourceTree = "<group>"; };
 		452CA1771447DDF400B7FC70 /* FBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRequest.h; sourceTree = "<group>"; };
 		452CA1781447DDF400B7FC70 /* FBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBRequest.m; sourceTree = "<group>"; };
+		452D3A0914704A270058AA45 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		452D3A1014707D050058AA45 /* NSString+MD5Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5Addition.h"; sourceTree = "<group>"; };
+		452D3A1114707D050058AA45 /* NSString+MD5Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5Addition.m"; sourceTree = "<group>"; };
+		452D3A1214707D050058AA45 /* UIDevice+IdentifierAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+IdentifierAddition.h"; sourceTree = "<group>"; };
+		452D3A1314707D050058AA45 /* UIDevice+IdentifierAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+IdentifierAddition.m"; sourceTree = "<group>"; };
 		452DB9E51465DC060030F7C9 /* MutipleOrdersTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MutipleOrdersTableView.h; sourceTree = "<group>"; };
 		452DB9E61465DC060030F7C9 /* MutipleOrdersTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MutipleOrdersTableView.m; sourceTree = "<group>"; };
 		452DB9E71465DC080030F7C9 /* MutipleOrdersTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MutipleOrdersTableView.xib; sourceTree = "<group>"; };
@@ -416,6 +425,8 @@
 		4588A25112B8063500863541 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4588A25612B8064800863541 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		4588A25C12B8066500863541 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		458CBD051474A7210057B063 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		458CBD061474A7210057B063 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		458D1D5A13A950FD00243581 /* MyUISegmentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyUISegmentController.h; sourceTree = "<group>"; };
 		458D1D5B13A950FD00243581 /* MyUISegmentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyUISegmentController.m; sourceTree = "<group>"; };
 		459C0C7112FA3A4100108705 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -730,6 +741,7 @@
 				451BCA0614621C4300FE308B /* libBumpAPI.a in Frameworks */,
 				455CDBFC14622644002572EC /* libFlurryAnalytics.a in Frameworks */,
 				45B4E5631462EC480067B037 /* libGoogleAdMobAds.a in Frameworks */,
+				458CBD071474A7210057B063 /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -788,6 +800,7 @@
 				A93A4AE912EA2EB000CCCD96 /* CoffeeRun.xcdatamodel */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* CoffeeRunSample-Info.plist */,
+				452D3A0914704A270058AA45 /* Settings.bundle */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -979,6 +992,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		452D3A0F14707CD70058AA45 /* UniqueDeviceId */ = {
+			isa = PBXGroup;
+			children = (
+				452D3A1014707D050058AA45 /* NSString+MD5Addition.h */,
+				452D3A1114707D050058AA45 /* NSString+MD5Addition.m */,
+				452D3A1214707D050058AA45 /* UIDevice+IdentifierAddition.h */,
+				452D3A1314707D050058AA45 /* UIDevice+IdentifierAddition.m */,
+			);
+			name = UniqueDeviceId;
+			sourceTree = "<group>";
+		};
 		4531C41213DB432700BD246C /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -1057,6 +1081,8 @@
 		4589206F13AA89CC0028F935 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				458CBD041474A70E0057B063 /* TestFlight */,
+				452D3A0F14707CD70058AA45 /* UniqueDeviceId */,
 				455CDBF914622644002572EC /* FlurryAnalytics */,
 				451BC9EA14621C4300FE308B /* API_build */,
 				45CE60401453626E000EBFAF /* Apppirater */,
@@ -1069,6 +1095,15 @@
 				A9ED707A1332ACF900298AE6 /* TapkuLibrary */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		458CBD041474A70E0057B063 /* TestFlight */ = {
+			isa = PBXGroup;
+			children = (
+				458CBD051474A7210057B063 /* libTestFlight.a */,
+				458CBD061474A7210057B063 /* TestFlight.h */,
+			);
+			name = TestFlight;
 			sourceTree = "<group>";
 		};
 		45AD413213F0E20800B153C0 /* OAuthConsumer */ = {
@@ -1661,6 +1696,7 @@
 				451BCA0714621C4300FE308B /* BumpApiLocalizable.strings in Resources */,
 				451BCA0814621C4300FE308B /* Localization-ReadMe.txt in Resources */,
 				452DB9E91465DC0A0030F7C9 /* MutipleOrdersTableView.xib in Resources */,
+				452D3A0A14704A270058AA45 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1833,6 +1869,8 @@
 				45B7CAA81459F14C00A1F24B /* UIColor+AdWhirlConfig.m in Sources */,
 				45B4E5661462EC6A0067B037 /* AdWhirlAdapterGoogleAdMobAds.m in Sources */,
 				452DB9E81465DC0A0030F7C9 /* MutipleOrdersTableView.m in Sources */,
+				452D3A1414707D050058AA45 /* NSString+MD5Addition.m in Sources */,
+				452D3A1514707D050058AA45 /* UIDevice+IdentifierAddition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1871,6 +1909,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Tony Hung (QRKXMQ42RZ)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1899,6 +1938,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = CoffeeRunSample;
+				PROVISIONING_PROFILE = "5F921F82-9F1F-450B-BF21-4CF873F77979";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1909,6 +1949,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Tony Hung (QRKXMQ42RZ)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1930,6 +1971,7 @@
 					"\"$(SRCROOT)/Classes\"",
 				);
 				PRODUCT_NAME = CoffeeRunSample;
+				PROVISIONING_PROFILE = "5F921F82-9F1F-450B-BF21-4CF873F77979";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1949,6 +1991,8 @@
 				PROVISIONING_PROFILE = "AA05FBF7-E2F9-4839-A632-ABB33936B01E";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A2492B26-2328-4271-BDA3-08336B44E3EE";
 				SDKROOT = iphoneos;
+				STRIP_INSTALLED_PRODUCT = NO;
+				"STRIP_INSTALLED_PRODUCT[sdk=*]" = YES;
 			};
 			name = Simulator;
 		};
@@ -1956,6 +2000,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Tony Hung (QRKXMQ42RZ)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1979,6 +2024,7 @@
 					"\"$(SRCROOT)/Classes\"",
 				);
 				PRODUCT_NAME = CoffeeRunSample;
+				PROVISIONING_PROFILE = "5F921F82-9F1F-450B-BF21-4CF873F77979";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1997,6 +2043,7 @@
 				PROVISIONING_PROFILE = "AA05FBF7-E2F9-4839-A632-ABB33936B01E";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA05FBF7-E2F9-4839-A632-ABB33936B01E";
 				SDKROOT = iphoneos;
+				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Debug;
 		};
@@ -2013,6 +2060,7 @@
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "AA05FBF7-E2F9-4839-A632-ABB33936B01E";
 				SDKROOT = iphoneos;
+				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Release;
 		};

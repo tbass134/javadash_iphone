@@ -15,6 +15,7 @@
 #import "Constants.h"
 #import "Appirater.h"
 #import "FlurryAnalytics.h"
+#import "UIDevice+IdentifierAddition.h"
 
 
 
@@ -72,20 +73,36 @@ static NSString* kAppId = @"189714094427611";
     _facebook.expirationDate = expirationDate;
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [FlurryAnalytics startSession:@"MUMH27DFIF94MBXYY19G"];
+    
+    [TestFlight takeOff:@"35d5d168384265e6c34d11672884014f_MTQ4NjIwMTEtMDktMTMgMjM6MTc6MDIuMzI0NjI1"];
 	
     
+   
+    
+    
+    id test = [[NSUserDefaults standardUserDefaults] objectForKey:@"enable_push_notifications"];
+    if (test == NULL) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"enable_push_notifications"];
+    }
 
-	//Register for notifications
-    [[UIApplication sharedApplication]
-     registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-                                         UIRemoteNotificationTypeSound |
-                                         UIRemoteNotificationTypeAlert)];
-	
-	//Alloc the coffee_orders_array
-	
-	//self.coffee_orders_array = [[NSMutableArray alloc]init];
-    
-#if TARGET_IPHONE_SIMULATOR
+
+    if([[NSUserDefaults standardUserDefaults] objectForKey:@"enable_push_notifications"])
+    {
+        printf("Enabled");
+        //Register for notifications
+        [[UIApplication sharedApplication]
+         registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                             UIRemoteNotificationTypeSound |
+                                             UIRemoteNotificationTypeAlert)];
+    }
+    else
+    {
+        //Create a unique device id to be used
+        NSString *deviceID = [[UIDevice currentDevice] uniqueGlobalDeviceIdentifier];
+        
+        [[NSUserDefaults standardUserDefaults]setValue:deviceID forKey:@"_UALastDeviceToken"];
+    }
+	#if TARGET_IPHONE_SIMULATOR
     [self initTesting];
 #else
 	if(![Utils checkIfContactAdded])
@@ -194,6 +211,9 @@ static NSString* kAppId = @"189714094427611";
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)_deviceToken {
 	
+    if(![[NSUserDefaults standardUserDefaults] objectForKey:@"enable_push_notifications"])
+        return;
+    
 	// Get a hex string from the device token with no spaces or < >
     self.deviceToken = [[[[_deviceToken description]
 						  stringByReplacingOccurrencesOfString: @"<" withString: @""] 
@@ -204,6 +224,12 @@ static NSString* kAppId = @"189714094427611";
     #endif
 	if ([application enabledRemoteNotificationTypes] == UIRemoteNotificationTypeNone) {
 		NSLog(@"Notifications are disabled for this application. Not registering with Urban Airship");
+        
+        //Create a unique device id to be used
+        NSString *deviceID = [[UIDevice currentDevice] uniqueGlobalDeviceIdentifier];
+        [[NSUserDefaults standardUserDefaults]setValue:deviceID forKey:@"_UALastDeviceToken"];
+        
+        
 		return;
 	}
 
@@ -242,6 +268,10 @@ static NSString* kAppId = @"189714094427611";
 }
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *) error {
     NSLog(@"Failed to register with error: %@", error);
+    
+    //Create a unique device id to be used
+    NSString *deviceID = [[UIDevice currentDevice] uniqueGlobalDeviceIdentifier];
+    [[NSUserDefaults standardUserDefaults]setValue:deviceID forKey:@"_UALastDeviceToken"];
 }
 - (void)connection:(NSURLConnection *)theConnection didReceiveResponse:(NSURLResponse *)response {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -317,6 +347,8 @@ static NSString* kAppId = @"189714094427611";
 	//Clear the array when the app quits
 	//self.coffee_orders_array = nil;
 }
+
+
 
 #pragma mark Testing
 -(void)initTesting

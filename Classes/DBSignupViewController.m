@@ -577,6 +577,9 @@
 		[[NSUserDefaults standardUserDefaults] setObject:image_data forKey:@"IMAGE"];
 	}
     
+    //Save the setting for Enable Push notifcations
+    BOOL enable_push =[[[NSUserDefaults standardUserDefaults] valueForKey:@"enable_push_notifications"]boolValue];
+    
     /*
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/addUser.php?deviceid=%@&name=%@&email=%@&enable_email=%d&fb=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],[Utils urlencode:userName],self.emailTextField.text,self.enableEmail.on,fbid,ts]]
 														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
@@ -589,13 +592,14 @@
 	[conn initWithRequest:request];
      */
     NSString *userName = [NSString stringWithFormat:@"%@ %@",self.nameTextField.text,self.lastNameTextField.text];
-    NSString *user_info = [NSString stringWithFormat:@"name=%@&deviceid=%@&email=%@&enable_email_use=%d&platform=%@&fbid=%d",
+    NSString *user_info = [NSString stringWithFormat:@"name=%@&deviceid=%@&email=%@&enable_email_use=%d&platform=%@&fbid=%d&enable_push=%d",
                            [Utils urlencode:userName],
                            [[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],
                            self.emailTextField.text,
                            self.enableEmail.on,
                            @"IOS",
                            fbid,
+                           enable_push,
                            nil];
     
     NSLog(@"user_info %@",user_info);

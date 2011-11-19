@@ -40,6 +40,8 @@
     UIBarButtonItem *send_order;
     UIBarButtonItem *goback;
     UIBarButtonItem *reload;
+    BOOL isEditing;
+    UIBarButtonItem *edit;
     BOOL order_ended;
 
 }

@@ -11,7 +11,7 @@
 #import "Loading.h"
 #import "AsyncImageView2.h"
 #import "FriendsInfo.h"
-@interface RunViewController : UIViewController<NSFetchedResultsControllerDelegate,UITableViewDelegate,UITableViewDataSource> {
+@interface RunViewController : UIViewController<NSFetchedResultsControllerDelegate,UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate> {
 
 	
 	//Core Data
@@ -35,10 +35,10 @@
     //Start Run
     IBOutlet UIView *start_run_view;
     IBOutlet UITableView *start_run_table;
-    UIBarButtonItem *done_btn;
 	NSMutableArray *cells;
 	NSMutableDictionary *dash_summary;
 	FriendsInfo *friends;
+    BOOL orderEnded;
 }
 
 //Core Data

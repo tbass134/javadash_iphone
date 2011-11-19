@@ -75,18 +75,7 @@
 	int ts = [[NSDate date] timeIntervalSince1970];
     
     
-    //TH 11/2/11 - May not need to send all user info to server, since the data is sent on startup
-    //              Just send device id
-    /*
-	NSString *userName = [NSString stringWithFormat:@"%@ %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"FIRSTNAME"],[[NSUserDefaults standardUserDefaults]valueForKey:@"LASTNAME"]];
-    NSString *email =[[NSUserDefaults standardUserDefaults]valueForKey:@"EMAIL"];
-    
-    BOOL enable_email = [[[NSUserDefaults standardUserDefaults]valueForKey:@"ENABLE_EMAIL"]boolValue];
-	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&name=%@&email=%@&enable_email=%d&platform=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],[Utils urlencode:userName],email,enable_email,@"IOS",ts]]
-														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
-													   timeoutInterval:60.0];
-     */
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],ts]]
+     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],ts]]
 														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
 													   timeoutInterval:60.0];
 
@@ -131,7 +120,6 @@
     
 
 	Order *order = [Order sharedOrder];
-    //NSLog(@"[order currentOrder] %@",[order currentOrder]);
 	if([order currentOrder] == NULL)
 		[self checkForOrders];
 	else
@@ -151,10 +139,8 @@
 	{
 		if([[[order currentOrder] objectForKey:@"run"]objectForKey:@"id"])
 		{
-			
-				printf("VIEW RUN");
-				[self viewRun];
-
+            printf("VIEW RUN");
+            [self viewRun];
 		}
 		else
 		{
@@ -186,18 +172,21 @@
     NSDate *adjustedDate = [run_date addTimeInterval: (60*60*12)];
     run_date = [adjustedDate retain];
         
+    orderEnded = NO;
     if ([[NSDate date] compare:run_date] == NSOrderedAscending)
         [self startTimer];
     else
     {
+        orderEnded = YES;
         run_time_txt.text = @"Order Ended";
     }
+    
+    if(!orderEnded)
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showOptions:)];
+    
 	//Only show the orders if this device is the runner
 	if([[user_order objectForKey:@"is_runner"] intValue] == 1)
 	{
-		self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showOptions:)];
-        
-        
         
 		orders_cells = [[NSMutableArray alloc] init];
 		
@@ -305,27 +294,44 @@
         if(components.day<=0 && components.hour <=0 && components.minute <=0 && components.second <=0)
         {
             run_time_txt.text = @"Order Ended";
+            orderEnded = YES;
             [self stopTimer];
             Order *order = [Order sharedOrder];
             NSDictionary *user_order = [[order currentOrder]objectForKey:@"run"];
+            /*
             if([[user_order objectForKey:@"is_runner"] intValue] == 1)
             {
                 self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showOptions:)];
             }
+             */
         }
     }
     
 }
 -(void)showOptions:(id)sender{
-	UIActionSheet *sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Abandon Dash" otherButtonTitles:nil];
+    
+    NSDictionary *user_order = [[[Order sharedOrder] currentOrder]objectForKey:@"run"];
+    NSString *destructiveTitle;
+    
+    if([[user_order objectForKey:@"is_runner"] intValue] == 1)
+        destructiveTitle = @"Abandon Dash";
+    else
+        destructiveTitle = @"Leave Dash";
+    
+	UIActionSheet *sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:destructiveTitle otherButtonTitles:nil];
 	[sheet showFromTabBar:self.tabBarController.tabBar];
 	[sheet release];
 }
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
 	// the user clicked one of the OK/Cancel buttons
-	if (buttonIndex == 0)
+    NSDictionary *user_order = [[[Order sharedOrder] currentOrder]objectForKey:@"run"];
+    
+   	if (buttonIndex == 0)
 	{
-        [self completeRun];
+         if([[user_order objectForKey:@"is_runner"] intValue] == 1)
+             [self completeRun];
+        else
+            [self leaveRun];
     }
 }
 -(void)completeRun{
@@ -343,6 +349,28 @@
     NSLog(@"url %@", [request URL]);
 #endif
     conn.tag =@"completeOrder";
+    [conn setDelegate:self];
+    [conn initWithRequest:request];
+    
+    [load showLoading:@"Loading" inView:self.view];
+    
+}
+
+-(void)leaveRun{
+    
+    Order *order = [Order sharedOrder];
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/leaverun.php?deviceid=%@&run_id=%@",
+                                                                                             baseDomain,
+                                                                                             [[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"]
+                                                                                             ,[[[order currentOrder] objectForKey:@"run"]objectForKey:@"id"]]]
+                                                           cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                                       timeoutInterval:60.0];
+    
+    URLConnection *conn = [[URLConnection alloc]init];
+#if debug
+    NSLog(@"url %@", [request URL]);
+#endif
+    conn.tag =@"leaveOrder";
     [conn setDelegate:self];
     [conn initWithRequest:request];
     
@@ -449,16 +477,12 @@
 	
 	friends = [[FriendsInfo alloc]init];
 	friends.managedObjectContext = self.managedObjectContext;	
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-	done_btn= [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(completeSummary:)];
-	self.navigationItem.rightBarButtonItem = done_btn;
+
     
     [self reloadStartRunData];
     [start_run_table reloadData];
     start_run_table.delegate = self;
     start_run_table.dataSource = self;
-    self.navigationItem.rightBarButtonItem = done_btn;
 }
 //This will make sure we have an order and if so, show the data
 -(BOOL)hasOrder{

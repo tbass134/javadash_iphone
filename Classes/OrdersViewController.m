@@ -197,8 +197,24 @@
 {
 
 	self.navigationItem.rightBarButtonItem = addOrder_btn;
-    [self loadOrderData];
     
+    edit = [[UIBarButtonItem alloc]initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(edit:)];
+    self.navigationItem.leftBarButtonItem = edit;
+   
+    [self loadOrderData];
+}
+-(void)edit:(id)sender
+{
+    if(!isEditing)
+    {
+        [current_orders_table setEditing:YES  animated: YES];
+        isEditing = YES;
+    }
+    else
+    {
+        [current_orders_table setEditing:NO  animated: YES];
+        isEditing = NO;
+    }
 }
 -(void)placeOrder:(id)sender
 {
@@ -510,6 +526,35 @@
              
 		}           
 }
+- (void) tableView: (UITableView *) tableView
+commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
+ forRowAtIndexPath: (NSIndexPath *) indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //[_cues removeObjectAtIndex: indexPath.row];  // manipulate your data structure.
+        
+        if(order_ended)
+            return;
+                
+        if(indexPath.section ==1)
+        {
+            Order *order = [Order sharedOrder];
+            
+            NSDictionary *current_order = [[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"]objectAtIndex:indexPath.row];
+            //NSLog(@"current_order %@",current_order);
+            [[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"] removeObject:current_order];
+
+            //[current_orders_table deleteRowsAtIndexPaths: [NSArray arrayWithObject: indexPath]
+            //             withRowAnimation: UITableViewRowAnimationFade];
+        
+            //Call script to remove order
+            [self loadOrderData];	
+            
+            NSLog(@"order %@", [[Order sharedOrder] currentOrder]);
+        }
+    }
+} // commitEditingStyle
+
+
 #pragma mark Place Order
 -(void)initPlaceOrder
 {
