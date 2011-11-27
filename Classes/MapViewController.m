@@ -21,7 +21,7 @@
 
 #import "AsyncImageView2.h"
 
-#define kYelpSearchTerm @"Coffee Shops"
+#define kYelpSearchTerm @"Coffee"
 #define FIELDS_COUNT 2
 
 @implementation MapViewController
@@ -62,7 +62,6 @@
 	mapView.hidden = YES;
 	[seg_control setSelectedSegmentIndex:0];
 	
-	load = [[Loading alloc]init];
 	self.favorites_array = [FavoriteLocations getAllFavoriteLocations];
     
     // Keyboard toolbar
@@ -224,8 +223,13 @@
         l  = [NSString stringWithFormat:@"%f,%f",self.currentLocation.coordinate.latitude,self.currentLocation.coordinate.longitude];
         loc_txt.text = @"Current Location";
     }
-    [load showLoading:@"Loading" inView:self.view];
-        [self loadYelp:term loc:l];
+   /* 
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];	
+    HUD.delegate = self;	
+    [HUD show:YES];
+    */
+    [self loadYelp:term loc:l];
 
    }
 
@@ -280,13 +284,13 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     NSLog(@"Error: %@, %@", [error localizedDescription], [error localizedFailureReason]);
-    [load hideLoading];
+    //[HUD hide:YES];
     [Utils showAlert:@"Could not load data" withMessage:nil inView:self.view];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     
-    [load hideLoading];
+    //[HUD hide:YES];
      loadingView.hidden = YES;
     noResultsFound.hidden = YES;
     self.tableView.hidden = NO;
@@ -1054,7 +1058,6 @@
 - (void)dealloc {
     [super dealloc];
 	[conn release];
-	[load release];
 	//[self.currentLocation release];
 }
 

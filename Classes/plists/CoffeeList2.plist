@@ -120,6 +120,7 @@
 			<dict>
 				<key>Milk</key>
 				<array>
+					<string>None</string>
 					<string>Nonfat</string>
 					<string>1%</string>
 					<string>2%</string>
@@ -130,6 +131,7 @@
 				</array>
 				<key>Add-ins</key>
 				<array>
+					<string>none</string>
 					<string>1% milk</string>
 					<string>2% milk</string>
 					<string>Banana</string>
@@ -161,6 +163,7 @@
 				</array>
 				<key>Toppings</key>
 				<array>
+					<string>None</string>
 					<string>Caramel Brulee Topping *</string>
 					<string>Caramel Drizzle</string>
 					<string>Chocolate Curls *</string>
@@ -219,59 +222,52 @@
 			</dict>
 			<key>Iced</key>
 			<dict>
-				<key>Tea</key>
-				<dict>
-					<key>Tea Lattes</key>
-					<array>
-						<string>Tazo® Green Tea Latte</string>
-						<string>Tazo® Awake™ Tea Latte</string>
-						<string>Tazo® Chai Tea Latte</string>
-						<string>Tazo® Chai Eggnog Latte</string>
-					</array>
-					<key>Iced Tea Lemonade</key>
-					<array>
-						<string>Tazo® Shaken Iced Black Tea Lemonde</string>
-						<string>Tazo® Shaken Iced Green Tea Lemonade</string>
-						<string>Tazo® Shaken Iced Passion Black Tea Lemonade</string>
-					</array>
-					<key>Iced Tea</key>
-					<array>
-						<string>Tazo® Shaken Iced Black Tea</string>
-						<string>Tazo® Shaken Iced Green Tea</string>
-						<string>Tazo® Shaken Iced Passion Tea</string>
-					</array>
-				</dict>
-				<key>Espresso</key>
-				<dict>
-					<key>Signature Expresso</key>
-					<array>
-						<string>Caramel Macchiato</string>
-						<string>Cinnamon Dolce Latte</string>
-						<string>Eggnog Latte</string>
-						<string>Flavored Caffe Latte</string>
-						<string>Ginerbread Latte</string>
-						<string>Pumkin Spice Latte</string>
-						<string>Salted Caramel Mocha</string>
-						<string>Skinny Caramel Latte</string>
-						<string>Skinny Caramel Macchinato</string>
-						<string>Skinny Cinnamon Dolce Latte</string>
-						<string>Skinny Flavored Latte</string>
-						<string>Skinny Hazelnut Dolce Lattee</string>
-						<string>Skinny Latte</string>
-						<string>Skinny Vanilla Latte</string>
-						<string>White Chocolate Mocha</string>
-					</array>
-					<key>Classic Espresso</key>
-					<array>
-						<string>Caffé Americano</string>
-						<string>Caffé Latte</string>
-						<string>Caffé Mocha</string>
-					</array>
-				</dict>
 				<key>Brewed Coffee</key>
 				<array>
-					<string>Iced Brewed Coffee</string>
-					<string>Iced Coffee with Milk</string>
+					<string>Bold Pick of the Day</string>
+					<string>Clover® Brewed Coffee</string>
+					<string>Café Misto</string>
+					<string>Decaf Pike Place Roast</string>
+					<string>Pike Place Roast</string>
+				</array>
+				<key>Espresso</key>
+				<array>
+					<string>Caffè Americano</string>
+					<string>Caffè Latte</string>
+					<string>Caffè Mocha</string>
+					<string>Cappuccino</string>
+					<string>Caramel Brulée Latte (Seasonal offering)</string>
+					<string>Caramel Macchiato</string>
+					<string>Cinnamon Dolce Latte</string>
+					<string>Eggnog Latte (Seasonal offering)</string>
+					<string>Espresso</string>
+					<string>Espresso Con Panna</string>
+					<string>Espresso Macchiato</string>
+					<string>Flavored Latte</string>
+					<string>Gingerbread Latte (Seasonal offering)</string>
+					<string>Peppermint Mocha (Seasonal offering)</string>
+					<string>Peppermint White Chocolate Mocha</string>
+					<string>Pumpkin Spice Crème (Seasonal offering)</string>
+					<string>Pumpkin Spice Latte (Seasonal offering)</string>
+					<string>Salted Caramel Mocha (Seasonal offering)</string>
+					<string>Skinny Caramel Macchiato</string>
+					<string>Skinny Cinnamon Dolce Latte</string>
+					<string>Skinny Flavored Latte</string>
+					<string>Skinny Peppermint Mocha (Seasonal offering)</string>
+					<string>White Chocolate Mocha</string>
+				</array>
+				<key>Tea</key>
+				<array>
+					<string>Tazo® Green Tea Latte</string>
+					<string>Tazo® Awake™ Tea Latte</string>
+					<string>Tazo® Chai Tea Latte</string>
+					<string>Tazo® Chai Eggnog Latte</string>
+					<string>Tazo® Shaken Iced Black Tea Lemonde</string>
+					<string>Tazo® Shaken Iced Green Tea Lemonade</string>
+					<string>Tazo® Shaken Iced Passion Black Tea Lemonade</string>
+					<string>Tazo® Shaken Iced Black Tea</string>
+					<string>Tazo® Shaken Iced Green Tea</string>
+					<string>Tazo® Shaken Iced Passion Tea</string>
 				</array>
 				<key>Frappuccino Blended Beverages</key>
 				<array>
@@ -321,96 +317,74 @@
 					<string>Chocolate Smoothie</string>
 					<string>Strawberry Smoothie</string>
 				</array>
-				<key>Other Drinks</key>
-				<dict>
-					<key>Juice</key>
-					<array>
-						<string>Cold Apple Juice</string>
-					</array>
-					<key>Milk</key>
-					<array>
-						<string>Milk</string>
-					</array>
-				</dict>
+				<key>Kids’ Drinks &amp; Others</key>
+				<array>
+					<string>Cold Apple Juice</string>
+					<string>Milk</string>
+				</array>
 			</dict>
 			<key>Hot</key>
 			<dict>
-				<key>Other Drinks</key>
-				<dict>
-					<key>Juice</key>
-					<array>
-						<string>Caramel Apple Spice</string>
-						<string>Steamed Apple Juice</string>
-					</array>
-					<key>Milk</key>
-					<array/>
-					<key>New item</key>
-					<string>Flavored Streamed Milk</string>
-					<key>Chocolates</key>
-					<array>
-						<string>White Hot Chocolate</string>
-						<string>Salted Caramel Hot Chocolate</string>
-						<string>Hot Chocolate</string>
-					</array>
-				</dict>
+				<key>Kids’ Drinks &amp; Others</key>
+				<array>
+					<string>Caramel Apple Spice</string>
+					<string>Flavored Steamed Milk</string>
+					<string>Steamed Apple Juice</string>
+				</array>
+				<key>Chocolate Beverages</key>
+				<array>
+					<string>Hot Chocolate</string>
+					<string>Peppermint Hot Chocolate  (Seasonal offering)</string>
+					<string>Salted Caramel Hot Chocolate  (Seasonal offering)</string>
+					<string>White Hot Chocolate</string>
+				</array>
 				<key>Tea</key>
-				<dict>
-					<key>Tea Lattes</key>
-					<array>
-						<string>Tazo® Vanilla Rooibos Brewed Tea</string>
-						<string>Tazo® Green Tea Latte</string>
-						<string>Tazo® Earl Grey Tea Latte</string>
-						<string>Tazo® Awake™ Tea Latte</string>
-						<string>Tazo® Chai Tea Latte</string>
-					</array>
-					<key>Brewed Tea</key>
-					<array>
-						<string>Tazo® Awake™ Brewed Tea</string>
-						<string>Tazo® Calm™ Brewed Tea</string>
-						<string>Tazo® China Green Tips Brewed Tea</string>
-						<string>Tazo® Earl Grey Brewed Tea</string>
-						<string>Tazo® Orange Blossom Brewed Tea</string>
-						<string>Tazo® Passion™ Brewed Tea</string>
-						<string>Tazo® Refresh™ Brewed Tea</string>
-						<string>Tazo® Vanilla Rooibos Brewed Tea</string>
-						<string>Tazo® Zen™ Brewed Tea</string>
-					</array>
-				</dict>
+				<array>
+					<string>Tazo® Vanilla Rooibos Brewed Tea</string>
+					<string>Tazo® Green Tea Latte</string>
+					<string>Tazo® Earl Grey Tea Latte</string>
+					<string>Tazo® Awake™ Tea Latte</string>
+					<string>Tazo® Chai Tea Latte</string>
+					<string>Tazo® Awake™ Brewed Tea</string>
+					<string>Tazo® Calm™ Brewed Tea</string>
+					<string>Tazo® China Green Tips Brewed Tea</string>
+					<string>Tazo® Earl Grey Brewed Tea</string>
+					<string>Tazo® Orange Blossom Brewed Tea</string>
+					<string>Tazo® Passion™ Brewed Tea</string>
+					<string>Tazo® Refresh™ Brewed Tea</string>
+					<string>Tazo® Vanilla Rooibos Brewed Tea</string>
+					<string>Tazo® Zen™ Brewed Tea</string>
+				</array>
 				<key>Espresso</key>
-				<dict>
-					<key>Signature Expresso</key>
-					<array>
-						<string>Caramel Macchiato</string>
-						<string>Cinnamon Dolce Latte</string>
-						<string>Eggnog Latte</string>
-						<string>Flavored Caffe Latte</string>
-						<string>Ginerbread Latte</string>
-						<string>Pumkin Spice Latte</string>
-						<string>Salted Caramel Mocha</string>
-						<string>Skinny Caramel Latte</string>
-						<string>Skinny Caramel Macchinato</string>
-						<string>Skinny Cinnamon Dolce Latte</string>
-						<string>Skinny Flavored Latte</string>
-						<string>Skinny Hazelnut Dolce Lattee</string>
-						<string>Skinny Latte</string>
-						<string>Skinny Vanilla Latte</string>
-						<string>White Chocolate Mocha</string>
-					</array>
-					<key>Classic Espresso</key>
-					<array>
-						<string>Espresso</string>
-						<string>Espresso Con Panna</string>
-						<string>Espresso Macchiato</string>
-						<string>Caramel Macchiato</string>
-						<string>Cappuccino</string>
-						<string>Caffé Americano</string>
-						<string>Caffé Latte</string>
-						<string>Caffé Mocha</string>
-					</array>
-				</dict>
+				<array>
+					<string>Caffè Americano</string>
+					<string>Caffè Latte</string>
+					<string>Caffè Mocha</string>
+					<string>Cappuccino</string>
+					<string>Caramel Brulée Latte (Seasonal offering)</string>
+					<string>Caramel Macchiato</string>
+					<string>Cinnamon Dolce Latte</string>
+					<string>Eggnog Latte (Seasonal offering)</string>
+					<string>Espresso</string>
+					<string>Espresso Con Panna</string>
+					<string>Espresso Macchiato</string>
+					<string>Flavored Latte</string>
+					<string>Gingerbread Latte (Seasonal offering)</string>
+					<string>Peppermint Mocha (Seasonal offering)</string>
+					<string>Peppermint White Chocolate Mocha</string>
+					<string>Pumpkin Spice Crème (Seasonal offering)</string>
+					<string>Pumpkin Spice Latte (Seasonal offering)</string>
+					<string>Salted Caramel Mocha (Seasonal offering)</string>
+					<string>Skinny Caramel Macchiato</string>
+					<string>Skinny Cinnamon Dolce Latte</string>
+					<string>Skinny Flavored Latte</string>
+					<string>Skinny Peppermint Mocha (Seasonal offering)</string>
+					<string>White Chocolate Mocha</string>
+				</array>
 				<key>Brewed Coffee</key>
 				<array>
 					<string>Bold Pick of the Day</string>
+					<string>Clover® Brewed Coffee</string>
 					<string>Café Misto</string>
 					<string>Decaf Pike Place Roast</string>
 					<string>Pike Place Roast</string>
@@ -529,14 +503,7 @@
 		<dict>
 			<key>Drink Options</key>
 			<dict>
-				<key>Size</key>
-				<array>
-					<string>Small</string>
-					<string>Medium</string>
-					<string>Large</string>
-					<string>Extra Large</string>
-				</array>
-				<key>Add Turbo Shot™ of Espresso</key>
+				<key>Add Turbo Shot</key>
 				<false/>
 				<key>Sweetener</key>
 				<array>
@@ -546,21 +513,10 @@
 					<string>Equal®</string>
 					<string>Splenda®</string>
 				</array>
-				<key>Flavor Shot</key>
-				<array>
-					<string>Blueberry</string>
-					<string>Cinnamon</string>
-					<string>French Vanilla</string>
-					<string>Raspberry</string>
-					<string>Caramel</string>
-					<string>Coconut</string>
-					<string>Hazelnut</string>
-					<string>Toasted Almond</string>
-				</array>
 				<key>Blend</key>
 				<array>
 					<string>Original</string>
-					<string>Dunkin Decaf®</string>
+					<string>Decaf</string>
 				</array>
 				<key>Milk</key>
 				<array>
@@ -568,10 +524,23 @@
 					<string>Cream</string>
 					<string>Whole Milk</string>
 					<string>Skim Milk</string>
+					<string>1%</string>
+					<string>2%</string>
+				</array>
+				<key>Size</key>
+				<array>
+					<string>Small</string>
+					<string>Medium</string>
+					<string>Large</string>
+					<string>Extra Large</string>
 				</array>
 			</dict>
 			<key>Hot</key>
 			<dict>
+				<key>Hot Chocolate</key>
+				<array>
+					<string>Hot Chocolate</string>
+				</array>
 				<key>Tea</key>
 				<array>
 					<string>Regular</string>
@@ -580,16 +549,6 @@
 					<string>Green Tea</string>
 					<string>Earl Grey</string>
 				</array>
-				<key>Turbo Shot</key>
-				<dict>
-					<key>Turbo Shot</key>
-					<string></string>
-				</dict>
-				<key>Hot Chocolate</key>
-				<dict>
-					<key>Hot Chocolate</key>
-					<string></string>
-				</dict>
 				<key>Dunkaccino</key>
 				<array>
 					<string>Blueberry</string>

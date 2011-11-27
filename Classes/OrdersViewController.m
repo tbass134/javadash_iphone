@@ -9,7 +9,6 @@
 #import "OrdersViewController.h"
 #import "Utils.h"
 #import "Constants.h"
-#import "Loading.h"
 #import "JSON.h"
 #import "Order.h"
 #import "URLConnection.h"
@@ -70,13 +69,17 @@
 	conn.tag =@"GetOrders";
 	[conn setDelegate:self];
 	[conn initWithRequest:request];
-	
-	[load showLoading:@"Loading" inView:self.view];
+/*	
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];	
+    HUD.delegate = self;	
+    [HUD show:YES];
+ */
 }
 
 - (void)processSuccessful:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
 {
-	[load hideLoading];
+	//[HUD hide:YES];
     if([tag isEqualToString:@"GetOrders"])
     {
         if(!success)
@@ -97,6 +100,7 @@
         {
             if(self.navigationController.tabBarController.selectedIndex ==CURRENT_TAB_INDEX)
                 [Utils showAlert:@"Error Loading Data" withMessage:@"Please try again" inView:self.view];
+            current_orders_table.hidden = YES;
             return;
         }
             
@@ -104,8 +108,10 @@
          {
              if(self.navigationController.tabBarController.selectedIndex ==CURRENT_TAB_INDEX)
                  [Utils showAlert:@"No Orders Available" withMessage:nil inView:self.view];
+             current_orders_table.hidden = YES;
              return;
          }
+        current_orders_table.hidden = NO;
         [self gotoScreen];
     }
 	
@@ -176,9 +182,7 @@
     //Event listener to update order when an order has been editied
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OrderEdited:) name:@"OrderEdited" object:nil];
 
-	
-    load = [[Loading alloc]init];
-	//If we havent gotten the data yet, load it
+    //If we havent gotten the data yet, load it
 	Order *order = [Order sharedOrder];
 	if([order currentOrder] == NULL)
 		[self checkForOrders];
@@ -198,8 +202,8 @@
 
 	self.navigationItem.rightBarButtonItem = addOrder_btn;
     
-    edit = [[UIBarButtonItem alloc]initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(edit:)];
-    self.navigationItem.leftBarButtonItem = edit;
+    
+   
    
     [self loadOrderData];
 }
@@ -237,9 +241,12 @@
 	conn.tag =@"GetOrders";
 	[conn setDelegate:self];
 	[conn initWithRequest:request];
-	
-	load = [[Loading alloc]init];
-	[load showLoading:@"Loading" inView:self.view];
+/*	
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];	
+    HUD.delegate = self;	
+    [HUD show:YES];
+ */
 }
 
 -(void)loadOrderData
@@ -318,7 +325,12 @@
 	{
         noOrdersView.hidden = YES;
         current_orders_table.hidden = NO;
-		//Save this dictionary into Drink Orders sp we can edit it
+        if([[user_order objectForKey:@"is_runner"] intValue] == 0)
+        {
+            edit = [[UIBarButtonItem alloc]initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(edit:)];
+            self.navigationItem.leftBarButtonItem = edit;
+		}
+        //Save this dictionary into Drink Orders sp we can edit it
 		[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"];
 		
 		for(int i=0;i<orders_count;i++)
@@ -529,28 +541,30 @@
 - (void) tableView: (UITableView *) tableView
 commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
  forRowAtIndexPath: (NSIndexPath *) indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
+    
+    if(indexPath.section ==1)
+    {
+        if (editingStyle == UITableViewCellEditingStyleDelete) {
         //[_cues removeObjectAtIndex: indexPath.row];  // manipulate your data structure.
         
         if(order_ended)
             return;
                 
-        if(indexPath.section ==1)
-        {
-            Order *order = [Order sharedOrder];
-            
-            NSDictionary *current_order = [[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"]objectAtIndex:indexPath.row];
-            //NSLog(@"current_order %@",current_order);
-            [[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"] removeObject:current_order];
+        Order *order = [Order sharedOrder];
 
-            //[current_orders_table deleteRowsAtIndexPaths: [NSArray arrayWithObject: indexPath]
-            //             withRowAnimation: UITableViewRowAnimationFade];
-        
-            //Call script to remove order
-            [self loadOrderData];	
-            
-            NSLog(@"order %@", [[Order sharedOrder] currentOrder]);
+        NSDictionary *current_order = [[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"]objectAtIndex:indexPath.row];
+        //NSLog(@"current_order %@",current_order);
+        [[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"] removeObject:current_order];
+
+        //[current_orders_table deleteRowsAtIndexPaths: [NSArray arrayWithObject: indexPath]
+        //             withRowAnimation: UITableViewRowAnimationFade];
+
+        //Call script to remove order
+        [self loadOrderData];	
+
+        NSLog(@"order %@", [[Order sharedOrder] currentOrder]);
         }
+    
     }
 } // commitEditingStyle
 
@@ -703,7 +717,7 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
 }
 
 - (void)viewDidUnload {
-    [load release];
+
 
     [super viewDidUnload];
     // Release any retained subviews of the main view.

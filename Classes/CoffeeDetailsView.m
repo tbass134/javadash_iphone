@@ -59,6 +59,7 @@
 	
     
     switch_array = [[NSMutableArray alloc]init];
+    options_array = [[NSMutableArray alloc]init];
     NSString *path = [[NSBundle mainBundle] bundlePath];
     NSString *finalPath = [path stringByAppendingPathComponent:@"CoffeeList2.plist"];
     plistDictionary = [[NSDictionary dictionaryWithContentsOfFile:finalPath] retain];
@@ -89,9 +90,10 @@
             }
             
             
-            UIView *seg_view = [[UIView alloc]initWithFrame:CGRectMake(0,(i*100)-100,self.view.frame.size.width,100
+            UIView *seg_view = [[UIView alloc]initWithFrame:CGRectMake(0,0,self.view.frame.size.width,100
                                                                        )];
-            [scroll addSubview:seg_view];
+            //[scroll addSubview:seg_view];
+            [options_array addObject:seg_view];
             UILabel *title_label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 20)];
             title_label.backgroundColor = [UIColor clearColor];
             title_label.text = theKey;
@@ -100,10 +102,7 @@
        
             int viewHeight;
         
-            if([keys count]<4)
-                viewHeight = 37;
-            else
-                viewHeight = 74;
+           
             MyUISegmentController *oneRowControl = [[MyUISegmentController alloc]initWithFrame:CGRectMake(0, 20, 310, viewHeight)];
             oneRowControl.selected_key = theKey;
             //This is now a solid brown color.
@@ -133,11 +132,34 @@
                 oneRowControl.rowCount = 2;
                 oneRowControl.columnCount = 3;
             }
-            
-            oneRowControl.segmentTitles = keys;
 
-           
+            else if([keys count] ==7)
+            {
+                oneRowControl.rowCount = 4;
+                oneRowControl.columnCount = 3;
+            }
+            else if([keys count] ==8)
+            {
+                oneRowControl.rowCount = 4;
+                oneRowControl.columnCount = 4;
+            }
+            else  if([keys count] ==15)           {
+                oneRowControl.rowCount = 5;
+                oneRowControl.columnCount = 3;
+            }
+            
+            else  if([keys count] ==20)           {
+                oneRowControl.rowCount = 10;
+                oneRowControl.columnCount = 2;
+            }
+
             oneRowControl.segmentTitles = keys;
+            oneRowControl.segmentTitles = keys;
+            
+            CGRect frame = seg_view.frame;
+            frame.size.height = (oneRowControl.rowCount* 35);
+            seg_view.frame = frame;            
+            
             [seg_view addSubview:oneRowControl];
             [oneRowControl addTarget:self action:@selector(selectedIndexChanged:) forControlEvents:UIControlEventValueChanged];
 
@@ -162,6 +184,7 @@
         else
         { 
             
+            /*
             UILabel *switchLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, (i*100)-150, 200, 50)];
             switchLabel.text = theKey;
             switchLabel.backgroundColor = [UIColor clearColor];
@@ -175,9 +198,10 @@
             [scroll addSubview:_switch];
             [_switch release];
             switchTagInt++;
+             */
         }
 	}
-	
+/*	
 	//Add a text box for other options
 	CGRect options_rect;
     options_rect = CGRectMake(0, (i*90)-20, self.view.frame.size.width, 50);
@@ -232,7 +256,73 @@
     
     if(edit_order_dict == NULL)
         [self autoSelectFirstValue];
+ 
+ */
+    
+    NSLog(@"options_array %@",options_array);
+    
+    UIView *tempView = [[UIView alloc]init];
+    for(int i=0;i<[options_array count];i++)
+    {
+        UIView *option = [options_array objectAtIndex:i];
+        /*
+        float sizeOfContent = 0;
+        int j;
+        for (j = 0; j < [option.subviews count]; j++) {
+            UIView *view =[option.subviews objectAtIndex:j];
+            sizeOfContent += view.frame.size.height;
+            [view release];
+        }
+         */
+        
+        //NSLog(@"sizeOfContent %f",sizeOfContent);
+        option.frame = CGRectMake(0, 0, option.frame.size.width, option.frame.size.height);
+        option.backgroundColor = [self randomColor];
+        //[scroll addSubview:option];
+        [tempView addSubview:option];
+    }
+    
+    
+    int offset;
+    int contentSize;
+    for(UIView *child in tempView.subviews) {
+        CGPoint point = child.frame.origin;
+        
+        point.y = offset;
+        
+        
+        CGRect rect = child.frame;
+        rect.origin = point;
+        child.frame = rect;
+        
+        offset += child.frame.size.height;
+        
+        offset += 30;
+        
+        NSLog(@"point.y %f",point.y);
+        
+        contentSize = point.y;
+        
+        [scroll addSubview:child];
+        
+        
+    }
+    [scroll setContentSize:tempView.frame.size];
+    
+
+    [scroll setContentSize:CGSizeMake(self.view.frame.size.width, contentSize)];
     [super viewDidLoad];
+}
+ 
+         
+         
+         
+         
+-(UIColor *) randomColor {
+  CGFloat red =  (CGFloat)random()/(CGFloat)RAND_MAX;
+  CGFloat blue = (CGFloat)random()/(CGFloat)RAND_MAX;
+  CGFloat green = (CGFloat)random()/(CGFloat)RAND_MAX;
+  return [UIColor colorWithRed:red green:green blue:blue alpha:1.0];
 }
 - (IBAction)selectedIndexChanged:(id)sender {
     

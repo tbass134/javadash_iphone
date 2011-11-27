@@ -161,12 +161,18 @@
     }
     else
     {
-        printf("no users found");
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"No Users Found" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-        [alert show];
-        [alert release];
+       
         
-        followAll_btn.enabled = NO;
+        if(!noUsers)
+        {
+            printf("no users found");
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"No Users Found" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+            [alert show];
+            [alert release];
+            
+            followAll_btn.enabled = NO;
+        }
+             noUsers = YES;
     }
 }
 #pragma mark - Facebook

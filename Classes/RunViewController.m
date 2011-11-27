@@ -11,7 +11,6 @@
 
 #import "Utils.h"
 #import "Constants.h"
-#import "Loading.h"
 #import "JSON.h"
 #import "Order.h"
 #import "URLConnection.h"
@@ -84,9 +83,12 @@
 	conn.tag =@"GetOrders";
 	[conn setDelegate:self];
 	[conn initWithRequest:request];
-	
-    if(load != nil)
-        [load showLoading:@"Loading" inView:self.view];
+/*	
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    HUD.delegate = self;
+    [HUD show:YES];
+*/ 
 }
 
 -(void)startRun
@@ -113,10 +115,14 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"reloadData" object:nil];
+        
+    reloadDataBtn =  [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reloadData:)];
+
+    showOptionsBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showOptions:)];
     
-    load = [[Loading alloc]init];
+    startRunBtn =[[UIBarButtonItem alloc]initWithTitle:@"Start Run" style:UIBarButtonItemStyleDone target:self action:@selector(completeSummary:)];
     
-     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reloadData:)];
+    self.navigationItem.rightBarButtonItem = reloadDataBtn;
     
 
 	Order *order = [Order sharedOrder];
@@ -155,6 +161,7 @@
 #pragma mark View Run
 -(void)initShowRun{
     
+    self.navigationItem.rightBarButtonItem = showOptionsBtn;
     Order *order = [Order sharedOrder];
 	NSDictionary *user_order = [[order currentOrder]objectForKey:@"run"];
     
@@ -181,8 +188,8 @@
         run_time_txt.text = @"Order Ended";
     }
     
-    if(!orderEnded)
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showOptions:)];
+    //if(!orderEnded)
+      //  self.navigationItem.rightBarButtonItem = showOptionsBtn;
     
 	//Only show the orders if this device is the runner
 	if([[user_order objectForKey:@"is_runner"] intValue] == 1)
@@ -351,8 +358,13 @@
     conn.tag =@"completeOrder";
     [conn setDelegate:self];
     [conn initWithRequest:request];
+  /*  
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    HUD.delegate = self;
+    [HUD show:YES];
+*/
     
-    [load showLoading:@"Loading" inView:self.view];
     
 }
 
@@ -370,11 +382,16 @@
 #if debug
     NSLog(@"url %@", [request URL]);
 #endif
-    conn.tag =@"leaveOrder";
+    conn.tag =@"leaveRun";
     [conn setDelegate:self];
     [conn initWithRequest:request];
-    
-    [load showLoading:@"Loading" inView:self.view];
+  /*  
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];	
+    HUD.delegate = self;	
+    [HUD show:YES];
+   */
+
     
 }
 
@@ -383,8 +400,12 @@
     printf("\n");
     NSLog(@"data %@",[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
     printf("\n");
-	[load hideLoading];
+    //[HUD hide:YES];
 	
+    if([tag isEqualToString:@"leaveRun"])
+    {
+        [self checkForOrders];
+    }
     
     if([tag isEqualToString:@"GetOrders"])
     {
@@ -472,12 +493,12 @@
 -(void)initStartRun
 {
     dash_summary = [[[NSMutableDictionary alloc]init]retain];
-	load = [[Loading alloc]init];
-	
-	
+    
 	friends = [[FriendsInfo alloc]init];
 	friends.managedObjectContext = self.managedObjectContext;	
-
+    
+    
+    self.navigationItem.rightBarButtonItem = startRunBtn;
     
     [self reloadStartRunData];
     [start_run_table reloadData];
@@ -602,7 +623,7 @@
     NSString *image_url = @"";
     
     if([[dash_dict objectForKey:@"selected_location"] objectForKey:@"image_url"] != NULL)
-        image_url = [Utils urlencode:[[dash_dict objectForKey:@"selected_location"] objectForKey:@"image_url"]];
+        image_url = [[dash_dict objectForKey:@"selected_location"] objectForKey:@"image_url"];
     
 	
     
@@ -649,7 +670,13 @@
 	[conn setDelegate:self];
 	[conn initWithRequest:request];
 
-	[load showLoading:@"Sending Order" inView:self.view];
+   /* 
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];	
+    HUD.delegate = self;	
+    [HUD show:YES];
+   */ 
+
     
     
 }
@@ -789,7 +816,6 @@
 }
 
 - (void)viewDidUnload {
-    [load release];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

@@ -23,7 +23,6 @@
 #import "Order.h"
 #import "Utils.h"
 
-#import "CoffeeRunSampleViewController.h"
 
 
 #define LOCATION_TEXT	@"Current Location"
@@ -63,7 +62,6 @@
     [super viewDidLoad];
 	
 	dash_summary = [[[NSMutableDictionary alloc]init]retain];
-	load = [[Loading alloc]init];
 	
 	
 	friends = [[FriendsInfo alloc]init];
@@ -262,7 +260,6 @@
 	[conn initWithRequest:request];
 	
 
-	[load showLoading:@"Sending Order" inView:self.view];
 
 }
 - (void)processSuccessful:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
@@ -283,7 +280,6 @@
 		[self checkForOrders];
 	}
 	
-	[load hideLoading];
 	
 	if([tag isEqualToString:@"GetOrders"])
 	{
@@ -310,7 +306,6 @@
 	[conn setDelegate:self];
 	[conn initWithRequest:request];
 	
-	[load showLoading:@"Updating Order" inView:self.view];
 	
 }
 	
@@ -464,7 +459,6 @@
 
 - (void)dealloc {
 	[dash_summary release];
-	[load release];
     [super dealloc];
 }
 

@@ -13,11 +13,11 @@
 #import <CoreData/CoreData.h>
 #import "CoffeeLocation.h"
 #import "URLConnection.h"
-#import "Loading.h"
 #import "SummaryTableViewController.h"
+#import "MBProgressHUD.h"
+@interface MapViewController : UIViewController<MKMapViewDelegate,UITableViewDataSource, UITableViewDelegate,CLLocationManagerDelegate,MKReverseGeocoderDelegate,UITextFieldDelegate,MBProgressHUDDelegate> {
 
-@interface MapViewController : UIViewController<MKMapViewDelegate,UITableViewDataSource, UITableViewDelegate,CLLocationManagerDelegate,MKReverseGeocoderDelegate,UITextFieldDelegate/*,UISearchBarDelegate*/> {
-
+    MBProgressHUD *HUD;
     IBOutlet UIView *loadingView;
 	IBOutlet MKMapView *mapView;
 	IBOutlet UITableView *tableView;
@@ -34,7 +34,6 @@
 	
 	NSMutableArray *tableDataSource;
 	CoffeeLocation *location;
-	Loading *load;	
     IBOutlet UILabel *noResultsFound;
     
 	//Core Data

@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "FriendsInfo.h"
-#import "Loading.h"
 #import <CoreData/CoreData.h>
 #import "AdWhirlDelegateProtocol.h"
 @class AdWhirlView;
@@ -23,7 +22,6 @@
 	NSMutableArray *cells;
 	NSMutableDictionary *dash_summary;
 	FriendsInfo *friends;
-	Loading *load;
     IBOutlet UITableView *tableView;
     AdWhirlView *adView;
 	

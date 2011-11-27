@@ -8,16 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import "Loading.h"
 #import "AsyncImageView2.h"
 #import "FriendsInfo.h"
-@interface RunViewController : UIViewController<NSFetchedResultsControllerDelegate,UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate> {
+#import "MBProgressHUD.h"
+@interface RunViewController : UIViewController<NSFetchedResultsControllerDelegate,UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,MBProgressHUDDelegate> {
 
 	
 	//Core Data
 	NSFetchedResultsController *fetchedResultsController;
 	NSManagedObjectContext *managedObjectContext;
-	Loading *load;
+    
+    UIBarButtonItem *reloadDataBtn;
+    UIBarButtonItem *showOptionsBtn;
+    UIBarButtonItem *startRunBtn;
+    MBProgressHUD *HUD;
     
     
     //View Run

@@ -99,9 +99,7 @@
 	conn.tag =@"GetOrders";
 	[conn setDelegate:self];
 	[conn initWithRequest:request];
-	
-	load = [[Loading alloc]init];
-	[load showLoading:@"Loading" inView:self.view];
+
 }
 - (void)processSuccessful:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
 {
@@ -114,9 +112,6 @@
         [parser release];
         [json_str release];
 	}
-	[load hideLoading];
-	[load release];
-
 }
 -(void)loadData
 {

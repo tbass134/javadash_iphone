@@ -30,6 +30,7 @@
     UIBarButtonItem *cancel_btn;
      UIBarButtonItem *followAll_btn;
     BOOL followAll_clicked;
+    BOOL noUsers;
     
     
     //Core Data

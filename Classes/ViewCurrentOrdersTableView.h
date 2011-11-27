@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Loading.h"
 #import "AdWhirlDelegateProtocol.h"
 
 @class AdWhirlView;
@@ -17,7 +16,6 @@
 	NSMutableArray *run_array;
     NSMutableArray *cells;
 	NSMutableArray *orders_cells;
-	Loading *load;
     AdWhirlView *adView;
     IBOutlet UITableView *tableView;
     IBOutlet UIView *noOrdersView;

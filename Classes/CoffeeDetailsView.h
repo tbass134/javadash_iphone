@@ -32,6 +32,8 @@
     int switchTagInt;
     NSMutableArray *switch_array;
     
+    NSMutableArray *options_array;
+    
 	
 }
 @property(nonatomic,retain) NSDictionary *drink;

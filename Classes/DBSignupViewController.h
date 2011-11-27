@@ -11,17 +11,16 @@
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "FriendsInfo.h"
-#import "Loading.h"
-
+#import "MBProgressHUD.h"
 @protocol DBSignupViewControllerDelegate <NSObject>
 @required
 - (void)userDataAdded;
 @end
 
 @interface DBSignupViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,
-    ABPeoplePickerNavigationControllerDelegate> {
+    ABPeoplePickerNavigationControllerDelegate,MBProgressHUDDelegate> {
         
-        
+        MBProgressHUD *HUD;
     //Page 1 View
     IBOutlet UIView *page1;
     IBOutlet UIImageView *page1_bg;
@@ -68,8 +67,6 @@
     BOOL gotoContactInfo;    
     UIBarButtonItem *signUp_btn;
     UIBarButtonItem *cancel_btn;
-
-    Loading *load;
     NSString *fbid;
    
     

@@ -79,7 +79,6 @@
     RELEASE_SAFELY(photo_);
     RELEASE_SAFELY(getContactInfoButton_);
     
-    [load release];
     [super dealloc];
 }
 
@@ -104,7 +103,6 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
-    load = [[Loading alloc]init];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(getUserInfo) 
                                                  name:@"getUserInfo"
@@ -471,7 +469,10 @@
 #pragma mark - Others
 -(IBAction)connectFacebook:(id)sender
 {
-    [load showLoading:@"Loading" inView:self.view];
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];	
+    HUD.delegate = self;	
+    [HUD show:YES];
     if([UIAppDelegate.facebook isSessionValid])
     {
         UIAppDelegate.fb_tag = @"me";
@@ -483,7 +484,7 @@
 #pragma mark - FaceBook
 -(void)facebookDidLogin
 {
-    [load hideLoading];
+    [HUD hide:YES];
     printf("facebookDidLogin");
     UIAppDelegate.fb_tag = @"me";
     [UIAppDelegate.facebook requestWithGraphPath:@"me" andDelegate:UIAppDelegate];
@@ -491,11 +492,11 @@
 -(void)fbDidNotLogin
 {
     printf("fbDidNotLogin");
-     [load hideLoading];
+    [HUD hide:YES];
 }
 -(void)getUserInfo
 {
-    [load hideLoading];
+    [HUD hide:YES];
     NSLog(@"getUserInfo %@",UIAppDelegate.fb_me);
     NSString *firstName = [UIAppDelegate.fb_me objectForKey:@"first_name"];
     NSString *lastName = [UIAppDelegate.fb_me objectForKey:@"last_name"];
@@ -553,7 +554,7 @@
 }
 -(void)signup:(id)sender
 {
-    [self.navigationController dismissModalViewControllerAnimated:YES];
+    
 
     if(self.nameTextField.text != NULL && ![self.nameTextField.text isEqualToString:@""])
 		[[NSUserDefaults standardUserDefaults] setValue:self.nameTextField.text forKey:@"FIRSTNAME"];
@@ -607,6 +608,7 @@
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/addUser.php?",baseDomain]]
                                                            cachePolicy:NSURLRequestReturnCacheDataElseLoad
                                                        timeoutInterval:60.0];
+    NSLog(@"request %@",[request URL]);
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:postData];
     URLConnection *conn = [[URLConnection alloc]init];
@@ -621,6 +623,12 @@
 }
 - (void)processSuccessful:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
 {
+    NSLog(@"data %@",[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
+    
+    if([tag isEqualToString:@"sendFriendData"])
+    {
+        [self.navigationController dismissModalViewControllerAnimated:YES];
+    }
     if([tag isEqualToString:@"saveFB"])
     {
         

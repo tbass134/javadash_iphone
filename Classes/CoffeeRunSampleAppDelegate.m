@@ -103,7 +103,7 @@ static NSString* kAppId = @"189714094427611";
         [[NSUserDefaults standardUserDefaults]setValue:deviceID forKey:@"_UALastDeviceToken"];
     }
 	#if TARGET_IPHONE_SIMULATOR
-    [self initTesting];
+    //[self initTesting];
 #else
 	if(![Utils checkIfContactAdded])
 	{
@@ -145,7 +145,7 @@ static NSString* kAppId = @"189714094427611";
 	runs_view.managedObjectContext = self.managedObjectContext;	
 	localNavController = [[UINavigationController alloc] initWithRootViewController:runs_view];
 	localNavController.navigationBar.barStyle = UIBarStyleBlackOpaque;
-	localNavController.tabBarItem.image = [UIImage imageNamed:@"30x-Movie.png"];
+	localNavController.tabBarItem.image = [UIImage imageNamed:@"runs_icon.png"];
 	[localViewControllersArray addObject:localNavController];
 	[localNavController release]; // Retained by above array
 	[runs_view release];
@@ -156,7 +156,7 @@ static NSString* kAppId = @"189714094427611";
 	orders_view.title = @"Orders";
 	localNavController = [[UINavigationController alloc] initWithRootViewController:orders_view];
 	localNavController.navigationBar.barStyle = UIBarStyleBlackOpaque;
-	localNavController.tabBarItem.image = [UIImage imageNamed:@"30x-Grocery-Bag.png"];
+	localNavController.tabBarItem.image = [UIImage imageNamed:@"orders_icon.png"];
 	[localViewControllersArray addObject:localNavController];
 	[localNavController release]; // Retained by above array
 	[orders_view release];
@@ -166,7 +166,7 @@ static NSString* kAppId = @"189714094427611";
 	settings_view.managedObjectContext = self.managedObjectContext;	
 	localNavController = [[UINavigationController alloc] initWithRootViewController:settings_view];
 	localNavController.navigationBar.barStyle = UIBarStyleBlackOpaque;
-	localNavController.tabBarItem.image = [UIImage imageNamed:@"30x-Gear.png"];
+	localNavController.tabBarItem.image = [UIImage imageNamed:@"settings_icon.png"];
 	[localViewControllersArray addObject:localNavController];
 	[localNavController release]; // Retained by above array
 	[settings_view release];

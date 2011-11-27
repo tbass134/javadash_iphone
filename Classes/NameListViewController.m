@@ -110,14 +110,15 @@
     //NSLog(@"drink_type %@",drink_type);
 	coffee_dict =[[[plistDictionary objectForKey:companyName]objectForKey:@"Drinks"]objectForKey:drink_type];
     
-    //NSLog(@"coffee_dict %@",coffee_dict);
-    //NSLog(@"count %i",[coffee_dict count]);
+    NSLog(@"coffee_dict %@",coffee_dict);
+    NSLog(@"count %i",[coffee_dict count]);
     sections = [[NSMutableArray alloc]init];
     
     
     // Loop through the books and create our keys
     for (NSDictionary *item in coffee_dict)
     {
+        NSLog(@"item %@",item);
         [sections addObject:item];
     }
     
@@ -152,6 +153,7 @@
     
     // Configure the cell...
     //
+    //NSLog(@"[sections objectAtIndex:indexPath.section] %@",[sections objectAtIndex:indexPath.section]);
     cell.textLabel.text = [[coffee_dict objectForKey:[sections objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
 
     

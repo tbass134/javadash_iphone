@@ -12,9 +12,7 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
-		2899E5220DE3E06400AC0155 /* CoffeeRunSampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* CoffeeRunSampleViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
-		28D7ACF80DDB3853001CB0EB /* CoffeeRunSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* CoffeeRunSampleViewController.m */; };
 		450162B514507B8E00BD446C /* AdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 450162B314507B8E00BD446C /* AdViewController.m */; };
 		450162B614507B8E00BD446C /* AdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 450162B414507B8E00BD446C /* AdViewController.xib */; };
 		450ACDAF14530F1D00D21440 /* SCRGrfx.m in Sources */ = {isa = PBXBuildFile; fileRef = 450ACDAE14530F1D00D21440 /* SCRGrfx.m */; };
@@ -68,6 +66,12 @@
 		453292CC141865F100EC6879 /* 30x-Marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 453292CB141865F100EC6879 /* 30x-Marker.png */; };
 		453292CF1418676200EC6879 /* Powered_By_Yelp_Yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 453292CD1418676200EC6879 /* Powered_By_Yelp_Yellow.png */; };
 		453292D01418676200EC6879 /* yelp_logo_50x25.png in Resources */ = {isa = PBXBuildFile; fileRef = 453292CE1418676200EC6879 /* yelp_logo_50x25.png */; };
+		453989B3147859B500F2194F /* orders_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 453989B1147859B500F2194F /* orders_icon.png */; };
+		453989B4147859B500F2194F /* runs_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 453989B2147859B500F2194F /* runs_icon.png */; };
+		453989B714785EA500F2194F /* runs_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 453989B514785EA500F2194F /* runs_icon@2x.png */; };
+		453989B814785EA500F2194F /* orders_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 453989B614785EA500F2194F /* orders_icon@2x.png */; };
+		453989BB14785F6B00F2194F /* settings_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 453989B914785F6B00F2194F /* settings_icon.png */; };
+		453989BC14785F6B00F2194F /* settings_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 453989BA14785F6B00F2194F /* settings_icon@2x.png */; };
 		453A88DF13DFB7240044DD5E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 453A88DE13DFB7240044DD5E /* CFNetwork.framework */; };
 		454AEA83132AE40E0029C0C1 /* ViewCurrentOrdersTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 454AEA82132AE40E0029C0C1 /* ViewCurrentOrdersTableView.m */; };
 		4553D2FA12C9368100B27375 /* CoffeeLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4553D2F912C9368100B27375 /* CoffeeLocation.m */; };
@@ -85,6 +89,7 @@
 		456733F913F4D1B200808016 /* btn-back-step2.png in Resources */ = {isa = PBXBuildFile; fileRef = 456733F813F4D1B200808016 /* btn-back-step2.png */; };
 		4569C09E13132BD5007BC077 /* ItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4569C09C13132BD5007BC077 /* ItemsViewController.m */; };
 		4569C09F13132BD5007BC077 /* ItemsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4569C09D13132BD5007BC077 /* ItemsViewController.xib */; };
+		45744BCA14796CC9001B257C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 45744BC914796CC9001B257C /* MBProgressHUD.m */; };
 		457FCD741409F285005B9308 /* SummaryTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 457FCD731409F285005B9308 /* SummaryTableViewController.xib */; };
 		4580F2271392D728007A281C /* SelectTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4580F2251392D728007A281C /* SelectTimeView.m */; };
 		4580F2281392D728007A281C /* SelectTimeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4580F2261392D728007A281C /* SelectTimeView.xib */; };
@@ -200,7 +205,6 @@
 		A9A1FAC012E8887200390640 /* CoffeeList.plist in Resources */ = {isa = PBXBuildFile; fileRef = A9A1FABF12E8887200390640 /* CoffeeList.plist */; };
 		A9A1FBA112E89E6300390640 /* NameListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A1FB9F12E89E6300390640 /* NameListViewController.m */; };
 		A9A1FBA212E89E6300390640 /* NameListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9A1FBA012E89E6300390640 /* NameListViewController.xib */; };
-		A9DC72F4133BC33100AC6452 /* Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = A9DC72F3133BC33100AC6452 /* Loading.m */; };
 		A9DC73AC133BCEEC00AC6452 /* star_active.png in Resources */ = {isa = PBXBuildFile; fileRef = A9DC73AB133BCEEC00AC6452 /* star_active.png */; };
 		A9ED70D61332ACF900298AE6 /* ABTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A9ED707C1332ACF900298AE6 /* ABTableViewCell.m */; };
 		A9ED70D71332ACF900298AE6 /* NSArray+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A9ED707E1332ACF900298AE6 /* NSArray+TKCategory.m */; };
@@ -266,10 +270,7 @@
 		1D6058910D05DD3D006BFB54 /* CoffeeRunSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoffeeRunSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		2899E5210DE3E06400AC0155 /* CoffeeRunSampleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CoffeeRunSampleViewController.xib; path = ../CoffeeRunSampleViewController.xib; sourceTree = "<group>"; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
-		28D7ACF60DDB3853001CB0EB /* CoffeeRunSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoffeeRunSampleViewController.h; sourceTree = "<group>"; };
-		28D7ACF70DDB3853001CB0EB /* CoffeeRunSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoffeeRunSampleViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ../main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* CoffeeRunSample_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoffeeRunSample_Prefix.pch; path = ../CoffeeRunSample_Prefix.pch; sourceTree = "<group>"; };
 		450162B214507B8E00BD446C /* AdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdViewController.h; path = ../AdViewController.h; sourceTree = "<group>"; };
@@ -381,6 +382,12 @@
 		453292CB141865F100EC6879 /* 30x-Marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "30x-Marker.png"; sourceTree = "<group>"; };
 		453292CD1418676200EC6879 /* Powered_By_Yelp_Yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Powered_By_Yelp_Yellow.png; sourceTree = "<group>"; };
 		453292CE1418676200EC6879 /* yelp_logo_50x25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yelp_logo_50x25.png; sourceTree = "<group>"; };
+		453989B1147859B500F2194F /* orders_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orders_icon.png; sourceTree = "<group>"; };
+		453989B2147859B500F2194F /* runs_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = runs_icon.png; sourceTree = "<group>"; };
+		453989B514785EA500F2194F /* runs_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "runs_icon@2x.png"; sourceTree = "<group>"; };
+		453989B614785EA500F2194F /* orders_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "orders_icon@2x.png"; sourceTree = "<group>"; };
+		453989B914785F6B00F2194F /* settings_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings_icon.png; sourceTree = "<group>"; };
+		453989BA14785F6B00F2194F /* settings_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings_icon@2x.png"; sourceTree = "<group>"; };
 		453A88DE13DFB7240044DD5E /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		454AEA81132AE40E0029C0C1 /* ViewCurrentOrdersTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewCurrentOrdersTableView.h; sourceTree = "<group>"; };
 		454AEA82132AE40E0029C0C1 /* ViewCurrentOrdersTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewCurrentOrdersTableView.m; sourceTree = "<group>"; };
@@ -411,6 +418,8 @@
 		4569C09B13132BD5007BC077 /* ItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemsViewController.h; sourceTree = "<group>"; };
 		4569C09C13132BD5007BC077 /* ItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemsViewController.m; sourceTree = "<group>"; };
 		4569C09D13132BD5007BC077 /* ItemsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemsViewController.xib; sourceTree = "<group>"; };
+		45744BC814796CC9001B257C /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		45744BC914796CC9001B257C /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		457FCD731409F285005B9308 /* SummaryTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SummaryTableViewController.xib; sourceTree = "<group>"; };
 		4580F2241392D728007A281C /* SelectTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectTimeView.h; sourceTree = "<group>"; };
 		4580F2251392D728007A281C /* SelectTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectTimeView.m; sourceTree = "<group>"; };
@@ -617,8 +626,6 @@
 		A9A1FB9E12E89E6300390640 /* NameListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameListViewController.h; sourceTree = "<group>"; };
 		A9A1FB9F12E89E6300390640 /* NameListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameListViewController.m; sourceTree = "<group>"; };
 		A9A1FBA012E89E6300390640 /* NameListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NameListViewController.xib; sourceTree = "<group>"; };
-		A9DC72F2133BC33100AC6452 /* Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Loading.h; sourceTree = "<group>"; };
-		A9DC72F3133BC33100AC6452 /* Loading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Loading.m; sourceTree = "<group>"; };
 		A9DC73AB133BCEEC00AC6452 /* star_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_active.png; sourceTree = "<group>"; };
 		A9ED707B1332ACF900298AE6 /* ABTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABTableViewCell.h; sourceTree = "<group>"; };
 		A9ED707C1332ACF900298AE6 /* ABTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABTableViewCell.m; sourceTree = "<group>"; };
@@ -793,6 +800,12 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				453989B914785F6B00F2194F /* settings_icon.png */,
+				453989BA14785F6B00F2194F /* settings_icon@2x.png */,
+				453989B514785EA500F2194F /* runs_icon@2x.png */,
+				453989B614785EA500F2194F /* orders_icon@2x.png */,
+				453989B1147859B500F2194F /* orders_icon.png */,
+				453989B2147859B500F2194F /* runs_icon.png */,
 				45A5D49E1419A935000308CB /* CoffeeList2.plist */,
 				451FC16413CFE40800E436CF /* no-image.gif */,
 				A9A1FABF12E8887200390640 /* CoffeeList.plist */,
@@ -944,8 +957,6 @@
 				45F5787B13035BB50024BA03 /* URLConnection.m */,
 				4588A14C12B7CCA800863541 /* Utils.h */,
 				4588A14D12B7CCA800863541 /* Utils.m */,
-				A9DC72F2133BC33100AC6452 /* Loading.h */,
-				A9DC72F3133BC33100AC6452 /* Loading.m */,
 				45E6ACD413A12D73005410B5 /* FriendsInfo.h */,
 				45E6ACD513A12D73005410B5 /* FriendsInfo.m */,
 			);
@@ -1078,9 +1089,19 @@
 			path = FlurryAnalytics;
 			sourceTree = "<group>";
 		};
+		45744BC714796CAF001B257C /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				45744BC814796CC9001B257C /* MBProgressHUD.h */,
+				45744BC914796CC9001B257C /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
+			sourceTree = "<group>";
+		};
 		4589206F13AA89CC0028F935 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				45744BC714796CAF001B257C /* MBProgressHUD */,
 				458CBD041474A70E0057B063 /* TestFlight */,
 				452D3A0F14707CD70058AA45 /* UniqueDeviceId */,
 				455CDBF914622644002572EC /* FlurryAnalytics */,
@@ -1426,9 +1447,6 @@
 				A90BF2F61343C124003FF481 /* InfoViewController.h */,
 				A90BF2F71343C124003FF481 /* InfoViewController.m */,
 				A90BF2F81343C124003FF481 /* InfoViewController.xib */,
-				28D7ACF60DDB3853001CB0EB /* CoffeeRunSampleViewController.h */,
-				28D7ACF70DDB3853001CB0EB /* CoffeeRunSampleViewController.m */,
-				2899E5210DE3E06400AC0155 /* CoffeeRunSampleViewController.xib */,
 				45E6AC8213A126EE005410B5 /* SettingsView.h */,
 				45E6AC8313A126EE005410B5 /* SettingsView.m */,
 				45E6AC8413A126EE005410B5 /* SettingsView.xib */,
@@ -1646,7 +1664,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
-				2899E5220DE3E06400AC0155 /* CoffeeRunSampleViewController.xib in Resources */,
 				45B5772112C8622900E09A9C /* MapViewController.xib in Resources */,
 				A964815212D7B43C00B55A1A /* RunDetails.xib in Resources */,
 				A9A1FAC012E8887200390640 /* CoffeeList.plist in Resources */,
@@ -1697,6 +1714,12 @@
 				451BCA0814621C4300FE308B /* Localization-ReadMe.txt in Resources */,
 				452DB9E91465DC0A0030F7C9 /* MutipleOrdersTableView.xib in Resources */,
 				452D3A0A14704A270058AA45 /* Settings.bundle in Resources */,
+				453989B3147859B500F2194F /* orders_icon.png in Resources */,
+				453989B4147859B500F2194F /* runs_icon.png in Resources */,
+				453989B714785EA500F2194F /* runs_icon@2x.png in Resources */,
+				453989B814785EA500F2194F /* orders_icon@2x.png in Resources */,
+				453989BB14785F6B00F2194F /* settings_icon.png in Resources */,
+				453989BC14785F6B00F2194F /* settings_icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1709,7 +1732,6 @@
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* CoffeeRunSampleAppDelegate.m in Sources */,
-				28D7ACF80DDB3853001CB0EB /* CoffeeRunSampleViewController.m in Sources */,
 				4588A14E12B7CCA800863541 /* Utils.m in Sources */,
 				45B5772012C8622900E09A9C /* MapViewController.m in Sources */,
 				4553D2FA12C9368100B27375 /* CoffeeLocation.m in Sources */,
@@ -1778,7 +1800,6 @@
 				A9ED71001332ACF900298AE6 /* UIScrollview+TKCategory.m in Sources */,
 				A9ED71011332ACF900298AE6 /* UIToolbar+TKCategory.m in Sources */,
 				A9ED71021332ACF900298AE6 /* UIView+TKCategory.m in Sources */,
-				A9DC72F4133BC33100AC6452 /* Loading.m in Sources */,
 				45C694A8133C376B00962D33 /* AttendeeOrderTableViewController.m in Sources */,
 				A90BF1B313438581003FF481 /* Order.m in Sources */,
 				A90BF2F91343C124003FF481 /* InfoViewController.m in Sources */,
@@ -1871,6 +1892,7 @@
 				452DB9E81465DC0A0030F7C9 /* MutipleOrdersTableView.m in Sources */,
 				452D3A1414707D050058AA45 /* NSString+MD5Addition.m in Sources */,
 				452D3A1514707D050058AA45 /* UIDevice+IdentifierAddition.m in Sources */,
+				45744BCA14796CC9001B257C /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1925,7 +1947,7 @@
 					"LOCAL/CoffeeRun/APIS/nesterow-TouchCustoms-ca53986/Classes",
 				);
 				INFOPLIST_FILE = "CoffeeRunSample-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes/API_build\"",
@@ -1949,7 +1971,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Tony Hung (QRKXMQ42RZ)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Tony Hung";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1963,7 +1985,7 @@
 					"LOCAL/CoffeeRun/APIS/nesterow-TouchCustoms-ca53986/Classes",
 				);
 				INFOPLIST_FILE = "CoffeeRunSample-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes/API_build\"",
@@ -1971,7 +1993,7 @@
 					"\"$(SRCROOT)/Classes\"",
 				);
 				PRODUCT_NAME = CoffeeRunSample;
-				PROVISIONING_PROFILE = "5F921F82-9F1F-450B-BF21-4CF873F77979";
+				PROVISIONING_PROFILE = "604B5075-3206-48E1-B07B-97EB5288C6C1";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2016,7 +2038,7 @@
 					"LOCAL/CoffeeRun/APIS/nesterow-TouchCustoms-ca53986/Classes",
 				);
 				INFOPLIST_FILE = "CoffeeRunSample-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes/API_build\"",

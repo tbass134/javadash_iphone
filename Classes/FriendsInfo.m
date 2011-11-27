@@ -58,7 +58,7 @@
     if(success)
     {
         //Send the user data to the server
-        [self sendFriendDataToServer:dict];
+        //[self sendFriendDataToServer:dict];
         
     }
 	

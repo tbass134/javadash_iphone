@@ -7,15 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Loading.h"
 #import <CoreData/CoreData.h>
-
-@interface OrdersViewController : UIViewController<UITableViewDelegate, UITableViewDataSource> {
-    Loading *load;
+#import "MBProgressHUD.h"
+@interface OrdersViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,MBProgressHUDDelegate> {
     
     //Core Data
 	NSFetchedResultsController *fetchedResultsController;
 	NSManagedObjectContext *managedObjectContext;
+    
+    MBProgressHUD *HUD;
     
     //ViewCurrentOrdersView
     IBOutlet UIView *current_orders_view;
