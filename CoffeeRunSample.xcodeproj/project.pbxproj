@@ -58,6 +58,8 @@
 		452D3A1514707D050058AA45 /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 452D3A1314707D050058AA45 /* UIDevice+IdentifierAddition.m */; };
 		452DB9E81465DC0A0030F7C9 /* MutipleOrdersTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 452DB9E61465DC060030F7C9 /* MutipleOrdersTableView.m */; };
 		452DB9E91465DC0A0030F7C9 /* MutipleOrdersTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 452DB9E71465DC080030F7C9 /* MutipleOrdersTableView.xib */; };
+		453105111482953C005781AF /* CoffeeRunSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4531050F1482953C005781AF /* CoffeeRunSampleViewController.m */; };
+		453105121482953C005781AF /* CoffeeRunSampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 453105101482953C005781AF /* CoffeeRunSampleViewController.xib */; };
 		4531C40C13DB431F00BD246C /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 4531C40513DB431F00BD246C /* background.png */; };
 		4531C40D13DB431F00BD246C /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4531C40613DB431F00BD246C /* background@2x.png */; };
 		4531C40E13DB431F00BD246C /* DBSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4531C40813DB431F00BD246C /* DBSignupViewController.m */; };
@@ -373,6 +375,9 @@
 		452DB9E51465DC060030F7C9 /* MutipleOrdersTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MutipleOrdersTableView.h; sourceTree = "<group>"; };
 		452DB9E61465DC060030F7C9 /* MutipleOrdersTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MutipleOrdersTableView.m; sourceTree = "<group>"; };
 		452DB9E71465DC080030F7C9 /* MutipleOrdersTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MutipleOrdersTableView.xib; sourceTree = "<group>"; };
+		4531050E1482953C005781AF /* CoffeeRunSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoffeeRunSampleViewController.h; sourceTree = "<group>"; };
+		4531050F1482953C005781AF /* CoffeeRunSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoffeeRunSampleViewController.m; sourceTree = "<group>"; };
+		453105101482953C005781AF /* CoffeeRunSampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoffeeRunSampleViewController.xib; sourceTree = "<group>"; };
 		4531C40513DB431F00BD246C /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		4531C40613DB431F00BD246C /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
 		4531C40713DB431F00BD246C /* DBSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBSignupViewController.h; sourceTree = "<group>"; };
@@ -1444,6 +1449,9 @@
 		A90BF2FB1343C133003FF481 /* Main View */ = {
 			isa = PBXGroup;
 			children = (
+				4531050E1482953C005781AF /* CoffeeRunSampleViewController.h */,
+				4531050F1482953C005781AF /* CoffeeRunSampleViewController.m */,
+				453105101482953C005781AF /* CoffeeRunSampleViewController.xib */,
 				A90BF2F61343C124003FF481 /* InfoViewController.h */,
 				A90BF2F71343C124003FF481 /* InfoViewController.m */,
 				A90BF2F81343C124003FF481 /* InfoViewController.xib */,
@@ -1720,6 +1728,7 @@
 				453989B814785EA500F2194F /* orders_icon@2x.png in Resources */,
 				453989BB14785F6B00F2194F /* settings_icon.png in Resources */,
 				453989BC14785F6B00F2194F /* settings_icon@2x.png in Resources */,
+				453105121482953C005781AF /* CoffeeRunSampleViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1893,6 +1902,7 @@
 				452D3A1414707D050058AA45 /* NSString+MD5Addition.m in Sources */,
 				452D3A1514707D050058AA45 /* UIDevice+IdentifierAddition.m in Sources */,
 				45744BCA14796CC9001B257C /* MBProgressHUD.m in Sources */,
+				453105111482953C005781AF /* CoffeeRunSampleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

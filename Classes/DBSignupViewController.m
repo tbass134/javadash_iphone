@@ -497,7 +497,7 @@
 -(void)getUserInfo
 {
     [HUD hide:YES];
-    NSLog(@"getUserInfo %@",UIAppDelegate.fb_me);
+    //NSLog(@"getUserInfo %@",UIAppDelegate.fb_me);
     NSString *firstName = [UIAppDelegate.fb_me objectForKey:@"first_name"];
     NSString *lastName = [UIAppDelegate.fb_me objectForKey:@"last_name"];
     
@@ -527,13 +527,17 @@
 	[conn initWithRequest:request];
     
     //Upload fb ID to server
-    [self saveFBId];
+    //[self saveFBId];
+    
+    fbid= [[UIAppDelegate.fb_me objectForKey:@"id"]retain];    
+    NSLog(@"fbid %@",fbid);
+    
+    [self signup:nil];
 }
 -(void)saveFBId
 {
     //Store this in a UserDefaults since we'll need it again
-    fbid= [[UIAppDelegate.fb_me objectForKey:@"id"]retain];    
-    NSLog(@"fbid %@",fbid);
+    
     [[NSUserDefaults standardUserDefaults]setValue:@"FB_ID" forKey:fbid];
     
     int ts = [[NSDate date] timeIntervalSince1970];
@@ -542,7 +546,7 @@
     
     BOOL enable_email = [[[NSUserDefaults standardUserDefaults]valueForKey:@"ENABLE_EMAIL"]boolValue];
     
-	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/saveFBUserInfo.php?deviceid=%@&name=%@&email=%@&enable_email=%d&platform=%@&fb=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],[Utils urlencode:userName],email,enable_email,@"IOS",fbid, ts]]
+	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/addUser.php?deviceid=%@&name=%@&email=%@&enable_email=%d&platform=%@&fb=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],[Utils urlencode:userName],email,enable_email,@"IOS",fbid, ts]]
 														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
 													   timeoutInterval:60.0];
     

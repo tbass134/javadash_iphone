@@ -1,4 +1,4 @@
-//
+ //
 //  CoffeeRunSampleAppDelegate.m
 //  CoffeeRunSample
 //
@@ -605,7 +605,7 @@ static NSString* kAppId = @"189714094427611";
  */
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
     NSLog(@"%@",[error localizedDescription]);
-     //[[NSNotificationCenter defaultCenter] postNotificationName:@"getFriendsList" object:nil];
+     [[NSNotificationCenter defaultCenter] postNotificationName:@"fbFailed" object:nil];
 };
 
 

@@ -35,17 +35,21 @@
                                                      name:@"getFriendsList"
                                                    object:nil];
         
-        done_btn = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(fbFailed) 
+                                                     name:@"fbFailed"
+                                                   object:nil];
+        
+        
         cancel_btn = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
-        followAll_btn = [[UIBarButtonItem alloc]initWithTitle:@"Follow all" style:UIBarButtonItemStyleDone target:self action:@selector(followAll)];
+        //followAll_btn = [[UIBarButtonItem alloc]initWithTitle:@"Follow all" style:UIBarButtonItemStyleDone target:self action:@selector(followAll)];
         
         self.navigationItem.rightBarButtonItem = cancel_btn;
         
         
         if([UIAppDelegate.facebook isSessionValid])
         {
-            self.navigationItem.leftBarButtonItem = done_btn;
-            self.navigationItem.rightBarButtonItem = followAll_btn;
+            //self.navigationItem.rightBarButtonItem = followAll_btn;
             UIAppDelegate.fb_tag = @"me/friends";
             [UIAppDelegate.facebook requestWithGraphPath:@"me/friends" andDelegate:UIAppDelegate];
         }
@@ -63,6 +67,7 @@
 }
 -(void)followAll
 {
+    /*
     followAll_clicked = YES;   
     if([fb_array count]>0)
     {
@@ -81,63 +86,64 @@
             }
         }
     }
+     */
 }
 
 -(void)loadFromServer
 {
+    //Get all the friends device ID's
+    friends = [[FriendsInfo alloc]init];
+	friends.managedObjectContext = self.managedObjectContext;	
+	NSArray *friends_array = [friends getAllFriends];    
+    NSMutableArray *device_id_array = [[NSMutableArray alloc]init];
+
+    for(int i=0;i<[friends_array count];i++)
+    {
+        [device_id_array addObject:[[friends_array objectAtIndex:i]valueForKey:@"device_id"]];
+    }
+    
+	
+    
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/Facebook/getFacebookUsersOfApp.php",baseDomain]]
 														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
 													   timeoutInterval:60.0];
     
 	URLConnection *conn = [[URLConnection alloc]init];
+    
+    [request setHTTPMethod:@"POST"];
+	NSString *post_str = [NSString stringWithFormat:@"device_tokens=%@",[device_id_array componentsJoinedByString:@","]];
+    
+    NSLog(@"post_str %@",post_str);
+    
+	[request setHTTPBody:[post_str dataUsingEncoding:NSUTF8StringEncoding]]; 
 	conn.tag =@"getFBUsers";
 	[conn setDelegate:self];
 	[conn initWithRequest:request];
 }
 - (void)processSuccessful:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
 {
+    NSLog(@"data %@",[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
     NSString * json_str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     SBJSON *parser = [[SBJSON alloc] init];
     users_dict = [[parser objectWithString:json_str error:nil]retain];
+    NSLog(@"users_dict %@",users_dict);
+    
     [self loadFriendsList];
     [parser release];
     [json_str release];
     
-    
-    //NSLog(@"UIAppDelegate.fb_friends %@",UIAppDelegate.fb_friends);
 }
 -(void)loadFriendsList
 {
-    NSLog(@"users_dict %@",users_dict);
     self.table_view.hidden = NO;
     urlArray = [[NSMutableArray alloc]init];
     images = [[NSMutableArray alloc] init];
     names = [[NSMutableArray alloc] init];
     
-    fb_array = [[NSMutableArray alloc] init];
-    for(int i=0;i<[friends count];i++){
-        
-         NSDictionary *friendDict = [friends objectAtIndex:i];
-        //NSLog(@"friendDict %@",[friendDict objectForKey:@"id"]);
-       
-        for(id user in users_dict)
-        {
-             //NSLog(@"User id %@",[user objectForKey:@"id"]);
-            if([[friendDict objectForKey:@"id"]isEqualToString:[user objectForKey:@"fb_id"]]) ////Test:10904809 
-            {
-                NSMutableDictionary *friend = [[NSMutableDictionary alloc]init];
-                [friend setValue:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture",[friendDict objectForKey:@"id"]] forKey:@"url"];
-                [friend setValue:[friendDict objectForKey:@"name"] forKey:@"name"];
-                [friend setValue:[friendDict objectForKey:@"id"] forKey:@"id"];
-                [fb_array addObject:friend];
-            }
-            
-        }
-    }
-    if([fb_array count]>0)
+    if([users_dict count]>0)
     {
-        followAll_btn.enabled = YES;
-        for(int i=0;i<[fb_array count];i++){
+        //followAll_btn.enabled = YES;
+        for(int i=0;i<[users_dict count];i++){
             [images addObject:[NSNull null]];
         }
         
@@ -147,8 +153,8 @@
         UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,320,75)];
         
         UILabel *lab = [[UILabel alloc] initWithFrame:CGRectInset(v.bounds, 20, 0)];
-        lab.text = @"These are your Facebook friends who are already using JavaDash. Add them to share coffee orders";
-        lab.numberOfLines = 2;
+        lab.text = @"These are your Facebook friends who are already using Java Dash. Add them to share coffee orders";
+        lab.numberOfLines = 3;
         lab.font = [UIFont boldSystemFontOfSize:12];
         lab.textColor = [UIColor grayColor];
         [v addSubview:lab];
@@ -170,7 +176,7 @@
             [alert show];
             [alert release];
             
-            followAll_btn.enabled = NO;
+            //followAll_btn.enabled = NO;
         }
              noUsers = YES;
     }
@@ -205,13 +211,16 @@
 - (void)logout {
     [UIAppDelegate.facebook logout:UIAppDelegate];
 }
+-(void)fbFailed {
+    [Utils showAlert:@"Could Not Connect To Facebook" withMessage:nil inView:self.view];
+}
 
 #pragma mark - Table View Delegate
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [fb_array count];
+    return [users_dict count];
 }
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -224,7 +233,7 @@
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [button setTitle:@"Follow" forState:UIControlStateNormal];
-    CGRect frame = CGRectMake(0.0, 0.0, 80, 50);
+    CGRect frame = CGRectMake(0.0, 0.0, 70, 40);
     button.frame = frame; 
     button.tag = indexPath.row;
     [button addTarget:self action:@selector(addFriend:) forControlEvents:UIControlEventTouchUpInside];
@@ -232,14 +241,15 @@
     cell.accessoryView = button;
 
     
-	cell.textLabel.text = [[fb_array objectAtIndex:indexPath.row]objectForKey:@"name"];
+	cell.textLabel.text = [[users_dict objectAtIndex:indexPath.row]objectForKey:@"name"];
 	int i = indexPath.row;
 	
 	if([images objectAtIndex:i] != [NSNull null]) cell.imageView.image = [images objectAtIndex:i];
 	else{
 		
-		int index = i % [fb_array count];
-		UIImage *image = [[TKImageCenter sharedImageCenter] imageAtURL:[[fb_array objectAtIndex:index]objectForKey:@"url"] queueIfNeeded:YES];
+		int index = i % [users_dict count];
+        NSString *img_url = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture",[[users_dict objectAtIndex:index]objectForKey:@"fb_id"]];
+        UIImage *image = [[TKImageCenter sharedImageCenter] imageAtURL:img_url queueIfNeeded:YES];
 		
 		if(image != nil){
 			[images replaceObjectAtIndex:i withObject:image];
@@ -260,8 +270,9 @@
 	for (UITableViewCell * cell in [self.table_view visibleCells]) {
 		if(cell.imageView.image == nil){
 			
-			int i = [self.table_view indexPathForCell:cell].row % [fb_array count];
-			UIImage *image = [[TKImageCenter sharedImageCenter] imageAtURL:[[fb_array objectAtIndex:i]objectForKey:@"url"] queueIfNeeded:NO];
+			int i = [self.table_view indexPathForCell:cell].row % [users_dict count];
+            NSString *img_url = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture",[[users_dict objectAtIndex:i]objectForKey:@"fb_id"]];
+            UIImage *image = [[TKImageCenter sharedImageCenter] imageAtURL:img_url queueIfNeeded:YES];
             
 			if(image != nil){
 				[images replaceObjectAtIndex:i withObject:image];
@@ -275,22 +286,16 @@
 
 -(void)addFriend:(id)sender
 {
-     UIButton *button = (UIButton *)sender;
     
-    UIImage *image = [[TKImageCenter sharedImageCenter] imageAtURL:[[fb_array objectAtIndex:button.tag]objectForKey:@"url"] queueIfNeeded:NO];
-    NSLog(@"image %@",image);
-    NSDictionary *friendDict = [fb_array objectAtIndex:button.tag];
+    UIButton *button = (UIButton *)sender;
     
-    for(id user in users_dict)
-    {  
-        if([[user objectForKey:@"fb_id"] isEqualToString:[friendDict objectForKey:@"id"]])
-        {
-            //Save the data
-            [self addUserToList:user withImage:image];
-            break; 
-        }
-    }
+    NSString *img_url = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture",[[users_dict objectAtIndex:button.tag]objectForKey:@"fb_id"]];
+    UIImage *image = [[TKImageCenter sharedImageCenter] imageAtURL:img_url queueIfNeeded:NO];
 
+    NSDictionary *friendDict = [users_dict objectAtIndex:button.tag];
+    [self addUserToList:friendDict withImage:image];
+        
+    
 }
 -(void)addUserToList:(NSDictionary *)user withImage:(UIImage *)image
 {
@@ -345,6 +350,11 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    [users_dict release];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:@"facebookDidLogin"];
+    [[NSNotificationCenter defaultCenter] removeObserver:@"getFriendsList"];
+    [[NSNotificationCenter defaultCenter] removeObserver:@"fbFailed"];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }

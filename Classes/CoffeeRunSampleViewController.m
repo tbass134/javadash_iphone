@@ -14,7 +14,6 @@
 #import <MapKit/MapKit.h>
 #import "Constants.h"
 #import "JSON.h"
-#import "Loading.h"
 #import "Order.h"
 
 #import "InfoViewController.h"
@@ -159,8 +158,7 @@
 		[conn setDelegate:self];
 		[conn initWithRequest:request];
 		
-		load = [[Loading alloc]init];
-		[load showLoading:@"Loading" inView:self.view];
+		
 	}
 	else {
 		[Utils showAlert:@"No Contact Added" withMessage:@"Please add your contact information to get started with using Java Dash" inView:self.view];
@@ -174,7 +172,6 @@
 }
 - (void)processSuccessful:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
 {
-	[load hideLoading];
 	
 	
 	if(!success)
@@ -278,9 +275,7 @@
 	conn.tag =@"cancelRun";
 	[conn setDelegate:self];
 	[conn initWithRequest:request];
-	
-	load = [[Loading alloc]init];
-	[load showLoading:@"Loading" inView:self.view];
+
 }
 
 
@@ -308,7 +303,6 @@
 
 
 - (void)dealloc {
-    [load release];
     [friends release];
     [super dealloc];
 }

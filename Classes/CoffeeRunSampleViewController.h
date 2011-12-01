@@ -10,7 +10,6 @@
 
 #import "CoffeeRunSampleAppDelegate.h"
 #import "URLConnection.h"
-#import "Loading.h"
 #import "FriendsInfo.h"
 
 @interface CoffeeRunSampleViewController : UIViewController<NSFetchedResultsControllerDelegate> {
@@ -33,9 +32,7 @@
 	NSUserDefaults *prefs;
 	FriendsInfo *friends;
 	
-	
-	Loading *load;
-	
+    
 }
 //Core Data
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;

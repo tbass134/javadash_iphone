@@ -11,7 +11,7 @@
 #import "TapkuLibrary.h"
 #import <CoreData/CoreData.h>
 #import "CoffeeRunSampleAppDelegate.h"
-
+#import "FriendsInfo.h"
 @interface FacebookViewController : UIViewController<UITableViewDelegate>
 {
     IBOutlet FBLoginButton* _fbButton;
@@ -21,12 +21,8 @@
     NSMutableArray *images;
     NSMutableArray *names;
     
-    NSMutableArray *fb_array;
-    NSDictionary *users_dict;
+    NSMutableArray *users_dict;
     
-    NSArray *friends;
-    
-    UIBarButtonItem *done_btn;
     UIBarButtonItem *cancel_btn;
      UIBarButtonItem *followAll_btn;
     BOOL followAll_clicked;
@@ -37,6 +33,8 @@
 	NSFetchedResultsController *fetchedResultsController;
 	NSManagedObjectContext *managedObjectContext;
 	CoffeeRunSampleAppDelegate *delegate;
+    
+    FriendsInfo *friends;
 	
 
 

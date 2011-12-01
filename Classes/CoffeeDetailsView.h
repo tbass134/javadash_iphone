@@ -12,7 +12,6 @@
 @interface CoffeeDetailsView : UIViewController<UITextFieldDelegate> {
 
 @private
-	SCRSegmentedControl *_oneRowControl, *_twoRowControl, *_threeRowControl;
 	UILabel *_valueLabel;
 
 

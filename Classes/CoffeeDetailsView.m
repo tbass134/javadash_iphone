@@ -73,9 +73,9 @@
 	[self.view addSubview:scroll];
 	
 	
-	int i=0;
+    UIView *mainView = [[UIView alloc]init];
+    mainView.userInteractionEnabled = YES;
 	for (id theKey in coffee_dict) {
-		i++;
 		[sections_array addObject:theKey];
         
         NSDictionary *option_dict = [coffee_dict objectForKey:theKey];
@@ -93,7 +93,7 @@
             UIView *seg_view = [[UIView alloc]initWithFrame:CGRectMake(0,0,self.view.frame.size.width,100
                                                                        )];
             //[scroll addSubview:seg_view];
-            [options_array addObject:seg_view];
+            //[options_array addObject:seg_view];
             UILabel *title_label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 20)];
             title_label.backgroundColor = [UIColor clearColor];
             title_label.text = theKey;
@@ -178,42 +178,47 @@
             }
             
             [oneRowControl release];
-    
+            [mainView addSubview:seg_view];
          
           ;}
-        else
-        { 
-            
-            /*
-            UILabel *switchLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, (i*100)-150, 200, 50)];
-            switchLabel.text = theKey;
-            switchLabel.backgroundColor = [UIColor clearColor];
-            [scroll addSubview:switchLabel];
-            [switchLabel release];
-            UISwitch *_switch = [[UISwitch alloc]initWithFrame:CGRectMake(0,switchLabel.frame.origin.y  + switchLabel.frame.size.height, 75, 100)];
-            _switch.tag = 300 + switchTagInt;
-            NSDictionary *tempDict = [[NSDictionary alloc]initWithObjectsAndKeys:theKey,@"theKey", nil];
-            
-            [switch_array addObject:tempDict];
-            [scroll addSubview:_switch];
-            [_switch release];
-            switchTagInt++;
-             */
-        }
 	}
-/*	
+    for (id theKey in coffee_dict) 
+    {
+        if(![[coffee_dict objectForKey:theKey] isKindOfClass:[NSArray class]])
+        {
+             UIView *switchView = [[UIView alloc]init];
+             UILabel *switchLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 20)];
+             switchLabel.text = theKey;
+             switchLabel.backgroundColor = [UIColor clearColor];
+             [switchView addSubview:switchLabel];
+             [switchLabel release];
+             UISwitch *_switch = [[UISwitch alloc]initWithFrame:CGRectMake(self.view.frame.size.width-75,0, 75, 100)];
+             _switch.tag = 300 + switchTagInt;
+             NSDictionary *tempDict = [[NSDictionary alloc]initWithObjectsAndKeys:theKey,@"theKey", nil];
+             
+             [switch_array addObject:tempDict];
+             [switchView addSubview:_switch];
+             [_switch release];
+             switchTagInt++;
+             
+             [mainView addSubview:switchView];
+        }
+    }
+
+	
 	//Add a text box for other options
+    UIView *optionsView = [[UIView alloc]init];
 	CGRect options_rect;
-    options_rect = CGRectMake(0, (i*90)-20, self.view.frame.size.width, 50);
-	UILabel *options_label = [[UILabel alloc]initWithFrame:options_rect];
+    options_rect = CGRectMake(0, 0, self.view.frame.size.width, 50);
+	UILabel *options_label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 50)];
 	options_label.backgroundColor = [UIColor clearColor];
 	
 	options_label.text = @"Options";
-	[scroll addSubview:options_label];
+	[optionsView addSubview:options_label];
 	[options_label release];
 	
 	UITextField *options_txt = [[UITextField alloc]initWithFrame:CGRectMake(0, 
-																		  options_label.frame.origin.y + options_label.frame.size.height +10,
+																		  0,
 																		  self.view.frame.size.width,
 																		  50)];
     options_txt.backgroundColor = [UIColor whiteColor];
@@ -225,55 +230,37 @@
         options_txt.text = [edit_order_dict objectForKey:@"Custom"];
     }
     
-	[scroll addSubview:options_txt];
+	[optionsView addSubview:options_txt];
 	[options_txt release];
 	
 	//add a switch to save as favorite
-	UILabel *setFav_label = [[UILabel alloc]initWithFrame:CGRectMake(0, options_txt.frame.origin.y+options_txt.frame.size.height, 150, 50)];
+	UILabel *setFav_label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 150, 20)];
 	setFav_label.text = @"Set As Favorite";
 	setFav_label.backgroundColor = [UIColor clearColor];
-	[scroll addSubview:setFav_label];
+	[optionsView addSubview:setFav_label];
 	[setFav_label release];
 	
-	UISwitch *setFav_switch = [[UISwitch alloc]initWithFrame:CGRectMake(setFav_label.frame.size.width, options_txt.frame.origin.y+options_txt.frame.size.height+10, self.view.frame.size.width, 50)];
+	UISwitch *setFav_switch = [[UISwitch alloc]initWithFrame:CGRectMake(self.view.frame.size.width-75, 20, 75, 50)];
 	setFav_switch.tag = FAVESWITCHTAG;
-	[scroll addSubview:setFav_switch];
+	[optionsView addSubview:setFav_switch];
 	[setFav_switch release];
+    
+     [mainView addSubview:optionsView];
      
-    
-    int j = 0;
-    for (UIView *view in scroll.subviews)
-        j+=view.frame.size.height;
-    
-	CoffeeRunSampleAppDelegate *appDelegate = (CoffeeRunSampleAppDelegate*)[[UIApplication sharedApplication] delegate];
 
-    if(appDelegate.adsLoaded)
-        [scroll setContentSize:CGSizeMake(self.view.frame.size.width, j+100)];
-    else
-        [scroll setContentSize:CGSizeMake(self.view.frame.size.width, j+50)];
-	[scroll release];
-	
     
     if(edit_order_dict == NULL)
         [self autoSelectFirstValue];
  
- */
     
+    /*
     NSLog(@"options_array %@",options_array);
     
     UIView *tempView = [[UIView alloc]init];
     for(int i=0;i<[options_array count];i++)
     {
         UIView *option = [options_array objectAtIndex:i];
-        /*
-        float sizeOfContent = 0;
-        int j;
-        for (j = 0; j < [option.subviews count]; j++) {
-            UIView *view =[option.subviews objectAtIndex:j];
-            sizeOfContent += view.frame.size.height;
-            [view release];
-        }
-         */
+        
         
         //NSLog(@"sizeOfContent %f",sizeOfContent);
         option.frame = CGRectMake(0, 0, option.frame.size.width, option.frame.size.height);
@@ -281,11 +268,12 @@
         //[scroll addSubview:option];
         [tempView addSubview:option];
     }
+     */
     
     
-    int offset;
+    int offset = 0;
     int contentSize;
-    for(UIView *child in tempView.subviews) {
+    for(UIView *child in mainView.subviews) {
         CGPoint point = child.frame.origin;
         
         point.y = offset;
@@ -307,10 +295,10 @@
         
         
     }
-    [scroll setContentSize:tempView.frame.size];
+    //[scroll setContentSize:mainView.frame.size];
     
 
-    [scroll setContentSize:CGSizeMake(self.view.frame.size.width, contentSize)];
+    [scroll setContentSize:CGSizeMake(self.view.frame.size.width, 1000)];
     [super viewDidLoad];
 }
  
