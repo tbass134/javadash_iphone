@@ -58,6 +58,8 @@
     IBOutlet UITextField *name_txt;
     IBOutlet UITextField *loc_txt;
     UIToolbar *keyboardToolbar;
+    
+    NSMutableArray *locations_array;
 
 }
 @property (retain,nonatomic) MKMapView *mapView;

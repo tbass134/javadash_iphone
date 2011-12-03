@@ -21,7 +21,7 @@
 
 #import "AsyncImageView2.h"
 
-#define kYelpSearchTerm @"Coffee"
+#define kYelpSearchTerm @"Coffee & Tea"
 #define FIELDS_COUNT 2
 
 @implementation MapViewController
@@ -46,7 +46,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-    
+    locations_array = [[NSMutableArray alloc]init];
     noResultsFound.hidden = YES;
     cancel_btn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(searchCancel:)];
 
@@ -185,7 +185,7 @@
          NSString *coords = [NSString stringWithFormat:@"%f,%f",newLocation.coordinate.latitude,newLocation.coordinate.longitude];
         
         [self dismissSearchView];
-        self.tableDataSource = nil;
+        //self.tableDataSource = nil;
         [self.tableView reloadData];
         [self loadData:kYelpSearchTerm loc:coords];
         
@@ -223,16 +223,8 @@
         l  = [NSString stringWithFormat:@"%f,%f",self.currentLocation.coordinate.latitude,self.currentLocation.coordinate.longitude];
         loc_txt.text = @"Current Location";
     }
-   /* 
-    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    [self.navigationController.view addSubview:HUD];	
-    HUD.delegate = self;	
-    [HUD show:YES];
-    */
     [self loadYelp:term loc:l];
-
-   }
-
+}
 #pragma mark YELP API
 - (void)loadYelp:(NSString *)term loc:(NSString *)l {
     
@@ -284,36 +276,32 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     NSLog(@"Error: %@, %@", [error localizedDescription], [error localizedFailureReason]);
-    //[HUD hide:YES];
     [Utils showAlert:@"Could not load data" withMessage:nil inView:self.view];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     
-    //[HUD hide:YES];
      loadingView.hidden = YES;
     noResultsFound.hidden = YES;
-    self.tableView.hidden = NO;
-    self.mapView.hidden = NO;
+    
+    //self.tableView.hidden = NO;
+    //self.mapView.hidden = NO;
+    
     NSString *json_str = [[NSString alloc] initWithData:_yelpResponseData encoding:NSUTF8StringEncoding];
     SBJSON *parser = [[SBJSON alloc] init];
     yelp_dict= [[parser objectWithString:json_str error:nil]retain];
     total = [[yelp_dict objectForKey:@"total"]intValue];
     [parser release];
-    
     if([yelp_dict objectForKey:@"error"] != NULL)
     {
         [Utils showAlert:@"Could not load data" withMessage:@"Please try again" inView:nil];
         noResultsFound.hidden = NO;
-        self.tableView.hidden = YES;
-        self.mapView.hidden = YES;
+        //self.tableView.hidden = YES;
+        //self.mapView.hidden = YES;
         [self.view sendSubviewToBack:search_view];
-        
         return;
     }
-    
     float lat = [[[[yelp_dict objectForKey:@"region"]objectForKey:@"center"]objectForKey:@"latitude"]floatValue];
-    
     float lng = [[[[yelp_dict objectForKey:@"region"]objectForKey:@"center"]objectForKey:@"longitude"]floatValue];
     
     //NSLog(@"lat %f",lat);
@@ -336,13 +324,18 @@
         if([self.mapView.annotations count]>1)
             [self.mapView removeAnnotations:self.mapView.annotations];
     }
+   
     
-    if(self.tableDataSource == NULL)
-        self.tableDataSource = [[NSMutableArray alloc]init];
+    //if(self.tableDataSource == NULL)
+      //  self.tableDataSource = [[NSMutableArray alloc]init];
+    
+    
     
     for(id items in [yelp_dict objectForKey:@"businesses"])
     {
-        [self.tableDataSource addObject:items];
+        //[self.tableDataSource addObject:items];
+        [locations_array addObject:items];
+        /*
         location = [[CoffeeLocation alloc]init];
         NSMutableDictionary *obj = items;
         //NSLog(@"obj.name %@", [obj objectForKey:@"name"]);
@@ -386,9 +379,12 @@
         [placemark release];
         [location release];
         [tempLocation release];
+         */
     }
     
-    [self.tableView setDelegate:self];
+     //NSLog(@"self.tableDataSource count %i",[self.tableDataSource count]);
+    
+    //[self.tableView setDelegate:self];
     [self.tableView reloadData];
 }
 -(void)loadDataFromJSONStr:(NSString *)str
@@ -459,8 +455,9 @@
         [tempLocation release];
     }
     
-   
     
+    NSLog(@"self.tableDataSource %@",self.tableDataSource);
+    NSLog(@"count %i",[self.tableDataSource count]);
     [self.tableView setDelegate:self];
     [self.tableView reloadData];      
 }
@@ -540,11 +537,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     //return [self.tableDataSource count];
+  
     
-    if([self.tableDataSource count]<total)
-        return [self.tableDataSource count]+1;
+    if([locations_array count]<total)
+        return [locations_array count]+1;
     else
-        return [self.tableDataSource count];
+        return [locations_array count];
 }
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -554,7 +552,7 @@
     UITableViewCell *cell = nil;
 	
     NSUInteger row = [indexPath row];
-    NSUInteger count = [self.tableDataSource count];
+    NSUInteger count = [locations_array count];
 	
     if (row == count) {
 		
@@ -574,7 +572,7 @@
         
     } else {
         
-        NSDictionary *obj = [self.tableDataSource objectAtIndex:indexPath.row];
+        NSDictionary *obj = [locations_array objectAtIndex:indexPath.row];
         
         const NSInteger TOP_LABEL_TAG = 1001;
         const NSInteger BOTTOM_LABEL_TAG = 1002;
@@ -827,7 +825,7 @@
     CGPoint currentTouchPosition = [touch locationInView:self.tableView];
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint: currentTouchPosition];
 
-    NSMutableDictionary *obj = [self.tableDataSource objectAtIndex:indexPath.row];
+    NSMutableDictionary *obj = [locations_array objectAtIndex:indexPath.row];
 
     if (indexPath != nil)
     {
@@ -862,7 +860,7 @@
 		UIButton *button = (UIButton *)cell.accessoryView;
 		[button setBackgroundImage:image forState:UIControlStateNormal];
 			
-		self.tableDataSource = [yelp_dict objectForKey:@"businesses"];
+		//self.tableDataSource = [yelp_dict objectForKey:@"businesses"];
         [self.tableView setDelegate:self];
         [self.tableView reloadData];
 		
@@ -879,7 +877,13 @@
         [self.view sendSubviewToBack:search_view];
         self.navigationItem.rightBarButtonItem = nil;
         
-        self.tableDataSource = nil;
+        //self.tableDataSource = nil;
+        if(locations_array != NULL)
+        {
+            [locations_array release];
+            locations_array = [[NSMutableArray alloc]init];
+        }
+            
         [self.tableView setDelegate:self];
         [self.tableView reloadData];
         [self loadData:name_txt.text loc:loc_txt.text];
@@ -990,7 +994,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
 	printf("viewWillAppear");
-	self.tableDataSource = [yelp_dict objectForKey:@"businesses"];
+	//self.tableDataSource = [yelp_dict objectForKey:@"businesses"];
 	[self.tableView setDelegate:self];
 	[self.tableView reloadData];
 	
@@ -1005,7 +1009,7 @@
        
     
     NSUInteger row = [indexPath row];
-	NSUInteger count = [self.tableDataSource count];
+	NSUInteger count = [locations_array count];
 	
 	if (row == count) 
     {
@@ -1019,13 +1023,21 @@
 	} 
     else
     {
+        printf("selected");
+        
+        //NSLog(@"yelp_dict %@",yelp_dict);
+        //NSLog(@"indexPath.row %i",indexPath.row);
        
-        NSDictionary *savedLocaton = [[yelp_dict objectForKey:@"businesses"]objectAtIndex:indexPath.row];	
+        NSDictionary *savedLocaton = [[yelp_dict objectForKey:@"businesses"]objectAtIndex:indexPath.row];
+        NSLog(@"savedLocaton %@",savedLocaton);
+        
         selected_location = savedLocaton;
         DashSummary *dash = [DashSummary instance];
         [[dash getDict]setValue:selected_location forKey:@"selected_location"];
         //NSLog(@"dash %@", [dash getDict]);
+         
         [self.navigationController popViewControllerAnimated:YES];
+        
 
 	}
 }

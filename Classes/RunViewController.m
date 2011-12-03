@@ -22,7 +22,6 @@
 #import "TapkuLibrary.h"
 
 #import "Constants.h"
-
 #import "TapkuLibrary.h"
 
 #import "MapViewController.h"
@@ -62,35 +61,89 @@
 
 -(void)reloadData:(id)sender
 {
-    printf("\n************* \nRunViewController reloadData\n************* \n");
 	[self checkForOrders];
 }
-		
--(void)checkForOrders
-{
-    printf("checkForOrders Called");
-	//every time we go to this screen, we need to know if an order has been sent,
+
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+    // Remove HUD from screen when the HUD was hidded    
+    [HUD removeFromSuperview];
+    [HUD release];
+	HUD = nil;
+}
+#pragma mark checkForOrders
+-(void)checkForOrders{
+    HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.navigationController.view addSubview:HUD];
+    // Regiser for HUD callbacks so we can remove it from the window at the right time
+    HUD.delegate = self;
+	
+    // Show the HUD while the provided method executes in a new thread
+    [HUD showWhileExecuting:@selector(GetOrders) onTarget:self withObject:nil animated:YES];
+}
+-(void)GetOrders{
+    
+    //every time we go to this screen, we need to know if an order has been sent,
 	//If so, change the Label
-	int ts = [[NSDate date] timeIntervalSince1970];
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    int ts = [[NSDate date] timeIntervalSince1970];
     
     
-     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],ts]]
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],ts]]
 														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
 													   timeoutInterval:60.0];
 
-    NSLog(@"URL %@",[request URL]);
-	URLConnection *conn = [[URLConnection alloc]init];
-	conn.tag =@"GetOrders";
-	[conn setDelegate:self];
-	[conn initWithRequest:request];
-/*	
-    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    [self.navigationController.view addSubview:HUD];
-    HUD.delegate = self;
-    [HUD show:YES];
-*/ 
+    NSError *requestError;
+    NSURLResponse *urlResponse = nil;
+    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    if (response == nil) {
+        if (requestError != nil) {
+            
+            [Utils showAlert:@"Could not connect to server" withMessage:@"Please try again" inView:self.view];
+        }
+    }
+    else
+    {
+        //if we get a vaild order than instert your drink and send that to the server
+        NSString * json_str = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+        SBJSON *parser = [[SBJSON alloc] init];
+        Order *order = [Order sharedOrder];
+        [order setOrder:[parser objectWithString:json_str error:nil]];
+        [parser release];
+        [json_str release];
+        [self performSelectorOnMainThread:@selector(updateOrders)
+                               withObject:nil
+                            waitUntilDone:NO];
+    } 
+    [pool release];
 }
+-(void)updateOrders{
+    Order *order = [Order sharedOrder];
+    if([order currentOrder] == NULL)
+    {
+        [Utils showAlert:@"Error Loading Data" withMessage:@"Please try again" inView:self.view];
+        return;
+    }
+    if([[order currentOrder] objectForKey:@"run"]!= (id)[NSNull null])
+    {
+        if(![[[order currentOrder] objectForKey:@"run"]objectForKey:@"id"])
+        {
+            //[Utils showAlert:@"No Orders Available" withMessage:nil inView:self.view];
+            //make sure the other view is not showing
+            if(view_run_view.superview)
+                [view_run_view removeFromSuperview];
+            [self.view addSubview:start_run_view];
+            [self startRun];
+            
+            //if(self.adView != nil)
+            //   [self.view bringSubviewToFront:self.adView];
+            return;
+        }
+        printf("calling gotoScreen");
+        [self gotoScreen];
+    }
 
+}
+#pragma mark -
 -(void)startRun
 {
     printf("startRun");
@@ -256,12 +309,8 @@
 						}
                         
 					}
-					
-                    
 				}
-                
-				cell1.textView.text = str;	
-				
+				cell1.textView.text = str;
 				[orders_cells addObject:cell1];
 				[cell1 release];
 			}
@@ -303,14 +352,6 @@
             run_time_txt.text = @"Order Ended";
             orderEnded = YES;
             [self stopTimer];
-            Order *order = [Order sharedOrder];
-            NSDictionary *user_order = [[order currentOrder]objectForKey:@"run"];
-            /*
-            if([[user_order objectForKey:@"is_runner"] intValue] == 1)
-            {
-                self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showOptions:)];
-            }
-             */
         }
     }
     
@@ -336,13 +377,23 @@
    	if (buttonIndex == 0)
 	{
          if([[user_order objectForKey:@"is_runner"] intValue] == 1)
-             [self completeRun];
+         {
+             HUD = [[MBProgressHUD alloc] initWithView:self.view];
+             [self.navigationController.view addSubview:HUD];
+             HUD.delegate = self;
+             [HUD showWhileExecuting:@selector(completeRun) onTarget:self withObject:nil animated:YES];         }
         else
-            [self leaveRun];
+        {
+            HUD = [[MBProgressHUD alloc] initWithView:self.view];
+            [self.navigationController.view addSubview:HUD];
+            HUD.delegate = self;
+            [HUD showWhileExecuting:@selector(leaveRun) onTarget:self withObject:nil animated:YES];
+        }
     }
 }
+#pragma mark CompleteRun
 -(void)completeRun{
-    
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     Order *order = [Order sharedOrder];
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/completerun.php?deviceid=%@&run_id=%@",
                                                                                              baseDomain,
@@ -351,25 +402,47 @@
                                                            cachePolicy:NSURLRequestReturnCacheDataElseLoad
                                                        timeoutInterval:60.0];
     
-    URLConnection *conn = [[URLConnection alloc]init];
-#if debug
-    NSLog(@"url %@", [request URL]);
-#endif
-    conn.tag =@"completeOrder";
-    [conn setDelegate:self];
-    [conn initWithRequest:request];
-  /*  
-    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    [self.navigationController.view addSubview:HUD];
-    HUD.delegate = self;
-    [HUD show:YES];
-*/
     
-    
-}
+    //conn.tag =@"completeOrder";
+    NSError *requestError;
+    NSURLResponse *urlResponse = nil;
+    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    if (response == nil) {
+        if (requestError != nil) {
+            
+            [Utils showAlert:@"Could not connect to server" withMessage:@"Please try again" inView:self.view];
+        }
+    }
+    else
+    {
+        //if we get a vaild order than instert your drink and send that to the server
+        NSString * json_str = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+        SBJSON *parser = [[SBJSON alloc] init];
+        Order *order = [Order sharedOrder];
+        [order setOrder:[parser objectWithString:json_str error:nil]];
+        [parser release];
+        [json_str release];
+        [self performSelectorOnMainThread:@selector(updatecompleteRun)
+                               withObject:nil
+                            waitUntilDone:NO];
+    } 
 
--(void)leaveRun{
+    [pool release];    
+}
+-(void)updatecompleteRun{
+    [Utils showAlert:nil withMessage:@"Order Completed" inView:self.view];
+    //[self checkForOrders];
     
+    //Clear the drink orders array
+    DrinkOrders *drink_orders = [DrinkOrders instance];
+    [drink_orders clearArray];
+    
+    [self checkForOrders];
+}
+#pragma mark -
+#pragma mark leaveRun
+-(void)leaveRun{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     Order *order = [Order sharedOrder];
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/leaverun.php?deviceid=%@&run_id=%@",
                                                                                              baseDomain,
@@ -378,116 +451,28 @@
                                                            cachePolicy:NSURLRequestReturnCacheDataElseLoad
                                                        timeoutInterval:60.0];
     
-    URLConnection *conn = [[URLConnection alloc]init];
-#if debug
-    NSLog(@"url %@", [request URL]);
-#endif
-    conn.tag =@"leaveRun";
-    [conn setDelegate:self];
-    [conn initWithRequest:request];
-  /*  
-    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    [self.navigationController.view addSubview:HUD];	
-    HUD.delegate = self;	
-    [HUD show:YES];
-   */
-
-    
-}
-
-- (void)processSuccessful:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
-{
-    printf("\n");
-    NSLog(@"data %@",[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
-    printf("\n");
-    //[HUD hide:YES];
-	
-    if([tag isEqualToString:@"leaveRun"])
-    {
-        [self checkForOrders];
-    }
-    
-    if([tag isEqualToString:@"GetOrders"])
-    {
-        if(!success)
-        {
+    //conn.tag =@"leaveRun";
+    NSError *requestError;
+    NSURLResponse *urlResponse = nil;
+    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    if (response == nil) {
+        if (requestError != nil) {
+            
             [Utils showAlert:@"Could not connect to server" withMessage:@"Please try again" inView:self.view];
-            return;
-        }
-        
-        //if we get a vaild order than instert your drink and send that to the server
-        NSString * json_str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        SBJSON *parser = [[SBJSON alloc] init];
-        Order *order = [Order sharedOrder];
-        [order setOrder:[parser objectWithString:json_str error:nil]];
-        [parser release];
-        [json_str release];
-    
-        if([order currentOrder] == NULL)
-        {
-            [Utils showAlert:@"Error Loading Data" withMessage:@"Please try again" inView:self.view];
-            return;
-        }
-        if([[order currentOrder] objectForKey:@"run"]!= (id)[NSNull null])
-        {
-            if(![[[order currentOrder] objectForKey:@"run"]objectForKey:@"id"])
-            {
-                //[Utils showAlert:@"No Orders Available" withMessage:nil inView:self.view];
-                //make sure the other view is not showing
-                if(view_run_view.superview)
-                    [view_run_view removeFromSuperview];
-                [self.view addSubview:start_run_view];
-                [self startRun];
-                
-                //if(self.adView != nil)
-                 //   [self.view bringSubviewToFront:self.adView];
-                return;
-            }
-            
-            
-            
-            printf("calling gotoScreen");
-            [self gotoScreen];
         }
     }
-    
-	if([tag isEqualToString:@"completeOrder"])
-	{
-		if(success)
-        {
-            [Utils showAlert:nil withMessage:@"Order Completed" inView:self.view];
-            //[self checkForOrders];
-            
-            //Clear the drink orders array
-            DrinkOrders *drink_orders = [DrinkOrders instance];
-            [drink_orders clearArray];
-            
-            [self checkForOrders];
-                        
-        }
-		
-		
-	}
-    
-    if([tag isEqualToString:@"startRun"])
-	{
-		UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Order Sent" message:@"Your order has been submitted" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK",nil];
-		[alert show];
-		[alert release];
-		
-		
-		//Clear the Order info since we dont need it anymore
-		DashSummary *dash = [DashSummary instance];
-		[dash clearDict];
-		[self checkForOrders];
-	}
-    
-	//if(self.adView != nil)
-      //  [self.view bringSubviewToFront:self.adView];
-    
+    else
+    {
+        [self performSelectorOnMainThread:@selector(updateleaveRun)
+                               withObject:nil
+                            waitUntilDone:NO];
+    }
+    [pool release];    
 }
-
-
+-(void)updateleaveRun{
+     [self checkForOrders];
+}
+#pragma mark -
 
 #pragma mark Start Run
 -(void)initStartRun
@@ -496,8 +481,6 @@
     
 	friends = [[FriendsInfo alloc]init];
 	friends.managedObjectContext = self.managedObjectContext;	
-    
-    
     self.navigationItem.rightBarButtonItem = startRunBtn;
     
     [self reloadStartRunData];
@@ -516,23 +499,13 @@
 				success = YES;
 			
 			else
-			{/*
-              UIAlertView *override_current_run_alert = [[UIAlertView alloc]initWithTitle:@"Run already started" message:@"You are currently in a run, are you sure you want to start a new run?. If so, the previous one will be removed" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",nil];
-              [override_current_run_alert show];
-              [override_current_run_alert release];
-			  */
-				success = NO;
-				
-			}
-			
+                success = NO;
 		}
-		else {
+		else
 			[Utils showAlert:@"No Friends" withMessage:@"In Order to user Java Dash to its fullest extent, you should find some friends. Press the 'BUMP' button to make some friends first" inView:self.view];
-		}
 	}
-	else {
+	else 
 		[Utils showAlert:@"No Contact Added" withMessage:@"Please add your contact information to get started with using Java Dash" inView:self.view];
-	}	
     
 	return success;
 }
@@ -588,7 +561,7 @@
         for(int i=0;i<[[dash_dict objectForKey:@"selected_friends"] count];i++)
         {
             
-            [users_str appendString:[NSString stringWithFormat:@"%@ %@",[[[dash_dict objectForKey:@"selected_friends"] objectAtIndex:i]valueForKey:@"first_name"],[[[dash_dict objectForKey:@"selected_friends"] objectAtIndex:i]valueForKey:@"last_name"]]];
+            [users_str appendString:[NSString stringWithFormat:@"%@ %@\n",[[[dash_dict objectForKey:@"selected_friends"] objectAtIndex:i]valueForKey:@"first_name"],[[[dash_dict objectForKey:@"selected_friends"] objectAtIndex:i]valueForKey:@"last_name"]]];
         }
 
         if(users_str != (id)[NSNull null])
@@ -598,13 +571,12 @@
 	[cells addObject:attendees_cell];
 	[attendees_cell release];
     
-    
-	
     [start_run_table reloadData];
     start_run_table.delegate = self;
     start_run_table.dataSource = self;
 	
 }
+#pragma mark Complete Summary
 -(void)completeSummary:(id)sender
 {    
 	DashSummary *dash = [DashSummary instance];
@@ -613,9 +585,8 @@
 	
     if(dash_dict == NULL)
 		return;
-	
-	
-	NSString *_address = [[[[dash_dict objectForKey:@"selected_location"] objectForKey:@"location"]objectForKey:@"address"]objectAtIndex:0];
+    
+    NSString *_address = [[[[dash_dict objectForKey:@"selected_location"] objectForKey:@"location"]objectForKey:@"address"]objectAtIndex:0];
 	NSString *_cityState = [NSString stringWithFormat:@"%@,%@",[[[dash_dict objectForKey:@"selected_location"] objectForKey:@"location"]objectForKey:@"city"],[[[dash_dict objectForKey:@"selected_location"] objectForKey:@"location"]objectForKey:@"state_code"]];
     
 	NSString *address = [NSString stringWithFormat:@"%@\n%@",_address,_cityState];
@@ -641,8 +612,34 @@
         [Utils showAlert:@"NO Data" withMessage:@"Please add info to Run" inView:self.view];
         return;
     }
+    HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.navigationController.view addSubview:HUD];
+    // Regiser for HUD callbacks so we can remove it from the window at the right time
+    HUD.delegate = self;
 	
-	//Send a push to all devices
+    // Show the HUD while the provided method executes in a new thread
+    [HUD showWhileExecuting:@selector(submitDash:) onTarget:self withObject:dash_dict animated:YES];
+}
+-(void)submitDash:(NSDictionary *)dash_dict
+{
+    NSMutableArray *device_id_array = [[NSMutableArray alloc]init];
+	for(int i=0;i<[[dash_dict objectForKey:@"selected_friends"] count];i++)
+	{
+		[device_id_array addObject:[[[dash_dict objectForKey:@"selected_friends"] objectAtIndex:i]valueForKey:@"device_id"]];
+	}
+
+    NSString *_address = [[[[dash_dict objectForKey:@"selected_location"] objectForKey:@"location"]objectForKey:@"address"]objectAtIndex:0];
+	NSString *_cityState = [NSString stringWithFormat:@"%@,%@",[[[dash_dict objectForKey:@"selected_location"] objectForKey:@"location"]objectForKey:@"city"],[[[dash_dict objectForKey:@"selected_location"] objectForKey:@"location"]objectForKey:@"state_code"]];
+    
+	NSString *address = [NSString stringWithFormat:@"%@\n%@",_address,_cityState];
+	NSString *selected_yelp_id = [[dash_dict objectForKey:@"selected_location"] objectForKey:@"id"];
+    NSString *image_url = @"";
+    
+    if([[dash_dict objectForKey:@"selected_location"] objectForKey:@"image_url"] != NULL)
+        image_url = [[dash_dict objectForKey:@"selected_location"] objectForKey:@"image_url"];
+
+    
+    //Send a push to all devices
 	NSString *push_type = @"doOrder";
 	NSString *runnerInfo = [NSString stringWithFormat:@"first_name=%@&last_name=%@&deviceid=%@&selected_date=%@&selected_name=%@&selected_address=%@&selected_url=%@&selected_yelp_id=%@",
 							[[NSUserDefaults standardUserDefaults]valueForKey:@"FIRSTNAME"],
@@ -661,26 +658,42 @@
 	
 	[request setHTTPMethod:@"POST"];
 	NSString *post_str = [NSString stringWithFormat:@"device_tokens=%@&push_type=%@&%@",[device_id_array componentsJoinedByString:@","],push_type,runnerInfo];
-    
     NSLog(@"post_str %@",post_str);
     
 	[request setHTTPBody:[post_str dataUsingEncoding:NSUTF8StringEncoding]]; 
-	URLConnection *conn = [[URLConnection alloc]init];
-	conn.tag =@"startRun";
-	[conn setDelegate:self];
-	[conn initWithRequest:request];
-
-   /* 
-    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    [self.navigationController.view addSubview:HUD];	
-    HUD.delegate = self;	
-    [HUD show:YES];
-   */ 
-
+	//conn.tag =@"startRun";
     
     
+    NSError *requestError;
+    NSURLResponse *urlResponse = nil;
+    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    if (response == nil) {
+        if (requestError != nil) {
+            
+            [Utils showAlert:@"Could not connect to server" withMessage:@"Please try again" inView:self.view];
+        }
+    }
+    else
+    {
+        [self performSelectorOnMainThread:@selector(updatesubmitDash)
+                               withObject:nil
+                            waitUntilDone:NO];
+    }
+
 }
-
+-(void)updatesubmitDash
+{
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Order Sent" message:@"Your order has been submitted" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK",nil];
+    [alert show];
+    [alert release];
+    
+    
+    //Clear the Order info since we dont need it anymore
+    DashSummary *dash = [DashSummary instance];
+    [dash clearDict];
+    [self checkForOrders];
+}
+#pragma mark -
 
 #pragma mark -
 #pragma mark Table view data source

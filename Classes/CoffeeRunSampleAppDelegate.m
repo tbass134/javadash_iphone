@@ -103,8 +103,8 @@ static NSString* kAppId = @"189714094427611";
         [[NSUserDefaults standardUserDefaults]setValue:deviceID forKey:@"_UALastDeviceToken"];
     }
 	#if TARGET_IPHONE_SIMULATOR
-    //[self initTesting];
-#else
+        //[self initTesting];
+    #endif
 	if(![Utils checkIfContactAdded])
 	{
         dbSignupViewController = [[DBSignupViewController alloc] initWithNibName:@"DBSignupViewController" bundle:nil];
@@ -119,7 +119,6 @@ static NSString* kAppId = @"189714094427611";
 	else {
 		[self loadUI];
 	}
-#endif	
     // call the Appirater class
     [Appirater appLaunched];
     
@@ -136,6 +135,7 @@ static NSString* kAppId = @"189714094427611";
 
 -(void)loadUI
 {
+    printf("callubng loadUI");
 	NSMutableArray *localViewControllersArray = [[NSMutableArray alloc]initWithCapacity:1];
 	UINavigationController *localNavController;
 	

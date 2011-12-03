@@ -51,9 +51,7 @@ static ImageCache *imageCache = nil;
     }
     if(url == NULL)
     {
-        printf("No image");
         UIImageView *imageView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"no-image.gif"]] autorelease];
-
         [self addSubview:imageView];
         imageView.frame = self.bounds;
         [imageView setNeedsLayout]; // is this necessary if superview gets setNeedsLayout?
