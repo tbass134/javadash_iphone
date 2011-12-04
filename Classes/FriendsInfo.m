@@ -80,7 +80,7 @@
     NSData *postData = [user_info dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/addUser.php?",baseDomain]]
-                                                           cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                                           cachePolicy:NSURLCacheStorageNotAllowed
                                                        timeoutInterval:60.0];
     NSLog(@"request %@",[request URL]);
     [request setHTTPMethod:@"POST"];

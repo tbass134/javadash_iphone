@@ -105,7 +105,7 @@
 	
     
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/Facebook/getFacebookUsersOfApp.php",baseDomain]]
-														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
+														   cachePolicy:NSURLCacheStorageNotAllowed
 													   timeoutInterval:60.0];
     
 	URLConnection *conn = [[URLConnection alloc]init];

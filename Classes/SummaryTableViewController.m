@@ -247,7 +247,7 @@
 							nil];
 	
 	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/startrun.php",baseDomain]]
-														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
+														   cachePolicy:NSURLCacheStorageNotAllowed
 													   timeoutInterval:60.0];
 	
 	[request setHTTPMethod:@"POST"];
@@ -299,7 +299,7 @@
 													   timeoutInterval:60.0];
      */
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],ts]]
-														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
+														   cachePolicy:NSURLCacheStorageNotAllowed
 													   timeoutInterval:60.0];
 	URLConnection *conn = [[URLConnection alloc]init];
 	conn.tag =@"GetOrders";

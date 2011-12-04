@@ -48,7 +48,7 @@
 	Order *order = [Order sharedOrder];
 	//This is the data that got returned from the server when we first went to view the run.. Called  getOrder.php from CurrentRunViewController
 	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/placeorder.php",baseDomain]]
-														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
+														   cachePolicy:NSURLCacheStorageNotAllowed
 													   timeoutInterval:60.0];
 	
 	[request setHTTPMethod:@"POST"];

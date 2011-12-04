@@ -79,7 +79,6 @@
 		[sections_array addObject:theKey];
         
         NSDictionary *option_dict = [coffee_dict objectForKey:theKey];
-        
         if([[coffee_dict objectForKey:theKey] isKindOfClass:[NSArray class]])
         { 
         
@@ -92,18 +91,12 @@
             
             UIView *seg_view = [[UIView alloc]initWithFrame:CGRectMake(0,0,self.view.frame.size.width,100
                                                                        )];
-            //[scroll addSubview:seg_view];
-            //[options_array addObject:seg_view];
             UILabel *title_label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 20)];
             title_label.backgroundColor = [UIColor clearColor];
             title_label.text = theKey;
             [seg_view addSubview:title_label];
             [title_label release];
-       
-            int viewHeight;
-        
-           
-            MyUISegmentController *oneRowControl = [[MyUISegmentController alloc]initWithFrame:CGRectMake(0, 20, 310, viewHeight)];
+            MyUISegmentController *oneRowControl = [[MyUISegmentController alloc]initWithFrame:CGRectMake(0, 20, 310, 1000)];
             oneRowControl.selected_key = theKey;
             //This is now a solid brown color.
             [oneRowControl setColorScheme:SCRSegmentColorSchemeBlackOpaque];
@@ -155,18 +148,16 @@
                 oneRowControl.columnCount = 2;
             }
 
-            NSLog(@"oneRowControl.rowCount %i",oneRowControl.rowCount);
             oneRowControl.segmentTitles = keys;            
-            CGRect frame = seg_view.frame;
-            if(oneRowControl.rowCount ==1)
-                frame.size.height = (oneRowControl.rowCount* 20);
-            if(oneRowControl.rowCount ==10)
-                frame.size.height = (oneRowControl.rowCount* 40);
-            else
-                frame.size.height = (oneRowControl.rowCount* 80);
-            seg_view.frame = frame;            
-            
+            CGRect oneRowControlFrame = oneRowControl.frame;
+            oneRowControlFrame.size.height = oneRowControl.rowCount* 36;
             [seg_view addSubview:oneRowControl];
+            
+
+            CGRect updatedFrame = seg_view.frame;
+            updatedFrame.size.height = 20 + oneRowControlFrame.size.height +10;
+            seg_view.frame = updatedFrame;            
+            
             [oneRowControl addTarget:self action:@selector(selectedIndexChanged:) forControlEvents:UIControlEventValueChanged];
 
             
@@ -192,7 +183,7 @@
     {
         if(![[coffee_dict objectForKey:theKey] isKindOfClass:[NSArray class]])
         {
-             UIView *switchView = [[UIView alloc]init];
+            UIView *switchView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
              UILabel *switchLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 5, 200, 20)];
              switchLabel.text = theKey;
              switchLabel.backgroundColor = [UIColor clearColor];
@@ -273,7 +264,7 @@
         CGPoint point = child.frame.origin;
         
         point.y = offset;
-        child.backgroundColor = [self randomColor];
+        //child.backgroundColor = [self randomColor];
         
         
         CGRect rect = child.frame;
@@ -283,19 +274,16 @@
         offset += child.frame.size.height;
         
         offset += 30;
-        
-        //NSLog(@"point.y %f",point.y);
-        
         contentSize = point.y;
-        
         [scroll addSubview:child];
-        
-        
     }
     //[scroll setContentSize:mainView.frame.size];
-    
-
-    [scroll setContentSize:CGSizeMake(self.view.frame.size.width,contentSize+100)];
+    int bottom_padding;
+    if(edit_order_dict == NULL)
+        bottom_padding = 100;
+    else
+        bottom_padding = 200;
+    [scroll setContentSize:CGSizeMake(self.view.frame.size.width,contentSize+bottom_padding)];
     [super viewDidLoad];
 }
  
@@ -405,7 +393,7 @@
         //This order was editied, need to send the new data to the server
         int ts = [[NSDate date] timeIntervalSince1970];
         NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/placeorder.php?ts=%i",baseDomain,ts]]
-                                                               cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                                               cachePolicy:NSURLCacheStorageNotAllowed
                                                            timeoutInterval:60.0];
         
         [request setHTTPMethod:@"POST"];

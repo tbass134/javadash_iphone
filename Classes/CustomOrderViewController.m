@@ -34,14 +34,28 @@
 	appDelegate = [[UIApplication sharedApplication] delegate];
 	self.text_view.delegate = self;
     
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonSystemItemCancel target:self action:@selector(goBack:)];
     if(edit_order_dict != NULL)
         self.text_view.text = [edit_order_dict objectForKey:@"CustomOrder"];
 
 	
     [super viewDidLoad];
 }
+-(void)goBack:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 -(IBAction)saveOrder
 {
+    if([text_view.text isEqualToString:@""])
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"No Order Added" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        [alert show];
+        [alert release];
+        return;
+    }
+
     if(edit_order_dict != NULL)
     {
         [edit_order_dict setObject:text_view.text forKey:@"CustomOrder"];
@@ -53,7 +67,7 @@
         //This order was editied, need to send the new data to the server
         int ts = [[NSDate date] timeIntervalSince1970];
         NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/placeorder.php?ts=%i",baseDomain,ts]]
-                                                               cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                                               cachePolicy:NSURLCacheStorageNotAllowed
                                                            timeoutInterval:60.0];
         
         [request setHTTPMethod:@"POST"];
@@ -88,7 +102,7 @@
         [[drink_orders getArray]addObject:savedDrink];
     }
      
-	[self.navigationController dismissModalViewControllerAnimated:YES];
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 
@@ -129,6 +143,10 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.text_view becomeFirstResponder];
 }
 
 

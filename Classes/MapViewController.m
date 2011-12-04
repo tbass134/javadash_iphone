@@ -412,6 +412,7 @@
     for(id items in [yelp_dict objectForKey:@"businesses"])
     {
         [self.tableDataSource addObject:items];
+        /*
         location = [[CoffeeLocation alloc]init];
         NSMutableDictionary *obj = items;
         location.rating_img_url			= [obj objectForKey:@"rating_img_url"];
@@ -453,6 +454,7 @@
         [placemark release];
         [location release];
         [tempLocation release];
+         */
     }
     
     
@@ -994,10 +996,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
 	printf("viewWillAppear");
-	//self.tableDataSource = [yelp_dict objectForKey:@"businesses"];
 	[self.tableView setDelegate:self];
 	[self.tableView reloadData];
-	
 }
 
 
@@ -1023,22 +1023,11 @@
 	} 
     else
     {
-        printf("selected");
-        
-        //NSLog(@"yelp_dict %@",yelp_dict);
-        //NSLog(@"indexPath.row %i",indexPath.row);
-       
-        NSDictionary *savedLocaton = [[yelp_dict objectForKey:@"businesses"]objectAtIndex:indexPath.row];
-        NSLog(@"savedLocaton %@",savedLocaton);
-        
+        NSDictionary *savedLocaton = [locations_array objectAtIndex:indexPath.row];
         selected_location = savedLocaton;
         DashSummary *dash = [DashSummary instance];
-        [[dash getDict]setValue:selected_location forKey:@"selected_location"];
-        //NSLog(@"dash %@", [dash getDict]);
-         
+        [[dash getDict]setValue:selected_location forKey:@"selected_location"];         
         [self.navigationController popViewControllerAnimated:YES];
-        
-
 	}
 }
 

@@ -73,4 +73,6 @@
 //Place Order View
 -(void)initPlaceOrder;
 
+-(void)showNoOrdersView:(BOOL)show;
+
 @end

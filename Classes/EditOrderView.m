@@ -266,7 +266,7 @@
 	
 	int ts = [[NSDate date] timeIntervalSince1970];
 	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/placeorder.php?ts=%i",baseDomain,ts]]
-														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
+														   cachePolicy:NSURLCacheStorageNotAllowed
 													   timeoutInterval:60.0];
 	
 	[request setHTTPMethod:@"POST"];

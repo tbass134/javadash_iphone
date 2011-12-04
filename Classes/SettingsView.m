@@ -100,7 +100,7 @@
                                 [[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],ts];
         
         NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/userPurchase.php?%@",baseDomain,userInfo]]
-                                                               cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                                               cachePolicy:NSURLCacheStorageNotAllowed
                                                            timeoutInterval:60.0];
         
         URLConnection *conn = [[URLConnection alloc]init];

@@ -89,7 +89,7 @@
     
     
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],ts]]
-														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
+														   cachePolicy:NSURLCacheStorageNotAllowed
 													   timeoutInterval:60.0];
 
     NSError *requestError;
@@ -399,7 +399,7 @@
                                                                                              baseDomain,
                                                                                              [[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"]
                                                                                              ,[[[order currentOrder] objectForKey:@"run"]objectForKey:@"id"]]]
-                                                           cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                                           cachePolicy:NSURLCacheStorageNotAllowed
                                                        timeoutInterval:60.0];
     
     
@@ -448,7 +448,7 @@
                                                                                              baseDomain,
                                                                                              [[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"]
                                                                                              ,[[[order currentOrder] objectForKey:@"run"]objectForKey:@"id"]]]
-                                                           cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                                           cachePolicy:NSURLCacheStorageNotAllowed
                                                        timeoutInterval:60.0];
     
     //conn.tag =@"leaveRun";
@@ -653,7 +653,7 @@
 							nil];
 	
 	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/startrun.php",baseDomain]]
-														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
+														   cachePolicy:NSURLCacheStorageNotAllowed
 													   timeoutInterval:60.0];
 	
 	[request setHTTPMethod:@"POST"];

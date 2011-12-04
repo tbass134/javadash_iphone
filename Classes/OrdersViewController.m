@@ -56,80 +56,62 @@
 
 -(void)checkForOrders
 {
-	//every time we go to this screen, we need to know if an order has been sent,
+    
+    HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.navigationController.view addSubview:HUD];
+    // Regiser for HUD callbacks so we can remove it from the window at the right time
+    HUD.delegate = self;
+	
+    // Show the HUD while the provided method executes in a new thread
+    [HUD showWhileExecuting:@selector(GetOrders) onTarget:self withObject:nil animated:YES];
+}
+-(void)GetOrders
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    //every time we go to this screen, we need to know if an order has been sent,
 	//If so, change the Label
     int ts = [[NSDate date] timeIntervalSince1970];
-        NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],ts]]
-														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],ts]]
+														   cachePolicy:NSURLCacheStorageNotAllowed
 													   timeoutInterval:60.0];
-#if debug
-	NSLog(@"url %@", [request URL]);
-#endif
-	URLConnection *conn = [[URLConnection alloc]init];
-	conn.tag =@"GetOrders";
-	[conn setDelegate:self];
-	[conn initWithRequest:request];
-/*	
-    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    [self.navigationController.view addSubview:HUD];	
-    HUD.delegate = self;	
-    [HUD show:YES];
- */
-}
-
-- (void)processSuccessful:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
-{
-	//[HUD hide:YES];
-    if([tag isEqualToString:@"GetOrders"])
-    {
-        if(!success)
-        {
+    NSError *requestError;
+    NSURLResponse *urlResponse = nil;
+    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    if (response == nil) {
+        if (requestError != nil) {
             if(self.navigationController.tabBarController.selectedIndex ==CURRENT_TAB_INDEX)
                 [Utils showAlert:@"Could not connect to server" withMessage:@"Please try again" inView:self.view];
-            return;
         }
-        
-        //NSLog(@"data %@",[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
-        NSString * json_str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    }
+    else
+    {
+        NSString * json_str = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         SBJSON *parser = [[SBJSON alloc] init];
         Order *order = [Order sharedOrder];
         [order setOrder:[parser objectWithString:json_str error:nil]];
         [parser release];
         [json_str release];
-        if([order currentOrder] == NULL)
-        {
-            if(self.navigationController.tabBarController.selectedIndex ==CURRENT_TAB_INDEX)
-                [Utils showAlert:@"Error Loading Data" withMessage:@"Please try again" inView:self.view];
-            current_orders_table.hidden = YES;
-            return;
-        }
-            
-         if(![[[order currentOrder] objectForKey:@"run"]objectForKey:@"id"])
-         {
-             if(self.navigationController.tabBarController.selectedIndex ==CURRENT_TAB_INDEX)
-                 [Utils showAlert:@"No Orders Available" withMessage:nil inView:self.view];
-             current_orders_table.hidden = YES;
-             return;
-         }
-        current_orders_table.hidden = NO;
-        [self gotoScreen];
-    }
-	
-    if([tag isEqualToString:@"submitOrder"])
-    {
-        if(self.navigationController.tabBarController.selectedIndex ==CURRENT_TAB_INDEX)
-            [Utils showAlert:@"Order Added" withMessage:nil inView:self.view];
-        
-        self.navigationItem.leftBarButtonItem = nil;
-        DrinkOrders *drink_orders = [DrinkOrders instance];
-        [drink_orders clearArray];
-        
-        NSMutableArray *drink_orders_array  = [drink_orders getArray];
-        NSLog(@"drink_orders_array %@",drink_orders_array);
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
-	}
+
+        [self performSelectorOnMainThread:@selector(updateOrders)
+                               withObject:nil
+                            waitUntilDone:NO];
+    } 
+    [pool release];
 }
+-(void)updateOrders
+{
+    Order *order = [Order sharedOrder];
+    if(![[[order currentOrder] objectForKey:@"run"]objectForKey:@"id"])
+    {
+        printf("NO Orders");
+        current_orders_table.hidden = YES;
+        return;
+    }
+    current_orders_table.hidden = NO;
+    [self gotoScreen];
+
+}
+
 -(void)viewCurrentOrders
 {
     if(place_over_view.superview)
@@ -151,9 +133,7 @@
 	NSDictionary *user_order = [order currentOrder];
 	if(![[user_order objectForKey:@"run"]objectForKey:@"id"])
 	{
-        if(self.navigationController.tabBarController.selectedIndex ==CURRENT_TAB_INDEX)
-            [Utils showAlert:@"No Runs Available" withMessage:nil inView:self.view];
-        noOrdersView.hidden = YES;
+        printf("No Runs Available");
 		return;
 	}
 	if([user_order objectForKey:@"run"] != NULL)
@@ -182,13 +162,7 @@
     //Event listener to update order when an order has been editied
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OrderEdited:) name:@"OrderEdited" object:nil];
 
-    //If we havent gotten the data yet, load it
-	Order *order = [Order sharedOrder];
-	if([order currentOrder] == NULL)
-		[self checkForOrders];
-	else 
-		[self gotoScreen];
-
+   
     [super viewDidLoad];
 }
 -(void)reloadData:(id)sender
@@ -199,12 +173,7 @@
 #pragma mark ViewCurrentOrders
 -(void)initViewCurrentOrders
 {
-
 	self.navigationItem.rightBarButtonItem = addOrder_btn;
-    
-    
-   
-   
     [self loadOrderData];
 }
 -(void)edit:(id)sender
@@ -231,23 +200,13 @@
 {
 	printf("Order has been edited");
 	
-	int ts = [[NSDate date] timeIntervalSince1970];
-    
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],ts]]
-														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
-													   timeoutInterval:60.0];
-	//NSLog(@"url %@", [request URL]);
-	URLConnection *conn = [[URLConnection alloc]init];
-	conn.tag =@"GetOrders";
-	[conn setDelegate:self];
-	[conn initWithRequest:request];
-/*	
-    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    [self.navigationController.view addSubview:HUD];	
-    HUD.delegate = self;	
-    [HUD show:YES];
- */
-}
+	HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.navigationController.view addSubview:HUD];
+    // Regiser for HUD callbacks so we can remove it from the window at the right time
+    HUD.delegate = self;
+	
+    // Show the HUD while the provided method executes in a new thread
+    [HUD showWhileExecuting:@selector(GetOrders) onTarget:self withObject:nil animated:YES];}
 
 -(void)loadOrderData
 {
@@ -292,7 +251,6 @@
         addOrder_btn.enabled = NO;
     }
 
-	NSLog(@"order_ended %d",order_ended);
 	//If the device is a ATTENDEE, show the run info
 	if([[user_order objectForKey:@"is_runner"] intValue] == 0)
 	{
@@ -320,11 +278,13 @@
 	}
 	orders_cells = [[NSMutableArray alloc] init];
 	int orders_count = [[user_order objectForKey:@"orders"]count];
+    NSLog(@"orders_count %i",orders_count);
 	
 	if(orders_count >0)
 	{
-        noOrdersView.hidden = YES;
         current_orders_table.hidden = NO;
+        [self showNoOrdersView:NO];
+
         if([[user_order objectForKey:@"is_runner"] intValue] == 0)
         {
             edit = [[UIBarButtonItem alloc]initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(edit:)];
@@ -337,10 +297,6 @@
 		{
 			
 			NSString *deviceID = [[[user_order objectForKey:@"orders"]objectAtIndex:i]objectForKey:@"deviceid"];
-            //NSLog(@"deviceID %@",deviceID);
-            //NSLog(@"_UALastDeviceToken  %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"_UALastDeviceToken"]);
-			//if(![deviceID isEqualToString: [[NSUserDefaults standardUserDefaults] objectForKey:@"_UALastDeviceToken"]])
-			//	break;
 			TKLabelTextViewCell *cell1 = [[TKLabelTextViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier];
 			NSString *name = [[[user_order objectForKey:@"orders"]objectAtIndex:i]objectForKey:@"name"];
 			cell1.label.text = [NSString stringWithFormat:@"Order for: %@",name];
@@ -394,13 +350,27 @@
 	}
     else
     {
-        noOrdersView.hidden = YES;
+        [self showNoOrdersView:YES];
         current_orders_table.hidden = NO;
     }
     
 	[current_orders_table reloadData];
     current_orders_table.delegate = self;
     current_orders_table.dataSource = self;
+}
+#pragma mark Show No Orders View
+-(void)showNoOrdersView:(BOOL)show
+{
+    BOOL isShowing = [self.view.subviews containsObject:noOrdersView];
+    NSLog(@"isShowing %d",isShowing);
+    
+    if(isShowing)
+        [noOrdersView removeFromSuperview];
+    
+    if(show)
+        [self.view addSubview:noOrdersView];
+    else
+        [noOrdersView removeFromSuperview];
 }
 #pragma mark -
 #pragma mark Table view data source
@@ -562,7 +532,6 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
         //Call script to remove order
         [self loadOrderData];	
 
-        NSLog(@"order %@", [[Order sharedOrder] currentOrder]);
         }
     
     }
@@ -587,11 +556,28 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
 }
 -(void)sendOrder:(id)sender
 {
-	//printf("send Order");
+    HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.navigationController.view addSubview:HUD];
+    // Regiser for HUD callbacks so we can remove it from the window at the right time
+    HUD.delegate = self;
+	
+    // Show the HUD while the provided method executes in a new thread
+    [HUD showWhileExecuting:@selector(sendOrders) onTarget:self withObject:nil animated:YES];
+    
+    
+	        
+    
+	//NSLog(@"order id %@",[[[order currentOrder]objectForKey:@"run"]objectForKey:@"id"]);
+}
+-(void)sendOrders
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+    //printf("send Order");
 	Order *order = [Order sharedOrder];
 	//This is the data that got returned from the server when we first went to view the run.. Called  getOrder.php from CurrentRunViewController
 	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/placeorder.php",baseDomain]]
-														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
+														   cachePolicy:NSURLCacheStorageNotAllowed
 													   timeoutInterval:60.0];
 	
 	[request setHTTPMethod:@"POST"];
@@ -619,21 +605,45 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
 	{
 		NSString *post_str = [NSString stringWithFormat:@"device_id=%@&order=%@&run_id=%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],[Utils urlencode:theString],[[[order currentOrder]objectForKey:@"run"]objectForKey:@"id"]];
 		[request setHTTPBody:[post_str dataUsingEncoding:NSUTF8StringEncoding]]; 
-		URLConnection *conn = [[URLConnection alloc]init];
-		conn.tag =@"submitOrder";
-		[conn setDelegate:self];
-		[conn initWithRequest:request];
+		NSError *requestError;
+        NSURLResponse *urlResponse = nil;
+        NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+        if (response == nil) {
+            if (requestError != nil) {
+                
+                [Utils showAlert:@"Could not connect to server" withMessage:@"Please try again" inView:self.view];
+            }
+        }
+        else
+        {
+          
+            [self performSelectorOnMainThread:@selector(orderAdded)
+                                   withObject:nil
+                                waitUntilDone:NO];
+        } 
+
 	}
     else
     {
-        if(self.navigationController.tabBarController.selectedIndex ==CURRENT_TAB_INDEX)
-            [Utils showAlert:@"No Orders Added"withMessage:@"Please add a order" inView:self.view];
+        printf("No Orders Added");
     }
-        
-    
-	//NSLog(@"order id %@",[[[order currentOrder]objectForKey:@"run"]objectForKey:@"id"]);
-    
+    [pool release];
 }
+-(void)orderAdded
+{
+    if(self.navigationController.tabBarController.selectedIndex ==CURRENT_TAB_INDEX)
+        [Utils showAlert:@"Order Added" withMessage:nil inView:self.view];
+    
+    self.navigationItem.leftBarButtonItem = nil;
+    DrinkOrders *drink_orders = [DrinkOrders instance];
+    [drink_orders clearArray];
+    
+    NSMutableArray *drink_orders_array  = [drink_orders getArray];
+    NSLog(@"drink_orders_array %@",drink_orders_array);
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
+}
+
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	if(buttonIndex == 1) {
 		
@@ -662,10 +672,8 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
 -(IBAction)showCustomList
 {
 	CustomOrderViewController *customOrder   = [[CustomOrderViewController alloc]initWithNibName:@"CustomOrderViewController" bundle:nil];
-	UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:customOrder];
-	[self.navigationController presentModalViewController:nav animated:YES];
+	[self.navigationController pushViewController:customOrder animated:YES];
 	[customOrder release];
-	[nav release];
 }
 -(IBAction)showYourOrderList
 {
@@ -692,19 +700,26 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
 */
 -(void)viewDidAppear:(BOOL)animated
 {
+    //If we havent gotten the data yet, load it
+	Order *order = [Order sharedOrder];
+	if([order currentOrder] == NULL)
+		[self checkForOrders];
+	else 
+		[self gotoScreen];
+
+   /* 
     if(current_orders_view.superview)
     {
         Order *order = [Order sharedOrder]; 
         
         int orders_count = [[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"]count];
         
-        if(orders_count ==0)
-            noOrdersView.hidden = NO;
-        else   
+        if(orders_count >0)
             noOrdersView.hidden = YES;
         
         [self loadOrderData];
     }
+    */
     
     CoffeeRunSampleAppDelegate *appDelegate  = (CoffeeRunSampleAppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate showAdView];

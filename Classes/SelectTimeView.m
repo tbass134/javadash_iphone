@@ -28,7 +28,7 @@
 	[self.dp setDate:[NSDate date]];
     
     
-    NSDate *last_minute = [[NSDate date] addTimeInterval: -(10)];
+    NSDate *last_minute = [[NSDate date] dateByAddingTimeInterval:(5*60)];
 	self.dp.minimumDate = last_minute;
     [super viewDidLoad];
 }

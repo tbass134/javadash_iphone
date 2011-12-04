@@ -103,7 +103,7 @@ static NSString* kAppId = @"189714094427611";
         [[NSUserDefaults standardUserDefaults]setValue:deviceID forKey:@"_UALastDeviceToken"];
     }
 	#if TARGET_IPHONE_SIMULATOR
-        //[self initTesting];
+        [self initTesting];
     #endif
 	if(![Utils checkIfContactAdded])
 	{
@@ -359,30 +359,33 @@ static NSString* kAppId = @"189714094427611";
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    [defaults setValue:@"6607b4cc259f117dd348678a50d2e984a1d7a8f8557bf315cd6b45c1c6c904e7"forKey:@"_UALastDeviceToken"];
-    [defaults setValue:@"tony" forKey:@"FIRSTNAME"];
-    [defaults setValue:@"hung" forKey:@"LASTNAME"];
-    [defaults setValue:@"" forKey:@"NUMBER"];
-    [defaults setValue:@"tbass134@gmail.com" forKey:@"EMAIL"];
-    [defaults setValue:[NSNumber numberWithBool:YES] forKey:@"ENABLE_EMAIL"];
+    if(![defaults valueForKey:@"_UALastDeviceToken"])
+    {
+    
+        [defaults setValue:@"6607b4cc259f117dd348678a50d2e984a1d7a8f8557bf315cd6b45c1c6c904e7"forKey:@"_UALastDeviceToken"];
+        [defaults setValue:@"tony" forKey:@"FIRSTNAME"];
+        [defaults setValue:@"hung" forKey:@"LASTNAME"];
+        [defaults setValue:@"" forKey:@"NUMBER"];
+        [defaults setValue:@"tbass134@gmail.com" forKey:@"EMAIL"];
+        [defaults setValue:[NSNumber numberWithBool:YES] forKey:@"ENABLE_EMAIL"];
 
-    
-    //Add my info
-    NSDictionary *my_dict = [[NSDictionary alloc]initWithObjectsAndKeys:
-                            [defaults valueForKey:@"FIRSTNAME"],@"FIRSTNAME",
-                            [defaults valueForKey:@"LASTNAME"],@"LASTNAME",
-                            [defaults valueForKey:@"EMAIL"], @"EMAIL",
-                            [defaults valueForKey:@"_UALastDeviceToken"],@"TOKEN",
-                            [NSNumber numberWithBool:[[defaults valueForKey:@"ENABLE_EMAIL"]boolValue]],@"ENABLE_EMAIL",nil];
-                               
-    if([friends insertFriendData:my_dict])
-        printf("My Data Added");
-    
-    //Test Friend
-    NSDictionary *temp_dict = [[NSDictionary alloc]initWithObjectsAndKeys:@"Tony",@"FIRSTNAME",@"home",@"LASTNAME",@"tbass134@yahoo.com", @"EMAIL",@"b76cc8ae0270c31e99112e8ec823711a41bec4e508a9d74b76edcc290a5b7f45",@"TOKEN",[NSNumber numberWithBool:YES],@"ENABLE_EMAIL", nil];
-    if([friends insertFriendData:temp_dict])
-        [[NSUserDefaults standardUserDefaults]setValue:[NSNumber numberWithBool:1] forKey:@"user_added"];
-	 
+        
+        //Add my info
+        NSDictionary *my_dict = [[NSDictionary alloc]initWithObjectsAndKeys:
+                                [defaults valueForKey:@"FIRSTNAME"],@"FIRSTNAME",
+                                [defaults valueForKey:@"LASTNAME"],@"LASTNAME",
+                                [defaults valueForKey:@"EMAIL"], @"EMAIL",
+                                [defaults valueForKey:@"_UALastDeviceToken"],@"TOKEN",
+                                [NSNumber numberWithBool:[[defaults valueForKey:@"ENABLE_EMAIL"]boolValue]],@"ENABLE_EMAIL",nil];
+                                   
+        if([friends insertFriendData:my_dict])
+            printf("My Data Added");
+        
+        //Test Friend
+        NSDictionary *temp_dict = [[NSDictionary alloc]initWithObjectsAndKeys:@"Tony",@"FIRSTNAME",@"home",@"LASTNAME",@"tbass134@yahoo.com", @"EMAIL",@"b76cc8ae0270c31e99112e8ec823711a41bec4e508a9d74b76edcc290a5b7f45",@"TOKEN",[NSNumber numberWithBool:YES],@"ENABLE_EMAIL", nil];
+        if([friends insertFriendData:temp_dict])
+            [[NSUserDefaults standardUserDefaults]setValue:[NSNumber numberWithBool:1] forKey:@"user_added"];
+    }
 	[friends release];
     
    

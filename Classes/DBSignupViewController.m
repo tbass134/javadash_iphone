@@ -517,7 +517,7 @@
     
     
 	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:picture_url
-														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
+														   cachePolicy:NSURLCacheStorageNotAllowed
 													   timeoutInterval:60.0];
     
     NSLog(@"request %@", [request URL]);
@@ -547,7 +547,7 @@
     BOOL enable_email = [[[NSUserDefaults standardUserDefaults]valueForKey:@"ENABLE_EMAIL"]boolValue];
     
 	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/addUser.php?deviceid=%@&name=%@&email=%@&enable_email=%d&platform=%@&fb=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],[Utils urlencode:userName],email,enable_email,@"IOS",fbid, ts]]
-														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
+														   cachePolicy:NSURLCacheStorageNotAllowed
 													   timeoutInterval:60.0];
     
     NSLog(@"request %@", [request URL]);
@@ -610,7 +610,7 @@
     NSLog(@"user_info %@",user_info);
     NSData *postData = [user_info dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/addUser.php?",baseDomain]]
-                                                           cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                                           cachePolicy:NSURLCacheStorageNotAllowed
                                                        timeoutInterval:60.0];
     NSLog(@"request %@",[request URL]);
     [request setHTTPMethod:@"POST"];
