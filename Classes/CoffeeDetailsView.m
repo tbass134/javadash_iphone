@@ -416,14 +416,19 @@
         [conn initWithRequest:request];
     }
     else
-        [Utils showAlert:@"Order Added" withMessage:nil inView:self.view];
+    {
+         [Utils showAlert:@"Order Added" withMessage:nil inView:self.view];
+    }
+       
     
 	[self.navigationController dismissModalViewControllerAnimated:YES];
 }
 - (void)processSuccessful:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
 {
+    //clear the drink orders array
+    [[DrinkOrders instance]clearArray];
     //[Utils showAlert:@"Order Updated" withMessage:nil inView:self.view];
-     [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderEdited" object:self];
+     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
     
     [self.navigationController popViewControllerAnimated:YES];
 }

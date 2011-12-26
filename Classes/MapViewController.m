@@ -209,11 +209,12 @@
     mapView.hidden = YES;
     tableView.hidden = YES;
     search_view.hidden = YES;
+    seg_control.enabled = NO;
 
 }
 -(void)loadData:(NSString *)term loc:(NSString *)l
 {
-    
+    seg_control.enabled = YES;
     if([term isEqualToString:@""])
         term = kYelpSearchTerm;
     name_txt.text = term;

@@ -528,7 +528,6 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
     if(indexPath.section ==1)
     {
         if (editingStyle == UITableViewCellEditingStyleDelete) {
-        //[_cues removeObjectAtIndex: indexPath.row];  // manipulate your data structure.
         
         if(order_ended)
             return;
@@ -536,14 +535,16 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
         Order *order = [Order sharedOrder];
 
         NSDictionary *current_order = [[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"]objectAtIndex:indexPath.row];
-        //NSLog(@"current_order %@",current_order);
-        [[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"] removeObject:current_order];
+        [self removeOrder:current_order];
+        
 
         //[current_orders_table deleteRowsAtIndexPaths: [NSArray arrayWithObject: indexPath]
         //             withRowAnimation: UITableViewRowAnimationFade];
 
         //Call script to remove order
-        [self loadOrderData];	
+         
+            
+        //[self loadOrderData];	
 
         }
     
@@ -704,6 +705,56 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
 	[self.navigationController pushViewController:showOrder animated:YES];
 	[showOrder release];
 	
+}
+-(void)removeOrder:(NSDictionary *)order
+{
+    NSLog(@"Remove Order %@",order);
+    HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.navigationController.view addSubview:HUD];
+    // Regiser for HUD callbacks so we can remove it from the window at the right time
+    HUD.delegate = self;
+	
+    // Show the HUD while the provided method executes in a new thread
+    [HUD showWhileExecuting:@selector(setremoveOrder:) onTarget:self withObject:order animated:YES];
+	//NSLog(@"order id %@",[[[order currentOrder]objectForKey:@"run"]objectForKey:@"id"]);
+    
+    //
+}
+
+-(void)setremoveOrder:(NSDictionary *)order
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    printf("delete Order");
+    //This is the data that got returned from the server when we first went to view the run.. Called  getOrder.php from CurrentRunViewController
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/deleteOrder.php?order_id=%i",baseDomain,[[order objectForKey:@"order_id"]intValue]]]
+                                                       cachePolicy:NSURLCacheStorageNotAllowed
+                                                   timeoutInterval:60.0];
+
+
+    NSError *requestError;
+    NSURLResponse *urlResponse = nil;
+    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    if (response == nil) {
+        if (requestError != nil) {
+            [Utils showAlert:@"Could not connect to server" withMessage:@"Please try again" inView:self.view];
+        }
+    }
+    else
+    {
+        [self performSelectorOnMainThread:@selector(updateDeletedRow:)
+                               withObject:order
+                            waitUntilDone:NO];
+    } 
+    [pool release];
+}
+-(void)updateDeletedRow:(NSDictionary *)order
+{
+    printf("updateDeletedRow");
+    [[[[[Order sharedOrder] currentOrder]objectForKey:@"run"]objectForKey:@"orders"] removeObject:order];
+    [current_orders_table reloadData];
+    //[self checkForOrders];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
 }
 
 /*
