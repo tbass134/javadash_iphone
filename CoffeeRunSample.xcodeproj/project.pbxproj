@@ -166,6 +166,7 @@
 		45B7D99213FDED470002BAF0 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B7D99113FDED460002BAF0 /* iAd.framework */; };
 		45B8880D13A81B0100C7BD9B /* CoffeeDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B8880C13A81B0100C7BD9B /* CoffeeDetailsView.m */; };
 		45BDB39C1326E3CC002D2F03 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 45BDB39B1326E3CC002D2F03 /* star.png */; };
+		45BE9E3214A16DAE009E75CA /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 45BE9E3114A16DAE009E75CA /* Icon.png */; };
 		45C694A8133C376B00962D33 /* AttendeeOrderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45C694A7133C376B00962D33 /* AttendeeOrderTableViewController.m */; };
 		45CE604314536286000EBFAF /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 45CE604214536286000EBFAF /* Appirater.m */; };
 		45D1551B132723850082D87F /* FavoriteLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D1551A132723850082D87F /* FavoriteLocations.m */; };
@@ -569,6 +570,7 @@
 		45B8880B13A81B0100C7BD9B /* CoffeeDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoffeeDetailsView.h; sourceTree = "<group>"; };
 		45B8880C13A81B0100C7BD9B /* CoffeeDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoffeeDetailsView.m; sourceTree = "<group>"; };
 		45BDB39B1326E3CC002D2F03 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
+		45BE9E3114A16DAE009E75CA /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		45C694A6133C376B00962D33 /* AttendeeOrderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttendeeOrderTableViewController.h; sourceTree = "<group>"; };
 		45C694A7133C376B00962D33 /* AttendeeOrderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttendeeOrderTableViewController.m; sourceTree = "<group>"; };
 		45CAC7C4144E1DB00053BFE3 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
@@ -805,6 +807,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				45BE9E3114A16DAE009E75CA /* Icon.png */,
 				453989B914785F6B00F2194F /* settings_icon.png */,
 				453989BA14785F6B00F2194F /* settings_icon@2x.png */,
 				453989B514785EA500F2194F /* runs_icon@2x.png */,
@@ -1729,6 +1732,7 @@
 				453989BB14785F6B00F2194F /* settings_icon.png in Resources */,
 				453989BC14785F6B00F2194F /* settings_icon@2x.png in Resources */,
 				453105121482953C005781AF /* CoffeeRunSampleViewController.xib in Resources */,
+				45BE9E3214A16DAE009E75CA /* Icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1941,6 +1945,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					armv7,
+					armv6,
+				);
 				CODE_SIGN_IDENTITY = "iPhone Developer: Tony Hung (QRKXMQ42RZ)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1981,6 +1989,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					armv7,
+					armv6,
+				);
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Tony Hung";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2032,6 +2044,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					armv7,
+					armv6,
+				);
 				CODE_SIGN_IDENTITY = "iPhone Developer: Tony Hung (QRKXMQ42RZ)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (

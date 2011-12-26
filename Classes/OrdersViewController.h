@@ -43,6 +43,7 @@
     BOOL isEditing;
     UIBarButtonItem *edit;
     BOOL order_ended;
+    BOOL modalViewDidAppear;
 
 }
 //Core Data

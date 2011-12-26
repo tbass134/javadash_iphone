@@ -389,7 +389,7 @@
     {
         Order *order = [Order sharedOrder];
         
-        
+        printf("Calling placeorder");
         //This order was editied, need to send the new data to the server
         int ts = [[NSDate date] timeIntervalSince1970];
         NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/placeorder.php?ts=%i",baseDomain,ts]]

@@ -56,7 +56,6 @@
 
 -(void)checkForOrders
 {
-    
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.navigationController.view addSubview:HUD];
     // Regiser for HUD callbacks so we can remove it from the window at the right time
@@ -81,6 +80,7 @@
         if (requestError != nil) {
             if(self.navigationController.tabBarController.selectedIndex ==CURRENT_TAB_INDEX)
                 [Utils showAlert:@"Could not connect to server" withMessage:@"Please try again" inView:self.view];
+            //[self showNoOrdersView:YES];
         }
     }
     else
@@ -105,6 +105,7 @@
     {
         printf("NO Orders");
         current_orders_table.hidden = YES;
+        //[self showNoOrdersView:YES];
         return;
     }
     current_orders_table.hidden = NO;
@@ -134,13 +135,25 @@
 	if(![[user_order objectForKey:@"run"]objectForKey:@"id"])
 	{
         printf("No Runs Available");
+        //[self showNoOrdersView:YES];
 		return;
 	}
+    DrinkOrders *drink_orders = [DrinkOrders instance];
+    if([[drink_orders getArray]count]>0)
+    {
+         //[self viewCurrentOrders];
+        [self initPlaceOrder];
+    }
+    else
+        [self viewCurrentOrders];
+    
+    /* //Orginal
 	if([user_order objectForKey:@"run"] != NULL)
 	{		
+        //[self showNoOrdersView:NO];
         [self viewCurrentOrders];
 	}
-	
+     */
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -283,7 +296,7 @@
 	if(orders_count >0)
 	{
         current_orders_table.hidden = NO;
-        [self showNoOrdersView:NO];
+        //[self showNoOrdersView:NO];
 
         if([[user_order objectForKey:@"is_runner"] intValue] == 0)
         {
@@ -350,7 +363,7 @@
 	}
     else
     {
-        [self showNoOrdersView:YES];
+        //[self showNoOrdersView:YES];
         current_orders_table.hidden = NO;
     }
     
@@ -463,7 +476,7 @@
             {
                 if([drink_dict objectForKey:@"CustomOrder"] != nil)
                 {
-                    
+                    modalViewDidAppear = YES;
                     CustomOrderViewController *customOrder   = [[CustomOrderViewController alloc]initWithNibName:@"CustomOrderViewController" bundle:nil];
                     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:customOrder];
                     customOrder.edit_order_dict = drink_dict;
@@ -546,6 +559,7 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
 }
 -(void)goBack:(id)sender
 {
+    modalViewDidAppear = NO;
     self.navigationItem.leftBarButtonItem = nil;
     if(place_over_view.superview)
         [place_over_view removeFromSuperview];
@@ -556,6 +570,7 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
 }
 -(void)sendOrder:(id)sender
 {
+    modalViewDidAppear = YES;
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.navigationController.view addSubview:HUD];
     // Regiser for HUD callbacks so we can remove it from the window at the right time
@@ -563,17 +578,13 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
 	
     // Show the HUD while the provided method executes in a new thread
     [HUD showWhileExecuting:@selector(sendOrders) onTarget:self withObject:nil animated:YES];
-    
-    
-	        
-    
 	//NSLog(@"order id %@",[[[order currentOrder]objectForKey:@"run"]objectForKey:@"id"]);
 }
 -(void)sendOrders
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
-    //printf("send Order");
+    printf("send Order");
 	Order *order = [Order sharedOrder];
 	//This is the data that got returned from the server when we first went to view the run.. Called  getOrder.php from CurrentRunViewController
 	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/placeorder.php",baseDomain]]
@@ -660,6 +671,7 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
 }
 -(IBAction)showDrinkList
 {
+    modalViewDidAppear = YES;
 	NameListViewController *orderView   = [[NameListViewController alloc]initWithNibName:@"NameListViewController" bundle:nil];
 	orderView.orderType = @"Drinks";
 	//Pass the Dictionary we got from the server
@@ -671,12 +683,14 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
 }
 -(IBAction)showCustomList
 {
+    modalViewDidAppear = YES;
 	CustomOrderViewController *customOrder   = [[CustomOrderViewController alloc]initWithNibName:@"CustomOrderViewController" bundle:nil];
 	[self.navigationController pushViewController:customOrder animated:YES];
 	[customOrder release];
 }
 -(IBAction)showYourOrderList
 {
+    modalViewDidAppear = YES;
 	YourOrderTableViewController *showOrder   = [[YourOrderTableViewController alloc]initWithNibName:nil bundle:nil];
 	showOrder.type = NULL;
 	[self.navigationController pushViewController:showOrder animated:YES];
@@ -684,6 +698,7 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
 }
 -(IBAction)showFavoritesList
 {
+    modalViewDidAppear = YES;
 	YourOrderTableViewController *showOrder   = [[YourOrderTableViewController alloc]initWithNibName:nil bundle:nil];
 	showOrder.type = @"favorites";
 	[self.navigationController pushViewController:showOrder animated:YES];
@@ -700,13 +715,17 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
 */
 -(void)viewDidAppear:(BOOL)animated
 {
-    //If we havent gotten the data yet, load it
-	Order *order = [Order sharedOrder];
-	if([order currentOrder] == NULL)
-		[self checkForOrders];
-	else 
-		[self gotoScreen];
+    if(!modalViewDidAppear)
+    {
+        //If we havent gotten the data yet, load it
+        Order *order = [Order sharedOrder];
+        if([order currentOrder] == NULL)
+            [self checkForOrders];
+        else 
+            [self gotoScreen];
+    }
 
+    modalViewDidAppear = NO;
    /* 
     if(current_orders_view.superview)
     {
