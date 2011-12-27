@@ -64,6 +64,19 @@
 	
 	return success;
 }
+-(BOOL)removeFriend:(NSManagedObject *)friend
+{
+    
+    NSManagedObjectContext *context = [self managedObjectContext];
+    [context deleteObject:friend];
+    // Commit the change.
+    NSError *error = nil;
+    if (![managedObjectContext save:&error]) {
+        return NO;
+    }
+    return YES;
+    
+}
 -(void)sendFriendDataToServer:(NSDictionary *)friend_dict
 {
     [Utils printDict:friend_dict];

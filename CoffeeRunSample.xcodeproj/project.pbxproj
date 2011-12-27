@@ -88,6 +88,8 @@
 		4557191B144B438700FB64BD /* FacebookViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45571919144B438700FB64BD /* FacebookViewController.xib */; };
 		455BF14F14104F9000001C9F /* RunViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 455BF14E14104F9000001C9F /* RunViewController.xib */; };
 		455CDBFC14622644002572EC /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 455CDBFB14622644002572EC /* libFlurryAnalytics.a */; };
+		4564503014A9549900B418CE /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4564502F14A9549900B418CE /* avatar.png */; };
+		4564503214A954A700B418CE /* blank_location.png in Resources */ = {isa = PBXBuildFile; fileRef = 4564503114A954A700B418CE /* blank_location.png */; };
 		456733F913F4D1B200808016 /* btn-back-step2.png in Resources */ = {isa = PBXBuildFile; fileRef = 456733F813F4D1B200808016 /* btn-back-step2.png */; };
 		4569C09E13132BD5007BC077 /* ItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4569C09C13132BD5007BC077 /* ItemsViewController.m */; };
 		4569C09F13132BD5007BC077 /* ItemsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4569C09D13132BD5007BC077 /* ItemsViewController.xib */; };
@@ -420,6 +422,8 @@
 		455BF14E14104F9000001C9F /* RunViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RunViewController.xib; sourceTree = "<group>"; };
 		455CDBFA14622644002572EC /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAnalytics.h; sourceTree = "<group>"; };
 		455CDBFB14622644002572EC /* libFlurryAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryAnalytics.a; sourceTree = "<group>"; };
+		4564502F14A9549900B418CE /* avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar.png; sourceTree = "<group>"; };
+		4564503114A954A700B418CE /* blank_location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blank_location.png; sourceTree = "<group>"; };
 		456733F813F4D1B200808016 /* btn-back-step2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-back-step2.png"; sourceTree = "<group>"; };
 		4569C09B13132BD5007BC077 /* ItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemsViewController.h; sourceTree = "<group>"; };
 		4569C09C13132BD5007BC077 /* ItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemsViewController.m; sourceTree = "<group>"; };
@@ -807,7 +811,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4564503114A954A700B418CE /* blank_location.png */,
 				45BE9E3114A16DAE009E75CA /* Icon.png */,
+				4564502F14A9549900B418CE /* avatar.png */,
 				453989B914785F6B00F2194F /* settings_icon.png */,
 				453989BA14785F6B00F2194F /* settings_icon@2x.png */,
 				453989B514785EA500F2194F /* runs_icon@2x.png */,
@@ -1733,6 +1739,8 @@
 				453989BC14785F6B00F2194F /* settings_icon@2x.png in Resources */,
 				453105121482953C005781AF /* CoffeeRunSampleViewController.xib in Resources */,
 				45BE9E3214A16DAE009E75CA /* Icon.png in Resources */,
+				4564503014A9549900B418CE /* avatar.png in Resources */,
+				4564503214A954A700B418CE /* blank_location.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

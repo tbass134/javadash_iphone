@@ -35,7 +35,7 @@
 	CoffeeRunSampleAppDelegate *delegate;
     
     FriendsInfo *friends;
-	
+	BOOL dbDataLoaded;
 
 
 }

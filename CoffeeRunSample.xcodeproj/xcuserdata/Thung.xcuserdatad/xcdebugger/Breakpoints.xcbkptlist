@@ -9,11 +9,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Classes/MapViewController.m"
-         timestampString = "346611078.444826"
+         timestampString = "346642107.585039"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1046"
-         endingLineNumber = "1046"
+         startingLineNumber = "1051"
+         endingLineNumber = "1051"
          landmarkName = "-didReceiveMemoryWarning"
          landmarkType = "5">
       </FileBreakpoint>

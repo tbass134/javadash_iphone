@@ -214,6 +214,7 @@
 #pragma mark View Run
 -(void)initShowRun{
     
+    yelp_img.image = [UIImage imageNamed:@"blank_location.png"];
     self.navigationItem.rightBarButtonItem = showOptionsBtn;
     Order *order = [Order sharedOrder];
 	NSDictionary *user_order = [[order currentOrder]objectForKey:@"run"];

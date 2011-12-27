@@ -28,6 +28,7 @@
 @property (retain) id delegate;
 
 -(BOOL)insertFriendData:(NSDictionary *)dict;
+-(BOOL)removeFriend:(NSManagedObject *)friend;
 -(void)sendFriendDataToServer:(NSDictionary *)friend_dict;
 -(void)readFriendsData;
 -(BOOL)checkforFriends;

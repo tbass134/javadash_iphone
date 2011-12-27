@@ -79,8 +79,7 @@
     if (response == nil) {
         if (requestError != nil) {
             if(self.navigationController.tabBarController.selectedIndex ==CURRENT_TAB_INDEX)
-                [Utils showAlert:@"Could not connect to server" withMessage:@"Please try again" inView:self.view];
-            //[self showNoOrdersView:YES];
+            [self showNoOrdersView:YES withTitle:@"Could not connect to server" andMessage:nil];
         }
     }
     else
@@ -105,7 +104,7 @@
     {
         printf("NO Orders");
         current_orders_table.hidden = YES;
-        //[self showNoOrdersView:YES];
+        [self showNoOrdersView:YES withTitle:@"No Orders" andMessage:@"Click \"Add to Order\" to add an order"];
         return;
     }
     current_orders_table.hidden = NO;
@@ -135,7 +134,7 @@
 	if(![[user_order objectForKey:@"run"]objectForKey:@"id"])
 	{
         printf("No Runs Available");
-        //[self showNoOrdersView:YES];
+        [self showNoOrdersView:YES withTitle:@"No Runs Available" andMessage:nil];
 		return;
 	}
     DrinkOrders *drink_orders = [DrinkOrders instance];
@@ -296,7 +295,7 @@
 	if(orders_count >0)
 	{
         current_orders_table.hidden = NO;
-        //[self showNoOrdersView:NO];
+        [self showNoOrdersView:NO withTitle:nil andMessage:nil];
 
         if([[user_order objectForKey:@"is_runner"] intValue] == 0)
         {
@@ -363,7 +362,7 @@
 	}
     else
     {
-        //[self showNoOrdersView:YES];
+        [self showNoOrdersView:YES withTitle:@"No Orders" andMessage:@"Click \"Add to Order\" to add an order"];
         current_orders_table.hidden = NO;
     }
     
@@ -372,7 +371,7 @@
     current_orders_table.dataSource = self;
 }
 #pragma mark Show No Orders View
--(void)showNoOrdersView:(BOOL)show
+-(void)showNoOrdersView:(BOOL)show withTitle:(NSString *)title andMessage:(NSString *)message;
 {
     BOOL isShowing = [self.view.subviews containsObject:noOrdersView];
     NSLog(@"isShowing %d",isShowing);
@@ -381,7 +380,11 @@
         [noOrdersView removeFromSuperview];
     
     if(show)
+    {
         [self.view addSubview:noOrdersView];
+        NoOrdersTitle.text = title;
+        NoOrdersMessage.text = message;
+    }
     else
         [noOrdersView removeFromSuperview];
 }
@@ -466,10 +469,10 @@
 		{
             
             NSDictionary *drink_dict = [[[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"]objectAtIndex:indexPath.row]objectForKey:@"drink"];
-            NSLog(@"drink_dict %@",drink_dict);
+            //NSLog(@"drink_dict %@",drink_dict);
             
-            NSLog(@"count %i",[drink_dict count]);
-            NSLog(@"NSArray %d",[drink_dict isKindOfClass:[NSArray class]]);
+            //NSLog(@"count %i",[drink_dict count]);
+            //NSLog(@"NSArray %d",[drink_dict isKindOfClass:[NSArray class]]);
             //NSLog(@"Custom Ordder %@",[drink_dict objectForKey:@"CustomOrder"]);
             
             if([drink_dict isKindOfClass:[NSDictionary class]])
@@ -490,8 +493,8 @@
                 }
             }
         
-                NSLog(@"count %i",[drink_dict count]);
-                NSLog(@"NSArray %d",[drink_dict isKindOfClass:[NSArray class]]);
+                //NSLog(@"count %i",[drink_dict count]);
+                //NSLog(@"NSArray %d",[drink_dict isKindOfClass:[NSArray class]]);
                 
                 
                if([drink_dict count] >1 && [drink_dict isKindOfClass:[NSArray class]])
@@ -533,23 +536,12 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
             return;
                 
         Order *order = [Order sharedOrder];
-
         NSDictionary *current_order = [[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"]objectAtIndex:indexPath.row];
         [self removeOrder:current_order];
-        
-
-        //[current_orders_table deleteRowsAtIndexPaths: [NSArray arrayWithObject: indexPath]
-        //             withRowAnimation: UITableViewRowAnimationFade];
-
-        //Call script to remove order
-         
-            
-        //[self loadOrderData];	
-
         }
     
     }
-} // commitEditingStyle
+}
 
 
 #pragma mark Place Order
@@ -574,12 +566,8 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
     modalViewDidAppear = YES;
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.navigationController.view addSubview:HUD];
-    // Regiser for HUD callbacks so we can remove it from the window at the right time
     HUD.delegate = self;
-	
-    // Show the HUD while the provided method executes in a new thread
     [HUD showWhileExecuting:@selector(sendOrders) onTarget:self withObject:nil animated:YES];
-	//NSLog(@"order id %@",[[[order currentOrder]objectForKey:@"run"]objectForKey:@"id"]);
 }
 -(void)sendOrders
 {
@@ -708,17 +696,10 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
 }
 -(void)removeOrder:(NSDictionary *)order
 {
-    NSLog(@"Remove Order %@",order);
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.navigationController.view addSubview:HUD];
-    // Regiser for HUD callbacks so we can remove it from the window at the right time
     HUD.delegate = self;
-	
-    // Show the HUD while the provided method executes in a new thread
     [HUD showWhileExecuting:@selector(setremoveOrder:) onTarget:self withObject:order animated:YES];
-	//NSLog(@"order id %@",[[[order currentOrder]objectForKey:@"run"]objectForKey:@"id"]);
-    
-    //
 }
 
 -(void)setremoveOrder:(NSDictionary *)order

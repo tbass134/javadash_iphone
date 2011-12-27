@@ -319,6 +319,8 @@
 	{
 		cell.imageView.image = [[UIImage alloc] initWithData:[[self.friends_array objectAtIndex:indexPath.row]valueForKey:@"image"]];
 	}
+    else
+        cell.imageView.image = [UIImage imageNamed:@"avatar.png"];
 	return cell;
 }
 // Customize the number of rows in the table view.
@@ -331,7 +333,22 @@
 {
 	return 1;
 }
-
+- (void) tableView: (UITableView *) tableView
+commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
+ forRowAtIndexPath: (NSIndexPath *) indexPath {
+        if (editingStyle == UITableViewCellEditingStyleDelete) {
+            
+            NSManagedObject *currentFriend = [self.friends_array objectAtIndex:indexPath.row];
+            if([friends removeFriend:currentFriend])
+            {
+                // Update the array and table view.
+                //[self.friends_array removeObjectAtIndex:indexPath.row];
+                //[self.table_view deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+                self.friends_array = [friends getAllFriends];
+                [self.table_view reloadData];
+            }
+    }
+} // commitEditingStyle
 -(void)viewDidAppear:(BOOL)animated
 {
     if(![[[NSUserDefaults standardUserDefaults]valueForKey:@"didPurchaseApp"]boolValue])

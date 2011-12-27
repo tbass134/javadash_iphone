@@ -95,6 +95,11 @@
     friends = [[FriendsInfo alloc]init];
 	friends.managedObjectContext = self.managedObjectContext;	
 	NSArray *friends_array = [friends getAllFriends];    
+    
+    if([friends_array count] == 0)
+    {
+        return;
+    }
     NSMutableArray *device_id_array = [[NSMutableArray alloc]init];
 
     for(int i=0;i<[friends_array count];i++)
@@ -200,8 +205,13 @@
 }
 -(void)getFriendsList
 {
-    friends = [UIAppDelegate.fb_friends retain];
-    [self loadFromServer];
+    if(!dbDataLoaded)
+    {
+        printf("getFriendsList");
+        friends = [UIAppDelegate.fb_friends retain];
+        [self loadFromServer];
+        dbDataLoaded = YES;
+    }
 }
 
 - (void)login {

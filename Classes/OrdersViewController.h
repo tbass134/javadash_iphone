@@ -20,7 +20,7 @@
     //ViewCurrentOrdersView
     IBOutlet UIView *current_orders_view;
     IBOutlet UITableView *current_orders_table;
-    IBOutlet UIView *noOrdersView;
+    
     NSMutableArray *run_array;
     NSMutableArray *cells;
 	NSMutableArray *orders_cells;
@@ -44,6 +44,11 @@
     UIBarButtonItem *edit;
     BOOL order_ended;
     BOOL modalViewDidAppear;
+    
+    //No Orders View
+    IBOutlet UIView *noOrdersView;
+    IBOutlet UILabel *NoOrdersTitle;
+    IBOutlet UILabel *NoOrdersMessage;
 
 }
 //Core Data
@@ -74,6 +79,6 @@
 //Place Order View
 -(void)initPlaceOrder;
 
--(void)showNoOrdersView:(BOOL)show;
+-(void)showNoOrdersView:(BOOL)show withTitle:(NSString *)title andMessage:(NSString *)message;
 
 @end

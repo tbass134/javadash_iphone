@@ -488,13 +488,18 @@
 	
 	if([annotation isKindOfClass:[ParkPlaceMark class]])
     {
-		if([annotation.location_dict objectForKey:@"image_url"] != NULL)
-		{
+		
 			//NSLog(@"annotation %@",[annotation.location_dict objectForKey:@"image_url"]);
 			AsyncImageView2 *asyncImageView = [[[AsyncImageView2 alloc] initWithFrame:CGRectMake(5, 5, 30, 30)] autorelease];
+        if([annotation.location_dict objectForKey:@"image_url"] != NULL)
+		{
 			[asyncImageView loadImageFromURL:[NSURL URLWithString:[annotation.location_dict objectForKey:@"image_url"]]];
+        }
+        else
+            asyncImageView.image = [UIImage imageNamed:@"blank_location.png"];
+        
 			annView.leftCalloutAccessoryView = asyncImageView;
-		}
+		
 
 	}
 	UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
