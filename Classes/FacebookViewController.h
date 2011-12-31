@@ -12,8 +12,9 @@
 #import <CoreData/CoreData.h>
 #import "CoffeeRunSampleAppDelegate.h"
 #import "FriendsInfo.h"
-@interface FacebookViewController : UIViewController<UITableViewDelegate>
+@interface FacebookViewController : UIViewController<UITableViewDelegate,MBProgressHUDDelegate>
 {
+    MBProgressHUD *HUD;
     IBOutlet FBLoginButton* _fbButton;
     IBOutlet UIButton* _getUserInfoButton;
     IBOutlet UITableView *table_view;
@@ -21,7 +22,8 @@
     NSMutableArray *images;
     NSMutableArray *names;
     
-    NSMutableArray *users_dict;
+    
+    NSMutableArray *users;
     
     UIBarButtonItem *cancel_btn;
      UIBarButtonItem *followAll_btn;
@@ -34,7 +36,7 @@
 	NSManagedObjectContext *managedObjectContext;
 	CoffeeRunSampleAppDelegate *delegate;
     
-    FriendsInfo *friends;
+    NSArray *friends;
 	BOOL dbDataLoaded;
 
 

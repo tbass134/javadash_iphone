@@ -91,6 +91,7 @@
 
 -(void)loadFromServer
 {
+    /*
     //Get all the friends device ID's
     friends = [[FriendsInfo alloc]init];
 	friends.managedObjectContext = self.managedObjectContext;	
@@ -107,31 +108,59 @@
         [device_id_array addObject:[[friends_array objectAtIndex:i]valueForKey:@"device_id"]];
     }
     
+	*/
+    HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.navigationController.view addSubview:HUD];
+    // Regiser for HUD callbacks so we can remove it from the window at the right time
+    HUD.delegate = self;
+    [HUD show:YES];
 	
+    // Show the HUD while the provided method executes in a new thread
     
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/Facebook/getFacebookUsersOfApp.php",baseDomain]]
 														   cachePolicy:NSURLCacheStorageNotAllowed
 													   timeoutInterval:60.0];
     
 	URLConnection *conn = [[URLConnection alloc]init];
-    
-    [request setHTTPMethod:@"POST"];
-	NSString *post_str = [NSString stringWithFormat:@"device_tokens=%@",[device_id_array componentsJoinedByString:@","]];
-    
-    NSLog(@"post_str %@",post_str);
-    
-	[request setHTTPBody:[post_str dataUsingEncoding:NSUTF8StringEncoding]]; 
 	conn.tag =@"getFBUsers";
 	[conn setDelegate:self];
 	[conn initWithRequest:request];
 }
 - (void)processSuccessful:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
 {
-    NSLog(@"data %@",[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
+    [HUD hide:YES];
     NSString * json_str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     SBJSON *parser = [[SBJSON alloc] init];
-    users_dict = [[parser objectWithString:json_str error:nil]retain];
-    NSLog(@"users_dict %@",users_dict);
+    NSDictionary *allFBUsers = [[parser objectWithString:json_str error:nil]retain];
+    
+
+    
+    NSLog(@"allFBUsers %@",allFBUsers);
+    NSLog(@"friends %@",friends);
+    
+    for(int i =0;i<[friends count];i++)
+    {
+     
+        NSDictionary *friend = [friends objectAtIndex:i];
+        //NSLog(@"id %@",[friend objectForKey:@"id"]);
+        int fbID = [[friend objectForKey:@"id"]intValue];
+        for(int j=0;j<[allFBUsers count];j++)
+        {
+            NSDictionary *jdFriend = [allFBUsers objectAtIndex:j];
+            //NSLog(@"jdFriend %@",jdFriend);
+            int jdFriendID = [[jdFriend objectForKey:@"fb_id"]intValue];
+            
+            //NSLog(@"fbID %i",fbID);
+            //NSLog(@"jdFriendID %i",jdFriendID);
+            if(fbID == jdFriendID)
+            {
+                printf("FOund Frined");
+                [users addObject:jdFriend];
+                break;
+            }
+        }
+    }
+    
     
     [self loadFriendsList];
     [parser release];
@@ -145,10 +174,10 @@
     images = [[NSMutableArray alloc] init];
     names = [[NSMutableArray alloc] init];
     
-    if([users_dict count]>0)
+    if([users count]>0)
     {
         //followAll_btn.enabled = YES;
-        for(int i=0;i<[users_dict count];i++){
+        for(int i=0;i<[users count];i++){
             [images addObject:[NSNull null]];
         }
         
@@ -230,7 +259,7 @@
     return 1;
 }
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [users_dict count];
+    return [users count];
 }
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -251,14 +280,14 @@
     cell.accessoryView = button;
 
     
-	cell.textLabel.text = [[users_dict objectAtIndex:indexPath.row]objectForKey:@"name"];
+	cell.textLabel.text = [[users objectAtIndex:indexPath.row]objectForKey:@"name"];
 	int i = indexPath.row;
 	
 	if([images objectAtIndex:i] != [NSNull null]) cell.imageView.image = [images objectAtIndex:i];
 	else{
 		
-		int index = i % [users_dict count];
-        NSString *img_url = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture",[[users_dict objectAtIndex:index]objectForKey:@"fb_id"]];
+		int index = i % [users count];
+        NSString *img_url = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture",[[users objectAtIndex:index]objectForKey:@"fb_id"]];
         UIImage *image = [[TKImageCenter sharedImageCenter] imageAtURL:img_url queueIfNeeded:YES];
 		
 		if(image != nil){
@@ -280,8 +309,8 @@
 	for (UITableViewCell * cell in [self.table_view visibleCells]) {
 		if(cell.imageView.image == nil){
 			
-			int i = [self.table_view indexPathForCell:cell].row % [users_dict count];
-            NSString *img_url = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture",[[users_dict objectAtIndex:i]objectForKey:@"fb_id"]];
+			int i = [self.table_view indexPathForCell:cell].row % [users count];
+            NSString *img_url = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture",[[users objectAtIndex:i]objectForKey:@"fb_id"]];
             UIImage *image = [[TKImageCenter sharedImageCenter] imageAtURL:img_url queueIfNeeded:YES];
             
 			if(image != nil){
@@ -299,10 +328,10 @@
     
     UIButton *button = (UIButton *)sender;
     
-    NSString *img_url = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture",[[users_dict objectAtIndex:button.tag]objectForKey:@"fb_id"]];
+    NSString *img_url = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture",[[users objectAtIndex:button.tag]objectForKey:@"fb_id"]];
     UIImage *image = [[TKImageCenter sharedImageCenter] imageAtURL:img_url queueIfNeeded:NO];
 
-    NSDictionary *friendDict = [users_dict objectAtIndex:button.tag];
+    NSDictionary *friendDict = [users objectAtIndex:button.tag];
     [self addUserToList:friendDict withImage:image];
         
     
@@ -352,6 +381,7 @@
 
 - (void)viewDidLoad
 {
+    users = [[NSMutableArray alloc]init];
     self.table_view.hidden = YES;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -360,7 +390,7 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    [users_dict release];
+    [users release];
     
     [[NSNotificationCenter defaultCenter] removeObserver:@"facebookDidLogin"];
     [[NSNotificationCenter defaultCenter] removeObserver:@"getFriendsList"];
