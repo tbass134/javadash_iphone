@@ -278,6 +278,10 @@
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     NSLog(@"Error: %@, %@", [error localizedDescription], [error localizedFailureReason]);
     [Utils showAlert:@"Could not load data" withMessage:nil inView:self.view];
+    noResultsFound.hidden = NO;
+    //self.tableView.hidden = YES;
+    //self.mapView.hidden = YES;
+    [self.view sendSubviewToBack:search_view];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {

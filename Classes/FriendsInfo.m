@@ -170,7 +170,24 @@
 	}
 	return	success;
 }
-
+//This is different becuase the Dictionary returned is slightly different
+-(BOOL)checkFriendAdded:(NSDictionary *)dict
+{
+    BOOL success = NO;	
+	NSArray *friends_array = [self getAllFriends];
+    
+	for(int i=0;i<[friends_array count];i++)
+	{
+        if([[[friends_array objectAtIndex:i]valueForKey:@"device_id"]isEqualToString:[dict objectForKey:@"deviceid"]])
+        {
+			success = YES;
+            break;
+        }
+		
+	}
+	return	success;
+ 
+}
 -(BOOL)checkIfContactAdded
 {
 	//this will only check to see if the UserDefaults have the first name,last name and #

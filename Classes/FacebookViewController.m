@@ -106,7 +106,7 @@
     for(int i=0;i<[friends_array count];i++)
     {
         [device_id_array addObject:[[friends_array objectAtIndex:i]valueForKey:@"device_id"]];
-    }
+    }0
     
 	*/
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
@@ -269,14 +269,29 @@
     if (cell == nil)
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     
+    NSDictionary *friendDict = [users objectAtIndex:indexPath.row];
+    NSLog(@"friendDict %@",friendDict);
+
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [button setTitle:@"Follow" forState:UIControlStateNormal];
+    if([_friends checkFriendAdded:friendDict])
+    {
+        [button setTitle:@"Following" forState:UIControlStateNormal];
+        button.enabled = NO;
+        
+    }
+    else
+    {
+        [button setTitle:@"Follow" forState:UIControlStateNormal];
+        button.enabled = YES;
+
+    }
     CGRect frame = CGRectMake(0.0, 0.0, 70, 40);
     button.frame = frame; 
     button.tag = indexPath.row;
-    [button addTarget:self action:@selector(addFriend:) forControlEvents:UIControlEventTouchUpInside];
     cell.backgroundColor = [UIColor clearColor];
+    [button addTarget:self action:@selector(addFriend:) forControlEvents:UIControlEventTouchUpInside];
+
     cell.accessoryView = button;
 
     
@@ -358,8 +373,8 @@
     
    
     
-	FriendsInfo *_friends = [[FriendsInfo alloc]init];
-	_friends.managedObjectContext = self.managedObjectContext;
+	
+	
     if(![_friends checkforFriendAdded:user_dict])
 	{
 		if([_friends insertFriendData:user_dict])
@@ -367,11 +382,11 @@
             if(!followAll_clicked)
 			[Utils showAlert:@"Added" withMessage:[NSString stringWithFormat:@"%@ %@ has been added to your friends list",[user_dict objectForKey:@"FIRSTNAME"],[user_dict objectForKey:@"LASTNAME"]] inView:self.view];
         }
+        [self.table_view reloadData];
 	}
 	else
 		[Utils showAlert:nil withMessage:@"User has already been added to friends list" inView:self.view];	
-    
-    [_friends release];
+
     
     followAll_clicked = NO;
 
@@ -381,6 +396,8 @@
 
 - (void)viewDidLoad
 {
+    _friends = [[FriendsInfo alloc]init];
+    _friends.managedObjectContext = self.managedObjectContext;
     users = [[NSMutableArray alloc]init];
     self.table_view.hidden = YES;
     [super viewDidLoad];

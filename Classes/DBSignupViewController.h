@@ -68,6 +68,7 @@
     UIBarButtonItem *signUp_btn;
     UIBarButtonItem *cancel_btn;
     NSString *fbid;
+    BOOL userAdded;
    
     
 }

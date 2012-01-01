@@ -104,7 +104,10 @@
     {
         printf("NO Orders");
         current_orders_table.hidden = YES;
-        [self showNoOrdersView:YES withTitle:@"No Orders" andMessage:@"Click \"Add to Order\" to add an order"];
+        if(self.navigationItem.rightBarButtonItem == addOrder_btn)
+            [self showNoOrdersView:YES withTitle:@"No Orders" andMessage:@"Click \"Add to Order\" to add an order"];
+        else
+            [self showNoOrdersView:YES withTitle:@"No Orders" andMessage:@""];
         return;
     }
     current_orders_table.hidden = NO;

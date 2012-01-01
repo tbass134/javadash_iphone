@@ -75,5 +75,6 @@
 -(void)goTimeView;
 -(void)goFriendsView;
 -(void)checkForOrders;
+-(BOOL)isRunDataFilledOut;
 
 @end

@@ -123,7 +123,7 @@
     signUp_btn.enabled = NO;
     
     cancel_btn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(goBack)];
-    
+    /*
    if(gotoContactInfo)
    {
         self.navigationItem.rightBarButtonItem = signUp_btn;
@@ -167,7 +167,13 @@
         contact_back_btn.hidden = NO;
         [self.view addSubview:page1]; 
     }
-        [super viewDidLoad];
+     */
+    self.view = contact;
+    contact_back_btn.hidden = YES;
+    self.navigationItem.rightBarButtonItem = signUp_btn;
+    self.navigationItem.leftBarButtonItem =  cancel_btn;
+
+   
     
     
        
@@ -248,6 +254,8 @@
          [self.photoButton setImage:self.photo forState:UIControlStateNormal];
          
      }
+    
+     [super viewDidLoad];
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -261,6 +269,13 @@
         self.enableEmail.enabled = YES;
     else
         self.enableEmail.enabled = NO;
+}
+-(void)viewDidDisappear:(BOOL)animated
+{
+    printf("viewDidDisappear");
+    [[NSNotificationCenter defaultCenter] removeObserver:@"getUserInfo"];
+    [[NSNotificationCenter defaultCenter] removeObserver:@"facebookDidLogin"];
+    [[NSNotificationCenter defaultCenter] removeObserver:@"fbDidNotLogin"];
 }
 
 - (void)viewDidUnload
@@ -354,7 +369,6 @@
 	[UIView commitAnimations];
 
 }
-
 //View 3
 -(IBAction)gotoPageContact:(id)sender
 {
@@ -430,8 +444,6 @@
 }
 - (IBAction)getContactInfo:(id)sender
 {
-    printf("Get Contact");
-    printf("getContactInfo");
 	ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
 	picker.peoplePickerDelegate = self;
 	[self presentModalViewController:picker animated:YES];
@@ -440,7 +452,6 @@
 }
 -(IBAction)goBackContact:(id)sender
 {
-    printf("goBackContact");
     self.navigationItem.rightBarButtonItem = nil;
     [self performSelector:@selector(removeContact) withObject:nil afterDelay:kAnimationDuration];
 	
@@ -529,7 +540,8 @@
     //Upload fb ID to server
     //[self saveFBId];
     
-    fbid= [[UIAppDelegate.fb_me objectForKey:@"id"]retain];    
+    fbid= [[UIAppDelegate.fb_me objectForKey:@"id"]retain];
+     [[NSUserDefaults standardUserDefaults]setValue:@"FB_ID" forKey:fbid];
     NSLog(@"fbid %@",fbid);
     
     [self signup:nil];
@@ -538,7 +550,7 @@
 {
     //Store this in a UserDefaults since we'll need it again
     
-    [[NSUserDefaults standardUserDefaults]setValue:@"FB_ID" forKey:fbid];
+   
     
     int ts = [[NSDate date] timeIntervalSince1970];
 	NSString *userName = [NSString stringWithFormat:@"%@ %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"FIRSTNAME"],[[NSUserDefaults standardUserDefaults]valueForKey:@"LASTNAME"]];
@@ -596,8 +608,11 @@
 	[conn setDelegate:self];
 	[conn initWithRequest:request];
      */
+    if(userAdded)
+        return;
+    
     NSString *userName = [NSString stringWithFormat:@"%@ %@",self.nameTextField.text,self.lastNameTextField.text];
-    NSString *user_info = [NSString stringWithFormat:@"name=%@&deviceid=%@&email=%@&enable_email_use=%d&platform=%@&fbid=%d&enable_push=%d",
+    NSString *user_info = [NSString stringWithFormat:@"name=%@&deviceid=%@&email=%@&enable_email_use=%d&platform=%@&fbid=%@&enable_push=%d",
                            [Utils urlencode:userName],
                            [[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],
                            self.emailTextField.text,
@@ -620,6 +635,7 @@
     [conn setDelegate:self];
     [conn initWithRequest:request];
     [self resignKeyboard:nil];    
+    userAdded = YES;
 }
 -(void)goBack
 {
@@ -650,7 +666,7 @@
         
     }
     else
-    {
+    {/*
         if(gotoContactInfo)
         {
             [self.navigationController dismissModalViewControllerAnimated:YES];
@@ -660,6 +676,7 @@
         {
             [[self delegate] userDataAdded];
         }
+      */
     }
 
 }

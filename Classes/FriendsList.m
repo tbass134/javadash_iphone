@@ -62,9 +62,23 @@
 	self.friends_array = [context executeFetchRequest:fetchRequest error:&error];
 	[fetchRequest release];
 	
-	self.tableView.delegate = self;
-	self.tableView.dataSource = self;
-	[self.tableView reloadData];
+   
+	    
+    if([self.friends_array count] ==0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"No Friends Added" message:@"Please add friends to start a run with\nYou can go to the Settings page to add friends!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        [alert show];
+        [alert release];
+        selected_friends_btn.enabled = NO;
+    }
+    else
+    {
+        selected_friends_btn.enabled = YES;
+        self.tableView.delegate = self;
+        self.tableView.dataSource = self;
+        [self.tableView reloadData];
+
+    }
 	
 }
 /*

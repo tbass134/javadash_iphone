@@ -38,6 +38,7 @@
     
     NSArray *friends;
 	BOOL dbDataLoaded;
+    FriendsInfo *_friends;
 
 
 }

@@ -212,7 +212,8 @@
 }
 
 #pragma mark View Run
--(void)initShowRun{
+-(void)initShowRun
+{
     
     yelp_img.image = [UIImage imageNamed:@"blank_location.png"];
     self.navigationItem.rightBarButtonItem = showOptionsBtn;
@@ -320,8 +321,6 @@
     view_run_table.delegate = self;
     view_run_table.dataSource = self;
     [view_run_table reloadData];
-    
-    
 }
 -(void)startTimer {
 	
@@ -608,9 +607,9 @@
     
 	
     //Make sure we have data before we send it
-    if([dash_dict objectForKey:@"selected_date"] == NULL || [dash_dict objectForKey:@"selected_location"] == NULL || [dash_dict objectForKey:@"selected_friends"] == NULL || address == NULL || selected_yelp_id == NULL)
+    if(![self isRunDataFilledOut])
     {
-        [Utils showAlert:@"NO Data" withMessage:@"Please add info to Run" inView:self.view];
+        [Utils showAlert:@"No Data" withMessage:@"Please add info to Run" inView:self.view];
         return;
     }
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
@@ -694,6 +693,14 @@
     [dash clearDict];
     [self checkForOrders];
 }
+-(BOOL)isRunDataFilledOut
+{
+    NSMutableDictionary *dash_dict = [[DashSummary instance] getDict]; 
+    if([dash_dict objectForKey:@"selected_date"] == NULL || [dash_dict objectForKey:@"selected_location"] == NULL || [dash_dict objectForKey:@"selected_friends"] == NULL)
+        return NO;
+    else
+        return YES;
+}
 #pragma mark -
 
 #pragma mark -
@@ -702,11 +709,14 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UITableViewCell *cell;
     if(view_run_view.superview)
-        return [orders_cells objectAtIndex:indexPath.row];
+        cell = [orders_cells objectAtIndex:indexPath.row];
     
     if(start_run_view.superview)
-         return [cells objectAtIndex:indexPath.row];
+        cell =  [cells objectAtIndex:indexPath.row];
+    
+    return cell;
 }
 
 
@@ -721,6 +731,7 @@
 }
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    int tableViewHeight;
     if(view_run_view.superview)
     {
         TKLabelTextViewCell *cell = [orders_cells objectAtIndex:[indexPath row]];
@@ -729,22 +740,25 @@
         CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
         CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
         CGFloat height = MAX(size.height, 44.0f);
-        return height + (CELL_CONTENT_MARGIN * 2);
+        tableViewHeight =  height + (CELL_CONTENT_MARGIN * 2);
     }
     if(start_run_view.superview)
-        return 100;
+        tableViewHeight =  100;
     
+    return tableViewHeight;
 }
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    int count;
     //Show Run
     if(view_run_view.superview)
-        return [orders_cells count];
+        count =  [orders_cells count];
     else if(start_run_view.superview)
-        return [cells count];
-   }
+        count =  [cells count];
+    return count;
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -811,6 +825,19 @@
     if(start_run_view.superview)
     {
         [self reloadStartRunData];
+    }
+    
+    if(self.navigationItem.rightBarButtonItem ==startRunBtn)
+    {
+        //Check if any sections are filled out.
+        //if so, enable startRunBtn
+        
+        if(![self isRunDataFilledOut])
+            startRunBtn.enabled = NO;
+        else
+            startRunBtn.enabled = YES;
+        
+        
     }
     
     CoffeeRunSampleAppDelegate *appDelegate  = (CoffeeRunSampleAppDelegate *)[[UIApplication sharedApplication]delegate];

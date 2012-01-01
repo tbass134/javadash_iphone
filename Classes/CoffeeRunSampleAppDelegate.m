@@ -596,6 +596,7 @@ static NSString* kAppId = @"189714094427611";
         else if([fb_tag isEqualToString:@"me"])
         {
             fb_me = result;
+            NSLog(@"fb_me %@",fb_me);
             [[NSNotificationCenter defaultCenter] postNotificationName:@"getUserInfo" object:nil];
 
         }

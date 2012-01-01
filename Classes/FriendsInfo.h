@@ -33,6 +33,7 @@
 -(void)readFriendsData;
 -(BOOL)checkforFriends;
 -(BOOL)checkforFriendAdded:(NSDictionary *)dict;
+-(BOOL)checkFriendAdded:(NSDictionary *)dict;
 -(BOOL)checkIfContactAdded;
 -(NSArray *)getAllFriends;
 @end
