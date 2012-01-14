@@ -85,6 +85,10 @@ static Order *sharedInstance = nil;
 	}	
 }
 
+-(void)clearOrder
+{
+    current_order = nil;
+}
 
 
 //Loading Data methods

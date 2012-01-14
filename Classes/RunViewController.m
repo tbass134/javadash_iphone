@@ -41,6 +41,8 @@
 #define TIME_TAG 2
 #define PEOPLE_TAG 3
 
+#define DEBUG 1
+
 
 @implementation RunViewController
 //CoreData
@@ -92,6 +94,9 @@
 														   cachePolicy:NSURLCacheStorageNotAllowed
 													   timeoutInterval:60.0];
 
+    #ifdef DEBUG
+    NSLog(@"request %@",[request URL]);
+    #endif
     NSError *requestError;
     NSURLResponse *urlResponse = nil;
     NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
@@ -103,8 +108,12 @@
     }
     else
     {
+        [[Order sharedOrder]clearOrder];
         //if we get a vaild order than instert your drink and send that to the server
         NSString * json_str = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+        #ifdef DEBUG
+        NSLog(@"json_str %@",json_str);
+        #endif
         SBJSON *parser = [[SBJSON alloc] init];
         Order *order = [Order sharedOrder];
         [order setOrder:[parser objectWithString:json_str error:nil]];
@@ -131,6 +140,8 @@
             //make sure the other view is not showing
             if(view_run_view.superview)
                 [view_run_view removeFromSuperview];
+            
+            
             [self.view addSubview:start_run_view];
             [self startRun];
             
@@ -177,6 +188,11 @@
     
     self.navigationItem.rightBarButtonItem = reloadDataBtn;
     
+    if(![self isRunDataFilledOut])
+        startRunBtn.enabled = NO;
+    else
+        startRunBtn.enabled = YES;
+    
 
 	Order *order = [Order sharedOrder];
 	if([order currentOrder] == NULL)
@@ -191,7 +207,7 @@
 -(void)gotoScreen
 {
 	Order *order = [Order sharedOrder];
-	NSDictionary *user_order = [order currentOrder];
+	NSDictionary *user_order = [[order currentOrder]retain];
 	
 	[Utils printDict:user_order];
 	if([user_order objectForKey:@"run"] != NULL)
@@ -209,6 +225,7 @@
 			
 		}
 	}
+    [user_order release];
 }
 
 #pragma mark View Run
@@ -250,6 +267,7 @@
 	if([[user_order objectForKey:@"is_runner"] intValue] == 1)
 	{
         
+        //showOptionsBtn.enabled = YES;
 		orders_cells = [[NSMutableArray alloc] init];
 		
 		int orders_count = [[user_order objectForKey:@"orders"]count];
@@ -318,6 +336,8 @@
 			}
 		}
 	}
+    //else
+    //    showOptionsBtn.enabled = NO;
     view_run_table.delegate = self;
     view_run_table.dataSource = self;
     [view_run_table reloadData];
@@ -359,14 +379,14 @@
 -(void)showOptions:(id)sender{
     
     NSDictionary *user_order = [[[Order sharedOrder] currentOrder]objectForKey:@"run"];
-    NSString *destructiveTitle;
+    NSString *title;
     
     if([[user_order objectForKey:@"is_runner"] intValue] == 1)
-        destructiveTitle = @"Abandon Dash";
+        title = @"Complete Dash";
     else
-        destructiveTitle = @"Leave Dash";
+        title = @"Leave Dash";
     
-	UIActionSheet *sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:destructiveTitle otherButtonTitles:nil];
+	UIActionSheet *sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:title,nil];
 	[sheet showFromTabBar:self.tabBarController.tabBar];
 	[sheet release];
 }
@@ -381,7 +401,8 @@
              HUD = [[MBProgressHUD alloc] initWithView:self.view];
              [self.navigationController.view addSubview:HUD];
              HUD.delegate = self;
-             [HUD showWhileExecuting:@selector(completeRun) onTarget:self withObject:nil animated:YES];         }
+             [HUD showWhileExecuting:@selector(completeRun) onTarget:self withObject:nil animated:YES];  
+         }
         else
         {
             HUD = [[MBProgressHUD alloc] initWithView:self.view];
@@ -403,7 +424,9 @@
                                                        timeoutInterval:60.0];
     
     
-    //conn.tag =@"completeOrder";
+    #ifdef DEBUG
+    NSLog(@"request %@",[request URL]);
+    #endif
     NSError *requestError;
     NSURLResponse *urlResponse = nil;
     NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
@@ -417,6 +440,9 @@
     {
         //if we get a vaild order than instert your drink and send that to the server
         NSString * json_str = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+        #ifdef DEBUG
+        NSLog(@"json_str %@",json_str);
+        #endif
         SBJSON *parser = [[SBJSON alloc] init];
         Order *order = [Order sharedOrder];
         [order setOrder:[parser objectWithString:json_str error:nil]];
@@ -440,7 +466,7 @@
     [self checkForOrders];
 }
 #pragma mark -
-#pragma mark leaveRun
+#pragma mark  
 -(void)leaveRun{
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     Order *order = [Order sharedOrder];
@@ -452,6 +478,10 @@
                                                        timeoutInterval:60.0];
     
     //conn.tag =@"leaveRun";
+    
+    #ifdef DEBUG 
+    NSLog(@"URL %@",[request URL]);
+    #endif
     NSError *requestError;
     NSURLResponse *urlResponse = nil;
     NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
@@ -470,6 +500,7 @@
     [pool release];    
 }
 -(void)updateleaveRun{
+    [[Order sharedOrder]clearOrder]; 
      [self checkForOrders];
 }
 #pragma mark -
@@ -478,6 +509,20 @@
 -(void)initStartRun
 {
     dash_summary = [[[NSMutableDictionary alloc]init]retain];
+    
+    if(self.navigationItem.rightBarButtonItem ==startRunBtn)
+    {
+        //Check if any sections are filled out.
+        //if so, enable startRunBtn
+        
+        if(![self isRunDataFilledOut])
+            startRunBtn.enabled = NO;
+        else
+            startRunBtn.enabled = YES;
+        
+        
+    }
+
     
 	friends = [[FriendsInfo alloc]init];
 	friends.managedObjectContext = self.managedObjectContext;	
@@ -532,8 +577,9 @@
         NSString *_cityState = [NSString stringWithFormat:@"%@,%@",[[[dash_dict objectForKey:@"selected_location"] objectForKey:@"location"]objectForKey:@"city"],[[[dash_dict objectForKey:@"selected_location"] objectForKey:@"location"]objectForKey:@"state_code"]];
         
         location_cell.textView.text = [NSString stringWithFormat:@"%@\n%@\n%@",_name,_address,_cityState];
-
     }
+   if([dash_dict objectForKey:@"selected_location"] == NULL)
+        location_cell.textView.text = @"Tap to choose location";
 
     
 	[cells addObject:location_cell];
@@ -547,6 +593,9 @@
         if([dash_dict objectForKey:@"selected_date"]!= (id)[NSNull null])
             time_cell.textView.text = [dash_dict objectForKey:@"selected_date"];
 	}
+    if([dash_dict objectForKey:@"selected_date"] == NULL)
+        time_cell.textView.text = @"Tap to select time";
+    
     [cells addObject:time_cell];
 	[time_cell release];
 	
@@ -567,6 +616,8 @@
         if(users_str != (id)[NSNull null])
             attendees_cell.textView.text = users_str;
 	}
+    if([dash_dict objectForKey:@"selected_friends"] == NULL)
+        attendees_cell.textView.text = @"Tap to add friends to run";
      
 	[cells addObject:attendees_cell];
 	[attendees_cell release];
@@ -658,10 +709,11 @@
 	
 	[request setHTTPMethod:@"POST"];
 	NSString *post_str = [NSString stringWithFormat:@"device_tokens=%@&push_type=%@&%@",[device_id_array componentsJoinedByString:@","],push_type,runnerInfo];
+    #ifdef DEBUG
+    NSLog(@"request %@",[request URL]);
     NSLog(@"post_str %@",post_str);
-    
+    #endif
 	[request setHTTPBody:[post_str dataUsingEncoding:NSUTF8StringEncoding]]; 
-	//conn.tag =@"startRun";
     
     
     NSError *requestError;
@@ -675,6 +727,11 @@
     }
     else
     {
+        NSString * json_str = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+        #ifdef DEBUG
+        NSLog(@"json_str %@",json_str);
+        #endif
+
         [self performSelectorOnMainThread:@selector(updatesubmitDash)
                                withObject:nil
                             waitUntilDone:NO];
@@ -695,8 +752,9 @@
 }
 -(BOOL)isRunDataFilledOut
 {
+    //Friends should be an option
     NSMutableDictionary *dash_dict = [[DashSummary instance] getDict]; 
-    if([dash_dict objectForKey:@"selected_date"] == NULL || [dash_dict objectForKey:@"selected_location"] == NULL || [dash_dict objectForKey:@"selected_friends"] == NULL)
+    if([dash_dict objectForKey:@"selected_date"] == NULL || [dash_dict objectForKey:@"selected_location"] == NULL /*|| [dash_dict objectForKey:@"selected_friends"] == NULL*/)
         return NO;
     else
         return YES;
@@ -787,9 +845,8 @@
 }
 -(void)goMapView
 {
-	MapViewController *mapView = [[MapViewController alloc] initWithNibName:@"MapViewController" bundle:nil];
+	MapViewController *mapView = [[[MapViewController alloc] initWithNibName:@"MapViewController" bundle:nil]autorelease];
 	[self.navigationController pushViewController:mapView animated:YES];
-	[mapView release];
 }
 -(void)goTimeView
 {

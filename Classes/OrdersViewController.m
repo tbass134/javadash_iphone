@@ -35,6 +35,8 @@
 #define CELL_CONTENT_MARGIN 10.0f
 #define CURRENT_TAB_INDEX 1
 
+#define DEBUG 1
+
 @implementation OrdersViewController
 //ViewCurrentOrders
 @synthesize run_array;
@@ -173,7 +175,6 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"reloadData" object:nil];
 
     
-    
     //Event listener to update order when an order has been editied
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OrderEdited:) name:@"OrderEdited" object:nil];
 
@@ -300,11 +301,14 @@
         current_orders_table.hidden = NO;
         [self showNoOrdersView:NO withTitle:nil andMessage:nil];
 
+        /*
         if([[user_order objectForKey:@"is_runner"] intValue] == 0)
         {
             edit = [[UIBarButtonItem alloc]initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(edit:)];
             self.navigationItem.leftBarButtonItem = edit;
 		}
+         */
+        
         //Save this dictionary into Drink Orders sp we can edit it
 		[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"];
 		
@@ -376,6 +380,9 @@
 #pragma mark Show No Orders View
 -(void)showNoOrdersView:(BOOL)show withTitle:(NSString *)title andMessage:(NSString *)message;
 {
+    //if(!current_orders_view.superview)
+    //    return;
+    
     BOOL isShowing = [self.view.subviews containsObject:noOrdersView];
     NSLog(@"isShowing %d",isShowing);
     
@@ -551,6 +558,7 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
 -(void)initPlaceOrder
 {
 	self.navigationItem.rightBarButtonItem = send_order;
+    send_order.enabled = NO;
     self.navigationItem.leftBarButtonItem = goback;
 }
 -(void)goBack:(id)sender
@@ -590,7 +598,7 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
 	
 	DrinkOrders *drink_orders = [DrinkOrders instance];
 	NSMutableArray *drink_orders_array  = [drink_orders getArray];
-    NSLog(@"drink_orders_array %@",drink_orders_array);
+   
     
 	for(int i=0;i<[drink_orders_array count];i++)
 	{
@@ -607,6 +615,10 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
 	if(theString != NULL && ![theString isEqualToString:@""])
 	{
 		NSString *post_str = [NSString stringWithFormat:@"device_id=%@&order=%@&run_id=%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],[Utils urlencode:theString],[[[order currentOrder]objectForKey:@"run"]objectForKey:@"id"]];
+        #ifdef DEBUG
+                NSLog(@"request %@",[request URL]);
+                NSLog(@"post_str %@",post_str);
+        #endif
 		[request setHTTPBody:[post_str dataUsingEncoding:NSUTF8StringEncoding]]; 
 		NSError *requestError;
         NSURLResponse *urlResponse = nil;
@@ -619,7 +631,10 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
         }
         else
         {
-          
+            #ifdef DEBUG
+            NSString * json_str = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSLog(@"json_str %@",json_str);
+            #endif
             [self performSelectorOnMainThread:@selector(orderAdded)
                                    withObject:nil
                                 waitUntilDone:NO];
@@ -642,7 +657,9 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
     [drink_orders clearArray];
     
     NSMutableArray *drink_orders_array  = [drink_orders getArray];
+    #ifdef DEBUG
     NSLog(@"drink_orders_array %@",drink_orders_array);
+    #endif  
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
 }
@@ -758,6 +775,15 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
             [self checkForOrders];
         else 
             [self gotoScreen];
+    }
+    
+    if(self.navigationItem.rightBarButtonItem == send_order)
+    {
+        NSLog(@"Drink Order %@",[[DrinkOrders instance]getArray]);
+        if([[[DrinkOrders instance]getArray]count]>0)
+            send_order.enabled = YES;
+        else
+            send_order.enabled = NO;
     }
 
     modalViewDidAppear = NO;

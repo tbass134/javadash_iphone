@@ -74,7 +74,7 @@ static NSString* kAppId = @"189714094427611";
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [FlurryAnalytics startSession:@"MUMH27DFIF94MBXYY19G"];
     
-    [TestFlight takeOff:@"35d5d168384265e6c34d11672884014f_MTQ4NjIwMTEtMDktMTMgMjM6MTc6MDIuMzI0NjI1"];
+    //[TestFlight takeOff:@"35d5d168384265e6c34d11672884014f_MTQ4NjIwMTEtMDktMTMgMjM6MTc6MDIuMzI0NjI1"];
 	
     
    
@@ -88,7 +88,7 @@ static NSString* kAppId = @"189714094427611";
 
     if([[NSUserDefaults standardUserDefaults] objectForKey:@"enable_push_notifications"])
     {
-        printf("Enabled");
+        printf("enable_push_notifications");
         //Register for notifications
         [[UIApplication sharedApplication]
          registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
@@ -99,12 +99,12 @@ static NSString* kAppId = @"189714094427611";
     {
         //Create a unique device id to be used
         NSString *deviceID = [[UIDevice currentDevice] uniqueGlobalDeviceIdentifier];
-        
         [[NSUserDefaults standardUserDefaults]setValue:deviceID forKey:@"_UALastDeviceToken"];
     }
 	#if TARGET_IPHONE_SIMULATOR
         [self initTesting];
     #endif
+    
 	if(![Utils checkIfContactAdded])
 	{
         dbSignupViewController = [[DBSignupViewController alloc] initWithNibName:@"DBSignupViewController" bundle:nil];
@@ -300,7 +300,6 @@ static NSString* kAppId = @"189714094427611";
 	if ([[userInfo allKeys] containsObject:@"order"])
 	{
 		NSDictionary *orderInfo  = [userInfo objectForKey:@"order"];
-		[Utils printDict:orderInfo];
 		if([[orderInfo objectForKey:@"push_type"] isEqualToString:@"doOrder"])
 		{
 			message = [NSString stringWithFormat:@"%@ wants to know if you want some coffee!",[orderInfo objectForKey:@"runner"]];

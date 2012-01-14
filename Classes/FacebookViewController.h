@@ -18,6 +18,7 @@
     IBOutlet FBLoginButton* _fbButton;
     IBOutlet UIButton* _getUserInfoButton;
     IBOutlet UITableView *table_view;
+    IBOutlet UILabel *loading_txt;
     NSMutableArray *urlArray;
     NSMutableArray *images;
     NSMutableArray *names;

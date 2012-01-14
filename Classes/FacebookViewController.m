@@ -24,40 +24,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(facebookDidLogin:) 
-                                                     name:@"facebookDidLogin"
-                                                   object:nil];
-
-    
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(getFriendsList) 
-                                                     name:@"getFriendsList"
-                                                   object:nil];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(fbFailed) 
-                                                     name:@"fbFailed"
-                                                   object:nil];
-        
-        
-        cancel_btn = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
-        //followAll_btn = [[UIBarButtonItem alloc]initWithTitle:@"Follow all" style:UIBarButtonItemStyleDone target:self action:@selector(followAll)];
-        
-        self.navigationItem.rightBarButtonItem = cancel_btn;
-        
-        
-        if([UIAppDelegate.facebook isSessionValid])
-        {
-            //self.navigationItem.rightBarButtonItem = followAll_btn;
-            UIAppDelegate.fb_tag = @"me/friends";
-            [UIAppDelegate.facebook requestWithGraphPath:@"me/friends" andDelegate:UIAppDelegate];
-        }
-        else
-        {
-            [self login];
-        }
-
 }
     return self;
 }
@@ -91,24 +57,7 @@
 
 -(void)loadFromServer
 {
-    /*
-    //Get all the friends device ID's
-    friends = [[FriendsInfo alloc]init];
-	friends.managedObjectContext = self.managedObjectContext;	
-	NSArray *friends_array = [friends getAllFriends];    
-    
-    if([friends_array count] == 0)
-    {
-        return;
-    }
-    NSMutableArray *device_id_array = [[NSMutableArray alloc]init];
 
-    for(int i=0;i<[friends_array count];i++)
-    {
-        [device_id_array addObject:[[friends_array objectAtIndex:i]valueForKey:@"device_id"]];
-    }0
-    
-	*/
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.navigationController.view addSubview:HUD];
     // Regiser for HUD callbacks so we can remove it from the window at the right time
@@ -121,6 +70,7 @@
 														   cachePolicy:NSURLCacheStorageNotAllowed
 													   timeoutInterval:60.0];
     
+    NSLog(@"request %@",[request URL]);
 	URLConnection *conn = [[URLConnection alloc]init];
 	conn.tag =@"getFBUsers";
 	[conn setDelegate:self];
@@ -129,14 +79,15 @@
 - (void)processSuccessful:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
 {
     [HUD hide:YES];
+    loading_txt.hidden = YES;
     NSString * json_str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     SBJSON *parser = [[SBJSON alloc] init];
     NSDictionary *allFBUsers = [[parser objectWithString:json_str error:nil]retain];
     
 
     
-    NSLog(@"allFBUsers %@",allFBUsers);
-    NSLog(@"friends %@",friends);
+    //NSLog(@"allFBUsers %@",allFBUsers);
+    //NSLog(@"friends %@",friends);
     
     for(int i =0;i<[friends count];i++)
     {
@@ -359,20 +310,41 @@
     else
         image_data = nil;
     
-    //Split the names by the space for the first and last name
-    NSArray *name = [[user objectForKey:@"name"] componentsSeparatedByString: @" "];
+    NSCharacterSet * set = [[NSCharacterSet characterSetWithCharactersInString:@" "] invertedSet];
     
-    NSDictionary *user_dict = [[NSDictionary alloc]initWithObjectsAndKeys:
-                               [name objectAtIndex:0],@"FIRSTNAME",
-                               [name objectAtIndex:1],@"LASTNAME",
-                               @"",@"NUMBER",
-                               [user objectForKey:@"email"],@"EMAIL",
-                               image_data,@"IMAGE",
-                               [user objectForKey:@"deviceid"],@"TOKEN",
-                               nil];
+    NSString *fname;
+    NSString *lname;
     
-   
+    if ([[user objectForKey:@"name"] rangeOfCharacterFromSet:set].location != NSNotFound) {
     
+        printf("found space");
+        //Split the names by the space for the first and last name
+        NSArray *name = [[user objectForKey:@"name"] componentsSeparatedByString:@" "];
+        if([name count]>1)
+        {
+            fname = [name objectAtIndex:0];
+            lname = [name objectAtIndex:1];
+        }
+        else
+        {
+            fname = [user objectForKey:@"name"];
+            lname = @"";
+        }
+    }
+    else
+    {
+        fname = [user objectForKey:@"name"];
+        lname = @"";
+    }
+    
+        NSDictionary *user_dict = [[NSDictionary alloc]initWithObjectsAndKeys:
+                                   fname,@"FIRSTNAME",
+                                   lname,@"LASTNAME",
+                                   @"",@"NUMBER",
+                                   [user objectForKey:@"email"],@"EMAIL",
+                                   image_data,@"IMAGE",
+                                   [user objectForKey:@"deviceid"],@"TOKEN",
+                                   nil];
 	
 	
     if(![_friends checkforFriendAdded:user_dict])
@@ -400,6 +372,42 @@
     _friends.managedObjectContext = self.managedObjectContext;
     users = [[NSMutableArray alloc]init];
     self.table_view.hidden = YES;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(facebookDidLogin:) 
+                                                 name:@"facebookDidLogin"
+                                               object:nil];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(getFriendsList) 
+                                                 name:@"getFriendsList"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(fbFailed) 
+                                                 name:@"fbFailed"
+                                               object:nil];
+    
+    
+    cancel_btn = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
+    //followAll_btn = [[UIBarButtonItem alloc]initWithTitle:@"Follow all" style:UIBarButtonItemStyleDone target:self action:@selector(followAll)];
+    
+    self.navigationItem.rightBarButtonItem = cancel_btn;
+    loading_txt.hidden = NO;
+    
+    if([UIAppDelegate.facebook isSessionValid])
+    {
+        //self.navigationItem.rightBarButtonItem = followAll_btn;
+        UIAppDelegate.fb_tag = @"me/friends";
+        [UIAppDelegate.facebook requestWithGraphPath:@"me/friends" andDelegate:UIAppDelegate];
+    }
+    else
+    {
+        [self login];
+    }
+
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 }

@@ -3,7 +3,7 @@
 //  CoffeeRunSample
 //
 //  Created by Tony Hung on 12/14/10.
-//  Copyright 2010 Earthcam. All rights reserved.
+//  Copyright 2010 Dark Bear Interactive. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

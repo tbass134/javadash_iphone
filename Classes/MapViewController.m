@@ -202,7 +202,21 @@
 {
 	NSLog(@"could not retrive Location %@",error);
     [locationManager stopUpdatingLocation];
-    [Utils showAlert:@"Could not load current location" withMessage:nil inView:self.view];
+    MKUserLocation *userLocation = mapView.userLocation;
+    
+    if (!userLocation.location) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Service Disabled" 
+                                                        message:@"To re-enable, please go to Settings and turn on Location Service for this app." 
+                                                       delegate:nil 
+                                              cancelButtonTitle:@"OK" 
+                                              otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
+    else
+        [Utils showAlert:@"Could not load current location" withMessage:nil inView:self.view];
+    
+    
     
     loadingView.hidden = YES;
     noResultsFound.hidden = NO;
@@ -279,8 +293,9 @@
     NSLog(@"Error: %@, %@", [error localizedDescription], [error localizedFailureReason]);
     [Utils showAlert:@"Could not load data" withMessage:nil inView:self.view];
     noResultsFound.hidden = NO;
-    //self.tableView.hidden = YES;
-    //self.mapView.hidden = YES;
+    self.tableView.hidden = YES;
+    self.mapView.hidden = YES;
+    [self.mapView removeAnnotations:self.mapView.annotations];
     [self.view sendSubviewToBack:search_view];
 }
 
@@ -340,7 +355,7 @@
     {
         //[self.tableDataSource addObject:items];
         [locations_array addObject:items];
-        /*
+        
         location = [[CoffeeLocation alloc]init];
         NSMutableDictionary *obj = items;
         //NSLog(@"obj.name %@", [obj objectForKey:@"name"]);
@@ -384,7 +399,16 @@
         [placemark release];
         [location release];
         [tempLocation release];
-         */
+         
+    }
+    if([locations_array count] ==0)
+    {
+        [Utils showAlert:@"No Results Found" withMessage:nil inView:self.view];
+        noResultsFound.hidden = NO;
+        self.tableView.hidden = YES;
+        self.mapView.hidden = YES;
+        [self.mapView removeAnnotations:self.mapView.annotations];
+        [self.view sendSubviewToBack:search_view];
     }
     
      //NSLog(@"self.tableDataSource count %i",[self.tableDataSource count]);
@@ -417,7 +441,7 @@
     for(id items in [yelp_dict objectForKey:@"businesses"])
     {
         [self.tableDataSource addObject:items];
-        /*
+        
         location = [[CoffeeLocation alloc]init];
         NSMutableDictionary *obj = items;
         location.rating_img_url			= [obj objectForKey:@"rating_img_url"];
@@ -459,7 +483,7 @@
         [placemark release];
         [location release];
         [tempLocation release];
-         */
+         
     }
     
     
@@ -485,7 +509,7 @@
 
 - (MKAnnotationView *)mapView:(MKMapView *)theMapView viewForAnnotation:(ParkPlaceMark *)annotation {
 	
-
+    NSLog(@"annotation %@",annotation);
 	MKPinAnnotationView *annView=[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"currentloc"];
 	annView.animatesDrop=TRUE;
 	annView.canShowCallout = TRUE;

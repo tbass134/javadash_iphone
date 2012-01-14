@@ -123,6 +123,9 @@
 	}
     if([tag isEqualToString:@"purchaseApp"])
     {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Purchase Sucessful" message:@"Thanks for your purchase!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        [alert show];
+        [alert release];
         NSString * json_str  = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         if([json_str isEqualToString:@"1"])
         {

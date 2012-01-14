@@ -122,8 +122,9 @@
     signUp_btn = [[UIBarButtonItem alloc]initWithTitle:@"Update" style:UIBarButtonItemStyleDone target:self action:@selector(signup:)];
     signUp_btn.enabled = NO;
     
-    cancel_btn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(goBack)];
-    /*
+    if(gotoContactInfo)
+        cancel_btn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(goBack)];
+        /*
    if(gotoContactInfo)
    {
         self.navigationItem.rightBarButtonItem = signUp_btn;
@@ -512,9 +513,7 @@
     NSString *firstName = [UIAppDelegate.fb_me objectForKey:@"first_name"];
     NSString *lastName = [UIAppDelegate.fb_me objectForKey:@"last_name"];
     
-    NSURL *picture_url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture",[UIAppDelegate.fb_me objectForKey:@"id"]]];
-
-	//Update contact info with FB data
+   	//Update contact info with FB data
 	self.nameTextField.text = firstName;
 	self.lastNameTextField.text = lastName;
     
@@ -526,7 +525,7 @@
 	
     self.enableEmail.enabled = NO;
     
-    
+   /* 
 	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:picture_url
 														   cachePolicy:NSURLCacheStorageNotAllowed
 													   timeoutInterval:60.0];
@@ -536,7 +535,16 @@
 	conn.tag =@"getFBImage";
 	[conn setDelegate:self];
 	[conn initWithRequest:request];
+    */
     
+    //This works, need to put into background thread
+    
+    
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];	
+    HUD.delegate = self;	
+    [HUD show:YES];
+    [HUD showWhileExecuting:@selector(updatePhoto) onTarget:self withObject:nil animated:YES];    
     //Upload fb ID to server
     //[self saveFBId];
     
@@ -544,7 +552,35 @@
      [[NSUserDefaults standardUserDefaults]setValue:@"FB_ID" forKey:fbid];
     NSLog(@"fbid %@",fbid);
     
-    [self signup:nil];
+    //[self signup:nil];
+}
+-(void)updatePhoto
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    NSURL *picture_url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture",[UIAppDelegate.fb_me objectForKey:@"id"]]];
+    
+    NSLog(@"picture_url %@",picture_url);
+    UIImage * img = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:picture_url]];
+    
+    [self performSelectorOnMainThread:@selector(displayPhoto:)
+                           withObject:img
+                        waitUntilDone:NO];
+
+
+    [pool release];
+}
+-(void)displayPhoto:(UIImage *)photo
+{
+    [HUD hide:YES];
+    //UIImage* _image = [UIImage imageWithData: data];
+    CGSize sz = CGSizeMake(80, 80);
+    UIImage *smallImage = [Utils imageWithImage:photo scaledToSize:sz];
+    //image.image = smallImage;
+    
+    self.photo = [Utils imageWithImage:smallImage scaledToSize:sz];
+    NSLog(@"self.photo %@",self.photo);
+    [self.photoButton setImage:self.photo forState:UIControlStateNormal];
 }
 -(void)saveFBId
 {
@@ -570,8 +606,6 @@
 }
 -(void)signup:(id)sender
 {
-    
-
     if(self.nameTextField.text != NULL && ![self.nameTextField.text isEqualToString:@""])
 		[[NSUserDefaults standardUserDefaults] setValue:self.nameTextField.text forKey:@"FIRSTNAME"];
     
@@ -597,17 +631,7 @@
     //Save the setting for Enable Push notifcations
     BOOL enable_push =[[[NSUserDefaults standardUserDefaults] valueForKey:@"enable_push_notifications"]boolValue];
     
-    /*
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/addUser.php?deviceid=%@&name=%@&email=%@&enable_email=%d&fb=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],[Utils urlencode:userName],self.emailTextField.text,self.enableEmail.on,fbid,ts]]
-														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
-													   timeoutInterval:60.0];
-    
-    NSLog(@"url %@", [request URL]);
-	URLConnection *conn = [[URLConnection alloc]init];
-	conn.tag =@"GetOrders";
-	[conn setDelegate:self];
-	[conn initWithRequest:request];
-     */
+
     if(userAdded)
         return;
     
@@ -658,15 +682,18 @@
         printf("Got image");
         UIImage* _image = [UIImage imageWithData: data];
 		CGSize sz = CGSizeMake(80, 80);
-		//UIImage *smallImage = [Utils imageWithImage:_image scaledToSize:sz];
+		UIImage *smallImage = [Utils imageWithImage:_image scaledToSize:sz];
 		//image.image = smallImage;
         
-        self.photo = [Utils imageWithImage:_image scaledToSize:sz];
+        self.photo = [Utils imageWithImage:smallImage scaledToSize:sz];
+        //self.photo = [UIImage imageWithData:data];
+        NSLog(@"self.photo %@",self.photo);
         [self.photoButton setImage:self.photo forState:UIControlStateNormal];
         
     }
     else
-    {/*
+    {
+        
         if(gotoContactInfo)
         {
             [self.navigationController dismissModalViewControllerAnimated:YES];
@@ -676,7 +703,7 @@
         {
             [[self delegate] userDataAdded];
         }
-      */
+      
     }
 
 }
