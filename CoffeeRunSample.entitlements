@@ -8,6 +8,10 @@
 	</array>
 	<key>com.apple.developer.ubiquity-kvstore-identifier</key>
 	<string>$(TeamIdentifierPrefix)com.darkbearinteractive.coffeerun</string>
+	<key>Can be debugged</key>
+	<true/>
+	<key>New item</key>
+	<string></string>
 	<key>keychain-access-groups</key>
 	<array>
 		<string>$(AppIdentifierPrefix)com.darkbearinteractive.coffeerun</string>

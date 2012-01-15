@@ -102,12 +102,6 @@
     // Return the number of rows in the section.
     return [self.friends_array count];
 }
-
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-	
-	return 80;
-}
-
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     

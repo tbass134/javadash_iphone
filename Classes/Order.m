@@ -87,6 +87,7 @@ static Order *sharedInstance = nil;
 
 -(void)clearOrder
 {
+    [current_order removeAllObjects];
     current_order = nil;
 }
 

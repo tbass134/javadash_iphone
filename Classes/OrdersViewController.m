@@ -29,6 +29,7 @@
 #import "CustomOrderViewController.h"
 #import "CoffeeDetailsView.h"
 #import "MutipleOrdersTableView.h"
+#import "FlurryAnalytics.h"
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 320.0f
@@ -232,8 +233,7 @@
     [drink_orders clearArray];
 
     
-	Order *order = [Order sharedOrder];
-	NSDictionary *user_order = [[order currentOrder]objectForKey:@"run"];
+	NSDictionary *user_order = [[[[Order sharedOrder] currentOrder]objectForKey:@"run"]retain];
 	//NSLog(@"user_order %@",user_order);
 	
 	
@@ -293,6 +293,14 @@
 		[cell3 release];
 	}
 	orders_cells = [[NSMutableArray alloc] init];
+    if([user_order objectForKey:@"orders"] == (id)[NSNull null])
+    {
+        printf("No Orders");
+        [self showNoOrdersView:YES withTitle:@"No Orders" andMessage:@"Click \"Add to Order\" to add an order"];
+        current_orders_table.hidden = NO;
+        return;
+        
+    }
 	int orders_count = [[user_order objectForKey:@"orders"]count];
     NSLog(@"orders_count %i",orders_count);
 	
@@ -310,7 +318,7 @@
          */
         
         //Save this dictionary into Drink Orders sp we can edit it
-		[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"];
+		[[[[Order sharedOrder] currentOrder]objectForKey:@"run"]objectForKey:@"orders"];
 		
 		for(int i=0;i<orders_count;i++)
 		{
@@ -649,6 +657,7 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
 }
 -(void)orderAdded
 {
+    [FlurryAnalytics logEvent:@"Order Added"];
     if(self.navigationController.tabBarController.selectedIndex ==CURRENT_TAB_INDEX)
         [Utils showAlert:@"Order Added" withMessage:nil inView:self.view];
     

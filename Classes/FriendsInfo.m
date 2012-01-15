@@ -10,6 +10,7 @@
 #import "Utils.h"
 #import "Constants.h"
 #import "URLConnection.h"
+#import "FlurryAnalytics.h"
 
 @implementation FriendsInfo
 //CoreData
@@ -18,6 +19,7 @@
 
 -(BOOL)insertFriendData:(NSDictionary *)dict{
 	
+    [FlurryAnalytics logEvent:@"Friend Added"];
 	BOOL success = NO;
 	printf("insertFriendData");
 	[Utils printDict:dict];

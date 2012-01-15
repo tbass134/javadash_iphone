@@ -77,4 +77,8 @@
 -(void)checkForOrders;
 -(BOOL)isRunDataFilledOut;
 
+-(void)loadYelpImage:(NSString *)img_str;
+-(void)displayPhoto:(UIImage *)photo;
+-(void)displayDefaultPhoto;
+
 @end

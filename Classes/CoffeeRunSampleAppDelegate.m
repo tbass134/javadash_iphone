@@ -74,7 +74,7 @@ static NSString* kAppId = @"189714094427611";
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [FlurryAnalytics startSession:@"MUMH27DFIF94MBXYY19G"];
     
-    //[TestFlight takeOff:@"35d5d168384265e6c34d11672884014f_MTQ4NjIwMTEtMDktMTMgMjM6MTc6MDIuMzI0NjI1"];
+    [TestFlight takeOff:@"35d5d168384265e6c34d11672884014f_MTQ4NjIwMTEtMDktMTMgMjM6MTc6MDIuMzI0NjI1"];
 	
     
    
@@ -308,7 +308,7 @@ static NSString* kAppId = @"189714094427611";
 			message = [NSString stringWithFormat:@"%@ has placed an order!",[orderInfo objectForKey:@"attendee"]];
 		}
 
-        [UIApplication sharedApplication].applicationIconBadgeNumber = 1;
+        [UIApplication sharedApplication].applicationIconBadgeNumber++;
 	}
     
    // printf("Should be called Reload Data");

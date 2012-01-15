@@ -51,6 +51,7 @@ static ImageCache *imageCache = nil;
     }
     if(url == NULL)
     {
+        printf("No IMage to Load\n");
         UIImageView *imageView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"no-image.gif"]] autorelease];
         [self addSubview:imageView];
         imageView.frame = self.bounds;

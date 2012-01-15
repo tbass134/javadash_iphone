@@ -17,6 +17,7 @@
 #import "Constants.h"
 #import "MKStoreManager.h"
 #import "FacebookViewController.h"
+#import "FlurryAnalytics.h"
 
 
 #define MAX_BUMP_CHUNK 1024000.0f
@@ -187,6 +188,7 @@
 #pragma mark -
 #pragma mark BumpAPIDelegate methods
 - (void) bumpDataReceived:(NSData *)chunk{
+    [FlurryAnalytics logEvent:@"User Bumped with other user"];
 	//The chunk was packaged by the other user using an NSKeyedArchiver, so we unpackage it here with our NSKeyedUnArchiver
 	NSDictionary *responseDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:chunk];
 	

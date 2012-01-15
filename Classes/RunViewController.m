@@ -28,6 +28,7 @@
 #import "SelectTimeView.h"
 #import "FriendsList.h"
 #import "CoffeeRunSampleAppDelegate.h"
+#import "FlurryAnalytics.h"
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 320.0f
@@ -74,6 +75,7 @@
 }
 #pragma mark checkForOrders
 -(void)checkForOrders{
+    
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.navigationController.view addSubview:HUD];
     // Regiser for HUD callbacks so we can remove it from the window at the right time
@@ -126,6 +128,11 @@
     [pool release];
 }
 -(void)updateOrders{
+    if(![self isRunDataFilledOut])
+        startRunBtn.enabled = NO;
+    else
+        startRunBtn.enabled = YES;
+    
     Order *order = [Order sharedOrder];
     if([order currentOrder] == NULL)
     {
@@ -226,19 +233,24 @@
 		}
 	}
     [user_order release];
+    
 }
 
 #pragma mark View Run
 -(void)initShowRun
 {
     
-    yelp_img.image = [UIImage imageNamed:@"blank_location.png"];
+    
     self.navigationItem.rightBarButtonItem = showOptionsBtn;
     Order *order = [Order sharedOrder];
 	NSDictionary *user_order = [[order currentOrder]objectForKey:@"run"];
     
-	if([[user_order objectForKey:@"location"] objectForKey:@"image"] != NULL && ![[[user_order objectForKey:@"location"] objectForKey:@"image"] isEqualToString:@""])
-		[yelp_img loadImageFromURL:[NSURL URLWithString:[[user_order objectForKey:@"location"] objectForKey:@"image"]]];
+	if([[user_order objectForKey:@"location"] objectForKey:@"image"] != NULL || ![[[user_order objectForKey:@"location"] objectForKey:@"image"] isEqualToString:@""])
+    {
+        [self loadYelpImage:[[user_order objectForKey:@"location"] objectForKey:@"image"]];
+    }
+    
+    
     
 	run_info_txt.text = [NSString stringWithFormat:@"%@\n%@",[[user_order objectForKey:@"location"]objectForKey:@"name"],[[user_order objectForKey:@"location"]objectForKey:@"address"]];
     
@@ -269,7 +281,14 @@
         
         //showOptionsBtn.enabled = YES;
 		orders_cells = [[NSMutableArray alloc] init];
-		
+        
+		if([user_order objectForKey:@"orders"] == (id)[NSNull null])
+        {
+            printf("No Orders");
+            return;
+            
+        }
+        
 		int orders_count = [[user_order objectForKey:@"orders"]count];
 		static NSString *CellIdentifier = @"Cell";	
 		if(orders_count >0)
@@ -361,6 +380,7 @@
 - (void)updateTimer:(NSTimer *)myTimer{
     if(run_date != NULL)
     {
+
         
         NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         int unitFlags = NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
@@ -500,7 +520,6 @@
     [pool release];    
 }
 -(void)updateleaveRun{
-    [[Order sharedOrder]clearOrder]; 
      [self checkForOrders];
 }
 #pragma mark -
@@ -692,7 +711,7 @@
     
     //Send a push to all devices
 	NSString *push_type = @"doOrder";
-	NSString *runnerInfo = [NSString stringWithFormat:@"first_name=%@&last_name=%@&deviceid=%@&selected_date=%@&selected_name=%@&selected_address=%@&selected_url=%@&selected_yelp_id=%@",
+	NSString *runnerInfo = [NSString stringWithFormat:@"first_name=%@&last_name=%@&deviceid=%@&selected_date=%@&selected_name=%@&selected_address=%@&selected_url=%@&selected_yelp_id=%@&date_added=%@",
 							[[NSUserDefaults standardUserDefaults]valueForKey:@"FIRSTNAME"],
 							[[NSUserDefaults standardUserDefaults]valueForKey:@"LASTNAME"],
 							[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],
@@ -701,6 +720,7 @@
 							address,
 							image_url,
 							selected_yelp_id,
+                            [NSDate date],
 							nil];
 	
 	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/startrun.php",baseDomain]]
@@ -740,6 +760,7 @@
 }
 -(void)updatesubmitDash
 {
+    [FlurryAnalytics logEvent:@"Dash Started"];
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Order Sent" message:@"Your order has been submitted" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK",nil];
     [alert show];
     [alert release];
@@ -903,7 +924,44 @@
 }
 -(void)viewDidDisappear:(BOOL)animated
 {
-     //[self stopTimer];
+     [self stopTimer];
+}
+#pragma mark Load Yelp Image
+-(void)loadYelpImage:(NSString *)img_str
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    NSURL *picture_url = [NSURL URLWithString:img_str];
+    
+    NSLog(@"picture_url %@",picture_url);
+    if(picture_url != NULL)
+    {
+        UIImage * img = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:picture_url]];
+        
+        [self performSelectorOnMainThread:@selector(displayPhoto:)
+                               withObject:img
+                            waitUntilDone:NO];
+        
+    }
+    else
+    {
+        [self performSelectorOnMainThread:@selector(displayDefaultPhoto)
+                               withObject:nil
+                            waitUntilDone:NO];
+
+    }
+    [pool release];
+}
+-(void)displayPhoto:(UIImage *)photo
+{
+    //UIImage* _image = [UIImage imageWithData: data];
+    CGSize sz = CGSizeMake(100, 100);
+    UIImage *smallImage = [Utils imageWithImage:photo scaledToSize:sz];
+    yelp_img.image = smallImage;
+}
+-(void)displayDefaultPhoto
+{
+    yelp_img.image = [UIImage imageNamed:@"blank_location.png"];
 }
 
 - (void)didReceiveMemoryWarning {
