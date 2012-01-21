@@ -30,6 +30,7 @@
 @synthesize edit_order_dict;
 @synthesize orderType;
 @synthesize selected_index;
+@synthesize editLocalOrder;
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 /*
@@ -142,6 +143,13 @@
                 oneRowControl.rowCount = 5;
                 oneRowControl.columnCount = 3;
             }
+
+            else  if([keys count] ==18)          
+            {
+                oneRowControl.rowCount = 9;
+                oneRowControl.columnCount = 2;
+            }
+
             else  if([keys count] ==20)           
             {
                 oneRowControl.rowCount = 10;
@@ -385,6 +393,12 @@
     NSLog(@"drink %@",[drink_orders getArray]);
 #endif
     
+    if(editLocalOrder)
+    {
+        NSLog(@"Edit Local Order"); 
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }
     if(edit_order_dict !=NULL)
     {
         Order *order = [Order sharedOrder];
@@ -417,7 +431,7 @@
     }
     else
     {
-         [Utils showAlert:@"Order Added" withMessage:nil inView:self.view];
+         //[Utils showAlert:@"Order Added" withMessage:nil inView:self.view];
     }
        
     

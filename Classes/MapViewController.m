@@ -274,6 +274,7 @@
                                                                       realm:realm
                                                           signatureProvider:provider];
     [request prepare];
+    NSLog(@"request %@",[request URL]);
     
     _yelpResponseData = [[NSMutableData alloc] init];
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -291,12 +292,14 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     NSLog(@"Error: %@, %@", [error localizedDescription], [error localizedFailureReason]);
+    
     [Utils showAlert:@"Could not load data" withMessage:nil inView:self.view];
     noResultsFound.hidden = NO;
     self.tableView.hidden = YES;
     self.mapView.hidden = YES;
     [self.mapView removeAnnotations:self.mapView.annotations];
     [self.view sendSubviewToBack:search_view];
+     
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
@@ -308,10 +311,12 @@
     //self.mapView.hidden = NO;
     
     NSString *json_str = [[NSString alloc] initWithData:_yelpResponseData encoding:NSUTF8StringEncoding];
+    NSLog(@"json_str %@",json_str);
     SBJSON *parser = [[SBJSON alloc] init];
     yelp_dict= [[parser objectWithString:json_str error:nil]retain];
     total = [[yelp_dict objectForKey:@"total"]intValue];
     [parser release];
+    [json_str release];
     if([yelp_dict objectForKey:@"error"] != NULL)
     {
         [Utils showAlert:@"Could not load data" withMessage:@"Please try again" inView:nil];
@@ -337,6 +342,7 @@
 	region.span=span;
 	region.center=userlocation;
 	[mapView setRegion:region animated:TRUE];
+    [tempLocation release];
     
     
     if(offset<20)

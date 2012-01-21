@@ -58,6 +58,7 @@ static NSString* kAppId = @"189714094427611";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
+    [self customizeAppearance];
     //Facebook
     _permissions =  [[NSArray arrayWithObjects:
                       @"read_stream", @"publish_stream", @"offline_access",nil] retain];
@@ -101,10 +102,11 @@ static NSString* kAppId = @"189714094427611";
         NSString *deviceID = [[UIDevice currentDevice] uniqueGlobalDeviceIdentifier];
         [[NSUserDefaults standardUserDefaults]setValue:deviceID forKey:@"_UALastDeviceToken"];
     }
+    /*
 	#if TARGET_IPHONE_SIMULATOR
         [self initTesting];
     #endif
-    
+    */
 	if(![Utils checkIfContactAdded])
 	{
         dbSignupViewController = [[DBSignupViewController alloc] initWithNibName:@"DBSignupViewController" bundle:nil];
@@ -198,6 +200,18 @@ static NSString* kAppId = @"189714094427611";
     [self.window makeKeyAndVisible];
 }	
 
+
+- (void)customizeAppearance
+{
+    UIImage *tabBackground = [[UIImage imageNamed:@"bottomBar@2x"] 
+                              resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    
+    UITabBar *tabBar = [self.tabBarController tabBar];
+    if ([tabBar respondsToSelector:@selector(setBackgroundImage:)])
+    {
+        [[UITabBar appearance] setBackgroundImage:tabBackground];
+    }
+}
 -(void)checkForAppPurchase
 {
     if([[[NSUserDefaults standardUserDefaults]valueForKey:@"didPurchaseApp"]boolValue])
@@ -498,6 +512,10 @@ static NSString* kAppId = @"189714094427611";
 - (void)adWhirlDidReceiveAd:(AdWhirlView *)awv{
 //#if debug
 	NSLog(@"adWhirlDidReceiveAd");
+#ifdef TARGET_IPHONE_SIMULATOR
+    return;
+#endif
+    
 //#endif
 	//[[UIApplication sharedApplication] setStatusBarHidden:YES animated:YES];
 	//	[self performSelector:@selector(resetNav) withObject:nil afterDelay:.3];

@@ -247,7 +247,7 @@
     
 	if([[user_order objectForKey:@"location"] objectForKey:@"image"] != NULL || ![[[user_order objectForKey:@"location"] objectForKey:@"image"] isEqualToString:@""])
     {
-        [self loadYelpImage:[[user_order objectForKey:@"location"] objectForKey:@"image"]];
+        //[self loadYelpImage:[[user_order objectForKey:@"location"] objectForKey:@"image"]];
     }
     
     

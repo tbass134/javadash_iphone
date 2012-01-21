@@ -11,6 +11,7 @@
 #import "Constants.h"
 #import "URLConnection.h"
 #import "CoffeeRunSampleAppDelegate.h"
+#import "UIImageView+WebCache.h"
 #define UIAppDelegate \
 ((CoffeeRunSampleAppDelegate *)[UIApplication sharedApplication].delegate)
 
@@ -48,6 +49,7 @@
 @synthesize photo = photo_;
 
 @synthesize delegate;
+@synthesize img;
 
 @synthesize gotoContactInfo;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -124,42 +126,15 @@
     
     if(gotoContactInfo)
         cancel_btn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(goBack)];
-        /*
+
+    NSLog(@"gotoContactInfo %d",gotoContactInfo);
+        
    if(gotoContactInfo)
    {
-        self.navigationItem.rightBarButtonItem = signUp_btn;
+       self.view = contact;
+       contact_back_btn.hidden = YES;
+       self.navigationItem.rightBarButtonItem = signUp_btn;
        self.navigationItem.leftBarButtonItem =  cancel_btn;
-        [self.view addSubview:contact]; 
-        contact_back_btn.hidden = YES;
-       
-       
-       CGRect nameOrigin = self.nameTextField.frame;
-       nameOrigin.origin.y -=4;
-       self.nameTextField.frame = nameOrigin;
-       
-       CGRect lastnameOrigin = self.lastNameTextField.frame;
-       lastnameOrigin.origin.y-=4;
-       self.lastNameTextField.frame = lastnameOrigin;
-       
-       
-       CGRect emailOrigin = self.emailTextField.frame;
-       emailOrigin.origin.y-=20;
-       self.emailTextField.frame = emailOrigin;
-       
-       CGRect enableEmailOrigin = self.enableEmail.frame;
-       enableEmailOrigin.origin.y-=20;
-       self.enableEmail.frame = enableEmailOrigin;
-      
-       
-       CGRect EmailLabelOrigin = self.emailLabel.frame;
-       EmailLabelOrigin.origin.y-=20;
-       self.emailLabel.frame = EmailLabelOrigin;
-       
-       
-       CGRect sendEmailLabelOrigin = self.sendemailLabel.frame;
-       sendEmailLabelOrigin.origin.y-=20;
-       self.sendemailLabel.frame = sendEmailLabelOrigin;
-
 
     }
     else
@@ -168,12 +143,12 @@
         contact_back_btn.hidden = NO;
         [self.view addSubview:page1]; 
     }
-     */
+ /*   
     self.view = contact;
     contact_back_btn.hidden = YES;
     self.navigationItem.rightBarButtonItem = signUp_btn;
     self.navigationItem.leftBarButtonItem =  cancel_btn;
-
+*/
    
     
     
@@ -293,84 +268,7 @@
 }
 
 #pragma mark View Buttons
-//View 1
--(IBAction)gotoPage2:(id)sender
-{
-    printf("gotoPage2");
-    
-	[self performSelector:@selector(removeStep1) withObject:nil afterDelay:kAnimationDuration];
-	CGRect tempOrigin = page2.frame;
-	tempOrigin.origin.x=0;
-	CGRect temp = page2.frame;
-	temp.origin.x=320;
-	page2.frame = temp;
-	
-	CGRect tempStep1 = page1.frame;
-	tempStep1.origin.x=-320;
-	[self.view addSubview:page2];
-	
-	[UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationDuration:kAnimationDuration];
-    
-	page2.frame = tempOrigin;
-	page1.frame = tempStep1;
-	[UIView commitAnimations];
-    
-}
--(void)removeStep1 {
-	[page1 removeFromSuperview];
-	
-}
 
-//View 2
--(IBAction)gotoPage3:(id)sender
-{
-    [self performSelector:@selector(removeStep2) withObject:nil afterDelay:kAnimationDuration];
-	CGRect tempOrigin = page3.frame;
-	tempOrigin.origin.x=0;
-	CGRect temp = page3.frame;
-	temp.origin.x=320;
-	page3.frame = temp;
-	
-	CGRect tempStep1 = page2.frame;
-	tempStep1.origin.x=-320;
-	[self.view addSubview:page3];
-	
-	[UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationDuration:kAnimationDuration];
-	
-	page3.frame = tempOrigin;
-	page2.frame = tempStep1;
-	[UIView commitAnimations];
-}
--(void)removeStep2 {
-	[page2 removeFromSuperview];
-	
-}
--(IBAction)goBack2:(id)sender
-{
-    printf("goBack2");
-    [self performSelector:@selector(removeStep2) withObject:nil afterDelay:kAnimationDuration];
-	
-	CGRect tempOrigin = page2.frame;
-	tempOrigin.origin.x=0;
-	
-	CGRect temp = page2.frame;
-	temp.origin.x=320;
-	
-	CGRect tempStep1 = page1.frame;
-	tempStep1.origin.x=0;
-	[self.view addSubview:page1];
-	
-	[UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationDuration:kAnimationDuration];
-	
-	page2.frame = temp;
-	page1.frame = tempStep1;
-	[UIView commitAnimations];
-
-}
-//View 3
 -(IBAction)gotoPageContact:(id)sender
 {
     self.navigationItem.rightBarButtonItem = signUp_btn;
@@ -394,6 +292,45 @@
 }
 -(void)removeStep3 {
 	[page3 removeFromSuperview];
+}
+-(IBAction)skipContact:(id)sender
+{
+    printf("skip"); 
+    self.nameTextField.text = @"JavaDash";
+    self.lastNameTextField.text = @"User";
+    
+    [[NSUserDefaults standardUserDefaults]setValue:self.nameTextField.text forKey:@"FIRSTNAME"];
+    [[NSUserDefaults standardUserDefaults]setValue:self.lastNameTextField.text forKey:@"LASTNAME"];
+    
+    //Save the setting for Enable Push notifcations
+    BOOL enable_push =[[[NSUserDefaults standardUserDefaults] valueForKey:@"enable_push_notifications"]boolValue];
+   
+    NSString *userName = [NSString stringWithFormat:@"%@ %@",self.nameTextField.text,self.lastNameTextField.text];
+    NSString *user_info = [NSString stringWithFormat:@"name=%@&deviceid=%@&email=%@&enable_email_use=%d&platform=%@&fbid=%@&enable_push=%d",
+                           [Utils urlencode:userName],
+                           [[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],
+                           self.emailTextField.text,
+                           self.enableEmail.on,
+                           @"IOS",
+                           fbid,
+                           enable_push,
+                           nil];
+    
+    NSLog(@"user_info %@",user_info);
+    NSData *postData = [user_info dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/addUser.php",baseDomain]]
+                                                           cachePolicy:NSURLCacheStorageNotAllowed
+                                                       timeoutInterval:60.0];
+    NSLog(@"request %@",[request URL]);
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:postData];
+    URLConnection *conn = [[URLConnection alloc]init];
+    conn.tag = @"skipContact";
+    [conn setDelegate:self];
+    [conn initWithRequest:request];
+    //[self resignKeyboard:nil];    
+    userAdded = YES;
+
 }
 -(IBAction)goBack3:(id)sender
 {
@@ -540,6 +477,22 @@
     //This works, need to put into background thread
     
     
+    //CGSize sz = CGSizeMake(80, 80);
+    //UIImage *smallImage = [Utils imageWithImage:photo scaledToSize:sz];
+    //image.image = smallImage;
+    NSURL *picture_url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture",[UIAppDelegate.fb_me objectForKey:@"id"]]];
+    
+    NSLog(@"picture_url %@",picture_url);
+    [img setImageWithURL:picture_url placeholderImage:[UIImage imageNamed:@"avatar.png"]];
+    //self.photo = img.image;
+    
+   //self.photo = [Utils imageWithImage:smallImage scaledToSize:sz];
+    NSLog(@"self.photo %@",self.photo);
+    //[self.photoButton setImage:self.photo forState:UIControlStateNormal];
+
+    
+    
+    
     HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:HUD];	
     HUD.delegate = self;	
@@ -556,10 +509,9 @@
 }
 -(void)updatePhoto
 {
+    /*
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    NSURL *picture_url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture",[UIAppDelegate.fb_me objectForKey:@"id"]]];
-    
+    NSLog(@"updatePhooto %@",[UIAppDelegate.fb_me objectForKey:@"id"]);
     NSLog(@"picture_url %@",picture_url);
     UIImage * img = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:picture_url]];
     
@@ -569,19 +521,13 @@
 
 
     [pool release];
+     */
 }
 -(void)displayPhoto:(UIImage *)photo
 {
     [HUD hide:YES];
     //UIImage* _image = [UIImage imageWithData: data];
-    CGSize sz = CGSizeMake(80, 80);
-    UIImage *smallImage = [Utils imageWithImage:photo scaledToSize:sz];
-    //image.image = smallImage;
-    
-    self.photo = [Utils imageWithImage:smallImage scaledToSize:sz];
-    NSLog(@"self.photo %@",self.photo);
-    [self.photoButton setImage:self.photo forState:UIControlStateNormal];
-}
+   }
 -(void)saveFBId
 {
     //Store this in a UserDefaults since we'll need it again
@@ -608,10 +554,11 @@
 {
     if(self.nameTextField.text != NULL && ![self.nameTextField.text isEqualToString:@""])
 		[[NSUserDefaults standardUserDefaults] setValue:self.nameTextField.text forKey:@"FIRSTNAME"];
+  
     
 	if(self.lastNameTextField.text != NULL && ![self.lastNameTextField.text isEqualToString:@""])
 		[[NSUserDefaults standardUserDefaults] setValue:self.lastNameTextField.text forKey:@"LASTNAME"];
-	
+    
 	if(self.emailTextField.text != NULL && ![self.emailTextField.text isEqualToString:@""])
     {
         
@@ -669,8 +616,17 @@
 {
     NSLog(@"data %@",[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
     
+    
+    if([tag isEqualToString:@"skipContact"])
+    {
+        if([Utils checkIfContactAdded])
+        {
+            [[self delegate] userDataAdded];
+        }
+    }
     if([tag isEqualToString:@"sendFriendData"])
     {
+        
         [self.navigationController dismissModalViewControllerAnimated:YES];
     }
     if([tag isEqualToString:@"saveFB"])
@@ -693,6 +649,7 @@
     }
     else
     {
+        printf("user added");
         
         if(gotoContactInfo)
         {

@@ -94,18 +94,13 @@
 @property(nonatomic, retain) UIToolbar *keyboardToolbar;
 
 @property(nonatomic, retain) UIImage *photo;
+@property(nonatomic, retain) IBOutlet UIImageView *img;
 
 @property(nonatomic) BOOL gotoContactInfo;
-//View 1
--(IBAction)gotoPage2:(id)sender;
 
-//View 2
--(IBAction)gotoPage3:(id)sender;
--(IBAction)goBack2:(id)sender;
-
-//View 3
 -(IBAction)gotoPageContact:(id)sender;
 -(IBAction)goBack3:(id)sender;
+-(IBAction)skipContact:(id)sender;
 
 //Contact view
 - (IBAction)choosePhoto:(id)sender;

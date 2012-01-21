@@ -32,6 +32,7 @@
     NSMutableArray *switch_array;
     
     NSMutableArray *options_array;
+    BOOL editLocalOrder;
     
 	
 }
@@ -39,6 +40,7 @@
 @property(nonatomic,retain) NSDictionary *edit_order_dict;
 @property(nonatomic,retain)NSString *orderType;
 @property(nonatomic,assign)int selected_index;
+@property(nonatomic,assign)BOOL editLocalOrder;
 
 @property (nonatomic, retain) IBOutlet SCRSegmentedControl *oneRowControl, *twoRowControl, *threeRowControl;
 @property (nonatomic, retain) IBOutlet UILabel *valueLabel;

@@ -517,11 +517,13 @@
                 
                if([drink_dict count] >1 && [drink_dict isKindOfClass:[NSArray class]])
                {
+                   //Disabled for now
+                   /*
                     //Push the new mutiple Order Table View
                     MutipleOrdersTableView *mutiView   = [[MutipleOrdersTableView alloc]initWithNibName:@"MutipleOrdersTableView" bundle:nil];
                     mutiView.selected_index = indexPath.row;
                     [self.navigationController pushViewController:mutiView animated:YES];
-                   
+                   */
                }
                else
                {     
@@ -658,8 +660,8 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
 -(void)orderAdded
 {
     [FlurryAnalytics logEvent:@"Order Added"];
-    if(self.navigationController.tabBarController.selectedIndex ==CURRENT_TAB_INDEX)
-        [Utils showAlert:@"Order Added" withMessage:nil inView:self.view];
+    //if(self.navigationController.tabBarController.selectedIndex ==CURRENT_TAB_INDEX)
+    //    [Utils showAlert:@"Order Added" withMessage:nil inView:self.view];
     
     self.navigationItem.leftBarButtonItem = nil;
     DrinkOrders *drink_orders = [DrinkOrders instance];
@@ -790,9 +792,14 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
     {
         NSLog(@"Drink Order %@",[[DrinkOrders instance]getArray]);
         if([[[DrinkOrders instance]getArray]count]>0)
+        {
             send_order.enabled = YES;
+            [self sendOrder:nil];
+        }
         else
+        {
             send_order.enabled = NO;
+        }
     }
 
     modalViewDidAppear = NO;

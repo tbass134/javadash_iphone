@@ -268,20 +268,34 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    /*
-    Order *order = [Order sharedOrder];
-    NSString *companyName = [Utils getCompanyName:[[[[order currentOrder]objectForKey:@"run"] objectForKey:@"location"]objectForKey:@"name"]];
+    if([self.type isEqualToString:@"favorites"])
+    {
+        NSDictionary *order = [self.coffee_orders_array  objectAtIndex:indexPath.row];
+        NSLog(@"order %@",order);
+        
+        DrinkOrders *drink_orders = [DrinkOrders instance];
+        [[drink_orders getArray]addObject:order];
+        [Utils showAlert:@"Order Added" withMessage:nil inView:self.view];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else
+    {
     
-    NSDictionary *selected_drink = [self.coffee_orders_array objectAtIndex:indexPath.row];
-    NSDictionary *options_dict = [[NSDictionary alloc]initWithObjectsAndKeys:companyName,@"companyName",[selected_drink objectForKey:@"drink_type"],@"drink_type",[selected_drink objectForKey:@"beverage"],@"beverage",[selected_drink objectForKey:@"drink"],@"drink",nil];
-    
-    
-    CoffeeDetailsView *listView   = [[CoffeeDetailsView alloc]initWithNibName:nil bundle:nil];
-    listView.drink = options_dict;
-    listView.edit_order_dict = selected_drink;
-    listView.orderType = self.type;
-    [self.navigationController pushViewController:listView animated:YES];
-     */
+        Order *order = [Order sharedOrder];
+        NSString *companyName = [Utils getCompanyName:[[[[order currentOrder]objectForKey:@"run"] objectForKey:@"location"]objectForKey:@"name"]];
+        
+        NSDictionary *selected_drink = [self.coffee_orders_array objectAtIndex:indexPath.row];
+        NSDictionary *options_dict = [[NSDictionary alloc]initWithObjectsAndKeys:companyName,@"companyName",[selected_drink objectForKey:@"drink_type"],@"drink_type",[selected_drink objectForKey:@"beverage"],@"beverage",[selected_drink objectForKey:@"drink"],@"drink",nil];
+        
+        
+        
+        CoffeeDetailsView *listView   = [[CoffeeDetailsView alloc]initWithNibName:nil bundle:nil];
+        listView.drink = options_dict;
+        listView.edit_order_dict = selected_drink;
+        
+        listView.orderType = self.type;
+        [self.navigationController pushViewController:listView animated:YES];
+    }
 
    
 }

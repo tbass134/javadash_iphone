@@ -67,6 +67,8 @@
 		NSData *image_data = [NSData dataWithData:[[NSUserDefaults standardUserDefaults] valueForKey:@"IMAGE"]];
 		profile_image.image = [UIImage imageWithData:image_data]; 
 	}
+    else
+        profile_image.image = [UIImage imageNamed:@"avatar.png"];
 
    	self.table_view.delegate = self;
 	self.table_view.dataSource = self;

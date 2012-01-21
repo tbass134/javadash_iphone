@@ -92,9 +92,9 @@
     drink_temp_view.hidden = YES;
     
     
-    //plistDictionary = [[NSUserDefaults standardUserDefaults]dictionaryForKey:@"plistDictionary"];
+    plistDictionary = [[NSUserDefaults standardUserDefaults]dictionaryForKey:@"plistDictionary"];
 	
-	//if(!plistDictionary)
+	if(!plistDictionary)
 	{
 		NSString *path = [[NSBundle mainBundle] bundlePath];
 		NSString *finalPath = [path stringByAppendingPathComponent:@"CoffeeList2.plist"];

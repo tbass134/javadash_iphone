@@ -95,12 +95,12 @@
 {
     NSLog(@"data %@",[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
     
-	[Utils showAlert:@"Order Added" withMessage:nil inView:self.view];
+	//[Utils showAlert:@"Order Added" withMessage:nil inView:self.view];
 	
 	DrinkOrders *drink_orders = [DrinkOrders instance];
 	[drink_orders clearArray];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
     
     /*
     ViewCurrentOrdersTableView *current_run_view = [[ViewCurrentOrdersTableView alloc]initWithNibName:nil bundle:nil];
