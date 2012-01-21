@@ -94,7 +94,6 @@
 		455BF14F14104F9000001C9F /* RunViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 455BF14E14104F9000001C9F /* RunViewController.xib */; };
 		455CDBFC14622644002572EC /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 455CDBFB14622644002572EC /* libFlurryAnalytics.a */; };
 		4564503214A954A700B418CE /* blank_location.png in Resources */ = {isa = PBXBuildFile; fileRef = 4564503114A954A700B418CE /* blank_location.png */; };
-		456733F913F4D1B200808016 /* btn-back-step2.png in Resources */ = {isa = PBXBuildFile; fileRef = 456733F813F4D1B200808016 /* btn-back-step2.png */; };
 		4569C09E13132BD5007BC077 /* ItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4569C09C13132BD5007BC077 /* ItemsViewController.m */; };
 		4569C09F13132BD5007BC077 /* ItemsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4569C09D13132BD5007BC077 /* ItemsViewController.xib */; };
 		45744BCA14796CC9001B257C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 45744BC914796CC9001B257C /* MBProgressHUD.m */; };
@@ -441,7 +440,6 @@
 		455CDBFA14622644002572EC /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAnalytics.h; sourceTree = "<group>"; };
 		455CDBFB14622644002572EC /* libFlurryAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryAnalytics.a; sourceTree = "<group>"; };
 		4564503114A954A700B418CE /* blank_location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blank_location.png; sourceTree = "<group>"; };
-		456733F813F4D1B200808016 /* btn-back-step2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-back-step2.png"; sourceTree = "<group>"; };
 		4569C09B13132BD5007BC077 /* ItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemsViewController.h; sourceTree = "<group>"; };
 		4569C09C13132BD5007BC077 /* ItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemsViewController.m; sourceTree = "<group>"; };
 		4569C09D13132BD5007BC077 /* ItemsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemsViewController.xib; sourceTree = "<group>"; };
@@ -1410,7 +1408,6 @@
 				453292CD1418676200EC6879 /* Powered_By_Yelp_Yellow.png */,
 				453292CE1418676200EC6879 /* yelp_logo_50x25.png */,
 				453292C8141865C400EC6879 /* Icons */,
-				456733F813F4D1B200808016 /* btn-back-step2.png */,
 				45F67D6F1390AFC600C1273C /* CustomTableView */,
 				A9DC73AB133BCEEC00AC6452 /* star_active.png */,
 				45BDB39B1326E3CC002D2F03 /* star.png */,
@@ -1780,7 +1777,6 @@
 				4531C40C13DB431F00BD246C /* background.png in Resources */,
 				4531C40D13DB431F00BD246C /* background@2x.png in Resources */,
 				4531C40F13DB431F00BD246C /* DBSignupViewController.xib in Resources */,
-				456733F913F4D1B200808016 /* btn-back-step2.png in Resources */,
 				45B717C41405D68A001E526D /* MKStoreKitConfigs.plist in Resources */,
 				457FCD741409F285005B9308 /* SummaryTableViewController.xib in Resources */,
 				45272A3B140ADE96003C8611 /* ViewCurrentOrdersTableViewController.xib in Resources */,
