@@ -90,7 +90,11 @@ static Order *sharedInstance = nil;
     [current_order removeAllObjects];
     current_order = nil;
 }
-
-
+-(void)clearOrders
+{
+    printf("Calling clearOrders\n");
+    if([[current_order objectForKey:@"run"]objectForKey:@"orders"] != NULL)
+        [[[current_order objectForKey:@"run"]objectForKey:@"orders"] removeAllObjects];
+}
 //Loading Data methods
 @end

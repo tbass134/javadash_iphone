@@ -136,12 +136,14 @@
         
         
         UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,320,75)];
+        v.backgroundColor = [UIColor clearColor];
         
         UILabel *lab = [[UILabel alloc] initWithFrame:CGRectInset(v.bounds, 20, 0)];
         lab.text = @"These are your Facebook friends who are already using Java Dash. Add them to share coffee orders";
         lab.numberOfLines = 3;
         lab.font = [UIFont boldSystemFontOfSize:12];
         lab.textColor = [UIColor grayColor];
+        lab.backgroundColor = [UIColor clearColor];
         [v addSubview:lab];
         [lab release];
         

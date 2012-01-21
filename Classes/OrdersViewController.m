@@ -635,20 +635,32 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
         NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
         if (response == nil) {
             if (requestError != nil) {
-                
                 [Utils showAlert:@"Could not connect to server" withMessage:@"Please try again" inView:self.view];
             }
         }
         else
         {
-            #ifdef DEBUG
             NSString * json_str = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-            NSLog(@"json_str %@",json_str);
-            #endif
-            [self performSelectorOnMainThread:@selector(orderAdded)
+            SBJSON *parser = [[SBJSON alloc] init];
+            NSDictionary *response = [parser objectWithString:json_str error:nil];
+            [parser release];
+            [json_str release]; 
+            
+            if([response objectForKey:@"error"])
+            {
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Run Ended" message:@"You cannot add an order to a run that has already ended" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+                [alert show];
+                [alert release];
+                [[DrinkOrders instance] clearArray];
+                send_order.enabled = NO;
+                
+            }
+            else
+                [self performSelectorOnMainThread:@selector(orderAdded)
                                    withObject:nil
                                 waitUntilDone:NO];
-        } 
+        }
+        
 
 	}
     else

@@ -28,7 +28,7 @@ FBSessionDelegate,AdWhirlDelegate> {
 	NSManagedObjectContext *managedObjectContext;
 	NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-	
+	UIImageView *bg;
     UIWindow *window;
     CoffeeRunSampleViewController *viewController;
 	UITabBarController*  myTabBarController;

@@ -55,6 +55,7 @@
     NSMutableData *_yelpResponseData;
     
     IBOutlet UIView *search_view;
+    IBOutlet UIView *searchBG;
     IBOutlet UITextField *name_txt;
     IBOutlet UITextField *loc_txt;
     UIToolbar *keyboardToolbar;
@@ -107,4 +108,7 @@
 - (void)animateView:(NSUInteger)tag;
 - (void)checkBarButton:(NSUInteger)tag;
 -(void)dismissSearchView;
+
+-(void)hideSearchBar;
+-(void)showSearchBar;
 @end

@@ -34,16 +34,17 @@
 }
 
 -(IBAction)selectTime
-{
-	DashSummary *dash = [DashSummary instance];
-	
-   
+{   
 	NSDateFormatter *newFormatter = [[[NSDateFormatter alloc] init] autorelease];
     
-    [newFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss ZZZ"];
+    [newFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss ZZZ a"];
 	NSString *dateString = [newFormatter stringFromDate:self.dp.date];
     
-	[[dash getDict]setValue:dateString  forKey:@"selected_date"];
+    NSLog(@"ts %f",[self.dp.date timeIntervalSince1970]);
+    NSLog(@"dateString %@",dateString);
+    
+	[[[DashSummary instance] getDict]setValue:dateString  forKey:@"selected_date"];
+    [[[DashSummary instance] getDict]setValue:[NSNumber numberWithFloat:[self.dp.date timeIntervalSince1970]]  forKey:@"selected_timestamp"];
 	[self.navigationController popViewControllerAnimated:YES];
 }
 /*

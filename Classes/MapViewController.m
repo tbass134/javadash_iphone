@@ -206,7 +206,7 @@
     
     if (!userLocation.location) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Service Disabled" 
-                                                        message:@"To re-enable, please go to Settings and turn on Location Service for this app." 
+                                                        message:@"To re-enable, please go to Settings Application and turn on Location Service for this app." 
                                                        delegate:nil 
                                               cancelButtonTitle:@"OK" 
                                               otherButtonTitles:nil];
@@ -295,6 +295,7 @@
     
     [Utils showAlert:@"Could not load data" withMessage:nil inView:self.view];
     noResultsFound.hidden = NO;
+    loadingView.hidden = YES;
     self.tableView.hidden = YES;
     self.mapView.hidden = YES;
     [self.mapView removeAnnotations:self.mapView.annotations];
@@ -311,7 +312,7 @@
     //self.mapView.hidden = NO;
     
     NSString *json_str = [[NSString alloc] initWithData:_yelpResponseData encoding:NSUTF8StringEncoding];
-    NSLog(@"json_str %@",json_str);
+    //NSLog(@"json_str %@",json_str);
     SBJSON *parser = [[SBJSON alloc] init];
     yelp_dict= [[parser objectWithString:json_str error:nil]retain];
     total = [[yelp_dict objectForKey:@"total"]intValue];
@@ -321,6 +322,7 @@
     {
         [Utils showAlert:@"Could not load data" withMessage:@"Please try again" inView:nil];
         noResultsFound.hidden = NO;
+        loadingView.hidden = YES;
         //self.tableView.hidden = YES;
         //self.mapView.hidden = YES;
         [self.view sendSubviewToBack:search_view];
@@ -411,6 +413,7 @@
     {
         [Utils showAlert:@"No Results Found" withMessage:nil inView:self.view];
         noResultsFound.hidden = NO;
+        loadingView.hidden = YES;
         self.tableView.hidden = YES;
         self.mapView.hidden = YES;
         [self.mapView removeAnnotations:self.mapView.annotations];
@@ -523,8 +526,7 @@
 	if([annotation isKindOfClass:[ParkPlaceMark class]])
     {
 		
-			//NSLog(@"annotation %@",[annotation.location_dict objectForKey:@"image_url"]);
-			AsyncImageView2 *asyncImageView = [[[AsyncImageView2 alloc] initWithFrame:CGRectMake(5, 5, 30, 30)] autorelease];
+        AsyncImageView2 *asyncImageView = [[[AsyncImageView2 alloc] initWithFrame:CGRectMake(5, 5, 30, 30)] autorelease];
         if([annotation.location_dict objectForKey:@"image_url"] != NULL)
 		{
 			[asyncImageView loadImageFromURL:[NSURL URLWithString:[annotation.location_dict objectForKey:@"image_url"]]];
@@ -1069,18 +1071,7 @@
         [[dash getDict]setValue:selected_location forKey:@"selected_location"];         
         [self.navigationController popViewControllerAnimated:YES];
 	}
-}
-
-#pragma mark DETAILS
--(void)showDetails:(NSDictionary *)info
-{
-}
--(IBAction)chooseLocation:(id)sender
-{
-	
-}
-	   
-	   
+}	   
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];

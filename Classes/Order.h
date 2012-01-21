@@ -18,5 +18,6 @@
 - (void)setOrder:(NSMutableDictionary *)order;
 -(NSMutableDictionary *)currentOrder;
 -(void)clearOrder;
+-(void)clearOrders;
 
 @end

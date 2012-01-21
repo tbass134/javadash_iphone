@@ -226,8 +226,9 @@
      {
          printf("Has image");
          NSData *imageData =[[NSUserDefaults standardUserDefaults]valueForKey:@"IMAGE"];
-         self.photo = [[UIImage alloc] initWithData:imageData];
-         [self.photoButton setImage:self.photo forState:UIControlStateNormal];
+         img.image = [UIImage imageWithData:imageData];
+         //self.photo = [[UIImage alloc] initWithData:imageData];
+         //[self.photoButton setImage:self.photo forState:UIControlStateNormal];
          
      }
     
@@ -487,7 +488,7 @@
     //self.photo = img.image;
     
    //self.photo = [Utils imageWithImage:smallImage scaledToSize:sz];
-    NSLog(@"self.photo %@",self.photo);
+    //NSLog(@"self.photo %@",self.photo);
     //[self.photoButton setImage:self.photo forState:UIControlStateNormal];
 
     
@@ -569,9 +570,9 @@
 	}
     
 	
-	if(self.photo != NULL)
+	if(img.image != NULL)
 	{
-		NSData *image_data = UIImageJPEGRepresentation(self.photo,90);
+		NSData *image_data = UIImageJPEGRepresentation(img.image,90);
 		[[NSUserDefaults standardUserDefaults] setObject:image_data forKey:@"IMAGE"];
 	}
     
@@ -631,20 +632,6 @@
     }
     if([tag isEqualToString:@"saveFB"])
     {
-        
-    }
-    else if([tag isEqualToString:@"getFBImage"])
-    {
-        printf("Got image");
-        UIImage* _image = [UIImage imageWithData: data];
-		CGSize sz = CGSizeMake(80, 80);
-		UIImage *smallImage = [Utils imageWithImage:_image scaledToSize:sz];
-		//image.image = smallImage;
-        
-        self.photo = [Utils imageWithImage:smallImage scaledToSize:sz];
-        //self.photo = [UIImage imageWithData:data];
-        NSLog(@"self.photo %@",self.photo);
-        [self.photoButton setImage:self.photo forState:UIControlStateNormal];
         
     }
     else
@@ -811,14 +798,15 @@
 		CGSize sz = CGSizeMake(80, 80);
 		//UIImage *smallImage = [Utils imageWithImage:_image scaledToSize:sz];
 		//image.image = smallImage;
+        img.image = [Utils imageWithImage:_image scaledToSize:sz];
         
-        self.photo = [Utils imageWithImage:_image scaledToSize:sz];
-        [self.photoButton setImage:self.photo forState:UIControlStateNormal];
+        //self.photo = 
+        //[self.photoButton setImage:self.photo forState:UIControlStateNormal];
 	}
     else
     {
-        self.photo = nil;
-        [self.photoButton setImage:self.photo forState:UIControlStateNormal];
+        img.image = nil;
+        //[self.photoButton setImage:self.photo forState:UIControlStateNormal];
 
     }
 	/*
@@ -901,8 +889,10 @@
 {
     UIImage* _image =  [info objectForKey:UIImagePickerControllerEditedImage];
     CGSize sz = CGSizeMake(80, 80);
-    self.photo = [Utils imageWithImage:_image scaledToSize:sz];
-    [self.photoButton setImage:self.photo forState:UIControlStateNormal];
+    img.image  =[Utils imageWithImage:_image scaledToSize:sz];
+    
+    //self.photo = [Utils imageWithImage:_image scaledToSize:sz];
+    //[self.photoButton setImage:self.photo forState:UIControlStateNormal];
     [picker dismissModalViewControllerAnimated:YES];
 } 
 

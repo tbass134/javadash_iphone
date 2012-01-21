@@ -24,16 +24,16 @@
 #pragma mark -
 #pragma mark Initialization
 
-/*
+
 - (id)initWithStyle:(UITableViewStyle)style {
     // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-    self = [super initWithStyle:style];
+    self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         // Custom initialization.
     }
     return self;
 }
-*/
+
 
 
 #pragma mark -
@@ -43,7 +43,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.coffee_orders_array = [[NSMutableArray alloc]init];
-	[self.tableView initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    self.tableView.backgroundColor = [UIColor clearColor];
+	//[self.tableView initWithFrame:CGRectZero style:UITableViewStyleGrouped];
 	if([self.type isEqualToString:@"favorites"])
 	{
 		self.coffee_orders_array = [SavedDrinksList getAllDrinks];

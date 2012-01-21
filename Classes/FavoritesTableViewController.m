@@ -52,6 +52,7 @@
 	self.favorites_array = [FavoriteLocations getAllFavoriteLocations];
 	self.tableView.delegate = self;
 	self.tableView.dataSource = self;
+    self.tableView.backgroundColor = [UIColor clearColor];
 	[self.tableView reloadData];
 
 }

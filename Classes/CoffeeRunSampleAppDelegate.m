@@ -58,7 +58,7 @@ static NSString* kAppId = @"189714094427611";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
-    [self customizeAppearance];
+    
     //Facebook
     _permissions =  [[NSArray arrayWithObjects:
                       @"read_stream", @"publish_stream", @"offline_access",nil] retain];
@@ -89,7 +89,6 @@ static NSString* kAppId = @"189714094427611";
 
     if([[NSUserDefaults standardUserDefaults] objectForKey:@"enable_push_notifications"])
     {
-        printf("enable_push_notifications");
         //Register for notifications
         [[UIApplication sharedApplication]
          registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
@@ -137,6 +136,11 @@ static NSString* kAppId = @"189714094427611";
 
 -(void)loadUI
 {
+    bg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bg.png"]];
+    CGRect bgFrame = bg.frame;
+    bgFrame.origin.y = -40;
+    bg.frame = bgFrame;
+    [self.window addSubview:bg];
     printf("callubng loadUI");
 	NSMutableArray *localViewControllersArray = [[NSMutableArray alloc]initWithCapacity:1];
 	UINavigationController *localNavController;
@@ -197,19 +201,25 @@ static NSString* kAppId = @"189714094427611";
         
         [self.window bringSubviewToFront:myTabBarController.view];
     }
+    
+    [self customizeAppearance];
     [self.window makeKeyAndVisible];
 }	
 
 
 - (void)customizeAppearance
 {
-    UIImage *tabBackground = [[UIImage imageNamed:@"bottomBar@2x"] 
-                              resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-    
-    UITabBar *tabBar = [self.tabBarController tabBar];
+    // not supported on iOS4    
+    UITabBar *tabBar = [myTabBarController tabBar];
     if ([tabBar respondsToSelector:@selector(setBackgroundImage:)])
     {
-        [[UITabBar appearance] setBackgroundImage:tabBackground];
+        // set for all
+        [[UITabBar appearance] setBackgroundImage:[UIImage imageNamed:@"bottomBar.png"]];
+    }
+    else
+    {
+        // ios 4 code here
+        [tabBar setBackgroundColor:[UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1]];
     }
 }
 -(void)checkForAppPurchase
@@ -511,11 +521,12 @@ static NSString* kAppId = @"189714094427611";
 
 - (void)adWhirlDidReceiveAd:(AdWhirlView *)awv{
 //#if debug
+    /*
 	NSLog(@"adWhirlDidReceiveAd");
 #ifdef TARGET_IPHONE_SIMULATOR
     return;
 #endif
-    
+    */
 //#endif
 	//[[UIApplication sharedApplication] setStatusBarHidden:YES animated:YES];
 	//	[self performSelector:@selector(resetNav) withObject:nil afterDelay:.3];

@@ -29,6 +29,7 @@
 #import "FriendsList.h"
 #import "CoffeeRunSampleAppDelegate.h"
 #import "FlurryAnalytics.h"
+#import "UIImageView+WebCache.h"
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 320.0f
@@ -239,15 +240,14 @@
 #pragma mark View Run
 -(void)initShowRun
 {
-    
-    
+
     self.navigationItem.rightBarButtonItem = showOptionsBtn;
     Order *order = [Order sharedOrder];
 	NSDictionary *user_order = [[order currentOrder]objectForKey:@"run"];
     
 	if([[user_order objectForKey:@"location"] objectForKey:@"image"] != NULL || ![[[user_order objectForKey:@"location"] objectForKey:@"image"] isEqualToString:@""])
-    {
-        //[self loadYelpImage:[[user_order objectForKey:@"location"] objectForKey:@"image"]];
+    {        
+        [yelp_img setImageWithURL:[[user_order objectForKey:@"location"] objectForKey:@"image"] placeholderImage:[UIImage imageNamed:@"no-image.gif"]];
     }
     
     
@@ -256,12 +256,15 @@
     
     
     NSDateFormatter *newFormatter2 = [[[NSDateFormatter alloc] init] autorelease];
-    [newFormatter2 setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    //[newFormatter2 setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    [newFormatter2 setDateFormat:@"yyyy-MM-dd hh:mm:ss ZZZ"];
     run_date = [newFormatter2 dateFromString:[user_order objectForKey:@"timestamp"]];
     
     //HACK
-    NSDate *adjustedDate = [run_date addTimeInterval: (60*60*12)];
-    run_date = [adjustedDate retain];
+    //NSDate *adjustedDate = [run_date addTimeInterval: (60*60*12)];
+    //run_date = [adjustedDate retain];
+    
+    NSLog(@"run_date %@",run_date);
         
     orderEnded = NO;
     if ([[NSDate date] compare:run_date] == NSOrderedAscending)
@@ -270,6 +273,12 @@
     {
         orderEnded = YES;
         run_time_txt.text = @"Order Ended";
+    }
+    
+    if(orders_cells != NULL)
+    {
+        [orders_cells removeAllObjects];
+        orders_cells = nil;
     }
     
     //if(!orderEnded)
@@ -355,7 +364,7 @@
 			}
 		}
 	}
-    //else
+   // els 
     //    showOptionsBtn.enabled = NO;
     view_run_table.delegate = self;
     view_run_table.dataSource = self;
@@ -715,7 +724,7 @@
 							[[NSUserDefaults standardUserDefaults]valueForKey:@"FIRSTNAME"],
 							[[NSUserDefaults standardUserDefaults]valueForKey:@"LASTNAME"],
 							[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],
-							[dash_dict objectForKey:@"selected_date"],
+							[dash_dict objectForKey:@"selected_timestamp"],
 							[[dash_dict objectForKey:@"selected_location"] objectForKey:@"name"],
 							address,
 							image_url,
