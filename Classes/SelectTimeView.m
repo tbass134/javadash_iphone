@@ -26,10 +26,10 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	[self.dp setDate:[NSDate date]];
+    //self.dp.timeZone = [NSTimeZone timeZoneWithName:@"EST"];
     
-    
-    NSDate *last_minute = [[NSDate date] dateByAddingTimeInterval:(5*60)];
-	self.dp.minimumDate = last_minute;
+    //NSDate *last_minute = [[NSDate date] dateByAddingTimeInterval:(5*60)];
+	//self.dp.minimumDate = [NSDate date] ;
     [super viewDidLoad];
 }
 
@@ -43,7 +43,7 @@
     NSLog(@"ts %f",[self.dp.date timeIntervalSince1970]);
     NSLog(@"dateString %@",dateString);
     
-	[[[DashSummary instance] getDict]setValue:dateString  forKey:@"selected_date"];
+	[[[DashSummary instance] getDict]setValue:self.dp.date  forKey:@"selected_date"];
     [[[DashSummary instance] getDict]setValue:[NSNumber numberWithFloat:[self.dp.date timeIntervalSince1970]]  forKey:@"selected_timestamp"];
 	[self.navigationController popViewControllerAnimated:YES];
 }

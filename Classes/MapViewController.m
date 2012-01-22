@@ -305,11 +305,22 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     
+    if([self.tableView respondsToSelector:@selector(reloadData)])
+    {
+        printf("OK");
+    }
+    else
+    {
+        printf("Fail");
+        return;
+    }
+        
      loadingView.hidden = YES;
     noResultsFound.hidden = YES;
     
     //self.tableView.hidden = NO;
     //self.mapView.hidden = NO;
+    
     
     NSString *json_str = [[NSString alloc] initWithData:_yelpResponseData encoding:NSUTF8StringEncoding];
     //NSLog(@"json_str %@",json_str);
@@ -331,8 +342,15 @@
     float lat = [[[[yelp_dict objectForKey:@"region"]objectForKey:@"center"]objectForKey:@"latitude"]floatValue];
     float lng = [[[[yelp_dict objectForKey:@"region"]objectForKey:@"center"]objectForKey:@"longitude"]floatValue];
     
-    //NSLog(@"lat %f",lat);
-    //NSLog(@"lng %f",lng);
+    NSLog(@"lat %f",lat);
+    NSLog(@"lng %f",lng);
+    
+    if(self.mapView == nil)
+    {
+        printf("FAIIIIIIIIIII");
+    }
+
+    
     CLLocation *tempLocation = [[CLLocation alloc] initWithLatitude: lat longitude:lng];
     
     CLLocationCoordinate2D userlocation=[tempLocation coordinate];
@@ -343,15 +361,17 @@
 	
 	region.span=span;
 	region.center=userlocation;
-	[mapView setRegion:region animated:TRUE];
+	[self.mapView setRegion:region animated:TRUE];
     [tempLocation release];
     
+   
     
     if(offset<20)
     {
         if([self.mapView.annotations count]>1)
             [self.mapView removeAnnotations:self.mapView.annotations];
     }
+    printf("Still not dead");
    
     
     //if(self.tableDataSource == NULL)
@@ -419,87 +439,12 @@
         [self.mapView removeAnnotations:self.mapView.annotations];
         [self.view sendSubviewToBack:search_view];
     }
+     
     
      //NSLog(@"self.tableDataSource count %i",[self.tableDataSource count]);
     
     //[self.tableView setDelegate:self];
     [self.tableView reloadData];
-}
--(void)loadDataFromJSONStr:(NSString *)str
-{
-   
-    SBJSON *parser = [[SBJSON alloc] init];
-    yelp_dict= [[parser objectWithString:str error:nil]retain];
-    total = [[yelp_dict objectForKey:@"total"]intValue];
-    [parser release];
-
-    if([yelp_dict objectForKey:@"error"] != NULL)
-    {
-        [Utils showAlert:@"Could not load data" withMessage:@"Please try again" inView:nil];
-        return;
-    }
-    if(offset<20)
-    {
-        if([self.mapView.annotations count]>1)
-            [self.mapView removeAnnotations:self.mapView.annotations];
-    }
-       
-    if(self.tableDataSource == NULL)
-        self.tableDataSource = [[NSMutableArray alloc]init];
-    
-    for(id items in [yelp_dict objectForKey:@"businesses"])
-    {
-        [self.tableDataSource addObject:items];
-        
-        location = [[CoffeeLocation alloc]init];
-        NSMutableDictionary *obj = items;
-        location.rating_img_url			= [obj objectForKey:@"rating_img_url"];
-        location.country_code			= [obj objectForKey:@"country_code"];
-        location.id						= [obj objectForKey:@"id"];
-        location.is_closed				= [obj objectForKey:@"is_closed"];
-        location.city					= [[obj objectForKey:@"location"]objectForKey:@"city"];
-        location.mobile_url				= [obj objectForKey:@"mobile_url"];
-        location.review_count			= [obj objectForKey:@"review_count"];
-        location.zip					= [obj objectForKey:@"zip"];
-        location.state					= [obj objectForKey:@"state"];
-        location.latitude				= [[[obj objectForKey:@"location"]objectForKey:@"coordinate"]objectForKey:@"latitude"];
-        location.rating_img_url_small	= [obj objectForKey:@"rating_img_url_small"];
-        location.address1				= [obj objectForKey:@"address1"];
-        location.address2				= [obj objectForKey:@"address2"];
-        location.address3				= [obj objectForKey:@"address3"];
-        location.phone					= [obj objectForKey:@"phone"];
-        location.state_code				= [[obj objectForKey:@"location"]objectForKey:@"state_code"];
-        location.photo_url				= [obj objectForKey:@"photo_url"];
-        location.distance				= [obj objectForKey:@"distance"];
-        location.name					= [obj objectForKey:@"name"];
-        location.url					= [obj objectForKey:@"url"];
-        location.avg_rating				= [obj objectForKey:@"avg_rating"];
-        location.longitude				= [[[obj objectForKey:@"location"]objectForKey:@"coordinate"]objectForKey:@"longitude"];
-        location.nearby_url				= [obj objectForKey:@"nearby_url"];
-        location.photo_url_small		= [obj objectForKey:@"photo_url_small"];
-
-
-        float lat = [location.latitude floatValue];
-        float lng = [location.longitude floatValue];
-
-        CLLocation *tempLocation = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
-        ParkPlaceMark *placemark=[[[ParkPlaceMark alloc] initWithCoordinate:[tempLocation coordinate]]retain];
-        placemark.cam_title = location.name;
-        placemark.cam_subtitle = location.name;
-        placemark.location_id = location.id;
-        placemark.location_dict = obj;
-        [mapView addAnnotation:placemark];
-        [placemark release];
-        [location release];
-        [tempLocation release];
-         
-    }
-    
-    
-    NSLog(@"self.tableDataSource %@",self.tableDataSource);
-    NSLog(@"count %i",[self.tableDataSource count]);
-    [self.tableView setDelegate:self];
-    [self.tableView reloadData];      
 }
 -(BOOL)checkForFavorites:(NSString *)str
 {
@@ -518,7 +463,6 @@
 
 - (MKAnnotationView *)mapView:(MKMapView *)theMapView viewForAnnotation:(ParkPlaceMark *)annotation {
 	
-    NSLog(@"annotation %@",annotation);
 	MKPinAnnotationView *annView=[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"currentloc"];
 	annView.animatesDrop=TRUE;
 	annView.canShowCallout = TRUE;
@@ -546,6 +490,7 @@
 }
 - (void) mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
+    /*
 	if([view.annotation isKindOfClass:[ParkPlaceMark class]])
     {
 		ParkPlaceMark* theAnnotation;
@@ -558,6 +503,7 @@
 		NSLog(@"dash %@", [dash getDict]);
 		[self.navigationController popViewControllerAnimated:YES];
 	}
+     */
 
 	
 }
@@ -1088,6 +1034,7 @@
 
 
 - (void)dealloc {
+    printf("dealloc called");
     [super dealloc];
 	[conn release];
 	//[self.currentLocation release];

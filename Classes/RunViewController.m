@@ -255,17 +255,44 @@
 	run_info_txt.text = [NSString stringWithFormat:@"%@\n%@",[[user_order objectForKey:@"location"]objectForKey:@"name"],[[user_order objectForKey:@"location"]objectForKey:@"address"]];
     
     
-    NSDateFormatter *newFormatter2 = [[[NSDateFormatter alloc] init] autorelease];
-    //[newFormatter2 setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
-    [newFormatter2 setDateFormat:@"yyyy-MM-dd hh:mm:ss ZZZ"];
-    run_date = [newFormatter2 dateFromString:[user_order objectForKey:@"timestamp"]];
+    
+    NSDateFormatter *newFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [newFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [newFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    NSDate *runDate = [newFormatter dateFromString:[user_order objectForKey:@"timestamp"]];
+    
+    
+    
+    
+    //NSLog(@"runDate %@",[runDate addTimeInterval: -(60*60*5)]); //this works but cant use it since it hardcodes the tz offset
+    
+    
+    NSLog(@"runDate %@",runDate);
+    NSLog(@"current date %@ ",[NSDate date]);
+    
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    int unitFlags = NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    NSDateComponents *components = [gregorian components:unitFlags fromDate:[NSDate date] toDate:runDate options:0];
+    run_time_txt.text = [NSString stringWithFormat:@"Days:%02d Hours:%02d Mins:%02d Seconds:%02d", components.day, components.hour, components.minute, components.second ];
+    
+    if(components.day<=0 && components.hour <=0 && components.minute <=0 && components.second <=0)
+    {
+        run_time_txt.text = @"Order Ended";
+        orderEnded = YES;
+        [self stopTimer];
+    }
+
+    
+    
+    
+    //run_date = [[newFormatter2 dateFromString:[user_order objectForKey:@"timestamp"]]retain];
     
     //HACK
     //NSDate *adjustedDate = [run_date addTimeInterval: (60*60*12)];
     //run_date = [adjustedDate retain];
+       
+    return;
     
-    NSLog(@"run_date %@",run_date);
-        
     orderEnded = NO;
     if ([[NSDate date] compare:run_date] == NSOrderedAscending)
         [self startTimer];
@@ -369,6 +396,69 @@
     view_run_table.delegate = self;
     view_run_table.dataSource = self;
     [view_run_table reloadData];
+}
+
+// snippet from BDDateTransformer.m //
+- (id)transformedValue:(NSDate *)date
+{
+    // Initialize the formatter.
+    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+    [formatter setDateStyle:NSDateFormatterShortStyle];
+    [formatter setTimeStyle:NSDateFormatterNoStyle];
+    
+    // Initialize the calendar and flags.
+    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit | NSWeekdayCalendarUnit;
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    
+    // Create reference date for supplied date.
+    NSDateComponents *comps = [calendar components:unitFlags fromDate:date];
+    [comps setHour:0];
+    [comps setMinute:0];
+    [comps setSecond:0];
+    NSDate *suppliedDate = [calendar dateFromComponents:comps];
+    
+    // Iterate through the eight days (tomorrow, today, and the last six).
+    int i;
+    for (i = -1; i < 7; i++)
+    {
+        // Initialize reference date.
+        comps = [calendar components:unitFlags fromDate:[NSDate date]];
+        [comps setHour:0];
+        [comps setMinute:0];
+        [comps setSecond:0];
+        [comps setDay:[comps day] - i];
+        NSDate *referenceDate = [calendar dateFromComponents:comps];
+        // Get week day (starts at 1).
+        int weekday = [[calendar components:unitFlags fromDate:referenceDate] weekday] - 1;
+        
+        if ([suppliedDate compare:referenceDate] == NSOrderedSame && i == -1)
+        {
+            // Tomorrow
+            return [NSString stringWithString:@"Tomorrow"];
+        }
+        else if ([suppliedDate compare:referenceDate] == NSOrderedSame && i == 0)
+        {
+            // Today's time (a la iPhone Mail)
+            [formatter setDateStyle:NSDateFormatterNoStyle];
+            [formatter setTimeStyle:NSDateFormatterShortStyle];
+            return [formatter stringFromDate:date];
+        }
+        else if ([suppliedDate compare:referenceDate] == NSOrderedSame && i == 1)
+        {
+            // Today
+            return [NSString stringWithString:@"Yesterday"];
+        }
+        else if ([suppliedDate compare:referenceDate] == NSOrderedSame)
+        {
+            // Day of the week
+            NSString *day = [[formatter weekdaySymbols] objectAtIndex:weekday];
+            return day;
+        }
+    }
+    
+    // It's not in those eight days.
+    NSString *defaultDate = [formatter stringFromDate:date];
+    return defaultDate;
 }
 -(void)startTimer {
 	
@@ -619,7 +709,13 @@
     if([dash_dict count]>0)
     {
         if([dash_dict objectForKey:@"selected_date"]!= (id)[NSNull null])
-            time_cell.textView.text = [dash_dict objectForKey:@"selected_date"];
+        {
+            NSDateFormatter *newFormatter = [[[NSDateFormatter alloc] init] autorelease];
+            
+            [newFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss ZZZ a"];
+            NSString *dateString = [newFormatter stringFromDate:[dash_dict objectForKey:@"selected_date"]];
+            time_cell.textView.text = dateString;
+        }
 	}
     if([dash_dict objectForKey:@"selected_date"] == NULL)
         time_cell.textView.text = @"Tap to select time";
@@ -724,7 +820,7 @@
 							[[NSUserDefaults standardUserDefaults]valueForKey:@"FIRSTNAME"],
 							[[NSUserDefaults standardUserDefaults]valueForKey:@"LASTNAME"],
 							[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],
-							[dash_dict objectForKey:@"selected_timestamp"],
+							[dash_dict objectForKey:@"selected_date"],
 							[[dash_dict objectForKey:@"selected_location"] objectForKey:@"name"],
 							address,
 							image_url,
