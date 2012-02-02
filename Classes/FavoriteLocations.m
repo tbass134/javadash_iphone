@@ -18,7 +18,7 @@
 	NSString *path = [documentsDirectory stringByAppendingPathComponent:@"LocationFavorites.plist"];
 	NSLog(@"path %@",path);
 }
-+(BOOL)writeDataToFile:(NSMutableDictionary *)data
++(BOOL)writeDataToFile:(NSString *)str
 {
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -28,7 +28,7 @@
     printf("Add it to the list");
     NSMutableArray *plist = [NSMutableArray arrayWithContentsOfFile:path];
     if (plist == nil) plist = [NSMutableArray array];
-    [plist addObject:data];
+    [plist addObject:str];
     success = [plist writeToFile:path atomically:YES];
 
 	return success;
@@ -51,7 +51,7 @@
 	NSMutableArray *plist = [NSMutableArray arrayWithContentsOfFile:path];
 	return plist;
 }
-+(BOOL)removeFromList:(NSMutableDictionary *)data
++(BOOL)removeFromList:(NSString *)str
 {
 
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -63,14 +63,14 @@
     //Loop to find id
     for(int i=0;i<[plist count];i++)
     {
-     if([[data objectForKey:@"id"] isEqualToString:[[plist objectAtIndex:i]objectForKey:@"id"]])
+     if([str isEqualToString:[plist objectAtIndex:i]])
      {
          [plist removeObjectAtIndex:i];
          break;
      }
        
     }    
-    [plist removeObject:data];
+    [plist removeObject:str];
         
     return [plist writeToFile:path atomically:YES];
 		

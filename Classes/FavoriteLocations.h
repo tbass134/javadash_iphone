@@ -15,8 +15,8 @@
 }
 //å@property(nonatomic,retain)NSString *path;
 +(void)getFavoritesPlist;
-+(BOOL)writeDataToFile:(NSMutableDictionary *)data;
++(BOOL)writeDataToFile:(NSString *)str;
 +(NSMutableArray *)getLastFavoriteLocation;
 +(NSMutableArray *)getAllFavoriteLocations;
-+(BOOL)removeFromList:(NSMutableDictionary *)data;
++(BOOL)removeFromList:(NSString *)str;
 @end

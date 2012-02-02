@@ -21,7 +21,7 @@ static ImageCache *imageCache = nil;
 
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-    self.image = [UIImage imageNamed:@"no-image.gif"];
+    //self.image = [UIImage imageNamed:@"no-image.gif"];
     }
     return self;
 }
@@ -51,13 +51,16 @@ static ImageCache *imageCache = nil;
     }
     if(url == NULL)
     {
+        /*
         printf("No IMage to Load\n");
         UIImageView *imageView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"no-image.gif"]] autorelease];
         [self addSubview:imageView];
+        
         imageView.frame = self.bounds;
         [imageView setNeedsLayout]; // is this necessary if superview gets setNeedsLayout?
         [self setNeedsLayout];
         return;
+         */
     }
 
         

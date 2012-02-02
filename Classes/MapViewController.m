@@ -20,6 +20,7 @@
 #import "OAuthConsumer.h"
 
 #import "AsyncImageView2.h"
+#import "UIImageView+WebCache.h"
 
 #define kYelpSearchTerm @"Coffee & Tea"
 #define FIELDS_COUNT 2
@@ -264,7 +265,6 @@
     OAConsumer *consumer = [[[OAConsumer alloc] initWithKey:@"PTBdkAuUvjJh8JCiKEHvBg" secret:@"_coFSZoQItl-uGKKV5nNqDhbR70"] autorelease];
     OAToken *token = [[[OAToken alloc] initWithKey:@"Oas9vU3hIvjKpTjRy1rRzyJj4h9F43od" secret:@"2KCzJstOOSRNR9cDWKClmqWP7xE"] autorelease];  
     
-    NSLog(@"URL %@",URL);
     id<OASignatureProviding, NSObject> provider = [[[OAHMAC_SHA1SignatureProvider alloc] init] autorelease];
     NSString *realm = nil;  
     
@@ -274,12 +274,16 @@
                                                                       realm:realm
                                                           signatureProvider:provider];
     [request prepare];
+    printf("calling yelp\n");
     NSLog(@"request %@",[request URL]);
     
     _yelpResponseData = [[NSMutableData alloc] init];
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     [connection release];
     [request release];
+    
+    noResultsFound.hidden = YES;
+    loadingView.hidden = NO;
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -296,7 +300,7 @@
     [Utils showAlert:@"Could not load data" withMessage:nil inView:self.view];
     noResultsFound.hidden = NO;
     loadingView.hidden = YES;
-    self.tableView.hidden = YES;
+    self.tableView.hidden = NO;
     self.mapView.hidden = YES;
     [self.mapView removeAnnotations:self.mapView.annotations];
     [self.view sendSubviewToBack:search_view];
@@ -341,15 +345,7 @@
     }
     float lat = [[[[yelp_dict objectForKey:@"region"]objectForKey:@"center"]objectForKey:@"latitude"]floatValue];
     float lng = [[[[yelp_dict objectForKey:@"region"]objectForKey:@"center"]objectForKey:@"longitude"]floatValue];
-    
-    NSLog(@"lat %f",lat);
-    NSLog(@"lng %f",lng);
-    
-    if(self.mapView == nil)
-    {
-        printf("FAIIIIIIIIIII");
-    }
-
+   
     
     CLLocation *tempLocation = [[CLLocation alloc] initWithLatitude: lat longitude:lng];
     
@@ -371,7 +367,6 @@
         if([self.mapView.annotations count]>1)
             [self.mapView removeAnnotations:self.mapView.annotations];
     }
-    printf("Still not dead");
    
     
     //if(self.tableDataSource == NULL)
@@ -450,7 +445,7 @@
 {
 	BOOL success = NO;
 	for (int i=0;i<[self.favorites_array count]; i++) {
-		if([str isEqualToString:[[self.favorites_array objectAtIndex:i]objectForKey:@"id"]])
+		if([str isEqualToString:[self.favorites_array objectAtIndex:i]])
 		{
 			success = YES;
 			break;
@@ -553,8 +548,8 @@
                      reuseIdentifier:moreCellId] autorelease];
         }
 		
-        cell.textLabel.text = @"Load more items...";
-        cell.textLabel.textColor = [UIColor blueColor];
+        if(count >0)
+            cell.textLabel.text = @"Load more items...";
         cell.textLabel.font = [UIFont boldSystemFontOfSize:14];
         
         return cell;
@@ -569,11 +564,18 @@
         const NSInteger DISTANCE_TAG = 1003;
         
         const NSInteger ASYNC_IMAGE_TAG  = 1004;
+        const NSInteger RATING_IMAGE_TAG = 1005;
+        const NSInteger RATING_BUTTON_TAG = 1006;
+        const NSInteger YELP_IMAGE_TAG = 1007;
+        
         
         UILabel *topLabel;
         UILabel *bottomLabel;
         UILabel *distanceLabel;
-        AsyncImageView2 *asyncImageView;
+        UIImageView *asyncImageView;
+        UIImageView *ratingImageView;
+        UIButton *ratingButton;
+        UIImageView *yelpImage;
         
         static NSString *CellIdentifier = @"Cell";
         UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -592,9 +594,14 @@
             const CGFloat LABEL_HEIGHT = 20;
             //UIImage *image = [UIImage imageNamed:@"imageA.png"];
             
-            asyncImageView = [[[AsyncImageView2 alloc] initWithFrame:CGRectMake(5, 5, 50, 50)] autorelease];
+            asyncImageView = [[[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 75, 75)] autorelease];
             asyncImageView.tag = ASYNC_IMAGE_TAG;
             [cell.contentView addSubview:asyncImageView];
+            
+            yelpImage = [[[UIImageView alloc] initWithFrame:CGRectMake(160, 70, 51, 26)] autorelease];
+            yelpImage.tag = YELP_IMAGE_TAG;
+            
+            [cell.contentView addSubview:yelpImage];
             
             //
             // Create the label for the top row of text
@@ -627,7 +634,7 @@
               initWithFrame:
               CGRectMake(
                          asyncImageView.frame.size.width+10,
-                         0.5 * (self.tableView.rowHeight - 2 * LABEL_HEIGHT)+LABEL_HEIGHT,
+                         LABEL_HEIGHT,
                          self.tableView.bounds.size.width -asyncImageView.frame.size.width,
                          LABEL_HEIGHT *2)]
              autorelease];
@@ -641,7 +648,7 @@
             bottomLabel.backgroundColor = [UIColor clearColor];
             bottomLabel.textColor = [UIColor colorWithRed:0.25 green:0.0 blue:0.0 alpha:1.0];
             bottomLabel.highlightedTextColor = [UIColor colorWithRed:1.0 green:1.0 blue:0.9 alpha:1.0];
-            bottomLabel.font = [UIFont systemFontOfSize:13];
+            bottomLabel.font = [UIFont systemFontOfSize:12];
 
             
             
@@ -652,9 +659,9 @@
               initWithFrame:
               CGRectMake(
                          asyncImageView.frame.size.width+10,
-                         asyncImageView.frame.size.height,
-                         self.tableView.bounds.size.width -asyncImageView.frame.size.width,
-                         LABEL_HEIGHT *2)]
+                         55,
+                         100,
+                         20)]
              autorelease];
             distanceLabel.numberOfLines = 1;
             [cell.contentView addSubview:distanceLabel];
@@ -666,7 +673,26 @@
             distanceLabel.backgroundColor = [UIColor clearColor];
             distanceLabel.textColor = [UIColor colorWithRed:0.25 green:0.0 blue:0.0 alpha:1.0];
             distanceLabel.highlightedTextColor = [UIColor colorWithRed:1.0 green:1.0 blue:0.9 alpha:1.0];
-            distanceLabel.font = [UIFont systemFontOfSize:13];
+            distanceLabel.font = [UIFont systemFontOfSize:11];
+            
+            
+            //Create the image view for the rating
+            ratingImageView = [[[UIImageView alloc] initWithFrame:CGRectMake(5, 82, 75, 15)] autorelease];
+            ratingImageView.tag = RATING_IMAGE_TAG;
+            [cell.contentView addSubview:ratingImageView];
+            
+            ratingButton = [[UIButton buttonWithType:UIButtonTypeCustom] autorelease];
+            [ratingButton setTitleColor:[UIColor colorWithRed:0.25 green:0.0 blue:0.0 alpha:1.0] forState:UIControlStateNormal];
+            [ratingButton setTitleColor:[UIColor colorWithRed:1.0 green:1.0 blue:0.9 alpha:1.0] forState:UIControlStateHighlighted];
+            ratingButton.titleLabel.font = [UIFont boldSystemFontOfSize:13]; 
+            
+            ratingButton.frame =  CGRectMake(
+                                             80,
+                                             75,
+                                             75,
+                                             LABEL_HEIGHT);
+            [cell.contentView addSubview:ratingButton];
+            
 
             //
             // Create a background image view.
@@ -681,7 +707,10 @@
             topLabel = (UILabel *)[cell viewWithTag:TOP_LABEL_TAG];
             bottomLabel = (UILabel *)[cell viewWithTag:BOTTOM_LABEL_TAG];
             distanceLabel = (UILabel *)[cell viewWithTag:DISTANCE_TAG];
-            asyncImageView = (AsyncImageView2 *)[cell viewWithTag:ASYNC_IMAGE_TAG];
+            asyncImageView = (UIImageView *)[cell viewWithTag:ASYNC_IMAGE_TAG];
+            ratingImageView = (UIImageView *)[cell viewWithTag:RATING_IMAGE_TAG];
+            ratingButton = (UIButton *)[cell viewWithTag:RATING_BUTTON_TAG];
+            yelpImage = (UIImageView *)[cell viewWithTag:YELP_IMAGE_TAG];
         }
         
         topLabel.text = [obj objectForKey:@"name"];
@@ -718,6 +747,12 @@
             NSString *_state = [[obj objectForKey:@"location"]objectForKey:@"state_code"];
             bottomLabel.text = [NSString stringWithFormat:@"%@\n%@, %@",_address,_city,_state];
             
+
+            NSString *but_title = [NSString stringWithFormat:@"%@ reviews",[obj objectForKey:@"review_count"]];
+            [ratingButton setTitle:but_title forState:UIControlStateNormal];
+            ratingButton.tag = indexPath.row;
+            [ratingButton addTarget:self action:@selector(goReviews:) forControlEvents:UIControlEventTouchUpInside];
+
             
             //Distance
             float miles = [[obj objectForKey:@"distance"]intValue]*0.000621371192;        
@@ -728,10 +763,7 @@
             
             NSString *numberString = [formatter stringFromNumber:[NSNumber numberWithFloat:miles]];
             [formatter release];
-            
-            if([numberString intValue] ==0)
-                distanceLabel.text = @"";
-            else if([numberString intValue] <=0)
+            if([numberString intValue] <=0)
             {
                 float feet = miles * 5280;
                 
@@ -752,6 +784,8 @@
                     distanceLabel.text = [NSString stringWithFormat:@"%i miles",[numberString intValue]];
             }
             
+            NSLog(@"distanceLabel.text %@",distanceLabel.text);
+            
         }
         @catch (NSException * e) {
             NSLog(@"error %@",e);
@@ -759,14 +793,21 @@
         
         if([obj objectForKey:@"image_url"] != (id)[NSNull null])
         {
-            [asyncImageView loadImageFromURL:[NSURL URLWithString:[obj objectForKey:@"image_url"]]];
+           [asyncImageView setImageWithURL:[NSURL URLWithString:[obj objectForKey:@"image_url"]] placeholderImage:[UIImage imageNamed:@"blank_location.png"]];
+            
             asyncImageView.hidden = NO;
         }
-        else
+       
+        
+        if([obj objectForKey:@"rating_img_url"] != (id)[NSNull null])
         {
-           [asyncImageView loadImageFromURL:[NSURL URLWithString:@""]];
-            asyncImageView.hidden = YES;
+            [ratingImageView setImageWithURL:[NSURL URLWithString:[obj objectForKey:@"rating_img_url"]] placeholderImage:[UIImage imageNamed:@""]];
+            ratingImageView.hidden = NO;
         }
+        yelpImage.image = [UIImage imageNamed:@"yelp.png"];
+       
+
+        
         //
         // Set the background and selected background images for the text.
         // Since we will round the corners at the top and bottom of sections, we
@@ -805,10 +846,11 @@
 	
 }
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-	return 90.0;
+	return 100;
 }
 - (void)checkButtonTapped:(id)sender event:(id)event
 {
+    
 	
     NSSet *touches = [event allTouches];
     UITouch *touch = [touches anyObject];
@@ -816,20 +858,21 @@
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint: currentTouchPosition];
 
     NSMutableDictionary *obj = [locations_array objectAtIndex:indexPath.row];
+    NSString *yelp_id  = [obj objectForKey:@"id"];
 
     if (indexPath != nil)
     {
 		//printf("add To Favorites");
 		
 		
-		BOOL checked = [self checkForFavorites:[obj objectForKey:@"id"]];
+		BOOL checked = [self checkForFavorites:yelp_id];
 		BOOL checked2 = [[[[yelp_dict objectForKey:@"businesses"] objectAtIndex:indexPath.row]valueForKey:@"checked"]boolValue];
 		
 		UIImage *image;
 		if(checked || checked2)
 		{
 			printf("turn it off");
-            if([FavoriteLocations removeFromList:obj])
+            if([FavoriteLocations removeFromList:yelp_id])
             {
                 [[[yelp_dict objectForKey:@"businesses"] objectAtIndex:indexPath.row] setValue:[NSNumber numberWithBool:0] forKey:@"checked"];
                 [obj setValue:[NSNumber numberWithBool:0] forKey:@"checked"];
@@ -839,7 +882,7 @@
 		}
 		else {
 			printf("Turn it on");
-			[FavoriteLocations writeDataToFile:obj];
+			[FavoriteLocations writeDataToFile:yelp_id];
 			[[[yelp_dict objectForKey:@"businesses"] objectAtIndex:indexPath.row] setValue:[NSNumber numberWithBool:1] forKey:@"checked"];	
 			image = [UIImage imageNamed:@"star_active.png"];
 			[obj setValue:[NSNumber numberWithBool:1] forKey:@"checked"];
@@ -856,6 +899,10 @@
 		
     }
 	
+}
+-(void)goReviews:(id)sender
+{
+    
 }
 #pragma mark Keyboard layout
 - (void)resignKeyboard:(id)sender
@@ -985,7 +1032,7 @@
 {
 	printf("viewWillAppear");
 	[self.tableView setDelegate:self];
-	[self.tableView reloadData];
+	//[self.tableView reloadData];
 }
 
 

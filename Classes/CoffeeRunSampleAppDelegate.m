@@ -15,7 +15,7 @@
 #import "Constants.h"
 #import "Appirater.h"
 #import "FlurryAnalytics.h"
-#import "UIDevice+IdentifierAddition.h"
+
 
 
 
@@ -97,9 +97,7 @@ static NSString* kAppId = @"189714094427611";
     }
     else
     {
-        //Create a unique device id to be used
-        NSString *deviceID = [[UIDevice currentDevice] uniqueGlobalDeviceIdentifier];
-        [[NSUserDefaults standardUserDefaults]setValue:deviceID forKey:@"_UALastDeviceToken"];
+        [Utils createUniqueDeviceID];
     }
     /*
 	#if TARGET_IPHONE_SIMULATOR
@@ -250,10 +248,7 @@ static NSString* kAppId = @"189714094427611";
 		NSLog(@"Notifications are disabled for this application. Not registering with Urban Airship");
         
         //Create a unique device id to be used
-        NSString *deviceID = [[UIDevice currentDevice] uniqueGlobalDeviceIdentifier];
-        [[NSUserDefaults standardUserDefaults]setValue:deviceID forKey:@"_UALastDeviceToken"];
-        
-        
+        [Utils createUniqueDeviceID];
 		return;
 	}
 
@@ -294,8 +289,7 @@ static NSString* kAppId = @"189714094427611";
     NSLog(@"Failed to register with error: %@", error);
     
     //Create a unique device id to be used
-    NSString *deviceID = [[UIDevice currentDevice] uniqueGlobalDeviceIdentifier];
-    [[NSUserDefaults standardUserDefaults]setValue:deviceID forKey:@"_UALastDeviceToken"];
+    [Utils createUniqueDeviceID];
 }
 - (void)connection:(NSURLConnection *)theConnection didReceiveResponse:(NSURLResponse *)response {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

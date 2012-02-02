@@ -23,5 +23,5 @@
 
 +(BOOL)checkIfContactAdded;
 + (UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize;
-
++(void)createUniqueDeviceID;
 @end

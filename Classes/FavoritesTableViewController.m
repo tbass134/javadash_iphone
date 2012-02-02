@@ -10,6 +10,8 @@
 #import "FavoriteLocations.h"
 #import "FriendsList.h"
 #import "DashSummary.h"
+#import "OAuthConsumer.h"
+#import "SBJSON.h"
 
 @implementation FavoritesTableViewController
 //CoreData
@@ -49,31 +51,81 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     NSLog(@"getAllFavoriteLocations %@",[FavoriteLocations getAllFavoriteLocations]);
-	self.favorites_array = [FavoriteLocations getAllFavoriteLocations];
-	self.tableView.delegate = self;
-	self.tableView.dataSource = self;
+	//self.favorites_array = 
+    yelp_id_array = [[FavoriteLocations getAllFavoriteLocations]retain];
+    
+    for(int i=0;i<[yelp_id_array count];i++)
+    {
+        [self loadYelp:[yelp_id_array objectAtIndex:i]];
+    }
+    
     self.tableView.backgroundColor = [UIColor clearColor];
-	[self.tableView reloadData];
+
+    
+
 
 }
+- (void)loadYelp:(NSString *)yelp_id {
+    
+    // OAuthConsumer doesn't handle pluses in URL, only percent escapes
+    // OK: http://api.yelp.com/v2/search?term=restaurants&location=new%20york
+    // FAIL: http://api.yelp.com/v2/search?term=restaurants&location=new+york
+    
+    // OAuthConsumer has been patched to properly URL escape the consumer and token secrets 
+   NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.yelp.com/v2/business/%@",yelp_id]];
+       
+    OAConsumer *consumer = [[[OAConsumer alloc] initWithKey:@"PTBdkAuUvjJh8JCiKEHvBg" secret:@"_coFSZoQItl-uGKKV5nNqDhbR70"] autorelease];
+    OAToken *token = [[[OAToken alloc] initWithKey:@"Oas9vU3hIvjKpTjRy1rRzyJj4h9F43od" secret:@"2KCzJstOOSRNR9cDWKClmqWP7xE"] autorelease];  
+    
+    id<OASignatureProviding, NSObject> provider = [[[OAHMAC_SHA1SignatureProvider alloc] init] autorelease];
+    NSString *realm = nil;  
+    
+    OAMutableURLRequest *request = [[OAMutableURLRequest alloc] initWithURL:URL
+                                                                   consumer:consumer
+                                                                      token:token
+                                                                      realm:realm
+                                                          signatureProvider:provider];
+    [request prepare];
+    printf("calling yelp\n");
+    NSLog(@"request %@",[request URL]);
+    
+    _yelpResponseData = [[NSMutableData alloc] init];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    [connection release];
+    [request release];
+}
 
-/*
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    [_yelpResponseData setLength:0];
 }
-*/
-/*
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    [_yelpResponseData appendData:data];
 }
-*/
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations.
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    NSLog(@"Error: %@, %@", [error localizedDescription], [error localizedFailureReason]);
 }
-*/
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    
+    NSString *json_str = [[NSString alloc] initWithData:_yelpResponseData encoding:NSUTF8StringEncoding];
+    SBJSON *parser = [[SBJSON alloc] init];
+    NSDictionary *yelp_obj= [[parser objectWithString:json_str error:nil]retain];
+    [parser release];
+    [json_str release];
+    [self.favorites_array addObject:yelp_obj];
+    NSLog(@"[self.favorites_array count] %i",[self.favorites_array count]);
+    NSLog(@"[yelp_id_array count] %i",[yelp_id_array count]);
+    
+    if([self.favorites_array count] == [yelp_id_array count])
+    {
+        self.tableView.delegate = self;
+        self.tableView.dataSource = self;
+        [self.tableView reloadData];
+    }
+}
+
 
 
 #pragma mark -
@@ -100,9 +152,9 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-    
+    NSLog(@"self.favorites_array %@",[self.favorites_array objectAtIndex:indexPath.row]);
     // Configure the cell...
-    cell.textLabel.text = [[self.favorites_array objectAtIndex:indexPath.row]valueForKey:@"name"];
+    //cell.textLabel.text = [self.favorites_array objectAtIndex:indexPath.row];
     return cell;
 }
 

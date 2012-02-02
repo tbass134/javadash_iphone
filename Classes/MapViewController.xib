@@ -263,7 +263,7 @@
 					<object class="IBUIImageView" id="95717588">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{262, 250}, {50, 25}}</string>
+						<string key="NSFrame">{{262, 250}, {51, 26}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="223966504"/>
@@ -272,7 +272,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">yelp_logo_50x25.png</string>
+							<string key="NSResourceName">yelp.png</string>
 						</object>
 					</object>
 					<object class="IBUITableView" id="963514017">
@@ -1007,13 +1007,13 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>30x-Marker.png</string>
 				<string>Powered_By_Yelp_Yellow.png</string>
-				<string>yelp_logo_50x25.png</string>
+				<string>yelp.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{30, 30}</string>
 				<string>{115, 25}</string>
-				<string>{51, 27}</string>
+				<string>{51, 26}</string>
 			</object>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">933</string>

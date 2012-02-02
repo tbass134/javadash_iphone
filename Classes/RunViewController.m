@@ -87,6 +87,10 @@
 }
 -(void)GetOrders{
     
+    
+    if([[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"] == NULL)
+        [Utils createUniqueDeviceID];
+    
     //every time we go to this screen, we need to know if an order has been sent,
 	//If so, change the Label
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];

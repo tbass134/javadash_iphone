@@ -7,7 +7,7 @@
 //
 
 #import "Utils.h"
-
+#import "UIDevice+IdentifierAddition.h"
 
 @implementation Utils
 
@@ -162,4 +162,14 @@
         #endif
 	}	
 }
++(void)createUniqueDeviceID
+{
+    if(![[NSUserDefaults standardUserDefaults] valueForKey:@"_UALastDeviceToken"])
+    {
+        //Create a unique device id to be used
+        NSString *deviceID = [[UIDevice currentDevice] uniqueGlobalDeviceIdentifier];
+        [[NSUserDefaults standardUserDefaults]setValue:deviceID forKey:@"_UALastDeviceToken"];
+    }
+}
+    
 @end
