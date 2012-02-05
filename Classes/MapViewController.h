@@ -61,6 +61,7 @@
     UIToolbar *keyboardToolbar;
     
     NSMutableArray *locations_array;
+    BOOL currentLocationLoaded;
 
 }
 @property (retain,nonatomic) MKMapView *mapView;

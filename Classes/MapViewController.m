@@ -420,7 +420,7 @@
         placemark.location_dict = obj;
         [mapView addAnnotation:placemark];
         [placemark release];
-        [location release];
+        //[location release];
         [tempLocation release];
          
     }
@@ -574,7 +574,7 @@
         UILabel *distanceLabel;
         UIImageView *asyncImageView;
         UIImageView *ratingImageView;
-        UIButton *ratingButton;
+        UILabel *rating;
         UIImageView *yelpImage;
         
         static NSString *CellIdentifier = @"Cell";
@@ -600,7 +600,6 @@
             
             yelpImage = [[[UIImageView alloc] initWithFrame:CGRectMake(160, 70, 51, 26)] autorelease];
             yelpImage.tag = YELP_IMAGE_TAG;
-            
             [cell.contentView addSubview:yelpImage];
             
             //
@@ -681,17 +680,13 @@
             ratingImageView.tag = RATING_IMAGE_TAG;
             [cell.contentView addSubview:ratingImageView];
             
-            ratingButton = [[UIButton buttonWithType:UIButtonTypeCustom] autorelease];
-            [ratingButton setTitleColor:[UIColor colorWithRed:0.25 green:0.0 blue:0.0 alpha:1.0] forState:UIControlStateNormal];
-            [ratingButton setTitleColor:[UIColor colorWithRed:1.0 green:1.0 blue:0.9 alpha:1.0] forState:UIControlStateHighlighted];
-            ratingButton.titleLabel.font = [UIFont boldSystemFontOfSize:13]; 
             
-            ratingButton.frame =  CGRectMake(
-                                             80,
-                                             75,
-                                             75,
-                                             LABEL_HEIGHT);
-            [cell.contentView addSubview:ratingButton];
+            rating = [[UILabel alloc]initWithFrame:CGRectMake(asyncImageView.frame.size.width+10,asyncImageView.frame.size.height,75,LABEL_HEIGHT)];
+            rating.backgroundColor = [UIColor clearColor];
+            rating.textColor = [UIColor colorWithRed:0.25 green:0.0 blue:0.0 alpha:1.0];
+            rating.highlightedTextColor = [UIColor colorWithRed:1.0 green:1.0 blue:0.9 alpha:1.0];
+            rating.font = [UIFont boldSystemFontOfSize:13];
+            [cell.contentView addSubview:rating];
             
 
             //
@@ -709,7 +704,7 @@
             distanceLabel = (UILabel *)[cell viewWithTag:DISTANCE_TAG];
             asyncImageView = (UIImageView *)[cell viewWithTag:ASYNC_IMAGE_TAG];
             ratingImageView = (UIImageView *)[cell viewWithTag:RATING_IMAGE_TAG];
-            ratingButton = (UIButton *)[cell viewWithTag:RATING_BUTTON_TAG];
+            rating = (UILabel *)[cell viewWithTag:RATING_BUTTON_TAG];
             yelpImage = (UIImageView *)[cell viewWithTag:YELP_IMAGE_TAG];
         }
         
@@ -748,11 +743,7 @@
             bottomLabel.text = [NSString stringWithFormat:@"%@\n%@, %@",_address,_city,_state];
             
 
-            NSString *but_title = [NSString stringWithFormat:@"%@ reviews",[obj objectForKey:@"review_count"]];
-            [ratingButton setTitle:but_title forState:UIControlStateNormal];
-            ratingButton.tag = indexPath.row;
-            [ratingButton addTarget:self action:@selector(goReviews:) forControlEvents:UIControlEventTouchUpInside];
-
+            rating.text = [NSString stringWithFormat:@"%@ reviews",[obj objectForKey:@"review_count"]];
             
             //Distance
             float miles = [[obj objectForKey:@"distance"]intValue]*0.000621371192;        
@@ -783,9 +774,6 @@
                 else
                     distanceLabel.text = [NSString stringWithFormat:@"%i miles",[numberString intValue]];
             }
-            
-            NSLog(@"distanceLabel.text %@",distanceLabel.text);
-            
         }
         @catch (NSException * e) {
             NSLog(@"error %@",e);
@@ -1031,7 +1019,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
 	printf("viewWillAppear");
-	[self.tableView setDelegate:self];
+	//[self.tableView setDelegate:self];
 	//[self.tableView reloadData];
 }
 
@@ -1076,14 +1064,14 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     //\ e.g. self.myOutlet = nil;
-	self.currentLocation = nil;
+	//self.currentLocation = nil;
 }
 
 
 - (void)dealloc {
     printf("dealloc called");
     [super dealloc];
-	[conn release];
+	//[conn release];
 	//[self.currentLocation release];
 }
 

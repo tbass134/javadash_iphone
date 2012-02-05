@@ -31,6 +31,8 @@
 #import "FlurryAnalytics.h"
 #import "UIImageView+WebCache.h"
 
+#import "DataService.h"
+
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 320.0f
 #define CELL_CONTENT_MARGIN 10.0f
@@ -91,13 +93,17 @@
     if([[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"] == NULL)
         [Utils createUniqueDeviceID];
     
+    BOOL dataLoaded = [[DataService sharedDataService]getOrders];
+    if(dataLoaded)
+        [self updateOrders];
+    /*
     //every time we go to this screen, we need to know if an order has been sent,
 	//If so, change the Label
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     int ts = [[NSDate date] timeIntervalSince1970];
     
     
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],ts]]
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:]
 														   cachePolicy:NSURLCacheStorageNotAllowed
 													   timeoutInterval:60.0];
 
@@ -131,6 +137,8 @@
                             waitUntilDone:NO];
     } 
     [pool release];
+     
+     */
 }
 -(void)updateOrders{
     if(![self isRunDataFilledOut])

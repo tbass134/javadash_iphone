@@ -81,4 +81,7 @@
 -(void)displayPhoto:(UIImage *)photo;
 -(void)displayDefaultPhoto;
 
+-(void)startTimer;
+-(void)stopTimer;
+
 @end

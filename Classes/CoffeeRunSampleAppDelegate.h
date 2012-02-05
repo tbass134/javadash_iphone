@@ -91,5 +91,6 @@ FBSessionDelegate,AdWhirlDelegate> {
 -(void)initTesting;
 -(void)loadUI;
 -(void)checkForAppPurchase;
+- (void)customizeAppearance;
 @end
 

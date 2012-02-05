@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-@interface FavoritesTableViewController : UITableViewController {
+#import "MBProgressHUD.h"
+@interface FavoritesTableViewController : UITableViewController<MBProgressHUDDelegate> {
 
+    MBProgressHUD *HUD;
 	NSMutableArray *favorites_array;
     NSArray *yelp_id_array;
+    
 	
 	//Core Data
 	NSFetchedResultsController *fetchedResultsController;
@@ -20,6 +23,7 @@
     NSMutableData *_yelpResponseData;
 }
 @property (nonatomic, retain) NSMutableArray *favorites_array;
+@property (nonatomic, retain) NSArray *yelp_id_array;
 
 
 //Core Data
