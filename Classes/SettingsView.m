@@ -11,6 +11,7 @@
 #import "DBSignupViewController.h"
 #import "CoffeeRunSampleAppDelegate.h"
 #import "DBSignupViewController.h"
+#import "DataService.h"
 
 
 #import "URLConnection.h"
@@ -98,6 +99,15 @@
 #endif        
         //tell the server about the purchase.
         //Send a push to all devices
+        BOOL didPurchaseApp = [[DataService sharedDataService]purchaseApp];
+        if(didPurchaseApp)
+        {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Purchase Sucessful" message:@"Thanks for your purchase!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+            [alert show];
+            [alert release];
+            [self appPurchased];
+        }
+        /*
         int ts = [[NSDate date] timeIntervalSince1970];
         NSString *userInfo = [NSString stringWithFormat:@"deviceid=%@&ts=%i",
                                 [[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],ts];
@@ -110,6 +120,8 @@
         conn.tag = @"purchaseApp";
         [conn setDelegate:self];
         [conn initWithRequest:request];
+         */
+        
         
     } 
                                    onCancelled:^ { 
@@ -124,6 +136,7 @@
 		[Utils showAlert:@"Could not save data to server" withMessage:@"Please try again" inView:self.view];
 		return;
 	}
+    /*
     if([tag isEqualToString:@"purchaseApp"])
     {
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Purchase Sucessful" message:@"Thanks for your purchase!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
@@ -136,6 +149,7 @@
             [self appPurchased];
         }
     }
+     */
 }
 -(void)appPurchased
 {

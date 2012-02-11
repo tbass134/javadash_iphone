@@ -50,6 +50,7 @@
 @property(nonatomic,retain) IBOutlet UITableView *table_view;
 -(IBAction)fbButtonClick:(id)sender;
 -(IBAction)getUserInfo:(id)sender;
+-(void)loadFriendsList;
 
 -(void)addUserToList:(NSDictionary *)user withImage:(UIImage *)image;
 @end

@@ -17,6 +17,7 @@
 #import "Constants.h"
 #import "URLConnection.h"
 #import "JSON.h"
+#import "DataService.h"
 
 
 #define UITEXTVIEWTAG 101
@@ -402,7 +403,37 @@
     if(edit_order_dict !=NULL)
     {
         Order *order = [Order sharedOrder];
+        SBJSON *parser = [[SBJSON alloc] init];	
+        NSString *order_str = [parser stringWithObject:savedDrink];
+        [parser release];
         
+        NSDictionary *selected_drink = [[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"]objectAtIndex:selected_index];
+        
+        
+        
+        BOOL orderPlaced = [[DataService sharedDataService]placeOrder:
+                                                            [[[order currentOrder]objectForKey:@"run"]objectForKey:@"id"]
+                                                                order:order_str
+                                                          updateOrder:@"1"
+                                                              orderID:[selected_drink objectForKey:@"order_id"]
+                                                            ];
+        
+        if(orderPlaced)
+        {
+            //clear the drink orders array
+            [[DrinkOrders instance]clearArray];
+            //[Utils showAlert:@"Order Updated" withMessage:nil inView:self.view];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        
+    }
+    else
+    {
+        [self.navigationController dismissModalViewControllerAnimated:YES];
+    }
+        //NSLog(@"selected_drink %@",selected_drink);
+       /* 
         printf("Calling placeorder");
         //This order was editied, need to send the new data to the server
         int ts = [[NSDate date] timeIntervalSince1970];
@@ -412,12 +443,9 @@
         
         [request setHTTPMethod:@"POST"];
         
-        SBJSON *parser = [[SBJSON alloc] init];	
-        NSString *order_str = [parser stringWithObject:savedDrink];
-        [parser release];
         
-        NSDictionary *selected_drink = [[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"]objectAtIndex:selected_index];
-        NSLog(@"selected_drink %@",selected_drink);
+        
+        
         
         NSString *post_str = [NSString stringWithFormat:@"device_id=%@&run_id=%@&order=%@&updateOrder=1&order_id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"_UALastDeviceToken"],	[[[order currentOrder]objectForKey:@"run"]objectForKey:@"id"],order_str,[selected_drink objectForKey:@"order_id"]];
         [request setHTTPBody:[post_str dataUsingEncoding:NSUTF8StringEncoding]]; 
@@ -433,10 +461,12 @@
     {
          //[Utils showAlert:@"Order Added" withMessage:nil inView:self.view];
     }
+    */
        
     
-	[self.navigationController dismissModalViewControllerAnimated:YES];
+	//[self.navigationController dismissModalViewControllerAnimated:YES];
 }
+/*
 - (void)processSuccessful:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
 {
     //clear the drink orders array
@@ -446,6 +476,7 @@
     
     [self.navigationController popViewControllerAnimated:YES];
 }
+ */
 
 //implementation
 - (void)textFieldDidBeginEditing:(UITextField *)textField {

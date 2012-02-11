@@ -9,9 +9,9 @@
 #import "FacebookViewController.h"
 #import "Constants.h"
 #import "CoffeeRunSampleAppDelegate.h"
-#import "URLConnection.h"
 #import "Utils.h"
 #import "FriendsInfo.h"
+#import "DataService.h"
 #define UIAppDelegate \
 ((CoffeeRunSampleAppDelegate *)[UIApplication sharedApplication].delegate)
 @implementation FacebookViewController
@@ -63,60 +63,36 @@
     // Regiser for HUD callbacks so we can remove it from the window at the right time
     HUD.delegate = self;
     [HUD show:YES];
-	
-    // Show the HUD while the provided method executes in a new thread
-    
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/Facebook/getFacebookUsersOfApp.php",baseDomain]]
-														   cachePolicy:NSURLCacheStorageNotAllowed
-													   timeoutInterval:60.0];
-    
-    NSLog(@"request %@",[request URL]);
-	URLConnection *conn = [[URLConnection alloc]init];
-	conn.tag =@"getFBUsers";
-	[conn setDelegate:self];
-	[conn initWithRequest:request];
-}
-- (void)processSuccessful:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
-{
-    [HUD hide:YES];
-    loading_txt.hidden = YES;
-    NSString * json_str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    SBJSON *parser = [[SBJSON alloc] init];
-    NSDictionary *allFBUsers = [[parser objectWithString:json_str error:nil]retain];
-    
-
-    
-    //NSLog(@"allFBUsers %@",allFBUsers);
-    //NSLog(@"friends %@",friends);
-    
-    for(int i =0;i<[friends count];i++)
+    NSDictionary *allFBUsers = [[DataService sharedDataService]getFacebookUsersOfApp];
+    if(allFBUsers != NULL)
     {
-     
-        NSDictionary *friend = [friends objectAtIndex:i];
-        //NSLog(@"id %@",[friend objectForKey:@"id"]);
-        int fbID = [[friend objectForKey:@"id"]intValue];
-        for(int j=0;j<[allFBUsers count];j++)
+        [HUD hide:YES];
+        loading_txt.hidden = YES;
+        for(int i =0;i<[friends count];i++)
         {
-            NSDictionary *jdFriend = [allFBUsers objectAtIndex:j];
-            //NSLog(@"jdFriend %@",jdFriend);
-            int jdFriendID = [[jdFriend objectForKey:@"fb_id"]intValue];
             
-            //NSLog(@"fbID %i",fbID);
-            //NSLog(@"jdFriendID %i",jdFriendID);
-            if(fbID == jdFriendID)
+            NSDictionary *friend = [friends objectAtIndex:i];
+            //NSLog(@"id %@",[friend objectForKey:@"id"]);
+            int fbID = [[friend objectForKey:@"id"]intValue];
+            for(int j=0;j<[allFBUsers count];j++)
             {
-                printf("FOund Frined");
-                [users addObject:jdFriend];
-                break;
+                NSDictionary *jdFriend = [allFBUsers objectAtIndex:j];
+                //NSLog(@"jdFriend %@",jdFriend);
+                int jdFriendID = [[jdFriend objectForKey:@"fb_id"]intValue];
+                
+                //NSLog(@"fbID %i",fbID);
+                //NSLog(@"jdFriendID %i",jdFriendID);
+                if(fbID == jdFriendID)
+                {
+                    printf("FOund Frined");
+                    [users addObject:jdFriend];
+                    break;
+                }
             }
         }
+        [self loadFriendsList];
     }
-    
-    
-    [self loadFriendsList];
-    [parser release];
-    [json_str release];
-    
+        
 }
 -(void)loadFriendsList
 {

@@ -29,6 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+    table_view.hidden = YES;
 	appDelegate = [[UIApplication sharedApplication] delegate];
 	companyName =[[[[NSUserDefaults standardUserDefaults] valueForKey:@"Current Order Dict"]objectForKey:@"data"]objectForKey:@"selected_name"];
 	
@@ -76,6 +77,7 @@
 }
 -(IBAction)chooseDrinkTemp:(id)sender
 {
+    
     UIButton *btn = sender;
     
     if(btn.tag ==1)
@@ -89,13 +91,14 @@
         drink_type = @"Iced";
     }
     
+    table_view.hidden = NO;
     drink_temp_view.hidden = YES;
     
     
     plistDictionary = [[NSUserDefaults standardUserDefaults]dictionaryForKey:@"plistDictionary"];
 	
-	if(!plistDictionary)
-	{
+	//if(!plistDictionary)
+	//{
 		NSString *path = [[NSBundle mainBundle] bundlePath];
 		NSString *finalPath = [path stringByAppendingPathComponent:@"CoffeeList2.plist"];
 		plistDictionary = [[NSDictionary dictionaryWithContentsOfFile:finalPath] retain];
@@ -105,7 +108,7 @@
 		NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
 		if (standardUserDefaults) 
 			[standardUserDefaults setObject:plistDictionary forKey:@"plistDictionary"];
-	}
+	//}
     //NSLog(@"companyName %@\n",companyName);
     //NSLog(@"drink_type %@",drink_type);
 	coffee_dict =[[[plistDictionary objectForKey:companyName]objectForKey:@"Drinks"]objectForKey:drink_type];

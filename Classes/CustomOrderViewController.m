@@ -12,7 +12,7 @@
 #import "URLConnection.h"
 #import "JSON.h"
 #import "Constants.h"
-
+#import "DataService.h"
 @implementation CustomOrderViewController
 @synthesize text_view,label,saveBtn;
 @synthesize edit_order_dict;
@@ -58,12 +58,33 @@
 
     if(edit_order_dict != NULL)
     {
+        
         [edit_order_dict setObject:text_view.text forKey:@"CustomOrder"];
         DrinkOrders *drink_orders = [DrinkOrders instance];
         NSLog(@"drink_orders %@",drink_orders);
         
     
         Order *order = [Order sharedOrder];
+        SBJSON *parser = [[SBJSON alloc] init];	
+        NSString *order_str = [parser stringWithObject:edit_order_dict];
+        [parser release];
+         NSDictionary *selected_drink = [[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"]objectAtIndex:selected_index];
+        
+        
+        
+        BOOL orderPlaced = [[DataService sharedDataService]placeOrder:
+                            [[[order currentOrder]objectForKey:@"run"]objectForKey:@"id"]
+                                                                order:order_str
+                                                          updateOrder:@"1"
+                                                              orderID:[selected_drink objectForKey:@"order_id"]
+                            ];
+        
+        if(orderPlaced)
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        
+        /*
         //This order was editied, need to send the new data to the server
         int ts = [[NSDate date] timeIntervalSince1970];
         NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/placeorder.php?ts=%i",baseDomain,ts]]
@@ -72,11 +93,9 @@
         
         [request setHTTPMethod:@"POST"];
         
-        SBJSON *parser = [[SBJSON alloc] init];	
-        NSString *order_str = [parser stringWithObject:edit_order_dict];
-        [parser release];
+       
         
-         NSDictionary *selected_drink = [[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"]objectAtIndex:selected_index];
+        
         
         
         NSString *post_str = [NSString stringWithFormat:@"device_id=%@&run_id=%@&order=%@&updateOrder=1&order_id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"_UALastDeviceToken"],	[[[order currentOrder]objectForKey:@"run"]objectForKey:@"id"],order_str,[selected_drink objectForKey:@"order_id"]];
@@ -88,6 +107,7 @@
         conn.tag =@"editOrder";
         [conn setDelegate:self];
         [conn initWithRequest:request];
+         */
         
     }
     else
@@ -100,9 +120,11 @@
         
         DrinkOrders *drink_orders = [DrinkOrders instance];
         [[drink_orders getArray]addObject:savedDrink];
+        
+        [self.navigationController popViewControllerAnimated:YES];
     }
      
-	[self.navigationController popViewControllerAnimated:YES];
+	
 }
 
 

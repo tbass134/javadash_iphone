@@ -12,5 +12,15 @@
     NSString *urlPrefix;
 }
 -(BOOL)getOrders;
+
+-(BOOL)addUser:(NSString *)userName  deviceID:(NSString *)deviceid email:(NSString *)email emailEnabled:(BOOL)enableEmail facebookID:(NSString *)fbid enablePush:(BOOL)enable_push;
+-(BOOL)startRunWithDict:(NSDictionary *)dash_dict;
+-(BOOL)placeOrder:(NSString *)run_id order:(NSString *)order updateOrder:(NSString *)update_order orderID:(NSString *)order_id;
+-(BOOL)completerun:(NSString *)deviceid runID:(NSString *)run_id;
+-(BOOL)leaverun:(NSString *)deviceid runID:(NSString *)run_id;
+-(BOOL)deleteOrder:(NSString *)order_id;
+
+-(NSDictionary *)getFacebookUsersOfApp;
+-(BOOL)purchaseApp;
 + (DataService*)sharedDataService;
 @end

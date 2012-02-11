@@ -11,6 +11,7 @@
 #import "Constants.h"
 #import "URLConnection.h"
 #import "FlurryAnalytics.h"
+#import "DataService.h"
 
 @implementation FriendsInfo
 //CoreData
@@ -82,6 +83,22 @@
 -(void)sendFriendDataToServer:(NSDictionary *)friend_dict
 {
     [Utils printDict:friend_dict];
+    NSString *userName = [Utils urlencode:[NSString stringWithFormat:@"%@ %@",[friend_dict objectForKey:@"FIRSTNAME"], [friend_dict objectForKey:@"LASTNAME"]]];
+    
+    
+     BOOL userWasAdded = [[DataService sharedDataService]addUser:[Utils urlencode:userName]
+                                                        deviceID:[friend_dict objectForKey:@"TOKEN"]
+                                                           email:[friend_dict objectForKey:@"EMAIL"] 
+                                                    emailEnabled:[[friend_dict objectForKey:@"ENABLE_EMAIL"]boolValue]
+                                                      facebookID:0
+                                                      enablePush:nil];
+    if(userWasAdded)
+    {
+        printf("Friend Data sent to server");
+        [[self delegate] friendDataLoaded:YES withTag:nil andData:nil];
+    }
+    
+    /*
     NSString *user_info = [NSString stringWithFormat:@"name=%@&deviceid=%@&email=%@&enable_email_use=%d&platform=%@&fbid=%d",
                            [Utils urlencode:[NSString stringWithFormat:@"%@ %@",[friend_dict objectForKey:@"FIRSTNAME"], [friend_dict objectForKey:@"LASTNAME"]]],
                             [friend_dict objectForKey:@"TOKEN"],
@@ -106,7 +123,9 @@
     conn.tag = @"sendFriendData";
     [conn setDelegate:self];
     [conn initWithRequest:request];
+     */
 }
+/*
 - (void)processSuccessful:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
 {
     NSLog(@"data %@",[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
@@ -116,6 +135,7 @@
         [[self delegate] friendDataLoaded:YES withTag:tag andData:data];
     }
 }
+ */
 -(void)readFriendsData{
 	NSManagedObjectContext *context = [self managedObjectContext];    
 	NSEntityDescription *friendEnity = [NSEntityDescription entityForName:@"Friends" inManagedObjectContext:context];

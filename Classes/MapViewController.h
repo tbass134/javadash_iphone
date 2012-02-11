@@ -13,7 +13,6 @@
 #import <CoreData/CoreData.h>
 #import "CoffeeLocation.h"
 #import "URLConnection.h"
-#import "SummaryTableViewController.h"
 #import "MBProgressHUD.h"
 @interface MapViewController : UIViewController<MKMapViewDelegate,UITableViewDataSource, UITableViewDelegate,CLLocationManagerDelegate,MKReverseGeocoderDelegate,UITextFieldDelegate,MBProgressHUDDelegate> {
 
@@ -24,7 +23,6 @@
 	IBOutlet UISegmentedControl *seg_control;
 	IBOutlet UIBarButtonItem *reloadLocation_btn;
     UIBarButtonItem *cancel_btn;
-	SummaryTableViewController *parent;
 
 	NSMutableDictionary *yelp_dict;
 	CLLocationManager *locationManager;

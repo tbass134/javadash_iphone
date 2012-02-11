@@ -56,7 +56,7 @@
 @property(nonatomic,retain)IBOutlet UITableView *table_view;
 
 
-
+-(void)GetOrders;
 -(void)checkForOrders;
 -(void)startRun;
 -(void)viewRun;
@@ -70,6 +70,7 @@
 -(void)initStartRun;
 -(BOOL)hasOrder;
 -(void)reloadStartRunData;
+-(void)submitDash:(NSDictionary *)dash_dict;
 
 -(void)goMapView;
 -(void)goTimeView;

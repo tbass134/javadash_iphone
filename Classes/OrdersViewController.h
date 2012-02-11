@@ -64,7 +64,7 @@
 @property(nonatomic,retain)UIButton *your_order_btn;
 @property(nonatomic,retain)UIButton *favorite_btn;
 
-
+-(void)getOrders;
 -(void)checkForOrders;
 -(void)gotoScreen;
 
@@ -78,6 +78,7 @@
 
 //Place Order View
 -(void)initPlaceOrder;
+-(void)setremoveOrder:(NSDictionary *)order;
 
 -(void)showNoOrdersView:(BOOL)show withTitle:(NSString *)title andMessage:(NSString *)message;
 

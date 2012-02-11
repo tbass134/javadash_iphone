@@ -18,7 +18,6 @@
 
 #import "InfoViewController.h"
 
-#import "SummaryTableViewController.h"
 #define VIEW_ORDER @"View Order"
 #define EDIT_ORDER @"Edit Order"
 #define PLACE_ORDER @"Place Order"
@@ -141,15 +140,7 @@
 		//every time we go to this screen, we need to know if an order has been sent,
 		//If so, change the Label
 		int ts = [[NSDate date] timeIntervalSince1970];
-        /*
-		NSString *userName = [NSString stringWithFormat:@"%@ %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"FIRSTNAME"],[[NSUserDefaults standardUserDefaults]valueForKey:@"LASTNAME"]];
-		NSLog(@"userName %@",[Utils urlencode:userName]);
-		NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&name=%@&platform=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],[Utils urlencode:userName],@"IOS",ts]]
-															   cachePolicy:NSURLRequestReturnCacheDataElseLoad
-														   timeoutInterval:60.0];
-         */
-        
-        NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],ts]]
+            NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],ts]]
                                                                cachePolicy:NSURLCacheStorageNotAllowed
                                                            timeoutInterval:60.0];
 		NSLog(@"url %@", [request URL]);

@@ -12,6 +12,7 @@
 #import "URLConnection.h"
 #import "CoffeeRunSampleAppDelegate.h"
 #import "UIImageView+WebCache.h"
+#import "DataService.h"
 #define UIAppDelegate \
 ((CoffeeRunSampleAppDelegate *)[UIApplication sharedApplication].delegate)
 
@@ -307,6 +308,7 @@
     BOOL enable_push =[[[NSUserDefaults standardUserDefaults] valueForKey:@"enable_push_notifications"]boolValue];
    
     NSString *userName = [NSString stringWithFormat:@"%@ %@",self.nameTextField.text,self.lastNameTextField.text];
+   /*
     NSString *user_info = [NSString stringWithFormat:@"name=%@&deviceid=%@&email=%@&enable_email_use=%d&platform=%@&fbid=%@&enable_push=%d",
                            [Utils urlencode:userName],
                            [[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],
@@ -329,8 +331,28 @@
     conn.tag = @"skipContact";
     [conn setDelegate:self];
     [conn initWithRequest:request];
-    //[self resignKeyboard:nil];    
-    userAdded = YES;
+    //[self resignKeyboard:nil];   
+    */
+    
+    BOOL userWasAdded = [[DataService sharedDataService]addUser:
+                                                        userName 
+                                                       deviceID:[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"]
+                                                        email:self.emailTextField.text
+                                                        emailEnabled:self.enableEmail.on
+                                                        facebookID:fbid
+                                                        enablePush:enable_push
+                         ];
+    
+    if(userWasAdded)
+    {
+        if([Utils checkIfContactAdded])
+        {
+            [[self delegate] userDataAdded];
+        }
+        userAdded = YES;
+    }
+    
+    
 
 }
 -(IBAction)goBack3:(id)sender
@@ -532,15 +554,24 @@
 -(void)saveFBId
 {
     //Store this in a UserDefaults since we'll need it again
-    
-   
-    
-    int ts = [[NSDate date] timeIntervalSince1970];
-	NSString *userName = [NSString stringWithFormat:@"%@ %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"FIRSTNAME"],[[NSUserDefaults standardUserDefaults]valueForKey:@"LASTNAME"]];
+    NSString *userName = [NSString stringWithFormat:@"%@ %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"FIRSTNAME"],[[NSUserDefaults standardUserDefaults]valueForKey:@"LASTNAME"]];
     NSString *email =[[NSUserDefaults standardUserDefaults]valueForKey:@"EMAIL"];
-    
     BOOL enable_email = [[[NSUserDefaults standardUserDefaults]valueForKey:@"ENABLE_EMAIL"]boolValue];
+    BOOL enable_push =[[[NSUserDefaults standardUserDefaults] valueForKey:@"enable_push_notifications"]boolValue];
+
+    BOOL userWasAdded = [[DataService sharedDataService]addUser:userName
+                                                        deviceID:[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"]
+                                                        email:email
+                                                        emailEnabled:enable_email
+                                                        facebookID:fbid
+                                                        enablePush:enable_push
+                                                        ];
+    if(userWasAdded)
+    {
+        printf("fbUser added");
+    }
     
+    /*
 	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/addUser.php?deviceid=%@&name=%@&email=%@&enable_email=%d&platform=%@&fb=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],[Utils urlencode:userName],email,enable_email,@"IOS",fbid, ts]]
 														   cachePolicy:NSURLCacheStorageNotAllowed
 													   timeoutInterval:60.0];
@@ -550,6 +581,9 @@
 	conn.tag =@"saveFB";
 	[conn setDelegate:self];
 	[conn initWithRequest:request];
+     */
+    
+    
 }
 -(void)signup:(id)sender
 {
@@ -584,6 +618,29 @@
         return;
     
     NSString *userName = [NSString stringWithFormat:@"%@ %@",self.nameTextField.text,self.lastNameTextField.text];
+    BOOL userWasAdded = [[DataService sharedDataService]addUser:userName
+                                                                deviceID:[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"]
+                                                                email:self.emailTextField.text
+                                                                emailEnabled:self.enableEmail.on
+                                                                facebookID:fbid
+                                                                enablePush:enable_push
+                                                                ];
+    
+    if(userWasAdded)
+    {
+        if(gotoContactInfo)
+        {
+            [self.navigationController dismissModalViewControllerAnimated:YES];
+            return;
+        }
+        if([Utils checkIfContactAdded])
+        {
+            [[self delegate] userDataAdded];
+        }
+
+    }
+    
+    /*
     NSString *user_info = [NSString stringWithFormat:@"name=%@&deviceid=%@&email=%@&enable_email_use=%d&platform=%@&fbid=%@&enable_push=%d",
                            [Utils urlencode:userName],
                            [[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],
@@ -606,7 +663,8 @@
     conn.tag = @"sendFriendData";
     [conn setDelegate:self];
     [conn initWithRequest:request];
-    [self resignKeyboard:nil];    
+    [self resignKeyboard:nil];
+     */
     userAdded = YES;
 }
 -(void)goBack
@@ -617,18 +675,11 @@
 {
     NSLog(@"data %@",[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
     
-    
-    if([tag isEqualToString:@"skipContact"])
-    {
-        if([Utils checkIfContactAdded])
-        {
-            [[self delegate] userDataAdded];
-        }
-    }
+
     if([tag isEqualToString:@"sendFriendData"])
     {
         
-        [self.navigationController dismissModalViewControllerAnimated:YES];
+       
     }
     if([tag isEqualToString:@"saveFB"])
     {

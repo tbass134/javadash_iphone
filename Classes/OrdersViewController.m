@@ -19,9 +19,9 @@
 #import "URLConnection.h"
 #import "DrinkOrders.h"
 #import "SavedDrinksList.h"
+#import "DataService.h"
 
-//Place Order
-#import "ItemsViewController.h"
+
 
 
 #import "YourOrderTableViewController.h"
@@ -48,7 +48,6 @@
 @synthesize fetchedResultsController, managedObjectContext;
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -63,61 +62,42 @@
     [self.navigationController.view addSubview:HUD];
     // Regiser for HUD callbacks so we can remove it from the window at the right time
     HUD.delegate = self;
-	
-    // Show the HUD while the provided method executes in a new thread
-    [HUD showWhileExecuting:@selector(GetOrders) onTarget:self withObject:nil animated:YES];
+	[HUD show:YES];
+    [self getOrders];
 }
--(void)GetOrders
+-(void)getOrders
 {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    //every time we go to this screen, we need to know if an order has been sent,
-	//If so, change the Label
-    int ts = [[NSDate date] timeIntervalSince1970];
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],ts]]
-														   cachePolicy:NSURLCacheStorageNotAllowed
-													   timeoutInterval:60.0];
-    NSError *requestError;
-    NSURLResponse *urlResponse = nil;
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    if (response == nil) {
-        if (requestError != nil) {
-            if(self.navigationController.tabBarController.selectedIndex ==CURRENT_TAB_INDEX)
-            [self showNoOrdersView:YES withTitle:@"Could not connect to server" andMessage:nil];
+    printf("getOrders\n");
+    [HUD hide:YES];
+    if([[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"] == NULL)
+        [Utils createUniqueDeviceID];
+    
+    BOOL dataLoaded = [[DataService sharedDataService]getOrders];
+    NSLog(@"dataLoaded %d",dataLoaded);
+    if(dataLoaded)
+    {
+        Order *order = [Order sharedOrder];
+        if(![[[order currentOrder] objectForKey:@"run"]objectForKey:@"id"])
+        {
+            printf("NO Orders");
+            current_orders_table.hidden = YES;
+            if(self.navigationItem.rightBarButtonItem == addOrder_btn)
+                [self showNoOrdersView:YES withTitle:@"No Orders" andMessage:@"Click \"Add to Order\" to add an order"];
+            else
+                [self showNoOrdersView:YES withTitle:@"No Orders" andMessage:@""];
+            return;
         }
+        current_orders_table.hidden = NO;
+        [self gotoScreen];
+
     }
     else
     {
-        NSString * json_str = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-        SBJSON *parser = [[SBJSON alloc] init];
-        Order *order = [Order sharedOrder];
-        [order setOrder:[parser objectWithString:json_str error:nil]];
-        [parser release];
-        [json_str release];
-
-        [self performSelectorOnMainThread:@selector(updateOrders)
-                               withObject:nil
-                            waitUntilDone:NO];
-    } 
-    [pool release];
-}
--(void)updateOrders
-{
-    Order *order = [Order sharedOrder];
-    if(![[[order currentOrder] objectForKey:@"run"]objectForKey:@"id"])
-    {
-        printf("NO Orders");
-        current_orders_table.hidden = YES;
-        if(self.navigationItem.rightBarButtonItem == addOrder_btn)
-            [self showNoOrdersView:YES withTitle:@"No Orders" andMessage:@"Click \"Add to Order\" to add an order"];
-        else
-            [self showNoOrdersView:YES withTitle:@"No Orders" andMessage:@""];
-        return;
+        if(self.navigationController.tabBarController.selectedIndex ==CURRENT_TAB_INDEX)
+            [self showNoOrdersView:YES withTitle:@"Could not connect to server" andMessage:nil];
     }
-    current_orders_table.hidden = NO;
-    [self gotoScreen];
-
+    
 }
-
 -(void)viewCurrentOrders
 {
     if(place_over_view.superview)
@@ -221,9 +201,9 @@
     [self.navigationController.view addSubview:HUD];
     // Regiser for HUD callbacks so we can remove it from the window at the right time
     HUD.delegate = self;
-	
-    // Show the HUD while the provided method executes in a new thread
-    [HUD showWhileExecuting:@selector(GetOrders) onTarget:self withObject:nil animated:YES];}
+	[HUD show:YES];
+    [self getOrders];
+}
 
 -(void)loadOrderData
 {
@@ -234,7 +214,7 @@
 
     
 	NSDictionary *user_order = [[[[Order sharedOrder] currentOrder]objectForKey:@"run"]retain];
-	//NSLog(@"user_order %@",user_order);
+	NSLog(@"user_order %@",user_order);
 	
 	
 	run_array = [[NSMutableArray alloc]init];
@@ -243,20 +223,17 @@
 		[run_array addObject:items];
 	}
     
-	//NSLog(@"count %i",[run_array count]);
+	NSLog(@"count %i",[run_array count]);
 	static NSString *CellIdentifier = @"Cell";	
 	cells = [[NSMutableArray alloc] init];
     
     //If the order is over, disable Add to Order Button
-    NSDateFormatter *newFormatter2 = [[[NSDateFormatter alloc] init] autorelease];
-    [newFormatter2 setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
-    NSDate *run_date = [newFormatter2 dateFromString:[user_order objectForKey:@"timestamp"]];
+    NSDateFormatter *newFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [newFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [newFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    NSDate *runDate = [newFormatter dateFromString:[user_order objectForKey:@"timestamp"]];
     
-    //HACK
-    NSDate *adjustedDate = [run_date addTimeInterval: (60*60*12)];
-    run_date = [adjustedDate retain];
-    
-    if ([[NSDate date] compare:run_date] == NSOrderedAscending)
+    if ([[NSDate date] compare:runDate] == NSOrderedAscending)
     {
         order_ended = NO;
         addOrder_btn.enabled = YES;
@@ -588,10 +565,48 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.navigationController.view addSubview:HUD];
     HUD.delegate = self;
-    [HUD showWhileExecuting:@selector(sendOrders) onTarget:self withObject:nil animated:YES];
+    [HUD show:YES];
+    printf("call sendOrders");
+    [self sendOrders];
+    //[self sendOrders];
+    //[HUD showWhileExecuting:@selector(sendOrders) onTarget:self withObject:nil animated:YES];
 }
 -(void)sendOrders
 {
+    [HUD hide:YES];
+    SBJSON *parser = [[SBJSON alloc] init];
+	NSMutableString* theString = [NSMutableString string];
+    DrinkOrders *drink_orders = [DrinkOrders instance];
+	NSMutableArray *drink_orders_array  = [drink_orders getArray];
+	for(int i=0;i<[drink_orders_array count];i++)
+	{
+		NSDictionary *drink_dict = [drink_orders_array objectAtIndex:i];    
+		NSString *drink_str = [parser stringWithObject:drink_dict];
+		if([drink_orders_array count] >1)
+			[theString appendString:[NSString stringWithFormat:@"json=%@",drink_str]];
+		else
+			[theString appendString:drink_str];
+	}
+	if(theString != NULL && ![theString isEqualToString:@""])
+	{
+
+        BOOL orderSent = [[DataService sharedDataService]placeOrder:
+                          [[[[Order sharedOrder] currentOrder]objectForKey:@"run"]objectForKey:@"id"] 
+                                                          order:[Utils urlencode:theString]
+                                                    updateOrder:nil
+                                                         orderID:nil];
+        NSLog(@"orderSent %d",orderSent);
+        if(orderSent)
+        {
+            [FlurryAnalytics logEvent:@"Order Added"];
+            self.navigationItem.leftBarButtonItem = nil;
+            DrinkOrders *drink_orders = [DrinkOrders instance];
+            [drink_orders clearArray];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
+
+        }
+    }
+    /*
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
     printf("send Order");
@@ -668,7 +683,9 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
         printf("No Orders Added");
     }
     [pool release];
+     */
 }
+/*
 -(void)orderAdded
 {
     [FlurryAnalytics logEvent:@"Order Added"];
@@ -683,9 +700,9 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
     #ifdef DEBUG
     NSLog(@"drink_orders_array %@",drink_orders_array);
     #endif  
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
 }
+ */
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	if(buttonIndex == 1) {
@@ -742,11 +759,26 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.navigationController.view addSubview:HUD];
     HUD.delegate = self;
-    [HUD showWhileExecuting:@selector(setremoveOrder:) onTarget:self withObject:order animated:YES];
+    [HUD show:YES];
+    [self setremoveOrder:order];
+    //[HUD showWhileExecuting:@selector(setremoveOrder:) onTarget:self withObject:order animated:YES];
 }
 
 -(void)setremoveOrder:(NSDictionary *)order
 {
+    [HUD hide:YES];
+    BOOL removeOrder = [[DataService sharedDataService]deleteOrder:[order objectForKey:@"order_id"]];
+    if(removeOrder)
+    {
+        printf("updateDeletedRow");
+        [[[[[Order sharedOrder] currentOrder]objectForKey:@"run"]objectForKey:@"orders"] removeObject:order];
+        [current_orders_table reloadData];
+        //[self checkForOrders];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
+
+    }
+    
+    /*
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     printf("delete Order");
@@ -771,7 +803,9 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
                             waitUntilDone:NO];
     } 
     [pool release];
+     */
 }
+/*
 -(void)updateDeletedRow:(NSDictionary *)order
 {
     printf("updateDeletedRow");
@@ -780,7 +814,7 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
     //[self checkForOrders];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
 }
-
+*/
 /*
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

@@ -104,6 +104,7 @@ static NSString* kAppId = @"189714094427611";
         [self initTesting];
     #endif
     */
+   
 	if(![Utils checkIfContactAdded])
 	{
         dbSignupViewController = [[DBSignupViewController alloc] initWithNibName:@"DBSignupViewController" bundle:nil];

@@ -12,6 +12,7 @@
 #import "JSON.h"
 #import "Utils.h"
 #import "MyUISegmentController.h"
+#import "DataService.h"
 
 #define UITEXTVIEWTAG 1
 #define UISWITCHTAG 2
@@ -259,11 +260,30 @@
     else
     [order_dict setValue:options_txt.text forKey:@"Custom"];
     
+    SBJSON *parser = [[SBJSON alloc] init];	
+	NSString *order_str = [parser stringWithObject:order_dict];
+	[parser release];
+    
+    
     //NSLog(@"order_dict %@",order_dict);
+    BOOL orderPlaced = [[DataService sharedDataService]placeOrder:
+                        [[[order currentOrder]objectForKey:@"run"]objectForKey:@"id"]
+                                                            order:order_str
+                                                      updateOrder:@"1"
+                                                          orderID:nil
+                        ];
+    
+    if(orderPlaced)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Order Saved" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK",nil];
+        [alert show];
+        [alert release];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+
    
-	
+	/*
 	//call a script to edit the order
-	
 	int ts = [[NSDate date] timeIntervalSince1970];
 	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/placeorder.php?ts=%i",baseDomain,ts]]
 														   cachePolicy:NSURLCacheStorageNotAllowed
@@ -271,10 +291,6 @@
 	
 	[request setHTTPMethod:@"POST"];
 	
-	SBJSON *parser = [[SBJSON alloc] init];	
-	NSString *order_str = [parser stringWithObject:order_dict];
-	[parser release];
-    
 	
 	NSString *post_str = [NSString stringWithFormat:@"device_id=%@&run_id=%@&order=%@&updateOrder=1",[[NSUserDefaults standardUserDefaults] valueForKey:@"_UALastDeviceToken"],	[[[order currentOrder]objectForKey:@"run"]objectForKey:@"id"],order_str];
 	[request setHTTPBody:[post_str dataUsingEncoding:NSUTF8StringEncoding]]; 
@@ -285,7 +301,9 @@
 	conn.tag =@"editOrder";
 	[conn setDelegate:self];
 	[conn initWithRequest:request];
+     */
 }
+/*
 - (void)processSuccessful:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
 {
 	
@@ -296,8 +314,8 @@
 	[alert show];
 	[alert release];
     [self.navigationController popViewControllerAnimated:YES];
-	
 }
+*/
 
 /*
 // Override to allow orientations other than the default portrait orientation.
