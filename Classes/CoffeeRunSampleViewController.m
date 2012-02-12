@@ -38,8 +38,6 @@
         // Custom initialization
 		delegate = [[UIApplication sharedApplication] delegate];
 		prefs = [NSUserDefaults standardUserDefaults];
-		
-		
     }
     return self;
 }

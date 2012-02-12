@@ -47,6 +47,7 @@
 						<string key="NSFrame">{{0, -10}, {320, 480}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="434808774"/>
 						<string key="NSReuseIdentifierKey">_NS:567</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -61,6 +62,7 @@
 						<string key="NSFrameSize">{320, 460}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:418</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="800221236">
 							<int key="NSColorSpace">3</int>
@@ -84,7 +86,7 @@
 							<object class="IBUIButton" id="661703131">
 								<reference key="NSNextResponder" ref="189244967"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{20, 206}, {143, 104}}</string>
+								<string key="NSFrame">{{73, 119}, {175, 95}}</string>
 								<reference key="NSSuperview" ref="189244967"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="165358294"/>
@@ -94,8 +96,6 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
-								<int key="IBUIButtonType">1</int>
-								<string key="IBUINormalTitle">Hot</string>
 								<object class="NSColor" key="IBUIHighlightedTitleColor" id="732170877">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MQA</bytes>
@@ -107,6 +107,10 @@
 								<object class="NSColor" key="IBUINormalTitleShadowColor" id="254256005">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MC41AA</bytes>
+								</object>
+								<object class="NSCustomResource" key="IBUINormalImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">hot_coffee_btn.png</string>
 								</object>
 								<object class="IBUIFontDescription" key="IBUIFontDescription" id="841541784">
 									<string key="name">Helvetica-Bold</string>
@@ -123,24 +127,26 @@
 							<object class="IBUIButton" id="165358294">
 								<reference key="NSNextResponder" ref="189244967"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{183, 206}, {124, 103}}</string>
+								<string key="NSFrame">{{73, 243}, {175, 95}}</string>
 								<reference key="NSSuperview" ref="189244967"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="434808774"/>
+								<reference key="NSNextKeyView" ref="29838545"/>
 								<string key="NSReuseIdentifierKey">_NS:225</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUITag">2</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
-								<int key="IBUIButtonType">1</int>
-								<string key="IBUINormalTitle">Iced</string>
 								<reference key="IBUIHighlightedTitleColor" ref="732170877"/>
 								<object class="NSColor" key="IBUINormalTitleColor">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="254256005"/>
+								<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">iced_coffee_btn.png</string>
+								</object>
 								<reference key="IBUIFontDescription" ref="841541784"/>
 								<reference key="IBUIFont" ref="778710818"/>
 							</object>
@@ -169,11 +175,9 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIView" id="62171777">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<string key="NSFrameSize">{320, 480}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<string key="NSReuseIdentifierKey">_NS:180</string>
 				<reference key="IBUIBackgroundColor" ref="800221236"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -467,8 +471,19 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">bg.png</string>
-			<string key="NS.object.0">{320, 480}</string>
+			<bool key="EncodedWithXMLCoder">YES</bool>
+			<object class="NSArray" key="dict.sortedKeys">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>bg.png</string>
+				<string>hot_coffee_btn.png</string>
+				<string>iced_coffee_btn.png</string>
+			</object>
+			<object class="NSMutableArray" key="dict.values">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>{320, 480}</string>
+				<string>{175, 95}</string>
+				<string>{175, 95}</string>
+			</object>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>

@@ -208,6 +208,7 @@ static NSString* kAppId = @"189714094427611";
 
 - (void)customizeAppearance
 {
+    /*
     // not supported on iOS4    
     UITabBar *tabBar = [myTabBarController tabBar];
     if ([tabBar respondsToSelector:@selector(setBackgroundImage:)])
@@ -219,7 +220,42 @@ static NSString* kAppId = @"189714094427611";
     {
         // ios 4 code here
         [tabBar setBackgroundColor:[UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1]];
-    }
+    }*/
+    
+    UIImage *navBarImage = [UIImage imageNamed:@"menu-bar.png"];
+    
+    [[UINavigationBar appearance] setBackgroundImage:navBarImage 
+                                       forBarMetrics:UIBarMetricsDefault];
+    
+    
+    UIImage *barButton = [UIImage imageNamed:@"menu-bar-button.png"];
+    
+    [[UIBarButtonItem appearance] setBackgroundImage:barButton forState:UIControlStateNormal 
+                                          barMetrics:UIBarMetricsDefault];
+    
+    UIImage *backButton = [UIImage imageNamed:@"Back-no-text.png"];
+    
+    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButton forState:UIControlStateNormal 
+                                                    barMetrics:UIBarMetricsDefault];
+    
+    [[UIBarButtonItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:1.0], UITextAttributeTextColor, [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0], UITextAttributeTextShadowColor, [NSValue valueWithUIOffset:UIOffsetMake(0, 0)], UITextAttributeTextShadowOffset, nil] forState:UIControlStateNormal];
+    
+    UIImage* tabBarBackground = [UIImage imageNamed:@"tab-bar.png"];
+    [[UITabBar appearance] setBackgroundImage:tabBarBackground];
+    
+    
+    /*
+    UIImage *minImage = [UIImage imageNamed:@"slider-background.png"];
+    UIImage *maxImage = [UIImage imageNamed:@"slider-fill.png"];
+    UIImage *thumbImage = [UIImage imageNamed:@"slider-button.png"];
+    
+    [[UISlider appearance] setMaximumTrackImage:maxImage 
+                                       forState:UIControlStateNormal];
+    [[UISlider appearance] setMinimumTrackImage:minImage 
+                                       forState:UIControlStateNormal];
+    [[UISlider appearance] setThumbImage:thumbImage 
+                                forState:UIControlStateNormal];
+     */
 }
 -(void)checkForAppPurchase
 {

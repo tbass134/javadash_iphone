@@ -387,7 +387,6 @@
 								<string key="NSFrame">{{6, 8}, {253, 30}}</string>
 								<reference key="NSSuperview" ref="223966504"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBSegmentControlStyle">2</int>
@@ -440,7 +439,6 @@
 							</object>
 							<object class="IBUIBarButtonItem" id="776973908">
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="223966504"/>
 								<int key="IBUISystemItemIdentifier">11</int>
 							</object>
