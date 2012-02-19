@@ -80,6 +80,7 @@
         if(![[[order currentOrder] objectForKey:@"run"]objectForKey:@"id"])
         {
             printf("NO Orders");
+            
             current_orders_table.hidden = YES;
             if(self.navigationItem.rightBarButtonItem == addOrder_btn)
                 [self showNoOrdersView:YES withTitle:@"No Orders" andMessage:@"Click \"Add to Order\" to add an order"];
@@ -855,6 +856,13 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
 {
     if(!modalViewDidAppear)
     {
+        if(orders_cells != NULL)
+        {
+            [orders_cells removeAllObjects];
+            orders_cells = nil;
+            [current_orders_table reloadData];
+        }
+        
         //If we havent gotten the data yet, load it
         Order *order = [Order sharedOrder];
         if([order currentOrder] == NULL)
