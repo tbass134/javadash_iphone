@@ -31,6 +31,7 @@
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
+    self.title = @"Custom Order";
 	appDelegate = [[UIApplication sharedApplication] delegate];
 	self.text_view.delegate = self;
     

@@ -203,8 +203,10 @@
 {
 	NSLog(@"could not retrive Location %@",error);
     [locationManager stopUpdatingLocation];
+    #ifdef  TARGET_IPHONE_SIMULATOR
+    [self loadData:kYelpSearchTerm loc:@"10960"];
+    #else
     MKUserLocation *userLocation = mapView.userLocation;
-    
     if (!userLocation.location) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Service Disabled" 
                                                         message:@"To re-enable, please go to Settings Application and turn on Location Service for this app." 
@@ -225,6 +227,7 @@
     tableView.hidden = YES;
     search_view.hidden = YES;
     seg_control.enabled = NO;
+    #endif
 
 }
 -(void)loadData:(NSString *)term loc:(NSString *)l

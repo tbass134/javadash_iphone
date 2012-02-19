@@ -10,7 +10,7 @@
 #import "DashSummary.h"
 
 @implementation SelectTimeView
-@synthesize dp,select_time_btn;
+@synthesize dp,select_time_btn,date_str;
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 /*
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -25,27 +25,38 @@
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
-	[self.dp setDate:[NSDate date]];
-    //self.dp.timeZone = [NSTimeZone timeZoneWithName:@"EST"];
+	newFormatter = [[[NSDateFormatter alloc] init]retain];
+    [newFormatter setDateFormat:@"MMM d hh:mm aa"];
     
-    //NSDate *last_minute = [[NSDate date] dateByAddingTimeInterval:(5*60)];
-	//self.dp.minimumDate = [NSDate date] ;
+    NSDate* runDate = [[NSDate date] dateByAddingTimeInterval:self.dp.countDownDuration];
+    NSString *dateString = [newFormatter stringFromDate:runDate];
+     date_str.text = dateString;
     [super viewDidLoad];
 }
 
 -(IBAction)selectTime
 {   
-	NSDateFormatter *newFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    NSDate* runDate = [[NSDate date] dateByAddingTimeInterval:self.dp.countDownDuration];
+    NSDateFormatter *jsonFormat = [[[NSDateFormatter alloc] init]autorelease];
+    [jsonFormat setDateFormat:@"yyyy-MM-dd hh:mm:ss ZZZ a"];
+    NSString *dateString = [jsonFormat stringFromDate:runDate];
     
-    [newFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss ZZZ a"];
-	NSString *dateString = [newFormatter stringFromDate:self.dp.date];
+    //NSLog(@"ts %f",[self.dp.date timeIntervalSince1970]);
+    //NSLog(@"dateString %@",dateString);
     
+	[[[DashSummary instance] getDict]setValue:runDate forKey:@"selected_date"];
+    [[[DashSummary instance] getDict]setValue:[NSNumber numberWithDouble:[runDate timeIntervalSince1970]]  forKey:@"selected_timestamp"];
+    
+	[self.navigationController popViewControllerAnimated:YES];
+}
+-(IBAction)timeChanged:(id)sender
+{
+    NSDate* runDate = [[NSDate date] dateByAddingTimeInterval:self.dp.countDownDuration];
+    NSString *dateString = [newFormatter stringFromDate:runDate];
     NSLog(@"ts %f",[self.dp.date timeIntervalSince1970]);
     NSLog(@"dateString %@",dateString);
-    
-	[[[DashSummary instance] getDict]setValue:self.dp.date  forKey:@"selected_date"];
-    [[[DashSummary instance] getDict]setValue:[NSNumber numberWithFloat:[self.dp.date timeIntervalSince1970]]  forKey:@"selected_timestamp"];
-	[self.navigationController popViewControllerAnimated:YES];
+    date_str.text = dateString;
+
 }
 /*
 // Override to allow orientations other than the default portrait orientation.

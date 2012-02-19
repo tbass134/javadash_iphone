@@ -13,10 +13,11 @@
 
 	IBOutlet UIDatePicker *dp; 
 	IBOutlet UIButton *select_time_btn;
-	
+	NSDateFormatter *newFormatter;
 }
 @property (retain,nonatomic) IBOutlet UIDatePicker *dp; 
 @property (retain,nonatomic) IBOutlet UIButton *select_time_btn;
+@property (retain,nonatomic) IBOutlet UILabel *date_str;
 -(IBAction)selectTime;
-
+-(IBAction)timeChanged:(id)sender;
 @end

@@ -58,14 +58,14 @@ static NSString* kAppId = @"189714094427611";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
-    
+    [self customizeAppearance];
     //Facebook
     _permissions =  [[NSArray arrayWithObjects:
-                      @"read_stream", @"publish_stream", @"offline_access",nil] retain];
+                      @"read_stream", @"publish_stream", @"offline_access",@"email",nil] retain];
     _facebook = [[Facebook alloc] initWithAppId:kAppId
                                     andDelegate:self];
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSString *accessToken = [prefs valueForKey:@"facebook-accessToken"];
+    NSString *accessToken = [prefs valueForKey:@"facebook-accessToken"]; 
     NSDate *expirationDate = [prefs valueForKey:@"facebook-expirationDate"];
     #if debug
     NSLog(@"expirationDate %@",expirationDate);
@@ -119,6 +119,8 @@ static NSString* kAppId = @"189714094427611";
 	else {
 		[self loadUI];
 	}
+    
+    
     // call the Appirater class
     [Appirater appLaunched];
     
@@ -141,6 +143,8 @@ static NSString* kAppId = @"189714094427611";
     bg.frame = bgFrame;
     [self.window addSubview:bg];
     printf("callubng loadUI");
+    
+    
 	NSMutableArray *localViewControllersArray = [[NSMutableArray alloc]initWithCapacity:1];
 	UINavigationController *localNavController;
 	
@@ -150,7 +154,11 @@ static NSString* kAppId = @"189714094427611";
 	runs_view.managedObjectContext = self.managedObjectContext;	
 	localNavController = [[UINavigationController alloc] initWithRootViewController:runs_view];
 	localNavController.navigationBar.barStyle = UIBarStyleBlackOpaque;
-	localNavController.tabBarItem.image = [UIImage imageNamed:@"runs_icon.png"];
+    
+    UIImage *runs_icon = [UIImage imageNamed:@"runs_icon.png"];
+    //localNavController.tabBarItem.image = [UIImage imageNamed:@"runs_icon.png"];
+    [localNavController.tabBarItem setFinishedSelectedImage:runs_icon withFinishedUnselectedImage:runs_icon];
+    
 	[localViewControllersArray addObject:localNavController];
 	[localNavController release]; // Retained by above array
 	[runs_view release];
@@ -161,7 +169,10 @@ static NSString* kAppId = @"189714094427611";
 	orders_view.title = @"Orders";
 	localNavController = [[UINavigationController alloc] initWithRootViewController:orders_view];
 	localNavController.navigationBar.barStyle = UIBarStyleBlackOpaque;
-	localNavController.tabBarItem.image = [UIImage imageNamed:@"orders_icon.png"];
+    
+    UIImage *orders_icon = [UIImage imageNamed:@"orders_icon.png"];
+    [localNavController.tabBarItem setFinishedSelectedImage:orders_icon withFinishedUnselectedImage:orders_icon];
+
 	[localViewControllersArray addObject:localNavController];
 	[localNavController release]; // Retained by above array
 	[orders_view release];
@@ -171,7 +182,11 @@ static NSString* kAppId = @"189714094427611";
 	settings_view.managedObjectContext = self.managedObjectContext;	
 	localNavController = [[UINavigationController alloc] initWithRootViewController:settings_view];
 	localNavController.navigationBar.barStyle = UIBarStyleBlackOpaque;
-	localNavController.tabBarItem.image = [UIImage imageNamed:@"settings_icon.png"];
+    
+    UIImage *settings_icon = [UIImage imageNamed:@"settings_icon.png"];
+    [localNavController.tabBarItem setFinishedSelectedImage:settings_icon withFinishedUnselectedImage:settings_icon];
+    
+	
 	[localViewControllersArray addObject:localNavController];
 	[localNavController release]; // Retained by above array
 	[settings_view release];
@@ -201,7 +216,7 @@ static NSString* kAppId = @"189714094427611";
         [self.window bringSubviewToFront:myTabBarController.view];
     }
     
-    [self customizeAppearance];
+    
     [self.window makeKeyAndVisible];
 }	
 
@@ -396,6 +411,11 @@ static NSString* kAppId = @"189714094427611";
     printf("applicationDidBecomeActive");
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
+    
+    if(_facebook.accessToken == NULL && _facebook.expirationDate == NULL)
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"fbDidNotLogin" object:self];
+    else
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"fbDidNotLogin" object:self];
 }
 - (void)applicationWillTerminate:(UIApplication *)application {
 	//Clear the array when the app quits
@@ -441,9 +461,6 @@ static NSString* kAppId = @"189714094427611";
             [[NSUserDefaults standardUserDefaults]setValue:[NSNumber numberWithBool:1] forKey:@"user_added"];
     }
 	[friends release];
-    
-   
-	
 }
 - (void)friendDataLoaded:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
 {

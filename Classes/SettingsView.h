@@ -22,6 +22,7 @@
 	IBOutlet UITableView *table_view;
     IBOutlet UIImageView *profile_image;
     IBOutlet UILabel *profile_name;
+    IBOutlet UILabel *no_friends_txt;
 	
 	
 	//Core Data

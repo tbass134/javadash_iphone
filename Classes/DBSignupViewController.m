@@ -106,6 +106,7 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
+    printf("viewDidLoad\n");
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(getUserInfo) 
                                                  name:@"getUserInfo"
@@ -237,6 +238,7 @@
 }
 -(void)viewDidAppear:(BOOL)animated
 {
+    printf("viewDidAppear\n");
     if( (self.nameTextField.text != NULL && ![self.nameTextField.text isEqualToString:@""]) &&
        (self.lastNameTextField.text != NULL && ![self.lastNameTextField.text isEqualToString:@""]))
         signUp_btn.enabled = YES;
@@ -377,9 +379,6 @@
 	page2.frame = tempStep1;
 	[UIView commitAnimations];
 }
-
-
-
 #pragma mark - IBActions
 
 - (IBAction)choosePhoto:(id)sender
@@ -472,6 +471,7 @@
     //NSLog(@"getUserInfo %@",UIAppDelegate.fb_me);
     NSString *firstName = [UIAppDelegate.fb_me objectForKey:@"first_name"];
     NSString *lastName = [UIAppDelegate.fb_me objectForKey:@"last_name"];
+    NSString *email = [UIAppDelegate.fb_me objectForKey:@"email"];
     
    	//Update contact info with FB data
 	self.nameTextField.text = firstName;
@@ -482,8 +482,10 @@
         signUp_btn.enabled = YES;
     else
         signUp_btn.enabled = NO;
-	
-    self.enableEmail.enabled = NO;
+    
+    self.emailTextField.text = email;
+    self.enableEmail.on = YES;
+    self.enableEmail.enabled = YES;
     
    /* 
 	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:picture_url
@@ -507,50 +509,13 @@
     
     NSLog(@"picture_url %@",picture_url);
     [img setImageWithURL:picture_url placeholderImage:[UIImage imageNamed:@"avatar.png"]];
-    //self.photo = img.image;
-    
-   //self.photo = [Utils imageWithImage:smallImage scaledToSize:sz];
-    //NSLog(@"self.photo %@",self.photo);
-    //[self.photoButton setImage:self.photo forState:UIControlStateNormal];
-
-    
-    
-    
-    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    [self.navigationController.view addSubview:HUD];	
-    HUD.delegate = self;	
-    [HUD show:YES];
-    [HUD showWhileExecuting:@selector(updatePhoto) onTarget:self withObject:nil animated:YES];    
-    //Upload fb ID to server
-    //[self saveFBId];
-    
+       
     fbid= [[UIAppDelegate.fb_me objectForKey:@"id"]retain];
      [[NSUserDefaults standardUserDefaults]setValue:@"FB_ID" forKey:fbid];
     NSLog(@"fbid %@",fbid);
     
     //[self signup:nil];
 }
--(void)updatePhoto
-{
-    /*
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    NSLog(@"updatePhooto %@",[UIAppDelegate.fb_me objectForKey:@"id"]);
-    NSLog(@"picture_url %@",picture_url);
-    UIImage * img = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:picture_url]];
-    
-    [self performSelectorOnMainThread:@selector(displayPhoto:)
-                           withObject:img
-                        waitUntilDone:NO];
-
-
-    [pool release];
-     */
-}
--(void)displayPhoto:(UIImage *)photo
-{
-    [HUD hide:YES];
-    //UIImage* _image = [UIImage imageWithData: data];
-   }
 -(void)saveFBId
 {
     //Store this in a UserDefaults since we'll need it again
@@ -570,19 +535,6 @@
     {
         printf("fbUser added");
     }
-    
-    /*
-	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/addUser.php?deviceid=%@&name=%@&email=%@&enable_email=%d&platform=%@&fb=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],[Utils urlencode:userName],email,enable_email,@"IOS",fbid, ts]]
-														   cachePolicy:NSURLCacheStorageNotAllowed
-													   timeoutInterval:60.0];
-    
-    NSLog(@"request %@", [request URL]);
-	URLConnection *conn = [[URLConnection alloc]init];
-	conn.tag =@"saveFB";
-	[conn setDelegate:self];
-	[conn initWithRequest:request];
-     */
-    
     
 }
 -(void)signup:(id)sender

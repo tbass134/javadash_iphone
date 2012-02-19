@@ -43,6 +43,11 @@
 	NSMutableDictionary *dash_summary;
 	FriendsInfo *friends;
     BOOL orderEnded;
+    
+    //No Runs
+    IBOutlet UIView *noRuns_view;
+    IBOutlet UILabel *NoOrdersTitle;
+    IBOutlet UILabel *NoOrdersMessage;
 }
 
 //Core Data
@@ -54,6 +59,8 @@
 @property(nonatomic,retain)IBOutlet UITextView *run_info_txt;
 @property(nonatomic,retain)IBOutlet UITextView *run_time_txt;
 @property(nonatomic,retain)IBOutlet UITableView *table_view;
+
+
 
 
 -(void)GetOrders;
@@ -72,6 +79,8 @@
 -(void)reloadStartRunData;
 -(void)submitDash:(NSDictionary *)dash_dict;
 
+
+
 -(void)goMapView;
 -(void)goTimeView;
 -(void)goFriendsView;
@@ -84,5 +93,7 @@
 
 -(void)startTimer;
 -(void)stopTimer;
+
+-(void)showNoOrdersView:(BOOL)show withTitle:(NSString *)title andMessage:(NSString *)message;
 
 @end

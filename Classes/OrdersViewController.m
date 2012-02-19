@@ -188,6 +188,7 @@
 }
 -(void)placeOrder:(id)sender
 {
+    [self showNoOrdersView:NO withTitle:nil andMessage:nil];
     if(current_orders_view.superview)
         [current_orders_view removeFromSuperview];
     [self.view addSubview:place_over_view];
@@ -249,6 +250,11 @@
 	{
         printf("Its a runner\n");
 		TKLabelTextViewCell *cell1 = [[TKLabelTextViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier];
+        
+        UIView *v = [[[UIView alloc] init] autorelease];
+        v.backgroundColor = [UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1];
+        cell1.selectedBackgroundView = v;
+        
 		cell1.label.text = @"Runner";
         cell1.userInteractionEnabled = NO;
 		cell1.textView.text = [user_order objectForKey:@"user_name"];
@@ -256,6 +262,7 @@
 		[cell1 release];
 		
 		TKLabelTextViewCell *cell2 = [[TKLabelTextViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier];
+        cell2.selectedBackgroundView = v;
 		cell2.label.text = @"Location";
         // cell2.userInteractionEnabled = NO;
 		
@@ -264,6 +271,7 @@
 		[cell2 release];
 		
 		TKLabelTextViewCell *cell3 = [[TKLabelTextViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier];
+        cell3.selectedBackgroundView = v;
 		cell3.label.text = @"Time";
 		cell3.textView.text = [user_order objectForKey:@"timestamp"];
 		
@@ -302,6 +310,11 @@
 			
 			NSString *deviceID = [[[user_order objectForKey:@"orders"]objectAtIndex:i]objectForKey:@"deviceid"];
 			TKLabelTextViewCell *cell1 = [[TKLabelTextViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier];
+            
+            UIView *v = [[[UIView alloc] init] autorelease];
+            v.backgroundColor = [UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1];
+            cell1.selectedBackgroundView = v;
+            
 			NSString *name = [[[user_order objectForKey:@"orders"]objectAtIndex:i]objectForKey:@"name"];
 			cell1.label.text = [NSString stringWithFormat:@"Order for: %@",name];
 			NSMutableString *str = [[NSMutableString alloc]init];
@@ -354,8 +367,8 @@
 	}
     else
     {
-        [self showNoOrdersView:YES withTitle:@"No Orders" andMessage:@"Click \"Add to Order\" to add an order"];
         current_orders_table.hidden = NO;
+        [self showNoOrdersView:YES withTitle:@"No Orders" andMessage:@"Click \"Add to Order\" to add an order"];
     }
     
 	[current_orders_table reloadData];
@@ -376,6 +389,7 @@
     
     if(show)
     {
+        printf("show it");
         [self.view addSubview:noOrdersView];
         NoOrdersTitle.text = title;
         NoOrdersMessage.text = message;
@@ -417,6 +431,10 @@
     {
         
         TKLabelTextViewCell *cell = [orders_cells objectAtIndex:[indexPath row]];
+        UIView *v = [[[UIView alloc] init] autorelease];
+        v.backgroundColor = [UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1];
+        cell.selectedBackgroundView = v;
+        
         NSString *text =  cell.textView.text;
         
         CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);

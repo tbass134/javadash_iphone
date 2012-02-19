@@ -147,11 +147,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        UIView *v = [[[UIView alloc] init] autorelease];
+        v.backgroundColor = [UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1];
+        cell.selectedBackgroundView = v;
     }
     
     // Configure the cell...
@@ -167,6 +171,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSString *beverage = [[coffee_dict objectForKey:[sections objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
     
     NSString *drink = [[coffee_dict allKeys] objectAtIndex:indexPath.section];

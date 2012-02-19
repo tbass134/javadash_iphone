@@ -42,7 +42,6 @@
     self.favorites_array = [[NSMutableArray alloc]init];
     self.yelp_id_array = [FavoriteLocations getAllFavoriteLocations];
     
-   self.tableView.backgroundColor = [UIColor clearColor];
     if([self.yelp_id_array count]>0)
     {
         

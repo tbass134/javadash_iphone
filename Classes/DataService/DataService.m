@@ -15,7 +15,7 @@
 @implementation DataService
 
 //use to quickly turn off NSLogs
-#define IN_TESTING 1
+#define IN_TESTING 0
 #define TIMEOUT_SECONDS    60
 
     

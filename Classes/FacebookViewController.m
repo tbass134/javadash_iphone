@@ -152,7 +152,9 @@
 
 -(void)facebookDidLogin:(NSNotification *) notification
 {
-    [self fbDidLogin];
+    printf("facebookDidLogin");
+    UIAppDelegate.fb_tag = @"me/friends";
+    [UIAppDelegate.facebook requestWithGraphPath:@"me/friends" andDelegate:UIAppDelegate];
     
 }
 - (void)fbDidLogin {
@@ -202,7 +204,12 @@
     NSLog(@"friendDict %@",friendDict);
 
     
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    UIImage *bg = [UIImage imageNamed:@"wood_btn.png"]; 
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setFrame:CGRectMake(0.0,0.0, 70.0, 40.0)];
+    [button setBackgroundImage:bg forState:UIControlStateNormal];
+    button.titleLabel.textColor = [UIColor whiteColor];
+    button.titleLabel.font = [UIFont boldSystemFontOfSize:12];
     if([_friends checkFriendAdded:friendDict])
     {
         [button setTitle:@"Following" forState:UIControlStateNormal];
@@ -215,8 +222,6 @@
         button.enabled = YES;
 
     }
-    CGRect frame = CGRectMake(0.0, 0.0, 70, 40);
-    button.frame = frame; 
     button.tag = indexPath.row;
     cell.backgroundColor = [UIColor clearColor];
     [button addTarget:self action:@selector(addFriend:) forControlEvents:UIControlEventTouchUpInside];

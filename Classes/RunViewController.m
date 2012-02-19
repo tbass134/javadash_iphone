@@ -54,7 +54,6 @@
 //View Run
 @synthesize yelp_img,run_info_txt,run_time_txt,table_view;
 
-
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -92,6 +91,7 @@
     if([[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"] == NULL)
         [Utils createUniqueDeviceID];
     
+    //[self showNoOrdersView:NO withTitle:nil andMessage:nil];
     BOOL dataLoaded = [[DataService sharedDataService]getOrders];
     if(dataLoaded)
     {
@@ -101,16 +101,11 @@
             startRunBtn.enabled = YES;
         
         Order *order = [Order sharedOrder];
-        if([order currentOrder] == NULL)
-        {
-            [Utils showAlert:@"Error Loading Data" withMessage:@"Please try again" inView:self.view];
-            return;
-        }
+        
         if([[order currentOrder] objectForKey:@"run"]!= (id)[NSNull null])
         {
             if(![[[order currentOrder] objectForKey:@"run"]objectForKey:@"id"])
             {
-                //[Utils showAlert:@"No Orders Available" withMessage:nil inView:self.view];
                 //make sure the other view is not showing
                 if(view_run_view.superview)
                     [view_run_view removeFromSuperview];
@@ -118,9 +113,6 @@
                 
                 [self.view addSubview:start_run_view];
                 [self startRun];
-                
-                //if(self.adView != nil)
-                //   [self.view bringSubviewToFront:self.adView];
                 return;
             }
             printf("calling gotoScreen");
@@ -128,54 +120,14 @@
         }
 
     }
-    /*
-    //every time we go to this screen, we need to know if an order has been sent,
-	//If so, change the Label
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    int ts = [[NSDate date] timeIntervalSince1970];
-    
-    
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:]
-														   cachePolicy:NSURLCacheStorageNotAllowed
-													   timeoutInterval:60.0];
-
-    #ifdef DEBUG
-    NSLog(@"request %@",[request URL]);
-    #endif
-    NSError *requestError;
-    NSURLResponse *urlResponse = nil;
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    if (response == nil) {
-        if (requestError != nil) {
-            
-            [Utils showAlert:@"Could not connect to server" withMessage:@"Please try again" inView:self.view];
-        }
-    }
     else
-    {
-        [[Order sharedOrder]clearOrder];
-        //if we get a vaild order than instert your drink and send that to the server
-        NSString * json_str = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-        #ifdef DEBUG
-        NSLog(@"json_str %@",json_str);
-        #endif
-        SBJSON *parser = [[SBJSON alloc] init];
-        Order *order = [Order sharedOrder];
-        [order setOrder:[parser objectWithString:json_str error:nil]];
-        [parser release];
-        [json_str release];
-        [self performSelectorOnMainThread:@selector(updateOrders)
-                               withObject:nil
-                            waitUntilDone:NO];
-    } 
-    [pool release];
-     
-     */
+        [self showNoOrdersView:YES withTitle:nil andMessage:@"Could not load data"];
 }
 #pragma mark -
 -(void)startRun
 {
     printf("startRun");
+    [self showNoOrdersView:NO withTitle:nil andMessage:nil];
     //make sure the other view is not showing
     if(view_run_view.superview)
         [view_run_view removeFromSuperview];
@@ -227,7 +179,7 @@
 	Order *order = [Order sharedOrder];
 	NSDictionary *user_order = [[order currentOrder]retain];
 	
-	[Utils printDict:user_order];
+	//printDict[Utils printDict:user_order];
 	if([user_order objectForKey:@"run"] != NULL)
 	{
 		if([[[order currentOrder] objectForKey:@"run"]objectForKey:@"id"])
@@ -244,9 +196,7 @@
 		}
 	}
     [user_order release];
-    
 }
-
 #pragma mark View Run
 -(void)initShowRun
 {
@@ -264,58 +214,28 @@
     
 	run_info_txt.text = [NSString stringWithFormat:@"%@\n%@",[[user_order objectForKey:@"location"]objectForKey:@"name"],[[user_order objectForKey:@"location"]objectForKey:@"address"]];
     
-    
+    //Resize to text View accordingly
+    CGRect frame = run_info_txt.frame;
+    frame.size.height = run_info_txt.contentSize.height;
+    run_info_txt.frame = frame;
     
     NSDateFormatter *newFormatter = [[[NSDateFormatter alloc] init] autorelease];
     [newFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     [newFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-    NSDate *runDate = [newFormatter dateFromString:[user_order objectForKey:@"timestamp"]];
+    run_date= [[newFormatter dateFromString:[user_order objectForKey:@"timestamp"]]retain];
     
-    
-    
-    
-    //NSLog(@"runDate %@",[runDate addTimeInterval: -(60*60*5)]); //this works but cant use it since it hardcodes the tz offset
-    
-    
-    NSLog(@"runDate %@",runDate);
-    NSLog(@"current date %@ ",[NSDate date]);
-    
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    int unitFlags = NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
-    NSDateComponents *components = [gregorian components:unitFlags fromDate:[NSDate date] toDate:runDate options:0];
-    run_time_txt.text = [NSString stringWithFormat:@"Days:%02d Hours:%02d Mins:%02d Seconds:%02d", components.day, components.hour, components.minute, components.second ];
-    
-    if(components.day<=0 && components.hour <=0 && components.minute <=0 && components.second <=0)
-    {
-        run_time_txt.text = @"Order Ended";
-        orderEnded = YES;
-        [self stopTimer];
-    }
 
-    
-    
-    
-    //run_date = [[newFormatter2 dateFromString:[user_order objectForKey:@"timestamp"]]retain];
-    
-    //HACK
-    //NSDate *adjustedDate = [run_date addTimeInterval: (60*60*12)];
-    //run_date = [adjustedDate retain];
-       
-    return;
-    
+   // NSLog(@"run_date %@",run_date);
+    //NSLog(@"current date %@ ",[NSDate date]);
+      
     orderEnded = NO;
-    if ([[NSDate date] compare:run_date] == NSOrderedAscending)
-        [self startTimer];
-    else
-    {
-        orderEnded = YES;
-        run_time_txt.text = @"Order Ended";
-    }
-    
+    [self startTimer];
+       
     if(orders_cells != NULL)
     {
         [orders_cells removeAllObjects];
         orders_cells = nil;
+        [view_run_table reloadData];
     }
     
     //if(!orderEnded)
@@ -327,19 +247,20 @@
         
         //showOptionsBtn.enabled = YES;
 		orders_cells = [[NSMutableArray alloc] init];
+        NSLog(@"orders %@\n",[user_order objectForKey:@"orders"]);
         
-		if([user_order objectForKey:@"orders"] == (id)[NSNull null])
+		if([user_order objectForKey:@"orders"] == (id)[NSNull null] || [user_order objectForKey:@"orders"] == NULL)
         {
-            printf("No Orders");
+            [self showNoOrdersView:YES withTitle:nil andMessage:@"No Orders added"];
             return;
             
         }
         
 		int orders_count = [[user_order objectForKey:@"orders"]count];
-		static NSString *CellIdentifier = @"Cell";	
 		if(orders_count >0)
 		{
-            
+             [self showNoOrdersView:NO withTitle:nil andMessage:nil];
+            static NSString *CellIdentifier = @"Cell";	
 			//Save this dictionary into Drink Orders sp we can edit it
 			[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"];
 			
@@ -351,6 +272,11 @@
                     continue;
                 } 
 				TKLabelTextViewCell *cell1 = [[TKLabelTextViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier];
+                
+                UIView *v = [[[UIView alloc] init] autorelease];
+                v.backgroundColor = [UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1];
+                cell1.selectedBackgroundView = v;
+                
 				NSString *name = [[[user_order objectForKey:@"orders"]objectAtIndex:i]objectForKey:@"name"];
 				cell1.label.text = [NSString stringWithFormat:@"Order for: %@",name];
 				
@@ -400,75 +326,12 @@
 				[cell1 release];
 			}
 		}
+        
 	}
-   // els 
-    //    showOptionsBtn.enabled = NO;
+
     view_run_table.delegate = self;
     view_run_table.dataSource = self;
     [view_run_table reloadData];
-}
-
-// snippet from BDDateTransformer.m //
-- (id)transformedValue:(NSDate *)date
-{
-    // Initialize the formatter.
-    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
-    [formatter setDateStyle:NSDateFormatterShortStyle];
-    [formatter setTimeStyle:NSDateFormatterNoStyle];
-    
-    // Initialize the calendar and flags.
-    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit | NSWeekdayCalendarUnit;
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    
-    // Create reference date for supplied date.
-    NSDateComponents *comps = [calendar components:unitFlags fromDate:date];
-    [comps setHour:0];
-    [comps setMinute:0];
-    [comps setSecond:0];
-    NSDate *suppliedDate = [calendar dateFromComponents:comps];
-    
-    // Iterate through the eight days (tomorrow, today, and the last six).
-    int i;
-    for (i = -1; i < 7; i++)
-    {
-        // Initialize reference date.
-        comps = [calendar components:unitFlags fromDate:[NSDate date]];
-        [comps setHour:0];
-        [comps setMinute:0];
-        [comps setSecond:0];
-        [comps setDay:[comps day] - i];
-        NSDate *referenceDate = [calendar dateFromComponents:comps];
-        // Get week day (starts at 1).
-        int weekday = [[calendar components:unitFlags fromDate:referenceDate] weekday] - 1;
-        
-        if ([suppliedDate compare:referenceDate] == NSOrderedSame && i == -1)
-        {
-            // Tomorrow
-            return [NSString stringWithString:@"Tomorrow"];
-        }
-        else if ([suppliedDate compare:referenceDate] == NSOrderedSame && i == 0)
-        {
-            // Today's time (a la iPhone Mail)
-            [formatter setDateStyle:NSDateFormatterNoStyle];
-            [formatter setTimeStyle:NSDateFormatterShortStyle];
-            return [formatter stringFromDate:date];
-        }
-        else if ([suppliedDate compare:referenceDate] == NSOrderedSame && i == 1)
-        {
-            // Today
-            return [NSString stringWithString:@"Yesterday"];
-        }
-        else if ([suppliedDate compare:referenceDate] == NSOrderedSame)
-        {
-            // Day of the week
-            NSString *day = [[formatter weekdaySymbols] objectAtIndex:weekday];
-            return day;
-        }
-    }
-    
-    // It's not in those eight days.
-    NSString *defaultDate = [formatter stringFromDate:date];
-    return defaultDate;
 }
 -(void)startTimer {
 	
@@ -487,22 +350,18 @@
 }
 
 - (void)updateTimer:(NSTimer *)myTimer{
-    if(run_date != NULL)
-    {
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    int unitFlags = NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    NSDateComponents *components = [gregorian components:unitFlags fromDate:[NSDate date] toDate:run_date options:0];
+    run_time_txt.text = [NSString stringWithFormat:@"Time to Dash:\nHours:%02d Mins:%02d Seconds:%02d",components.hour, components.minute, components.second ];
 
-        
-        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        int unitFlags = NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
-        NSDateComponents *components = [gregorian components:unitFlags fromDate:[NSDate date] toDate:run_date options:0];
-        run_time_txt.text = [NSString stringWithFormat:@"Days:%02d Hours:%02d Mins:%02d Seconds:%02d", components.day, components.hour, components.minute, components.second ];
-        
-        if(components.day<=0 && components.hour <=0 && components.minute <=0 && components.second <=0)
-        {
-            run_time_txt.text = @"Order Ended";
-            orderEnded = YES;
-            [self stopTimer];
-        }
+    if(components.day<=0 && components.hour <=0 && components.minute <=0 && components.second <=0)
+    {
+        run_time_txt.text = @"Order Ended";
+        orderEnded = YES;
+        [self stopTimer];
     }
+    
     
 }
 -(void)showOptions:(id)sender{
@@ -561,51 +420,6 @@
         [self checkForOrders];
 
     }
-    
-    /*
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    Order *order = [Order sharedOrder];
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/completerun.php?deviceid=%@&run_id=%@",
-                                                                                             baseDomain,
-                                                                                             [[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],
-                                                                                             [[[[Order sharedOrder] currentOrder] objectForKey:@"run"]objectForKey:@"id"]
-                                                                                             ,];
-                                                           cachePolicy:NSURLCacheStorageNotAllowed
-                                                       timeoutInterval:60.0];
-    
-    
-    #ifdef DEBUG
-    NSLog(@"request %@",[request URL]);
-    #endif
-    NSError *requestError;
-    NSURLResponse *urlResponse = nil;
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    if (response == nil) {
-        if (requestError != nil) {
-            
-            [Utils showAlert:@"Could not connect to server" withMessage:@"Please try again" inView:self.view];
-        }
-    }
-    else
-    {
-        //if we get a vaild order than instert your drink and send that to the server
-        NSString * json_str = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-        #ifdef DEBUG
-        NSLog(@"json_str %@",json_str);
-        #endif
-        SBJSON *parser = [[SBJSON alloc] init];
-        Order *order = [Order sharedOrder];
-        [order setOrder:[parser objectWithString:json_str error:nil]];
-        [parser release];
-        [json_str release];
-        [self performSelectorOnMainThread:@selector(updatecompleteRun)
-                               withObject:nil
-                            waitUntilDone:NO];
-    } 
-
-    [pool release];  
-     */
-     
 }
 -(void)leaveRun{
     
@@ -680,6 +494,12 @@
 	static NSString *CellIdentifier = @"Cell";	
 	
 	TKLabelTextViewCell *location_cell = [[TKLabelTextViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier];
+    
+    UIView *location_view = [[[UIView alloc] init] autorelease];
+    location_view.backgroundColor = [UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1];
+    location_cell.selectedBackgroundView = location_view;
+    
+    
 	location_cell.tag = LOCATION_TAG;
 	location_cell.label.text = LOCATION_TEXT;
     if([[dash_dict objectForKey:@"selected_location"] count]>0)
@@ -699,6 +519,10 @@
 	[location_cell release];
 	
 	TKLabelTextViewCell *time_cell = [[TKLabelTextViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier];
+    UIView *time_view = [[[UIView alloc] init] autorelease];
+    time_view.backgroundColor = [UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1];
+    time_cell.selectedBackgroundView = time_view;
+
 	time_cell.tag = TIME_TAG;
 	time_cell.label.text = TIME_TEXT;
     if([dash_dict count]>0)
@@ -719,6 +543,10 @@
 	[time_cell release];
 	
 	TKLabelTextViewCell *attendees_cell = [[TKLabelTextViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier];
+    UIView *attendees_view = [[[UIView alloc] init] autorelease];
+    attendees_view.backgroundColor = [UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1];
+    attendees_cell.selectedBackgroundView = attendees_view;
+
 	attendees_cell.tag = PEOPLE_TAG;
 	attendees_cell.label.text = PEOPLE_TEXT;
 	
@@ -746,6 +574,34 @@
     start_run_table.dataSource = self;
 	
 }
+
+#pragma mark Show No Orders View
+-(void)showNoOrdersView:(BOOL)show withTitle:(NSString *)title andMessage:(NSString *)message;
+{
+    CGRect f = noRuns_view.frame;
+    f.origin.y = 152;
+    noRuns_view.frame = f;
+    
+    BOOL isShowing = [self.view.subviews containsObject:noRuns_view];
+    NSLog(@"isShowing %d",isShowing);
+    NSLog(@"title %@",title);
+    NSLog(@"message %@",message);
+    printf("\n");
+    if(isShowing)
+        [noRuns_view removeFromSuperview];
+    
+    if(show)
+    {
+        [self.view addSubview:noRuns_view];
+        NoOrdersTitle.text = title;
+        NoOrdersMessage.text = message;
+        
+        
+    }
+    else
+        [noRuns_view removeFromSuperview];
+}
+
 #pragma mark Complete Summary
 -(void)completeSummary:(id)sender
 {    
@@ -755,7 +611,7 @@
 	
     if(dash_dict == NULL)
 		return;
-    
+    /*
     NSString *_address = [[[[dash_dict objectForKey:@"selected_location"] objectForKey:@"location"]objectForKey:@"address"]objectAtIndex:0];
 	NSString *_cityState = [NSString stringWithFormat:@"%@,%@",[[[dash_dict objectForKey:@"selected_location"] objectForKey:@"location"]objectForKey:@"city"],[[[dash_dict objectForKey:@"selected_location"] objectForKey:@"location"]objectForKey:@"state_code"]];
     
@@ -774,7 +630,7 @@
 		[device_id_array addObject:[[[dash_dict objectForKey:@"selected_friends"] objectAtIndex:i]valueForKey:@"device_id"]];
 	}
 	NSLog(@"device_id_array %@",device_id_array);
-    
+    */
 	
     //Make sure we have data before we send it
     if(![self isRunDataFilledOut])
@@ -808,91 +664,7 @@
         [dash clearDict];
         [self checkForOrders];
     }
-    /*
-    NSMutableArray *device_id_array = [[NSMutableArray alloc]init];
-	for(int i=0;i<[[dash_dict objectForKey:@"selected_friends"] count];i++)
-	{
-		[device_id_array addObject:[[[dash_dict objectForKey:@"selected_friends"] objectAtIndex:i]valueForKey:@"device_id"]];
-	}
-
-    NSString *_address = [[[[dash_dict objectForKey:@"selected_location"] objectForKey:@"location"]objectForKey:@"address"]objectAtIndex:0];
-	NSString *_cityState = [NSString stringWithFormat:@"%@,%@",[[[dash_dict objectForKey:@"selected_location"] objectForKey:@"location"]objectForKey:@"city"],[[[dash_dict objectForKey:@"selected_location"] objectForKey:@"location"]objectForKey:@"state_code"]];
-    
-	NSString *address = [NSString stringWithFormat:@"%@\n%@",_address,_cityState];
-	NSString *selected_yelp_id = [[dash_dict objectForKey:@"selected_location"] objectForKey:@"id"];
-    NSString *image_url = @"";
-    
-    if([[dash_dict objectForKey:@"selected_location"] objectForKey:@"image_url"] != NULL)
-        image_url = [[dash_dict objectForKey:@"selected_location"] objectForKey:@"image_url"];
-
-    
-    //Send a push to all devices
-	NSString *push_type = @"doOrder";
-	NSString *runnerInfo = [NSString stringWithFormat:@"first_name=%@&last_name=%@&deviceid=%@&selected_date=%@&selected_name=%@&selected_address=%@&selected_url=%@&selected_yelp_id=%@&date_added=%@",
-							[[NSUserDefaults standardUserDefaults]valueForKey:@"FIRSTNAME"],
-							[[NSUserDefaults standardUserDefaults]valueForKey:@"LASTNAME"],
-							[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],
-							[dash_dict objectForKey:@"selected_date"],
-							[[dash_dict objectForKey:@"selected_location"] objectForKey:@"name"],
-							address,
-							image_url,
-							selected_yelp_id,
-                            [NSDate date],
-							nil];
-	
-    
-                         
-	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/startrun.php",baseDomain]]
-														   cachePolicy:NSURLCacheStorageNotAllowed
-													   timeoutInterval:60.0];
-	
-	[request setHTTPMethod:@"POST"];
-	NSString *post_str = [NSString stringWithFormat:@"device_tokens=%@&push_type=%@&%@",[device_id_array componentsJoinedByString:@","],push_type,runnerInfo];
-    #ifdef DEBUG
-    NSLog(@"request %@",[request URL]);
-    NSLog(@"post_str %@",post_str);
-    #endif
-	[request setHTTPBody:[post_str dataUsingEncoding:NSUTF8StringEncoding]]; 
-    
-    
-    NSError *requestError;
-    NSURLResponse *urlResponse = nil;
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    if (response == nil) {
-        if (requestError != nil) {
-            
-            [Utils showAlert:@"Could not connect to server" withMessage:@"Please try again" inView:self.view];
-        }
-    }
-    else
-    {
-        NSString * json_str = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-        #ifdef DEBUG
-        NSLog(@"json_str %@",json_str);
-        #endif
-
-        [self performSelectorOnMainThread:@selector(updatesubmitDash)
-                               withObject:nil
-                            waitUntilDone:NO];
-    }
-     */
-
 }
-/*
--(void)updatesubmitDash
-{
-    [FlurryAnalytics logEvent:@"Dash Started"];
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Order Sent" message:@"Your order has been submitted" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK",nil];
-    [alert show];
-    [alert release];
-    
-    
-    //Clear the Order info since we dont need it anymore
-    DashSummary *dash = [DashSummary instance];
-    [dash clearDict];
-    [self checkForOrders];
-}
- */
 -(BOOL)isRunDataFilledOut
 {
     //Friends should be an option
@@ -902,7 +674,6 @@
     else
         return YES;
 }
-#pragma mark -
 
 #pragma mark -
 #pragma mark Table view data source
@@ -911,6 +682,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
+    
     if(view_run_view.superview)
         cell = [orders_cells objectAtIndex:indexPath.row];
     
@@ -936,6 +708,10 @@
     if(view_run_view.superview)
     {
         TKLabelTextViewCell *cell = [orders_cells objectAtIndex:[indexPath row]];
+        UIView *v = [[[UIView alloc] init] autorelease];
+        v.backgroundColor = [UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1];
+        cell.selectedBackgroundView = v;
+        
         NSString *text =  cell.textView.text;
         
         CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
@@ -968,7 +744,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
-	[tableView deselectRowAtIndexPath:indexPath animated:YES]; 
+    
+   	[tableView deselectRowAtIndexPath:indexPath animated:YES]; 
 	if(start_run_view.superview)
     {    
         switch (indexPath.row) {
@@ -1022,6 +799,7 @@
 */
 -(void)viewDidAppear:(BOOL)animated
 {
+    //[self showNoOrdersView:NO withTitle:nil andMessage:nil];
     if(start_run_view.superview)
     {
         [self reloadStartRunData];
@@ -1036,10 +814,7 @@
             startRunBtn.enabled = NO;
         else
             startRunBtn.enabled = YES;
-        
-        
     }
-    
     CoffeeRunSampleAppDelegate *appDelegate  = (CoffeeRunSampleAppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate showAdView];
     [self startTimer];

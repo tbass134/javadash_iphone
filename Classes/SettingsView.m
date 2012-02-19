@@ -51,6 +51,11 @@
 	friends.managedObjectContext = self.managedObjectContext;	
 	self.friends_array = [friends getAllFriends];
     
+    if([self.friends_array count] ==0)
+        no_friends_txt.hidden = NO;
+    else
+        no_friends_txt.hidden = YES;
+    
     
     NSMutableString *name = [[NSMutableString alloc]init];
     if([[NSUserDefaults standardUserDefaults] valueForKey:@"FIRSTNAME"])
@@ -217,6 +222,11 @@
 			
 			self.friends_array = [friends getAllFriends];
 			[self.table_view reloadData];
+            
+            if([self.friends_array count] ==0)
+                no_friends_txt.hidden = NO;
+            else
+                no_friends_txt.hidden = YES;
 		}
 	}
 	else
@@ -344,6 +354,12 @@
         cell.imageView.image = [UIImage imageNamed:@"avatar.png"];
 	return cell;
 }
+- (NSString *) tableView: (UITableView *) tableview titleForHeaderInSection: (NSInteger) section {
+   
+    return [NSString stringWithFormat:@"%@'s Friends",profile_name.text];
+} // titleForHeaderInSection
+
+
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -367,6 +383,11 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
                 //[self.table_view deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
                 self.friends_array = [friends getAllFriends];
                 [self.table_view reloadData];
+                
+                if([self.friends_array count] ==0)
+                    no_friends_txt.hidden = NO;
+                else
+                    no_friends_txt.hidden = YES;
             }
     }
 } // commitEditingStyle
@@ -399,6 +420,11 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
 	self.table_view.delegate = self;
 	self.table_view.dataSource = self;
 	[self.table_view reloadData];
+    
+    if([self.friends_array count] ==0)
+        no_friends_txt.hidden = NO;
+    else
+        no_friends_txt.hidden = YES;
     
     CoffeeRunSampleAppDelegate *appDelegate  = (CoffeeRunSampleAppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate showAdView];

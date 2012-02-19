@@ -49,13 +49,19 @@
 - (void)loadView {
 	
 	UIView *mainView = [[UIView alloc]initWithFrame:[[UIScreen mainScreen] applicationFrame]];
-	mainView.backgroundColor = [UIColor clearColor];
 	self.view = mainView;
+    UIImageView *bg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bg.png"]];
+    bg.frame = CGRectMake(0, -40, self.view.frame.size.width, self.view.frame.size.height);
+    [mainView addSubview:bg];
     [mainView release];
 }
-
+-(void)viewDidAppear:(BOOL)animated
+{
+    
+}
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
+    
     
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(addOrder:)]autorelease];
 	
@@ -71,8 +77,8 @@
 	sections_array = [[NSMutableArray alloc]init];
 	savedDrink = [[NSMutableDictionary alloc]init];
 	
-	scroll = [[UIScrollView alloc]initWithFrame:[[UIScreen mainScreen] applicationFrame]];
-	[self.view addSubview:scroll];
+	scroll = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [self.view addSubview:scroll];
 	
 	
     UIView *mainView = [[UIView alloc]init];
@@ -93,8 +99,9 @@
             
             UIView *seg_view = [[UIView alloc]initWithFrame:CGRectMake(0,0,self.view.frame.size.width,100
                                                                        )];
-            UILabel *title_label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 20)];
+            UILabel *title_label = [[UILabel alloc]initWithFrame:CGRectMake(5, 0, 100, 20)];
             title_label.backgroundColor = [UIColor clearColor];
+            title_label.font = [UIFont boldSystemFontOfSize:15];
             title_label.text = theKey;
             [seg_view addSubview:title_label];
             [title_label release];
@@ -192,45 +199,47 @@
     {
         if(![[coffee_dict objectForKey:theKey] isKindOfClass:[NSArray class]])
         {
-            UIView *switchView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
-             UILabel *switchLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 5, 200, 20)];
-             switchLabel.text = theKey;
-             switchLabel.backgroundColor = [UIColor clearColor];
-             [switchView addSubview:switchLabel];
-             [switchLabel release];
-             UISwitch *_switch = [[UISwitch alloc]initWithFrame:CGRectMake(self.view.frame.size.width-75,0, 75, 100)];
-             _switch.tag = 300 + switchTagInt;
-             NSDictionary *tempDict = [[NSDictionary alloc]initWithObjectsAndKeys:theKey,@"theKey", nil];
-             
-             [switch_array addObject:tempDict];
-             [switchView addSubview:_switch];
-             [_switch release];
-             switchTagInt++;
+            UIView *switchView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
+            UILabel *switchLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, 200, 20)];
+            switchLabel.font = [UIFont boldSystemFontOfSize:15];
+            switchLabel.text = theKey;
+            switchLabel.backgroundColor = [UIColor clearColor];
+            [switchView addSubview:switchLabel];
+            [switchLabel release];
+            UISwitch *_switch = [[UISwitch alloc]initWithFrame:CGRectMake(0,25, 75, 100)];
+            _switch.tag = 300 + switchTagInt;
+            NSDictionary *tempDict = [[NSDictionary alloc]initWithObjectsAndKeys:theKey,@"theKey", nil];
+
+            [switch_array addObject:tempDict];
+            [switchView addSubview:_switch];
+            [_switch release];
+            switchTagInt++;
             
             CGRect switchViewframe = switchView.frame;
             switchViewframe.size.height = switchView.frame.size.height +30;
             switchView.frame = switchViewframe;     
              
-             [mainView addSubview:switchView];
+            [mainView addSubview:switchView];
         }
     }
 
-	
 	//Add a text box for other options
     UIView *optionsView = [[UIView alloc]init];
-	optionsView.frame  = CGRectMake(0, 0, self.view.frame.size.width, 50);
-	UILabel *options_label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 20)];
+	optionsView.frame  = CGRectMake(0, 0, self.view.frame.size.width, 70);
+	UILabel *options_label = [[UILabel alloc]initWithFrame:CGRectMake(5, 0, 100, 20)];
 	options_label.backgroundColor = [UIColor clearColor];
+    options_label.font = [UIFont boldSystemFontOfSize:15];
 	
 	options_label.text = @"Options";
 	[optionsView addSubview:options_label];
 	[options_label release];
 	
-	UITextField *options_txt = [[UITextField alloc]initWithFrame:CGRectMake(0, 
+	UITextField *options_txt = [[UITextField alloc]initWithFrame:CGRectMake(5, 
 																		  20,
-																		  self.view.frame.size.width,
+																		  self.view.frame.size.width-5,
 																		  50)];
-    options_txt.backgroundColor = [UIColor whiteColor];
+    options_txt.placeholder = @"Add details to this order";
+    options_txt.backgroundColor = [UIColor clearColor];
     options_txt.delegate = self;
     options_txt.tag = UITEXTVIEWTAG;
     
@@ -244,17 +253,17 @@
      
     [mainView addSubview:optionsView];
 	
-
     UIView *favView = [[UIView alloc]init];
-    favView.frame = CGRectMake(0, 0, self.view.frame.size.width, 200);
+    favView.frame = CGRectMake(0, 0, self.view.frame.size.width, 60);
 	//add a switch to save as favorite
-	UILabel *setFav_label = [[UILabel alloc]initWithFrame:CGRectMake(0, 5, 200, 20)];
+	UILabel *setFav_label = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, 200, 20)];
 	setFav_label.text = @"Set As Favorite";
 	setFav_label.backgroundColor = [UIColor clearColor];
+    setFav_label.font = [UIFont boldSystemFontOfSize:15];
 	[favView addSubview:setFav_label];
 	[setFav_label release];
 	
-	UISwitch *setFav_switch = [[UISwitch alloc]initWithFrame:CGRectMake(self.view.frame.size.width-75,0, 75, 100)];
+	UISwitch *setFav_switch = [[UISwitch alloc]initWithFrame:CGRectMake(0,25,0, 30)];
 	setFav_switch.tag = FAVESWITCHTAG;
 	[favView addSubview:setFav_switch];
 	[setFav_switch release];
@@ -274,7 +283,7 @@
         
         point.y = offset;
         //child.backgroundColor = [self randomColor];
-        
+        child.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:0.5];
         
         CGRect rect = child.frame;
         rect.origin = point;
@@ -282,14 +291,14 @@
         
         offset += child.frame.size.height;
         
-        offset += 30;
+        offset += 10;
         contentSize = point.y;
         [scroll addSubview:child];
     }
     //[scroll setContentSize:mainView.frame.size];
     int bottom_padding;
     if(edit_order_dict == NULL)
-        bottom_padding = 100;
+        bottom_padding = 150;
     else
         bottom_padding = 200;
     [scroll setContentSize:CGSizeMake(self.view.frame.size.width,contentSize+bottom_padding)];
