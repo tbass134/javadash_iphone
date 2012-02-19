@@ -44,32 +44,6 @@
 	
 	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(close:)]autorelease];
 
-/*	
-	if([orderType isEqualToString:@"Drinks"])
-	{
-		if([companyName isEqualToString:@"Dunkin Donuts"])
-			beverage_array = [[NSMutableArray alloc]initWithObjects:@"Coffee",@"Espresso Drinks",@"Coolata",@"Dunkaccino",@"Hot Chocolate",@"Turbo Shot",nil];
-		else if([companyName isEqualToString:@"Starbucks"])
-			beverage_array = [[NSMutableArray alloc]initWithObjects:@"Coffee",@"Espresso",@"Frappuccino Blended Beverages",@"Chocolate Beverages",@"Tazo Teas",@"Kids' Drinks & Others",@"Vivanno Smoothies",@"Bottled Drinks",@"Espresso Plain",nil];
-		else if([companyName isEqualToString:@"Bad Ass"])
-			beverage_array = [[NSMutableArray alloc]initWithObjects:@"Coffee Drinks",@"Signature Blended Lattes",@"Espresso",@"Signature Lattes",@"Non-Coffee Drinks",@"Smoothies",@"Tea",@"Coffee",@"Espresso Drinks",@"Cold Drinks",@"Hot Drinks",@"Traditional Lattes",@"Treats",@"Breakfast Sandwiches",nil];
-		else 
-			beverage_array = [[NSMutableArray alloc]initWithObjects:@"Coffee",@"Espresso Drinks",@"Tea",nil];
-	}
-	else
-	{
-		if([companyName isEqualToString:@"Dunkin Donuts"])
-			beverage_array = [[NSMutableArray alloc]initWithObjects:@"Wraps",@"Breakfast Sandwiches",@"Hash Browns",@"Flatbread",@"Bagels",@"Cookies & Other Baked Items",@"Fancies",@"Muffins",@"Danish",@"Donut Sticks",nil];
-		else if([companyName isEqualToString:@"Starbucks"])
-			beverage_array = [[NSMutableArray alloc]initWithObjects:nil];
-		else if([companyName isEqualToString:@"Bad Ass"])
-			beverage_array = [[NSMutableArray alloc]initWithObjects:nil];
-		else 
-			beverage_array = [[NSMutableArray alloc]initWithObjects:nil];
-		
-	}
-    [table_view reloadData];
-   */ 
 }
 -(void)close:(id)sender
 {
@@ -97,20 +71,15 @@
     
     plistDictionary = [[NSUserDefaults standardUserDefaults]dictionaryForKey:@"plistDictionary"];
 	
-	//if(!plistDictionary)
-	//{
-		NSString *path = [[NSBundle mainBundle] bundlePath];
+	NSString *path = [[NSBundle mainBundle] bundlePath];
 		NSString *finalPath = [path stringByAppendingPathComponent:@"CoffeeList2.plist"];
 		plistDictionary = [[NSDictionary dictionaryWithContentsOfFile:finalPath] retain];
 		
-        //NSLog(@"plistDictionary %@\n",plistDictionary);
-        
-		NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-		if (standardUserDefaults) 
-			[standardUserDefaults setObject:plistDictionary forKey:@"plistDictionary"];
-	//}
-    //NSLog(@"companyName %@\n",companyName);
-    //NSLog(@"drink_type %@",drink_type);
+    /*
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    if (standardUserDefaults) 
+        [standardUserDefaults setObject:plistDictionary forKey:@"plistDictionary"];
+	*/
 	coffee_dict =[[[plistDictionary objectForKey:companyName]objectForKey:@"Drinks"]objectForKey:drink_type];
     
     NSLog(@"coffee_dict %@",coffee_dict);
@@ -143,6 +112,19 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     return [[coffee_dict allKeys] objectAtIndex:section];
+}
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
+    headerView.backgroundColor = [UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1];
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(2, -1, self.view.frame.size.width, 30)];
+    label.font = [UIFont boldSystemFontOfSize:18];
+    label.textColor = [UIColor whiteColor];
+    label.backgroundColor = [UIColor clearColor];
+    label.text = [[coffee_dict allKeys] objectAtIndex:section];
+    [headerView addSubview:label];
+    
+    return headerView;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

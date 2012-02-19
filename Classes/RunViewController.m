@@ -37,9 +37,9 @@
 #define CELL_CONTENT_WIDTH 320.0f
 #define CELL_CONTENT_MARGIN 10.0f
 
-#define LOCATION_TEXT	@"Current Location"
-#define TIME_TEXT		@"Run Time"
-#define PEOPLE_TEXT		@"Attendees"
+#define LOCATION_TEXT	@"Current Location:"
+#define TIME_TEXT		@"Run Time:"
+#define PEOPLE_TEXT		@"Attendees:"
 
 #define LOCATION_TAG 1
 #define TIME_TAG 2
@@ -277,6 +277,8 @@
                 v.backgroundColor = [UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1];
                 cell1.selectedBackgroundView = v;
                 
+                cell1.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:253.0f/255.0f blue:220.0f/255.0f alpha:1];
+                
 				NSString *name = [[[user_order objectForKey:@"orders"]objectAtIndex:i]objectForKey:@"name"];
 				cell1.label.text = [NSString stringWithFormat:@"Order for: %@",name];
 				
@@ -498,10 +500,13 @@
     UIView *location_view = [[[UIView alloc] init] autorelease];
     location_view.backgroundColor = [UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1];
     location_cell.selectedBackgroundView = location_view;
+    location_cell.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:253.0f/255.0f blue:220.0f/255.0f alpha:1];
     
     
 	location_cell.tag = LOCATION_TAG;
 	location_cell.label.text = LOCATION_TEXT;
+    location_cell.label.font = [UIFont boldSystemFontOfSize:13];
+    
     if([[dash_dict objectForKey:@"selected_location"] count]>0)
     {
         NSString *_name = [[dash_dict objectForKey:@"selected_location"]objectForKey:@"name"];
@@ -522,9 +527,11 @@
     UIView *time_view = [[[UIView alloc] init] autorelease];
     time_view.backgroundColor = [UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1];
     time_cell.selectedBackgroundView = time_view;
+    time_cell.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:253.0f/255.0f blue:220.0f/255.0f alpha:1];
 
 	time_cell.tag = TIME_TAG;
 	time_cell.label.text = TIME_TEXT;
+    time_cell.label.font = [UIFont boldSystemFontOfSize:13];
     if([dash_dict count]>0)
     {
         if([dash_dict objectForKey:@"selected_date"]!= (id)[NSNull null])
@@ -546,9 +553,11 @@
     UIView *attendees_view = [[[UIView alloc] init] autorelease];
     attendees_view.backgroundColor = [UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1];
     attendees_cell.selectedBackgroundView = attendees_view;
+    attendees_cell.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:253/255.0f blue:220/255.0f alpha:1];
 
 	attendees_cell.tag = PEOPLE_TAG;
 	attendees_cell.label.text = PEOPLE_TEXT;
+    attendees_cell.label.font = [UIFont boldSystemFontOfSize:13];
 	
 	NSMutableString *users_str = [[NSMutableString alloc]init];
     
@@ -711,6 +720,7 @@
         UIView *v = [[[UIView alloc] init] autorelease];
         v.backgroundColor = [UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1];
         cell.selectedBackgroundView = v;
+        
         
         NSString *text =  cell.textView.text;
         

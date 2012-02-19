@@ -214,6 +214,13 @@
     [drink_orders clearArray];
 
     
+    if(orders_cells != NULL)
+    {
+        [orders_cells removeAllObjects];
+        orders_cells = nil;
+        [current_orders_table reloadData];
+    }
+    
 	NSDictionary *user_order = [[[[Order sharedOrder] currentOrder]objectForKey:@"run"]retain];
 	NSLog(@"user_order %@",user_order);
 	
@@ -254,7 +261,7 @@
         UIView *v = [[[UIView alloc] init] autorelease];
         v.backgroundColor = [UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1];
         cell1.selectedBackgroundView = v;
-        
+        cell1.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:253.0f/255.0f blue:220.0f/255.0f alpha:1];
 		cell1.label.text = @"Runner";
         cell1.userInteractionEnabled = NO;
 		cell1.textView.text = [user_order objectForKey:@"user_name"];
@@ -263,6 +270,7 @@
 		
 		TKLabelTextViewCell *cell2 = [[TKLabelTextViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier];
         cell2.selectedBackgroundView = v;
+        cell2.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:253.0f/255.0f blue:220.0f/255.0f alpha:1];
 		cell2.label.text = @"Location";
         // cell2.userInteractionEnabled = NO;
 		
@@ -272,6 +280,7 @@
 		
 		TKLabelTextViewCell *cell3 = [[TKLabelTextViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier];
         cell3.selectedBackgroundView = v;
+        cell3.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:253.0f/255.0f blue:220.0f/255.0f alpha:1];
 		cell3.label.text = @"Time";
 		cell3.textView.text = [user_order objectForKey:@"timestamp"];
 		
@@ -314,6 +323,7 @@
             UIView *v = [[[UIView alloc] init] autorelease];
             v.backgroundColor = [UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1];
             cell1.selectedBackgroundView = v;
+            cell1.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:253.0f/255.0f blue:220.0f/255.0f alpha:1];
             
 			NSString *name = [[[user_order objectForKey:@"orders"]objectAtIndex:i]objectForKey:@"name"];
 			cell1.label.text = [NSString stringWithFormat:@"Order for: %@",name];
@@ -434,6 +444,7 @@
         UIView *v = [[[UIView alloc] init] autorelease];
         v.backgroundColor = [UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1];
         cell.selectedBackgroundView = v;
+        cell.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:253.0f/255.0f blue:220.0f/255.0f alpha:1];
         
         NSString *text =  cell.textView.text;
         
