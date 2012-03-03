@@ -30,7 +30,6 @@
     [super viewDidLoad];
 	
     table_view.hidden = YES;
-	appDelegate = [[UIApplication sharedApplication] delegate];
 	companyName =[[[[NSUserDefaults standardUserDefaults] valueForKey:@"Current Order Dict"]objectForKey:@"data"]objectForKey:@"selected_name"];
 	
 	
@@ -51,48 +50,54 @@
 }
 -(IBAction)chooseDrinkTemp:(id)sender
 {
-    
     UIButton *btn = sender;
     
     if(btn.tag ==1)
-    {
-        printf("hot");
         drink_type = @"Hot";
-    }
     else if(btn.tag==2)
-    {
-        printf("iced");
         drink_type = @"Iced";
-    }
     
     table_view.hidden = NO;
     drink_temp_view.hidden = YES;
-    
     
     plistDictionary = [[NSUserDefaults standardUserDefaults]dictionaryForKey:@"plistDictionary"];
 	
 	NSString *path = [[NSBundle mainBundle] bundlePath];
 		NSString *finalPath = [path stringByAppendingPathComponent:@"CoffeeList2.plist"];
 		plistDictionary = [[NSDictionary dictionaryWithContentsOfFile:finalPath] retain];
-		
-    /*
-    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-    if (standardUserDefaults) 
-        [standardUserDefaults setObject:plistDictionary forKey:@"plistDictionary"];
-	*/
+
 	coffee_dict =[[[plistDictionary objectForKey:companyName]objectForKey:@"Drinks"]objectForKey:drink_type];
     
-    NSLog(@"coffee_dict %@",coffee_dict);
-    NSLog(@"count %i",[coffee_dict count]);
+    
     sections = [[NSMutableArray alloc]init];
+    //itemsInSection = [[NSMutableArray alloc]init];
     
-    
-    // Loop through the books and create our keys
+    // Loop through the items and create our keys
     for (NSDictionary *item in coffee_dict)
     {
-        NSLog(@"item %@",item);
+        /*
+        NSMutableArray *temp = [[NSMutableArray alloc]init]; 
+        //NSLog(@"item %@",item);
+        for(NSDictionary *items in [coffee_dict objectForKey:item])
+        {
+            [temp addObject:items];
+        }
+        NSSortDescriptor *sortOrder = [NSSortDescriptor sortDescriptorWithKey: @"self" ascending: YES];
+        [temp sortUsingDescriptors:[NSArray arrayWithObject: sortOrder]];
+         
+        [itemsInSection addObject:temp];
+         */
         [sections addObject:item];
     }
+    
+    NSSortDescriptor *sortOrder = [NSSortDescriptor sortDescriptorWithKey: @"self" ascending: YES];
+	[sections sortUsingDescriptors:[NSArray arrayWithObject: sortOrder]];
+    
+   
+        
+    
+    NSLog(@"sections %@",sections);
+    NSLog(@"itemsInSection %@",itemsInSection);
     
     [table_view reloadData];
 }
@@ -106,12 +111,13 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSDictionary *dictionary = [coffee_dict objectForKey:[sections objectAtIndex:section]];
-    //NSLog(@"dictionary %@",dictionary);
-    return [dictionary count];
+    return [dictionary count];  
+    
+    //return [[sections objectAtIndex:section]count];
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [[coffee_dict allKeys] objectAtIndex:section];
+    return [sections objectAtIndex:section];//[[coffee_dict allKeys] objectAtIndex:section];
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -121,7 +127,7 @@
     label.font = [UIFont boldSystemFontOfSize:18];
     label.textColor = [UIColor whiteColor];
     label.backgroundColor = [UIColor clearColor];
-    label.text = [[coffee_dict allKeys] objectAtIndex:section];
+    label.text = [sections objectAtIndex:section];
     [headerView addSubview:label];
     
     return headerView;
@@ -140,11 +146,7 @@
         cell.selectedBackgroundView = v;
     }
     
-    // Configure the cell...
-    //
-    //NSLog(@"[sections objectAtIndex:indexPath.section] %@",[sections objectAtIndex:indexPath.section]);
     cell.textLabel.text = [[coffee_dict objectForKey:[sections objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
-
     
     return cell;
 }
@@ -156,8 +158,11 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSString *beverage = [[coffee_dict objectForKey:[sections objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
     
-    NSString *drink = [[coffee_dict allKeys] objectAtIndex:indexPath.section];
+    //NSString *drink = [[coffee_dict allKeys] objectAtIndex:indexPath.section];
+    NSString *drink = [sections objectAtIndex:indexPath.section];
     
+    NSLog(@"beverage %@",beverage);
+    NSLog(@"drink %@",drink);
     NSDictionary *drink_dict = [[NSDictionary alloc]initWithObjectsAndKeys:companyName,@"companyName",drink_type,@"drink_type",beverage,@"beverage",drink,@"drink",nil];
     
     

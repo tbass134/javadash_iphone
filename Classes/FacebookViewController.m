@@ -7,7 +7,6 @@
 //
 
 #import "FacebookViewController.h"
-#import "Constants.h"
 #import "CoffeeRunSampleAppDelegate.h"
 #import "Utils.h"
 #import "FriendsInfo.h"
@@ -64,7 +63,8 @@
     HUD.delegate = self;
     [HUD show:YES];
     NSDictionary *allFBUsers = [[DataService sharedDataService]getFacebookUsersOfApp];
-    if(allFBUsers != NULL)
+    NSLog(@"allFBUsers %@",allFBUsers);
+    if(![allFBUsers objectForKey:@"success"])
     {
         [HUD hide:YES];
         loading_txt.hidden = YES;
@@ -91,6 +91,12 @@
             }
         }
         [self loadFriendsList];
+    }
+    else {
+         [HUD hide:YES];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"No Users Found" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        [alert show];
+        [alert release];
     }
         
 }
@@ -130,8 +136,7 @@
     }
     else
     {
-       
-        
+
         if(!noUsers)
         {
             printf("no users found");

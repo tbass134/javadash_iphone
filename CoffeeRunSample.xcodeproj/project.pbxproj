@@ -67,6 +67,8 @@
 		452D3A1514707D050058AA45 /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 452D3A1314707D050058AA45 /* UIDevice+IdentifierAddition.m */; };
 		452DB9E81465DC0A0030F7C9 /* MutipleOrdersTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 452DB9E61465DC060030F7C9 /* MutipleOrdersTableView.m */; };
 		452DB9E91465DC0A0030F7C9 /* MutipleOrdersTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 452DB9E71465DC080030F7C9 /* MutipleOrdersTableView.xib */; };
+		452EA99D14FE783F00C8FF71 /* HelpViewControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 452EA99B14FE783F00C8FF71 /* HelpViewControllerViewController.m */; };
+		452EA99E14FE783F00C8FF71 /* HelpViewControllerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 452EA99C14FE783F00C8FF71 /* HelpViewControllerViewController.xib */; };
 		453105111482953C005781AF /* CoffeeRunSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4531050F1482953C005781AF /* CoffeeRunSampleViewController.m */; };
 		453105121482953C005781AF /* CoffeeRunSampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 453105101482953C005781AF /* CoffeeRunSampleViewController.xib */; };
 		4531C40E13DB431F00BD246C /* DBSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4531C40813DB431F00BD246C /* DBSignupViewController.m */; };
@@ -91,8 +93,6 @@
 		456599B314F1773900FECCB8 /* custom_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 456599AD14F1773400FECCB8 /* custom_btn.png */; };
 		456599B414F1773900FECCB8 /* custom_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 456599AE14F1773600FECCB8 /* custom_btn@2x.png */; };
 		456599B514F1773900FECCB8 /* favorite_orders_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 456599AF14F1773700FECCB8 /* favorite_orders_btn.png */; };
-		4569C09E13132BD5007BC077 /* ItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4569C09C13132BD5007BC077 /* ItemsViewController.m */; };
-		4569C09F13132BD5007BC077 /* ItemsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4569C09D13132BD5007BC077 /* ItemsViewController.xib */; };
 		456D1D9314D5BBD3007143BD /* DataService.m in Sources */ = {isa = PBXBuildFile; fileRef = 456D1D9214D5BBD3007143BD /* DataService.m */; };
 		456D1DB914D5C03E007143BD /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 456D1DB814D5C03E007143BD /* MobileCoreServices.framework */; };
 		45744BCA14796CC9001B257C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 45744BC914796CC9001B257C /* MBProgressHUD.m */; };
@@ -116,7 +116,6 @@
 		4588A25D12B8066500863541 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4588A25C12B8066500863541 /* QuartzCore.framework */; };
 		458CBD071474A7210057B063 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 458CBD051474A7210057B063 /* libTestFlight.a */; };
 		458D1D5C13A950FD00243581 /* MyUISegmentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 458D1D5B13A950FD00243581 /* MyUISegmentController.m */; };
-		459C0C7312FA3A4100108705 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 459C0C7212FA3A4100108705 /* Constants.m */; };
 		459C560813183038008F6BDD /* CustomOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 459C560613183038008F6BDD /* CustomOrderViewController.m */; };
 		459C560913183038008F6BDD /* CustomOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 459C560713183038008F6BDD /* CustomOrderViewController.xib */; };
 		45A479A813146A1A00B2B415 /* YourOrderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A479A713146A1A00B2B415 /* YourOrderTableViewController.m */; };
@@ -180,6 +179,12 @@
 		45B7D99213FDED470002BAF0 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B7D99113FDED460002BAF0 /* iAd.framework */; };
 		45B8880D13A81B0100C7BD9B /* CoffeeDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B8880C13A81B0100C7BD9B /* CoffeeDetailsView.m */; };
 		45C694A8133C376B00962D33 /* AttendeeOrderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45C694A7133C376B00962D33 /* AttendeeOrderTableViewController.m */; };
+		45CD35B914FEFCC400407139 /* Drink_Selection_View.png in Resources */ = {isa = PBXBuildFile; fileRef = 45CD35B314FEFCC400407139 /* Drink_Selection_View.png */; };
+		45CD35BA14FEFCC400407139 /* Order_Options_View.png in Resources */ = {isa = PBXBuildFile; fileRef = 45CD35B414FEFCC400407139 /* Order_Options_View.png */; };
+		45CD35BB14FEFCC400407139 /* Orders_View.png in Resources */ = {isa = PBXBuildFile; fileRef = 45CD35B514FEFCC400407139 /* Orders_View.png */; };
+		45CD35BC14FEFCC400407139 /* Run_View.png in Resources */ = {isa = PBXBuildFile; fileRef = 45CD35B614FEFCC400407139 /* Run_View.png */; };
+		45CD35BD14FEFCC400407139 /* Run_View2.png in Resources */ = {isa = PBXBuildFile; fileRef = 45CD35B714FEFCC400407139 /* Run_View2.png */; };
+		45CD35BE14FEFCC400407139 /* Settings_View.png in Resources */ = {isa = PBXBuildFile; fileRef = 45CD35B814FEFCC400407139 /* Settings_View.png */; };
 		45CE604314536286000EBFAF /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 45CE604214536286000EBFAF /* Appirater.m */; };
 		45D1551B132723850082D87F /* FavoriteLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D1551A132723850082D87F /* FavoriteLocations.m */; };
 		45D23D2E1411DB7D000980C1 /* OrdersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45D23D2D1411DB7D000980C1 /* OrdersViewController.xib */; };
@@ -188,7 +193,6 @@
 		45E6AC8613A126EE005410B5 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45E6AC8413A126EE005410B5 /* SettingsView.xib */; };
 		45E6ACD613A12D73005410B5 /* FriendsInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6ACD513A12D73005410B5 /* FriendsInfo.m */; };
 		45E6ADD113A15F23005410B5 /* RunViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6ADD013A15F23005410B5 /* RunViewController.m */; };
-		45F5787C13035BB50024BA03 /* URLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F5787B13035BB50024BA03 /* URLConnection.m */; };
 		45F67C8A139099EF00C1273C /* DashSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F67C89139099EF00C1273C /* DashSummary.m */; };
 		45F67DE61390B42F00C1273C /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F67DE11390B42F00C1273C /* ImageCache.m */; };
 		45F67DE71390B42F00C1273C /* ImageCacheObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F67DE31390B42F00C1273C /* ImageCacheObject.m */; };
@@ -455,6 +459,9 @@
 		452DB9E51465DC060030F7C9 /* MutipleOrdersTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MutipleOrdersTableView.h; sourceTree = "<group>"; };
 		452DB9E61465DC060030F7C9 /* MutipleOrdersTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MutipleOrdersTableView.m; sourceTree = "<group>"; };
 		452DB9E71465DC080030F7C9 /* MutipleOrdersTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MutipleOrdersTableView.xib; sourceTree = "<group>"; };
+		452EA99A14FE783F00C8FF71 /* HelpViewControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelpViewControllerViewController.h; path = Help/HelpViewControllerViewController.h; sourceTree = "<group>"; };
+		452EA99B14FE783F00C8FF71 /* HelpViewControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelpViewControllerViewController.m; path = Help/HelpViewControllerViewController.m; sourceTree = "<group>"; };
+		452EA99C14FE783F00C8FF71 /* HelpViewControllerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HelpViewControllerViewController.xib; path = Help/HelpViewControllerViewController.xib; sourceTree = "<group>"; };
 		4531050E1482953C005781AF /* CoffeeRunSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoffeeRunSampleViewController.h; sourceTree = "<group>"; };
 		4531050F1482953C005781AF /* CoffeeRunSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoffeeRunSampleViewController.m; sourceTree = "<group>"; };
 		453105101482953C005781AF /* CoffeeRunSampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoffeeRunSampleViewController.xib; sourceTree = "<group>"; };
@@ -493,9 +500,6 @@
 		456599AD14F1773400FECCB8 /* custom_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = custom_btn.png; sourceTree = "<group>"; };
 		456599AE14F1773600FECCB8 /* custom_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "custom_btn@2x.png"; sourceTree = "<group>"; };
 		456599AF14F1773700FECCB8 /* favorite_orders_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favorite_orders_btn.png; sourceTree = "<group>"; };
-		4569C09B13132BD5007BC077 /* ItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemsViewController.h; sourceTree = "<group>"; };
-		4569C09C13132BD5007BC077 /* ItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemsViewController.m; sourceTree = "<group>"; };
-		4569C09D13132BD5007BC077 /* ItemsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemsViewController.xib; sourceTree = "<group>"; };
 		456D1D9114D5BBD3007143BD /* DataService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataService.h; sourceTree = "<group>"; };
 		456D1D9214D5BBD3007143BD /* DataService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataService.m; sourceTree = "<group>"; };
 		456D1DB814D5C03E007143BD /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -538,8 +542,6 @@
 		458CBD061474A7210057B063 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		458D1D5A13A950FD00243581 /* MyUISegmentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyUISegmentController.h; sourceTree = "<group>"; };
 		458D1D5B13A950FD00243581 /* MyUISegmentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyUISegmentController.m; sourceTree = "<group>"; };
-		459C0C7112FA3A4100108705 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		459C0C7212FA3A4100108705 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		459C560513183038008F6BDD /* CustomOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomOrderViewController.h; sourceTree = "<group>"; };
 		459C560613183038008F6BDD /* CustomOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomOrderViewController.m; sourceTree = "<group>"; };
 		459C560713183038008F6BDD /* CustomOrderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomOrderViewController.xib; sourceTree = "<group>"; };
@@ -668,6 +670,12 @@
 		45C694A6133C376B00962D33 /* AttendeeOrderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttendeeOrderTableViewController.h; sourceTree = "<group>"; };
 		45C694A7133C376B00962D33 /* AttendeeOrderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttendeeOrderTableViewController.m; sourceTree = "<group>"; };
 		45CAC7C4144E1DB00053BFE3 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
+		45CD35B314FEFCC400407139 /* Drink_Selection_View.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Drink_Selection_View.png; sourceTree = "<group>"; };
+		45CD35B414FEFCC400407139 /* Order_Options_View.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Order_Options_View.png; sourceTree = "<group>"; };
+		45CD35B514FEFCC400407139 /* Orders_View.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Orders_View.png; sourceTree = "<group>"; };
+		45CD35B614FEFCC400407139 /* Run_View.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Run_View.png; sourceTree = "<group>"; };
+		45CD35B714FEFCC400407139 /* Run_View2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Run_View2.png; sourceTree = "<group>"; };
+		45CD35B814FEFCC400407139 /* Settings_View.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Settings_View.png; sourceTree = "<group>"; };
 		45CE604114536286000EBFAF /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
 		45CE604214536286000EBFAF /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
 		45D15519132723850082D87F /* FavoriteLocations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteLocations.h; sourceTree = "<group>"; };
@@ -683,8 +691,6 @@
 		45E6ACD513A12D73005410B5 /* FriendsInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsInfo.m; sourceTree = "<group>"; };
 		45E6ADCF13A15F23005410B5 /* RunViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunViewController.h; sourceTree = "<group>"; };
 		45E6ADD013A15F23005410B5 /* RunViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunViewController.m; sourceTree = "<group>"; };
-		45F5787A13035BB50024BA03 /* URLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLConnection.h; sourceTree = "<group>"; };
-		45F5787B13035BB50024BA03 /* URLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLConnection.m; sourceTree = "<group>"; };
 		45F67C88139099EF00C1273C /* DashSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashSummary.h; sourceTree = "<group>"; };
 		45F67C89139099EF00C1273C /* DashSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashSummary.m; sourceTree = "<group>"; };
 		45F67DE01390B42F00C1273C /* ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCache.h; sourceTree = "<group>"; };
@@ -906,6 +912,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				452EA99914FE782000C8FF71 /* Help */,
 				456D1D9014D5BBD3007143BD /* DataService */,
 				450162B114507B7C00BD446C /* Ads */,
 				452CA1641447DAA600B7FC70 /* Facebook */,
@@ -919,8 +926,6 @@
 				451C82C713033E5700D11E30 /* Utils */,
 				1D3623240D0F684500981E51 /* CoffeeRunSampleAppDelegate.h */,
 				1D3623250D0F684500981E51 /* CoffeeRunSampleAppDelegate.m */,
-				459C0C7112FA3A4100108705 /* Constants.h */,
-				459C0C7212FA3A4100108705 /* Constants.m */,
 				32CA4F630368D1EE00C91783 /* CoffeeRunSample_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
@@ -1099,8 +1104,6 @@
 		451C82C713033E5700D11E30 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				45F5787A13035BB50024BA03 /* URLConnection.h */,
-				45F5787B13035BB50024BA03 /* URLConnection.m */,
 				4588A14C12B7CCA800863541 /* Utils.h */,
 				4588A14D12B7CCA800863541 /* Utils.m */,
 				45E6ACD413A12D73005410B5 /* FriendsInfo.h */,
@@ -1195,6 +1198,16 @@
 				452D3A1314707D050058AA45 /* UIDevice+IdentifierAddition.m */,
 			);
 			name = UniqueDeviceId;
+			sourceTree = "<group>";
+		};
+		452EA99914FE782000C8FF71 /* Help */ = {
+			isa = PBXGroup;
+			children = (
+				452EA99A14FE783F00C8FF71 /* HelpViewControllerViewController.h */,
+				452EA99B14FE783F00C8FF71 /* HelpViewControllerViewController.m */,
+				452EA99C14FE783F00C8FF71 /* HelpViewControllerViewController.xib */,
+			);
+			name = Help;
 			sourceTree = "<group>";
 		};
 		4531C41213DB432700BD246C /* SignUp */ = {
@@ -1529,6 +1542,19 @@
 			name = AdNetworkLibs;
 			sourceTree = "<group>";
 		};
+		45CD35B214FEFCC400407139 /* Help */ = {
+			isa = PBXGroup;
+			children = (
+				45CD35B314FEFCC400407139 /* Drink_Selection_View.png */,
+				45CD35B414FEFCC400407139 /* Order_Options_View.png */,
+				45CD35B514FEFCC400407139 /* Orders_View.png */,
+				45CD35B614FEFCC400407139 /* Run_View.png */,
+				45CD35B714FEFCC400407139 /* Run_View2.png */,
+				45CD35B814FEFCC400407139 /* Settings_View.png */,
+			);
+			path = Help;
+			sourceTree = "<group>";
+		};
 		45CE60401453626E000EBFAF /* Apppirater */ = {
 			isa = PBXGroup;
 			children = (
@@ -1543,9 +1569,6 @@
 			children = (
 				454AEA84132AE4180029C0C1 /* Current Orders View */,
 				A9A1FB9D12E89E1000390640 /* CoffeeList */,
-				4569C09B13132BD5007BC077 /* ItemsViewController.h */,
-				4569C09C13132BD5007BC077 /* ItemsViewController.m */,
-				4569C09D13132BD5007BC077 /* ItemsViewController.xib */,
 				45A479A613146A1A00B2B415 /* YourOrderTableViewController.h */,
 				45A479A713146A1A00B2B415 /* YourOrderTableViewController.m */,
 				459C560513183038008F6BDD /* CustomOrderViewController.h */,
@@ -1595,6 +1618,7 @@
 		45FBA06A14E87CCC00FA8BFC /* images */ = {
 			isa = PBXGroup;
 			children = (
+				45CD35B214FEFCC400407139 /* Help */,
 				45FBA0F514E8A0AE00FA8BFC /* Back.png */,
 				45FBA0F614E8A0AE00FA8BFC /* Back@2x.png */,
 				45FBA0F114E8A09D00FA8BFC /* back-big.png */,
@@ -1910,7 +1934,6 @@
 				A964815212D7B43C00B55A1A /* RunDetails.xib in Resources */,
 				A9A1FBA212E89E6300390640 /* NameListViewController.xib in Resources */,
 				451F40AD130B0B46004CBB06 /* FriendsTableListView.xib in Resources */,
-				4569C09F13132BD5007BC077 /* ItemsViewController.xib in Resources */,
 				459C560913183038008F6BDD /* CustomOrderViewController.xib in Resources */,
 				A90BF2FA1343C124003FF481 /* InfoViewController.xib in Resources */,
 				4580F2281392D728007A281C /* SelectTimeView.xib in Resources */,
@@ -2003,6 +2026,13 @@
 				456599B314F1773900FECCB8 /* custom_btn.png in Resources */,
 				456599B414F1773900FECCB8 /* custom_btn@2x.png in Resources */,
 				456599B514F1773900FECCB8 /* favorite_orders_btn.png in Resources */,
+				452EA99E14FE783F00C8FF71 /* HelpViewControllerViewController.xib in Resources */,
+				45CD35B914FEFCC400407139 /* Drink_Selection_View.png in Resources */,
+				45CD35BA14FEFCC400407139 /* Order_Options_View.png in Resources */,
+				45CD35BB14FEFCC400407139 /* Orders_View.png in Resources */,
+				45CD35BC14FEFCC400407139 /* Run_View.png in Resources */,
+				45CD35BD14FEFCC400407139 /* Run_View2.png in Resources */,
+				45CD35BE14FEFCC400407139 /* Settings_View.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2029,10 +2059,7 @@
 				A9A1FBA112E89E6300390640 /* NameListViewController.m in Sources */,
 				A93A4AEA12EA2EB000CCCD96 /* CoffeeRun.xcdatamodel in Sources */,
 				A93A4B4E12EA3E4400CCCD96 /* SavedDrinksList.m in Sources */,
-				459C0C7312FA3A4100108705 /* Constants.m in Sources */,
-				45F5787C13035BB50024BA03 /* URLConnection.m in Sources */,
 				451F40AC130B0B46004CBB06 /* FriendsTableListView.m in Sources */,
-				4569C09E13132BD5007BC077 /* ItemsViewController.m in Sources */,
 				45A479A813146A1A00B2B415 /* YourOrderTableViewController.m in Sources */,
 				459C560813183038008F6BDD /* CustomOrderViewController.m in Sources */,
 				45D450831325A08F004764C2 /* FavoritesTableViewController.m in Sources */,
@@ -2193,6 +2220,7 @@
 				452B4CA314DEE384000794EF /* ASIInputStream.m in Sources */,
 				452B4CA414DEE384000794EF /* ASINetworkQueue.m in Sources */,
 				452B4CAD14DEE384000794EF /* Reachability.m in Sources */,
+				452EA99D14FE783F00C8FF71 /* HelpViewControllerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

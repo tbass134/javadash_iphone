@@ -11,11 +11,8 @@
 #import "TapkuLibrary.h"
 #import "Order.h"
 
-#import "Constants.h"
 #import "JSON.h"
-#import "URLConnection.h"
 #import "Utils.h"
-#import "ItemsViewController.h"
 #import "DrinkOrders.h"
 
 #import "CoffeeRunSampleAppDelegate.h"
@@ -71,13 +68,7 @@
 	//[self loadData];
 }
 -(void)placeOrder:(id)sender
-{
-	ItemsViewController *currentRun = [[ItemsViewController alloc]initWithNibName:@"ItemsViewController" bundle:nil];
-	//currentRun.run_data = run_dict;
-	//currentRun.managedObjectContext = self.managedObjectContext;
-	[self.navigationController pushViewController:currentRun animated:YES];
-	[currentRun release];
-	
+{	
 }
 -(void)OrderEdited:(id)sender
 {
@@ -91,15 +82,7 @@
 														   cachePolicy:NSURLRequestReturnCacheDataElseLoad
 													   timeoutInterval:60.0];
      */
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],ts]]
-														   cachePolicy:NSURLCacheStorageNotAllowed
-													   timeoutInterval:60.0];
-	//NSLog(@"url %@", [request URL]);
-	URLConnection *conn = [[URLConnection alloc]init];
-	conn.tag =@"GetOrders";
-	[conn setDelegate:self];
-	[conn initWithRequest:request];
-
+   
 }
 - (void)processSuccessful:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
 {

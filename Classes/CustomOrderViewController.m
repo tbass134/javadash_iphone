@@ -9,9 +9,7 @@
 #import "CustomOrderViewController.h"
 #import "DrinkOrders.h"
 #import "Order.h"
-#import "URLConnection.h"
 #import "JSON.h"
-#import "Constants.h"
 #import "DataService.h"
 @implementation CustomOrderViewController
 @synthesize text_view,label,saveBtn;
@@ -85,31 +83,6 @@
             [self.navigationController popViewControllerAnimated:YES];
         }
         
-        /*
-        //This order was editied, need to send the new data to the server
-        int ts = [[NSDate date] timeIntervalSince1970];
-        NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/placeorder.php?ts=%i",baseDomain,ts]]
-                                                               cachePolicy:NSURLCacheStorageNotAllowed
-                                                           timeoutInterval:60.0];
-        
-        [request setHTTPMethod:@"POST"];
-        
-       
-        
-        
-        
-        
-        NSString *post_str = [NSString stringWithFormat:@"device_id=%@&run_id=%@&order=%@&updateOrder=1&order_id=%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"_UALastDeviceToken"],	[[[order currentOrder]objectForKey:@"run"]objectForKey:@"id"],order_str,[selected_drink objectForKey:@"order_id"]];
-        [request setHTTPBody:[post_str dataUsingEncoding:NSUTF8StringEncoding]]; 
-        NSLog(@"post_str %@",post_str);
-        NSLog(@"url %@", [request URL]);
-        
-        URLConnection *conn = [[URLConnection alloc]init];
-        conn.tag =@"editOrder";
-        [conn setDelegate:self];
-        [conn initWithRequest:request];
-         */
-        
     }
     else
     {
@@ -127,15 +100,6 @@
      
 	
 }
-
-
-- (void)processSuccessful:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
-{
-    //[Utils showAlert:@"Order Updated" withMessage:nil inView:self.view];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderEdited" object:self];
-    
-    [self.navigationController popViewControllerAnimated:YES];
-}   
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range  replacementText:(NSString *)text
 {
 	if (range.length==0) {

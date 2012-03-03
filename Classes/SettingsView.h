@@ -53,6 +53,7 @@
 -(IBAction)removeAds:(id)sender;
 -(IBAction)updateProfile:(id)sender;
 -(IBAction)goFacebook:(id)sender;
+-(IBAction)goHelp:(id)sender;
 -(void)readFriendsData;
 -(void)appPurchased;
 @end

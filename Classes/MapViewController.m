@@ -13,9 +13,7 @@
 #import "FavoritesTableViewController.h"
 #import "FavoriteLocations.h"
 #import "JSON.h"
-#import "URLConnection.h"
 #import "Utils.h"
-#import "Constants.h"
 #import "DashSummary.h"
 #import "OAuthConsumer.h"
 

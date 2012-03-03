@@ -72,6 +72,8 @@
    
     
 }
+//Help View
+@property(nonatomic, retain) IBOutlet UIView *help_view;
 
 //Contact View
 @property (retain) id delegate;

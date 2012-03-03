@@ -8,7 +8,6 @@
 
 #import "EditOrderView.h"
 #import "Order.h"
-#import "Constants.h"
 #import "JSON.h"
 #import "Utils.h"
 #import "MyUISegmentController.h"

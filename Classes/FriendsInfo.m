@@ -8,8 +8,6 @@
 
 #import "FriendsInfo.h"
 #import "Utils.h"
-#import "Constants.h"
-#import "URLConnection.h"
 #import "FlurryAnalytics.h"
 #import "DataService.h"
 
@@ -98,44 +96,7 @@
         [[self delegate] friendDataLoaded:YES withTag:nil andData:nil];
     }
     
-    /*
-    NSString *user_info = [NSString stringWithFormat:@"name=%@&deviceid=%@&email=%@&enable_email_use=%d&platform=%@&fbid=%d",
-                           [Utils urlencode:[NSString stringWithFormat:@"%@ %@",[friend_dict objectForKey:@"FIRSTNAME"], [friend_dict objectForKey:@"LASTNAME"]]],
-                            [friend_dict objectForKey:@"TOKEN"],
-                           [friend_dict objectForKey:@"EMAIL"],
-                           [[friend_dict objectForKey:@"ENABLE_EMAIL"]boolValue],
-                           @"IOS",
-                           0,
-                           nil];
-    
-    NSLog(@"user_info %@",user_info);
-    NSData *postData = [user_info dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/addUser.php?",baseDomain]]
-                                                           cachePolicy:NSURLCacheStorageNotAllowed
-                                                       timeoutInterval:60.0];
-    NSLog(@"request %@",[request URL]);
-    [request setHTTPMethod:@"POST"];
-    //[request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    //[request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPBody:postData];
-    URLConnection *conn = [[URLConnection alloc]init];
-    conn.tag = @"sendFriendData";
-    [conn setDelegate:self];
-    [conn initWithRequest:request];
-     */
-}
-/*
-- (void)processSuccessful:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
-{
-    NSLog(@"data %@",[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
-	if(success)
-	{
-        printf("Friend Data sent to server");
-        [[self delegate] friendDataLoaded:YES withTag:tag andData:data];
-    }
-}
- */
+  }
 -(void)readFriendsData{
 	NSManagedObjectContext *context = [self managedObjectContext];    
 	NSEntityDescription *friendEnity = [NSEntityDescription entityForName:@"Friends" inManagedObjectContext:context];

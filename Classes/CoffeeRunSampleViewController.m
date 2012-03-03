@@ -9,10 +9,8 @@
 #import "CoffeeRunSampleViewController.h"
 #import "MapViewController.h"
 #import "ViewCurrentOrdersTableView.h"
-#import "ItemsViewController.h"
 #import "Utils.h"
 #import <MapKit/MapKit.h>
-#import "Constants.h"
 #import "JSON.h"
 #import "Order.h"
 
@@ -62,98 +60,20 @@
 -(IBAction)viewOrder:(id)sender
 {
     
-	
-    //Only the person doing the dash sees View Order. The other people see PLace Order and then Edit Order on the order's they placed.
-    //The person doing the dash cant edit because they can put in their own order
-	printf("View Order");
-	if([friends checkIfContactAdded])	{
-		NSLog(@"view_order_btn.titleLabel.text %@",view_order_btn.titleLabel.text);
-		
-		Order *order = [Order sharedOrder];		
-		if([order currentOrder] != NULL)
-		{
-			if([view_order_btn.titleLabel.text isEqualToString:	PLACE_ORDER])
-			{
-				ItemsViewController *currentRun = [[ItemsViewController alloc]initWithNibName:@"ItemsViewController" bundle:nil];
-				//currentRun.run_data = run_dict;
-				currentRun.managedObjectContext = self.managedObjectContext;
-				[self.navigationController pushViewController:currentRun animated:YES];
-				[currentRun release];
-			}
-			else if([view_order_btn.titleLabel.text isEqualToString:VIEW_ORDER])
-			{
-				
-				ViewCurrentOrdersTableView *currentOrdersView = [[ViewCurrentOrdersTableView alloc]initWithNibName:nil bundle:nil];
-				[self.navigationController pushViewController:currentOrdersView animated:YES];
-				[currentOrdersView release];
-				
-			}
-			else if([view_order_btn.titleLabel.text isEqualToString:EDIT_ORDER])
-			{
-				printf("Edit the Drink Order");
-				ViewCurrentOrdersTableView *currentOrdersView = [[ViewCurrentOrdersTableView alloc]initWithNibName:nil bundle:nil];
-				[self.navigationController pushViewController:currentOrdersView animated:YES];
-				[currentOrdersView release];
-			}
-		}
-		else {
-			[Utils showAlert:@"No Orders available" withMessage:nil inView:self.view];
-		}
-
-	}
-	else {
-		[Utils showAlert:@"No Contact Added" withMessage:@"Please add your contact information to get started with using Java Dash" inView:self.view];
-		[self getContactInfo];
-	}
-
 }
 
 
 -(IBAction)viewInfo:(id)sender
 {
-	printf("view Info");
-	
-	InfoViewController *info = [[InfoViewController alloc]initWithNibName:@"InfoViewController" bundle:nil];
-	info.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-	UINavigationController * navigation = [[UINavigationController alloc]initWithRootViewController:info];
-
-    [self.navigationController presentModalViewController:navigation animated:YES];
-	[info release];
-	[navigation release];
-
 }
 
 -(void)getContactInfo
 {
-	if(![friends checkIfContactAdded])	
-	{
-		NSLog(@"Show Address Book");
-	}
 
 }
 -(void)checkForOrders
 {
-	if([friends checkIfContactAdded])
-	{
-		//every time we go to this screen, we need to know if an order has been sent,
-		//If so, change the Label
-		int ts = [[NSDate date] timeIntervalSince1970];
-            NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&ts=%i",baseDomain,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],ts]]
-                                                               cachePolicy:NSURLCacheStorageNotAllowed
-                                                           timeoutInterval:60.0];
-		NSLog(@"url %@", [request URL]);
-		URLConnection *conn = [[URLConnection alloc]init];
-		conn.tag =@"GetOrders";
-		[conn setDelegate:self];
-		[conn initWithRequest:request];
-		
-		
-	}
-	else {
-		[Utils showAlert:@"No Contact Added" withMessage:@"Please add your contact information to get started with using Java Dash" inView:self.view];
-		[self getContactInfo];
-	}
-
+	
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -250,21 +170,7 @@
 
 -(void)cancelCurrentRun
 {
-	Order *order = [Order sharedOrder];
-	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/completerun.php?deviceid=%@&run_id=%@",
-																							 baseDomain,
-																							 [[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"]
-																							 ,[[[order currentOrder] objectForKey:@"run"]objectForKey:@"id"]]]
-														   cachePolicy:NSURLCacheStorageNotAllowed
-													   timeoutInterval:60.0];
 	
-	URLConnection *conn = [[URLConnection alloc]init];
-	
-	NSLog(@"url %@", [request URL]);
-	conn.tag =@"cancelRun";
-	[conn setDelegate:self];
-	[conn initWithRequest:request];
-
 }
 
 

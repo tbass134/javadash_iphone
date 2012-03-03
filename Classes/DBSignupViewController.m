@@ -8,11 +8,10 @@
 
 #import "DBSignupViewController.h"
 #import "Utils.h"
-#import "Constants.h"
-#import "URLConnection.h"
 #import "CoffeeRunSampleAppDelegate.h"
 #import "UIImageView+WebCache.h"
 #import "DataService.h"
+#import "HelpViewControllerViewController.h"
 #define UIAppDelegate \
 ((CoffeeRunSampleAppDelegate *)[UIApplication sharedApplication].delegate)
 
@@ -26,7 +25,7 @@
 
 
 @implementation DBSignupViewController
-
+@synthesize help_view;
 @synthesize nameTextField = nameTextField_;
 @synthesize lastNameTextField = lastNameTextField_;
 @synthesize emailTextField = emailTextField_;
@@ -144,6 +143,12 @@
         self.navigationItem.rightBarButtonItem = nil;
         contact_back_btn.hidden = NO;
         [self.view addSubview:page1]; 
+        
+        HelpViewControllerViewController *helpView = [[HelpViewControllerViewController alloc]initWithNibName:@"HelpViewControllerViewController" bundle:nil];
+        helpView.view.frame = help_view.frame;
+        [help_view addSubview:helpView.view];
+        
+        
     }
  /*   
     self.view = contact;
@@ -310,32 +315,6 @@
     BOOL enable_push =[[[NSUserDefaults standardUserDefaults] valueForKey:@"enable_push_notifications"]boolValue];
    
     NSString *userName = [NSString stringWithFormat:@"%@ %@",self.nameTextField.text,self.lastNameTextField.text];
-   /*
-    NSString *user_info = [NSString stringWithFormat:@"name=%@&deviceid=%@&email=%@&enable_email_use=%d&platform=%@&fbid=%@&enable_push=%d",
-                           [Utils urlencode:userName],
-                           [[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],
-                           self.emailTextField.text,
-                           self.enableEmail.on,
-                           @"IOS",
-                           fbid,
-                           enable_push,
-                           nil];
-    
-    NSLog(@"user_info %@",user_info);
-    NSData *postData = [user_info dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/addUser.php",baseDomain]]
-                                                           cachePolicy:NSURLCacheStorageNotAllowed
-                                                       timeoutInterval:60.0];
-    NSLog(@"request %@",[request URL]);
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:postData];
-    URLConnection *conn = [[URLConnection alloc]init];
-    conn.tag = @"skipContact";
-    [conn setDelegate:self];
-    [conn initWithRequest:request];
-    //[self resignKeyboard:nil];   
-    */
-    
     BOOL userWasAdded = [[DataService sharedDataService]addUser:
                                                         userName 
                                                        deviceID:[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"]

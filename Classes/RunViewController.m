@@ -10,10 +10,8 @@
 
 
 #import "Utils.h"
-#import "Constants.h"
 #import "JSON.h"
 #import "Order.h"
-#import "URLConnection.h"
 #import "DashSummary.h"
 
 #import "Order.h"
@@ -21,7 +19,6 @@
 #import "AsyncImageView2.h"
 #import "TapkuLibrary.h"
 
-#import "Constants.h"
 #import "TapkuLibrary.h"
 
 #import "MapViewController.h"
@@ -277,8 +274,6 @@
                 v.backgroundColor = [UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1];
                 cell1.selectedBackgroundView = v;
                 
-                cell1.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:253.0f/255.0f blue:220.0f/255.0f alpha:1];
-                
 				NSString *name = [[[user_order objectForKey:@"orders"]objectAtIndex:i]objectForKey:@"name"];
 				cell1.label.text = [NSString stringWithFormat:@"Order for: %@",name];
 				
@@ -500,7 +495,6 @@
     UIView *location_view = [[[UIView alloc] init] autorelease];
     location_view.backgroundColor = [UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1];
     location_cell.selectedBackgroundView = location_view;
-    location_cell.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:253.0f/255.0f blue:220.0f/255.0f alpha:1];
     
     
 	location_cell.tag = LOCATION_TAG;
@@ -527,7 +521,6 @@
     UIView *time_view = [[[UIView alloc] init] autorelease];
     time_view.backgroundColor = [UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1];
     time_cell.selectedBackgroundView = time_view;
-    time_cell.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:253.0f/255.0f blue:220.0f/255.0f alpha:1];
 
 	time_cell.tag = TIME_TAG;
 	time_cell.label.text = TIME_TEXT;
@@ -553,7 +546,6 @@
     UIView *attendees_view = [[[UIView alloc] init] autorelease];
     attendees_view.backgroundColor = [UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1];
     attendees_cell.selectedBackgroundView = attendees_view;
-    attendees_cell.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:253/255.0f blue:220/255.0f alpha:1];
 
 	attendees_cell.tag = PEOPLE_TAG;
 	attendees_cell.label.text = PEOPLE_TEXT;

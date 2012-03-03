@@ -9,7 +9,6 @@
 #import "FriendsList.h"
 //#import "CoffeeOrderTableViewController.h"
 #import "NameListViewController.h"
-#import "Constants.h"
 #import "Utils.h"
 
 #import "CoffeeRunSampleAppDelegate.h"

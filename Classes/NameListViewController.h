@@ -21,10 +21,12 @@
 	NSString *orderType;
 	CoffeeRunSampleAppDelegate *appDelegate;
     NSMutableArray *sections;
+     NSMutableArray *itemsInSection;
     
     NSDictionary *plistDictionary;
 	NSDictionary *coffee_dict;
     NSString *drink_type;
+    NSMutableDictionary *items_dict;
 }
 @property(nonatomic,retain)NSString *companyName; 
 @property(nonatomic,retain)NSString *orderType;

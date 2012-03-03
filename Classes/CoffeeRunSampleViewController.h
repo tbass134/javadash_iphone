@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 #import "CoffeeRunSampleAppDelegate.h"
-#import "URLConnection.h"
 #import "FriendsInfo.h"
 
 @interface CoffeeRunSampleViewController : UIViewController<NSFetchedResultsControllerDelegate> {

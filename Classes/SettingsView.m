@@ -12,10 +12,9 @@
 #import "CoffeeRunSampleAppDelegate.h"
 #import "DBSignupViewController.h"
 #import "DataService.h"
+#import "HelpViewControllerViewController.h"
 
 
-#import "URLConnection.h"
-#import "Constants.h"
 #import "MKStoreManager.h"
 #import "FacebookViewController.h"
 #import "FlurryAnalytics.h"
@@ -46,6 +45,8 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.leftBarButtonItem= [[UIBarButtonItem alloc]initWithTitle:@"Help" style:UIBarButtonItemStylePlain target:self action:@selector(goHelp:)];
 
 	friends = [[FriendsInfo alloc]init];
 	friends.managedObjectContext = self.managedObjectContext;	
@@ -86,8 +87,17 @@
     fb.managedObjectContext = self.managedObjectContext;	
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:fb];
     [self presentModalViewController:nav animated:YES];
+    [nav release];
 }
-
+-(IBAction)goHelp:(id)sender
+{
+    HelpViewControllerViewController *helpView = [[HelpViewControllerViewController alloc]initWithNibName:@"HelpViewControllerViewController" bundle:nil];
+    helpView.view.backgroundColor = [UIColor whiteColor];
+    helpView.bg.hidden = NO;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:helpView];
+    [self.navigationController presentModalViewController:nav animated:YES];
+    [nav release];
+}
 #pragma mark Remove Ads
 #pragma mark
 -(IBAction)removeAds:(id)sender
@@ -112,49 +122,11 @@
             [alert release];
             [self appPurchased];
         }
-        /*
-        int ts = [[NSDate date] timeIntervalSince1970];
-        NSString *userInfo = [NSString stringWithFormat:@"deviceid=%@&ts=%i",
-                                [[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],ts];
-        
-        NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/userPurchase.php?%@",baseDomain,userInfo]]
-                                                               cachePolicy:NSURLCacheStorageNotAllowed
-                                                           timeoutInterval:60.0];
-        
-        URLConnection *conn = [[URLConnection alloc]init];
-        conn.tag = @"purchaseApp";
-        [conn setDelegate:self];
-        [conn initWithRequest:request];
-         */
-        
-        
     } 
-                                   onCancelled:^ { 
-                                       NSLog(@"User Cancelled Transaction"); 
-                                   }];
+    onCancelled:^ { 
+    NSLog(@"User Cancelled Transaction"); 
+    }];
 
-}
-- (void)processSuccessful:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
-{
-	if(!success)
-	{
-		[Utils showAlert:@"Could not save data to server" withMessage:@"Please try again" inView:self.view];
-		return;
-	}
-    /*
-    if([tag isEqualToString:@"purchaseApp"])
-    {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Purchase Sucessful" message:@"Thanks for your purchase!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-        [alert show];
-        [alert release];
-        NSString * json_str  = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        if([json_str isEqualToString:@"1"])
-        {
-            printf("Success");
-            [self appPurchased];
-        }
-    }
-     */
 }
 -(void)appPurchased
 {

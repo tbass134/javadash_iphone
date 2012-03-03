@@ -12,7 +12,6 @@
 #import "RunViewController.h"
 #import "OrdersViewController.h"
 #import "Utils.h"
-#import "Constants.h"
 #import "Appirater.h"
 #import "FlurryAnalytics.h"
 
@@ -156,8 +155,12 @@ static NSString* kAppId = @"189714094427611";
 	localNavController.navigationBar.barStyle = UIBarStyleBlackOpaque;
     
     UIImage *runs_icon = [UIImage imageNamed:@"runs_icon.png"];
-    //localNavController.tabBarItem.image = [UIImage imageNamed:@"runs_icon.png"];
-    [localNavController.tabBarItem setFinishedSelectedImage:runs_icon withFinishedUnselectedImage:runs_icon];
+   
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] > 4.9)
+        [localNavController.tabBarItem setFinishedSelectedImage:runs_icon withFinishedUnselectedImage:runs_icon];
+    else
+         localNavController.tabBarItem.image = runs_icon;
     
 	[localViewControllersArray addObject:localNavController];
 	[localNavController release]; // Retained by above array
@@ -171,8 +174,10 @@ static NSString* kAppId = @"189714094427611";
 	localNavController.navigationBar.barStyle = UIBarStyleBlackOpaque;
     
     UIImage *orders_icon = [UIImage imageNamed:@"orders_icon.png"];
-    [localNavController.tabBarItem setFinishedSelectedImage:orders_icon withFinishedUnselectedImage:orders_icon];
-
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] > 4.9)
+        [localNavController.tabBarItem setFinishedSelectedImage:orders_icon withFinishedUnselectedImage:orders_icon];
+    else
+        localNavController.tabBarItem.image = orders_icon;
 	[localViewControllersArray addObject:localNavController];
 	[localNavController release]; // Retained by above array
 	[orders_view release];
@@ -184,8 +189,10 @@ static NSString* kAppId = @"189714094427611";
 	localNavController.navigationBar.barStyle = UIBarStyleBlackOpaque;
     
     UIImage *settings_icon = [UIImage imageNamed:@"settings_icon.png"];
-    [localNavController.tabBarItem setFinishedSelectedImage:settings_icon withFinishedUnselectedImage:settings_icon];
-    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] > 4.9)
+        [localNavController.tabBarItem setFinishedSelectedImage:settings_icon withFinishedUnselectedImage:settings_icon];
+    else
+        localNavController.tabBarItem.image = settings_icon;
 	
 	[localViewControllersArray addObject:localNavController];
 	[localNavController release]; // Retained by above array
@@ -223,55 +230,57 @@ static NSString* kAppId = @"189714094427611";
 
 - (void)customizeAppearance
 {
-    /*
+    
     // not supported on iOS4    
     UITabBar *tabBar = [myTabBarController tabBar];
-    if ([tabBar respondsToSelector:@selector(setBackgroundImage:)])
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] > 4.9)
     {
-        // set for all
-        [[UITabBar appearance] setBackgroundImage:[UIImage imageNamed:@"bottomBar.png"]];
+        UIImage *navBarImage = [UIImage imageNamed:@"menu-bar.png"];
+        
+        [[UINavigationBar appearance] setBackgroundImage:navBarImage 
+                                           forBarMetrics:UIBarMetricsDefault];
+        
+        
+        UIImage *barButton = [UIImage imageNamed:@"menu-bar-button.png"];
+        
+        [[UIBarButtonItem appearance] setBackgroundImage:barButton forState:UIControlStateNormal 
+                                              barMetrics:UIBarMetricsDefault];
+        
+        UIImage *backButton = [UIImage imageNamed:@"Back-no-text.png"];
+        
+        [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButton forState:UIControlStateNormal 
+                                                        barMetrics:UIBarMetricsDefault];
+        
+        [[UIBarButtonItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:1.0], UITextAttributeTextColor, [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0], UITextAttributeTextShadowColor, [NSValue valueWithUIOffset:UIOffsetMake(0, 0)], UITextAttributeTextShadowOffset, nil] forState:UIControlStateNormal];
+        
+        UIImage* tabBarBackground = [UIImage imageNamed:@"tab-bar.png"];
+        [[UITabBar appearance] setBackgroundImage:tabBarBackground];
+        
+        
+        
+         UIImage *minImage = [UIImage imageNamed:@"slider-background.png"];
+         UIImage *maxImage = [UIImage imageNamed:@"slider-fill.png"];
+         UIImage *thumbImage = [UIImage imageNamed:@"slider-button.png"];
+         
+         [[UISlider appearance] setMaximumTrackImage:maxImage 
+         forState:UIControlStateNormal];
+         [[UISlider appearance] setMinimumTrackImage:minImage 
+         forState:UIControlStateNormal];
+         [[UISlider appearance] setThumbImage:thumbImage 
+         forState:UIControlStateNormal];
+         
+
     }
     else
     {
+        printf("IOS4 code");
+        UIImage *navBarImage = [UIImage imageNamed:@"menu-bar.png"];
         // ios 4 code here
-        [tabBar setBackgroundColor:[UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1]];
-    }*/
+    }
+     
     
-    UIImage *navBarImage = [UIImage imageNamed:@"menu-bar.png"];
-    
-    [[UINavigationBar appearance] setBackgroundImage:navBarImage 
-                                       forBarMetrics:UIBarMetricsDefault];
-    
-    
-    UIImage *barButton = [UIImage imageNamed:@"menu-bar-button.png"];
-    
-    [[UIBarButtonItem appearance] setBackgroundImage:barButton forState:UIControlStateNormal 
-                                          barMetrics:UIBarMetricsDefault];
-    
-    UIImage *backButton = [UIImage imageNamed:@"Back-no-text.png"];
-    
-    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButton forState:UIControlStateNormal 
-                                                    barMetrics:UIBarMetricsDefault];
-    
-    [[UIBarButtonItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:1.0], UITextAttributeTextColor, [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0], UITextAttributeTextShadowColor, [NSValue valueWithUIOffset:UIOffsetMake(0, 0)], UITextAttributeTextShadowOffset, nil] forState:UIControlStateNormal];
-    
-    UIImage* tabBarBackground = [UIImage imageNamed:@"tab-bar.png"];
-    [[UITabBar appearance] setBackgroundImage:tabBarBackground];
-    
-    
-    /*
-    UIImage *minImage = [UIImage imageNamed:@"slider-background.png"];
-    UIImage *maxImage = [UIImage imageNamed:@"slider-fill.png"];
-    UIImage *thumbImage = [UIImage imageNamed:@"slider-button.png"];
-    
-    [[UISlider appearance] setMaximumTrackImage:maxImage 
-                                       forState:UIControlStateNormal];
-    [[UISlider appearance] setMinimumTrackImage:minImage 
-                                       forState:UIControlStateNormal];
-    [[UISlider appearance] setThumbImage:thumbImage 
-                                forState:UIControlStateNormal];
-     */
-}
+
+   }
 -(void)checkForAppPurchase
 {
     if([[[NSUserDefaults standardUserDefaults]valueForKey:@"didPurchaseApp"]boolValue])
@@ -735,6 +744,18 @@ static NSString* kAppId = @"189714094427611";
     	
     [super dealloc];
 }
+@end
 
+@implementation UITabBar (UITabBarCategory)
+- (void)drawRect:(CGRect)rect {
+    UIImage *img = [UIImage imageNamed:@"tab-bar.png"];
+    [img drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+}
+@end
 
+@implementation UINavigationBar (UINavigationBarCategory)
+- (void)drawRect:(CGRect)rect {
+    UIImage *img = [UIImage imageNamed:@"menu-bar.png"];
+    [img drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+}
 @end

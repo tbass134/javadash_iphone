@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "URLConnection.h"
 
 @interface EditOrderView : UIViewController<UIScrollViewDelegate> {
 
@@ -16,7 +15,6 @@
 	NSMutableDictionary *order_dict_mutable;
 	NSString *selectedElement;
 	int selectedIndex;
-	URLConnection *conn;
     UITextView *options_txt;
 }
 @property(nonatomic,retain)NSDictionary *order_dict;

@@ -8,15 +8,12 @@
 
 #import "OrdersViewController.h"
 #import "Utils.h"
-#import "Constants.h"
 #import "JSON.h"
 #import "Order.h"
-#import "URLConnection.h"
 #import "DashSummary.h"
 
 #import "EditOrderView.h"
 #import "TapkuLibrary.h"
-#import "URLConnection.h"
 #import "DrinkOrders.h"
 #import "SavedDrinksList.h"
 #import "DataService.h"
@@ -94,8 +91,7 @@
     }
     else
     {
-        if(self.navigationController.tabBarController.selectedIndex ==CURRENT_TAB_INDEX)
-            [self showNoOrdersView:YES withTitle:@"Could not connect to server" andMessage:nil];
+        [self showNoOrdersView:YES withTitle:@"Could not connect to server" andMessage:nil];
     }
     
 }
@@ -262,7 +258,6 @@
         UIView *v = [[[UIView alloc] init] autorelease];
         v.backgroundColor = [UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1];
         cell1.selectedBackgroundView = v;
-        cell1.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:253.0f/255.0f blue:220.0f/255.0f alpha:1];
 		cell1.label.text = @"Runner";
         cell1.userInteractionEnabled = NO;
 		cell1.textView.text = [user_order objectForKey:@"user_name"];
@@ -271,7 +266,6 @@
 		
 		TKLabelTextViewCell *cell2 = [[TKLabelTextViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier];
         cell2.selectedBackgroundView = v;
-        cell2.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:253.0f/255.0f blue:220.0f/255.0f alpha:1];
 		cell2.label.text = @"Location";
         // cell2.userInteractionEnabled = NO;
 		
@@ -281,7 +275,6 @@
 		
 		TKLabelTextViewCell *cell3 = [[TKLabelTextViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier];
         cell3.selectedBackgroundView = v;
-        cell3.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:253.0f/255.0f blue:220.0f/255.0f alpha:1];
 		cell3.label.text = @"Time";
 		cell3.textView.text = [user_order objectForKey:@"timestamp"];
 		
@@ -324,7 +317,6 @@
             UIView *v = [[[UIView alloc] init] autorelease];
             v.backgroundColor = [UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1];
             cell1.selectedBackgroundView = v;
-            cell1.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:253.0f/255.0f blue:220.0f/255.0f alpha:1];
             
 			NSString *name = [[[user_order objectForKey:@"orders"]objectAtIndex:i]objectForKey:@"name"];
 			cell1.label.text = [NSString stringWithFormat:@"Order for: %@",name];
@@ -445,8 +437,7 @@
         UIView *v = [[[UIView alloc] init] autorelease];
         v.backgroundColor = [UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1];
         cell.selectedBackgroundView = v;
-        cell.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:253.0f/255.0f blue:220.0f/255.0f alpha:1];
-        
+
         NSString *text =  cell.textView.text;
         
         CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
@@ -636,104 +627,8 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
 
         }
     }
-    /*
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-
-    printf("send Order");
-	Order *order = [Order sharedOrder];
-	//This is the data that got returned from the server when we first went to view the run.. Called  getOrder.php from CurrentRunViewController
-	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/placeorder.php",baseDomain]]
-														   cachePolicy:NSURLCacheStorageNotAllowed
-													   timeoutInterval:60.0];
-	
-	[request setHTTPMethod:@"POST"];
-	
-	SBJSON *parser = [[SBJSON alloc] init];
-	NSMutableString* theString = [NSMutableString string];
-	
-	DrinkOrders *drink_orders = [DrinkOrders instance];
-	NSMutableArray *drink_orders_array  = [drink_orders getArray];
-   
     
-	for(int i=0;i<[drink_orders_array count];i++)
-	{
-		NSDictionary *drink_dict = [drink_orders_array objectAtIndex:i];    
-		NSString *drink_str = [parser stringWithObject:drink_dict];
-		if([drink_orders_array count] >1)
-			[theString appendString:[NSString stringWithFormat:@"json=%@",drink_str]];
-		else
-			[theString appendString:drink_str];
-        
-	}
-	[parser release];
-	
-	if(theString != NULL && ![theString isEqualToString:@""])
-	{
-		NSString *post_str = [NSString stringWithFormat:@"device_id=%@&order=%@&run_id=%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],[Utils urlencode:theString],[[[order currentOrder]objectForKey:@"run"]objectForKey:@"id"]];
-        #ifdef DEBUG
-                NSLog(@"request %@",[request URL]);
-                NSLog(@"post_str %@",post_str);
-        #endif
-		[request setHTTPBody:[post_str dataUsingEncoding:NSUTF8StringEncoding]]; 
-		NSError *requestError;
-        NSURLResponse *urlResponse = nil;
-        NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-        if (response == nil) {
-            if (requestError != nil) {
-                [Utils showAlert:@"Could not connect to server" withMessage:@"Please try again" inView:self.view];
-            }
-        }
-        else
-        {
-            NSString * json_str = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-            SBJSON *parser = [[SBJSON alloc] init];
-            NSDictionary *response = [parser objectWithString:json_str error:nil];
-            [parser release];
-            [json_str release]; 
-            
-            if([response objectForKey:@"error"])
-            {
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Run Ended" message:@"You cannot add an order to a run that has already ended" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-                [alert show];
-                [alert release];
-                [[DrinkOrders instance] clearArray];
-                send_order.enabled = NO;
-                
-            }
-            else
-                [self performSelectorOnMainThread:@selector(orderAdded)
-                                   withObject:nil
-                                waitUntilDone:NO];
-        }
-        
-
-	}
-    else
-    {
-        printf("No Orders Added");
-    }
-    [pool release];
-     */
 }
-/*
--(void)orderAdded
-{
-    [FlurryAnalytics logEvent:@"Order Added"];
-    //if(self.navigationController.tabBarController.selectedIndex ==CURRENT_TAB_INDEX)
-    //    [Utils showAlert:@"Order Added" withMessage:nil inView:self.view];
-    
-    self.navigationItem.leftBarButtonItem = nil;
-    DrinkOrders *drink_orders = [DrinkOrders instance];
-    [drink_orders clearArray];
-    
-    NSMutableArray *drink_orders_array  = [drink_orders getArray];
-    #ifdef DEBUG
-    NSLog(@"drink_orders_array %@",drink_orders_array);
-    #endif  
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
-}
- */
-
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	if(buttonIndex == 1) {
 		

@@ -328,7 +328,8 @@ static DataService* sharedDataService = nil;
     self = [super init];
     if (self) {
         // Initialization code here.
-        urlPrefix = [@"http://dev.javadash.com/JavaDash/php/" retain];
+        //urlPrefix = [@"http://dev.javadash.com/JavaDash/php/" retain];
+        urlPrefix = [@"http://javadash.com/JavaDash/php" retain];
     }
     
     return self;
