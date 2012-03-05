@@ -105,7 +105,6 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
-    printf("viewDidLoad\n");
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(getUserInfo) 
                                                  name:@"getUserInfo"
@@ -128,7 +127,6 @@
     if(gotoContactInfo)
         cancel_btn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(goBack)];
 
-    NSLog(@"gotoContactInfo %d",gotoContactInfo);
         
    if(gotoContactInfo)
    {
@@ -231,7 +229,6 @@
     
      if([[NSUserDefaults standardUserDefaults]valueForKey:@"IMAGE"] !=NULL)
      {
-         printf("Has image");
          NSData *imageData =[[NSUserDefaults standardUserDefaults]valueForKey:@"IMAGE"];
          img.image = [UIImage imageWithData:imageData];
          //self.photo = [[UIImage alloc] initWithData:imageData];
@@ -243,7 +240,6 @@
 }
 -(void)viewDidAppear:(BOOL)animated
 {
-    printf("viewDidAppear\n");
     if( (self.nameTextField.text != NULL && ![self.nameTextField.text isEqualToString:@""]) &&
        (self.lastNameTextField.text != NULL && ![self.lastNameTextField.text isEqualToString:@""]))
         signUp_btn.enabled = YES;
@@ -257,7 +253,6 @@
 }
 -(void)viewDidDisappear:(BOOL)animated
 {
-    printf("viewDidDisappear");
     [[NSNotificationCenter defaultCenter] removeObserver:@"getUserInfo"];
     [[NSNotificationCenter defaultCenter] removeObserver:@"facebookDidLogin"];
     [[NSNotificationCenter defaultCenter] removeObserver:@"fbDidNotLogin"];
@@ -304,7 +299,6 @@
 }
 -(IBAction)skipContact:(id)sender
 {
-    printf("skip"); 
     self.nameTextField.text = @"JavaDash";
     self.lastNameTextField.text = @"User";
     
@@ -338,7 +332,6 @@
 }
 -(IBAction)goBack3:(id)sender
 {
-    printf("goBack3");
     [self performSelector:@selector(removeStep3) withObject:nil afterDelay:kAnimationDuration];
 	
 	CGRect tempOrigin = page3.frame;
@@ -435,13 +428,11 @@
 -(void)facebookDidLogin
 {
     [HUD hide:YES];
-    printf("facebookDidLogin");
     UIAppDelegate.fb_tag = @"me";
     [UIAppDelegate.facebook requestWithGraphPath:@"me" andDelegate:UIAppDelegate];
 }
 -(void)fbDidNotLogin
 {
-    printf("fbDidNotLogin");
     [HUD hide:YES];
 }
 -(void)getUserInfo
@@ -466,32 +457,12 @@
     self.enableEmail.on = YES;
     self.enableEmail.enabled = YES;
     
-   /* 
-	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:picture_url
-														   cachePolicy:NSURLCacheStorageNotAllowed
-													   timeoutInterval:60.0];
-    
-    NSLog(@"request %@", [request URL]);
-	URLConnection *conn = [[URLConnection alloc]init];
-	conn.tag =@"getFBImage";
-	[conn setDelegate:self];
-	[conn initWithRequest:request];
-    */
-    
-    //This works, need to put into background thread
-    
-    
-    //CGSize sz = CGSizeMake(80, 80);
-    //UIImage *smallImage = [Utils imageWithImage:photo scaledToSize:sz];
-    //image.image = smallImage;
     NSURL *picture_url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture",[UIAppDelegate.fb_me objectForKey:@"id"]]];
     
-    NSLog(@"picture_url %@",picture_url);
     [img setImageWithURL:picture_url placeholderImage:[UIImage imageNamed:@"avatar.png"]];
        
     fbid= [[UIAppDelegate.fb_me objectForKey:@"id"]retain];
      [[NSUserDefaults standardUserDefaults]setValue:@"FB_ID" forKey:fbid];
-    NSLog(@"fbid %@",fbid);
     
     //[self signup:nil];
 }
@@ -529,7 +500,6 @@
     {
         
 		[[NSUserDefaults standardUserDefaults] setValue:self.emailTextField.text forKey:@"EMAIL"];
-        NSLog(@"self.enableEmail.on %d",self.enableEmail.on);
         
         [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:self.enableEmail.on] forKey:@"ENABLE_EMAIL"];
 	}
@@ -541,21 +511,32 @@
 		[[NSUserDefaults standardUserDefaults] setObject:image_data forKey:@"IMAGE"];
 	}
     
+   
+    if(userAdded)
+        return;
+    
+    HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.navigationController.view addSubview:HUD];
+    HUD.delegate = self;
+    [HUD show:YES];
+    [self doSignUp];
+   
+}
+-(void)doSignUp
+{
+    [HUD hide:YES];
     //Save the setting for Enable Push notifcations
     BOOL enable_push =[[[NSUserDefaults standardUserDefaults] valueForKey:@"enable_push_notifications"]boolValue];
     
 
-    if(userAdded)
-        return;
-    
     NSString *userName = [NSString stringWithFormat:@"%@ %@",self.nameTextField.text,self.lastNameTextField.text];
     BOOL userWasAdded = [[DataService sharedDataService]addUser:userName
-                                                                deviceID:[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"]
-                                                                email:self.emailTextField.text
-                                                                emailEnabled:self.enableEmail.on
-                                                                facebookID:fbid
-                                                                enablePush:enable_push
-                                                                ];
+                                                       deviceID:[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"]
+                                                          email:self.emailTextField.text
+                                                   emailEnabled:self.enableEmail.on
+                                                     facebookID:fbid
+                                                     enablePush:enable_push
+                         ];
     
     if(userWasAdded)
     {
@@ -568,43 +549,18 @@
         {
             [[self delegate] userDataAdded];
         }
-
+        
     }
     
-    /*
-    NSString *user_info = [NSString stringWithFormat:@"name=%@&deviceid=%@&email=%@&enable_email_use=%d&platform=%@&fbid=%@&enable_push=%d",
-                           [Utils urlencode:userName],
-                           [[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],
-                           self.emailTextField.text,
-                           self.enableEmail.on,
-                           @"IOS",
-                           fbid,
-                           enable_push,
-                           nil];
-    
-    NSLog(@"user_info %@",user_info);
-    NSData *postData = [user_info dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/addUser.php?",baseDomain]]
-                                                           cachePolicy:NSURLCacheStorageNotAllowed
-                                                       timeoutInterval:60.0];
-    NSLog(@"request %@",[request URL]);
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:postData];
-    URLConnection *conn = [[URLConnection alloc]init];
-    conn.tag = @"sendFriendData";
-    [conn setDelegate:self];
-    [conn initWithRequest:request];
-    [self resignKeyboard:nil];
-     */
     userAdded = YES;
 }
+
 -(void)goBack
 {
     [self.navigationController dismissModalViewControllerAnimated:YES];
 }
 - (void)processSuccessful:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
 {
-    NSLog(@"data %@",[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
     
 
     if([tag isEqualToString:@"sendFriendData"])
@@ -618,7 +574,6 @@
     }
     else
     {
-        printf("user added");
         
         if(gotoContactInfo)
         {

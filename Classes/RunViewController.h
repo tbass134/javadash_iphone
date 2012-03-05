@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import "AsyncImageView2.h"
 #import "FriendsInfo.h"
 #import "MBProgressHUD.h"
 @interface RunViewController : UIViewController<NSFetchedResultsControllerDelegate,UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,MBProgressHUDDelegate> {
@@ -26,7 +25,7 @@
     
     //View Run
     IBOutlet UIView *view_run_view;
-	IBOutlet AsyncImageView2 *yelp_img;
+	IBOutlet UIImageView *yelp_img;
 	IBOutlet UITextView *run_info_txt;
 	IBOutlet UITextView *run_time_txt;
 	IBOutlet UITableView *view_run_table;
@@ -55,7 +54,7 @@
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
 //View Run
-@property(nonatomic,retain)IBOutlet AsyncImageView2 *yelp_img;
+@property(nonatomic,retain)IBOutlet UIImageView *yelp_img;
 @property(nonatomic,retain)IBOutlet UITextView *run_info_txt;
 @property(nonatomic,retain)IBOutlet UITextView *run_time_txt;
 @property(nonatomic,retain)IBOutlet UITableView *table_view;

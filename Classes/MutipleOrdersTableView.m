@@ -58,7 +58,7 @@
 		{
             TKLabelTextViewCell *cell1 = [[TKLabelTextViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier];
             NSDictionary *current_dict = [drink_dict objectAtIndex:i];
-            NSLog(@"current_dict %@",current_dict);
+            //NSLog(@"current_dict %@",current_dict);
             NSArray *keys = [current_dict allKeys];
             if([keys count]>0)
             {

@@ -69,12 +69,9 @@
 		452DB9E91465DC0A0030F7C9 /* MutipleOrdersTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 452DB9E71465DC080030F7C9 /* MutipleOrdersTableView.xib */; };
 		452EA99D14FE783F00C8FF71 /* HelpViewControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 452EA99B14FE783F00C8FF71 /* HelpViewControllerViewController.m */; };
 		452EA99E14FE783F00C8FF71 /* HelpViewControllerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 452EA99C14FE783F00C8FF71 /* HelpViewControllerViewController.xib */; };
-		453105111482953C005781AF /* CoffeeRunSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4531050F1482953C005781AF /* CoffeeRunSampleViewController.m */; };
-		453105121482953C005781AF /* CoffeeRunSampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 453105101482953C005781AF /* CoffeeRunSampleViewController.xib */; };
 		4531C40E13DB431F00BD246C /* DBSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4531C40813DB431F00BD246C /* DBSignupViewController.m */; };
 		4531C40F13DB431F00BD246C /* DBSignupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4531C40913DB431F00BD246C /* DBSignupViewController.xib */; };
 		453A88DF13DFB7240044DD5E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 453A88DE13DFB7240044DD5E /* CFNetwork.framework */; };
-		454AEA83132AE40E0029C0C1 /* ViewCurrentOrdersTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 454AEA82132AE40E0029C0C1 /* ViewCurrentOrdersTableView.m */; };
 		4553D2FA12C9368100B27375 /* CoffeeLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4553D2F912C9368100B27375 /* CoffeeLocation.m */; };
 		4553D35012C93DF400B27375 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 4553D34512C93DF400B27375 /* NSObject+SBJSON.m */; };
 		4553D35112C93DF400B27375 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 4553D34712C93DF400B27375 /* NSString+SBJSON.m */; };
@@ -178,7 +175,6 @@
 		45B7CAA81459F14C00A1F24B /* UIColor+AdWhirlConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B7CA8E1459F14C00A1F24B /* UIColor+AdWhirlConfig.m */; };
 		45B7D99213FDED470002BAF0 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B7D99113FDED460002BAF0 /* iAd.framework */; };
 		45B8880D13A81B0100C7BD9B /* CoffeeDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B8880C13A81B0100C7BD9B /* CoffeeDetailsView.m */; };
-		45C694A8133C376B00962D33 /* AttendeeOrderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45C694A7133C376B00962D33 /* AttendeeOrderTableViewController.m */; };
 		45CD35B914FEFCC400407139 /* Drink_Selection_View.png in Resources */ = {isa = PBXBuildFile; fileRef = 45CD35B314FEFCC400407139 /* Drink_Selection_View.png */; };
 		45CD35BA14FEFCC400407139 /* Order_Options_View.png in Resources */ = {isa = PBXBuildFile; fileRef = 45CD35B414FEFCC400407139 /* Order_Options_View.png */; };
 		45CD35BB14FEFCC400407139 /* Orders_View.png in Resources */ = {isa = PBXBuildFile; fileRef = 45CD35B514FEFCC400407139 /* Orders_View.png */; };
@@ -194,9 +190,6 @@
 		45E6ACD613A12D73005410B5 /* FriendsInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6ACD513A12D73005410B5 /* FriendsInfo.m */; };
 		45E6ADD113A15F23005410B5 /* RunViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6ADD013A15F23005410B5 /* RunViewController.m */; };
 		45F67C8A139099EF00C1273C /* DashSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F67C89139099EF00C1273C /* DashSummary.m */; };
-		45F67DE61390B42F00C1273C /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F67DE11390B42F00C1273C /* ImageCache.m */; };
-		45F67DE71390B42F00C1273C /* ImageCacheObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F67DE31390B42F00C1273C /* ImageCacheObject.m */; };
-		45F67DE81390B42F00C1273C /* AsyncImageView2.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F67DE51390B42F00C1273C /* AsyncImageView2.m */; };
 		45FBA0A814E87CCC00FA8BFC /* 30x-Gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 45FBA06B14E87CCC00FA8BFC /* 30x-Gear.png */; };
 		45FBA0A914E87CCC00FA8BFC /* 30x-Marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 45FBA06C14E87CCC00FA8BFC /* 30x-Marker.png */; };
 		45FBA0AA14E87CCC00FA8BFC /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 45FBA06D14E87CCC00FA8BFC /* avatar.png */; };
@@ -462,15 +455,10 @@
 		452EA99A14FE783F00C8FF71 /* HelpViewControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelpViewControllerViewController.h; path = Help/HelpViewControllerViewController.h; sourceTree = "<group>"; };
 		452EA99B14FE783F00C8FF71 /* HelpViewControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelpViewControllerViewController.m; path = Help/HelpViewControllerViewController.m; sourceTree = "<group>"; };
 		452EA99C14FE783F00C8FF71 /* HelpViewControllerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HelpViewControllerViewController.xib; path = Help/HelpViewControllerViewController.xib; sourceTree = "<group>"; };
-		4531050E1482953C005781AF /* CoffeeRunSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoffeeRunSampleViewController.h; sourceTree = "<group>"; };
-		4531050F1482953C005781AF /* CoffeeRunSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoffeeRunSampleViewController.m; sourceTree = "<group>"; };
-		453105101482953C005781AF /* CoffeeRunSampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoffeeRunSampleViewController.xib; sourceTree = "<group>"; };
 		4531C40713DB431F00BD246C /* DBSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBSignupViewController.h; sourceTree = "<group>"; };
 		4531C40813DB431F00BD246C /* DBSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBSignupViewController.m; sourceTree = "<group>"; };
 		4531C40913DB431F00BD246C /* DBSignupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBSignupViewController.xib; sourceTree = "<group>"; };
 		453A88DE13DFB7240044DD5E /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		454AEA81132AE40E0029C0C1 /* ViewCurrentOrdersTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewCurrentOrdersTableView.h; sourceTree = "<group>"; };
-		454AEA82132AE40E0029C0C1 /* ViewCurrentOrdersTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewCurrentOrdersTableView.m; sourceTree = "<group>"; };
 		4553D2F812C9368100B27375 /* CoffeeLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoffeeLocation.h; sourceTree = "<group>"; };
 		4553D2F912C9368100B27375 /* CoffeeLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoffeeLocation.m; sourceTree = "<group>"; };
 		4553D34312C93DF400B27375 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
@@ -667,8 +655,6 @@
 		45B7D99113FDED460002BAF0 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		45B8880B13A81B0100C7BD9B /* CoffeeDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoffeeDetailsView.h; sourceTree = "<group>"; };
 		45B8880C13A81B0100C7BD9B /* CoffeeDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoffeeDetailsView.m; sourceTree = "<group>"; };
-		45C694A6133C376B00962D33 /* AttendeeOrderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttendeeOrderTableViewController.h; sourceTree = "<group>"; };
-		45C694A7133C376B00962D33 /* AttendeeOrderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttendeeOrderTableViewController.m; sourceTree = "<group>"; };
 		45CAC7C4144E1DB00053BFE3 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
 		45CD35B314FEFCC400407139 /* Drink_Selection_View.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Drink_Selection_View.png; sourceTree = "<group>"; };
 		45CD35B414FEFCC400407139 /* Order_Options_View.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Order_Options_View.png; sourceTree = "<group>"; };
@@ -693,12 +679,6 @@
 		45E6ADD013A15F23005410B5 /* RunViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunViewController.m; sourceTree = "<group>"; };
 		45F67C88139099EF00C1273C /* DashSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashSummary.h; sourceTree = "<group>"; };
 		45F67C89139099EF00C1273C /* DashSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashSummary.m; sourceTree = "<group>"; };
-		45F67DE01390B42F00C1273C /* ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCache.h; sourceTree = "<group>"; };
-		45F67DE11390B42F00C1273C /* ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCache.m; sourceTree = "<group>"; };
-		45F67DE21390B42F00C1273C /* ImageCacheObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCacheObject.h; sourceTree = "<group>"; };
-		45F67DE31390B42F00C1273C /* ImageCacheObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCacheObject.m; sourceTree = "<group>"; };
-		45F67DE41390B42F00C1273C /* AsyncImageView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView2.h; sourceTree = "<group>"; };
-		45F67DE51390B42F00C1273C /* AsyncImageView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView2.m; sourceTree = "<group>"; };
 		45FBA06B14E87CCC00FA8BFC /* 30x-Gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "30x-Gear.png"; sourceTree = "<group>"; };
 		45FBA06C14E87CCC00FA8BFC /* 30x-Marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "30x-Marker.png"; sourceTree = "<group>"; };
 		45FBA06D14E87CCC00FA8BFC /* avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar.png; sourceTree = "<group>"; };
@@ -761,7 +741,6 @@
 		45FBA0F514E8A0AE00FA8BFC /* Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Back.png; sourceTree = "<group>"; };
 		45FBA0F614E8A0AE00FA8BFC /* Back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Back@2x.png"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* CoffeeRunSample-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoffeeRunSample-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
-		A90BF17F13438044003FF481 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
 		A90BF1B113438581003FF481 /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
 		A90BF1B213438581003FF481 /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
 		A90BF2F61343C124003FF481 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
@@ -1223,10 +1202,6 @@
 		454AEA84132AE4180029C0C1 /* Current Orders View */ = {
 			isa = PBXGroup;
 			children = (
-				45C694A6133C376B00962D33 /* AttendeeOrderTableViewController.h */,
-				45C694A7133C376B00962D33 /* AttendeeOrderTableViewController.m */,
-				454AEA81132AE40E0029C0C1 /* ViewCurrentOrdersTableView.h */,
-				454AEA82132AE40E0029C0C1 /* ViewCurrentOrdersTableView.m */,
 				458203C413B93EB80076CC5B /* EditOrderView.h */,
 				458203C513B93EB80076CC5B /* EditOrderView.m */,
 				45272A3A140ADE96003C8611 /* ViewCurrentOrdersTableViewController.xib */,
@@ -1334,7 +1309,6 @@
 				452CA16A1447DDCF00B7FC70 /* Facebook */,
 				45B717AD1405D65E001E526D /* MKStoreKit */,
 				45AD413213F0E20800B153C0 /* OAuthConsumer */,
-				45F67DDF1390B42000C1273C /* AsyncImageLoader */,
 				4553D34212C93DF400B27375 /* JSON */,
 				A9ED707A1332ACF900298AE6 /* TapkuLibrary */,
 			);
@@ -1602,19 +1576,6 @@
 			name = "Start Dash";
 			sourceTree = "<group>";
 		};
-		45F67DDF1390B42000C1273C /* AsyncImageLoader */ = {
-			isa = PBXGroup;
-			children = (
-				45F67DE01390B42F00C1273C /* ImageCache.h */,
-				45F67DE11390B42F00C1273C /* ImageCache.m */,
-				45F67DE21390B42F00C1273C /* ImageCacheObject.h */,
-				45F67DE31390B42F00C1273C /* ImageCacheObject.m */,
-				45F67DE41390B42F00C1273C /* AsyncImageView2.h */,
-				45F67DE51390B42F00C1273C /* AsyncImageView2.m */,
-			);
-			name = AsyncImageLoader;
-			sourceTree = "<group>";
-		};
 		45FBA06A14E87CCC00FA8BFC /* images */ = {
 			isa = PBXGroup;
 			children = (
@@ -1697,7 +1658,6 @@
 				45F67C89139099EF00C1273C /* DashSummary.m */,
 				4580F2DD1392F0FE007A281C /* DrinkOrders.h */,
 				4580F2DE1392F0FE007A281C /* DrinkOrders.m */,
-				A90BF17F13438044003FF481 /* SynthesizeSingleton.h */,
 				A90BF1B113438581003FF481 /* Order.h */,
 				A90BF1B213438581003FF481 /* Order.m */,
 			);
@@ -1707,9 +1667,6 @@
 		A90BF2FB1343C133003FF481 /* Main View */ = {
 			isa = PBXGroup;
 			children = (
-				4531050E1482953C005781AF /* CoffeeRunSampleViewController.h */,
-				4531050F1482953C005781AF /* CoffeeRunSampleViewController.m */,
-				453105101482953C005781AF /* CoffeeRunSampleViewController.xib */,
 				A90BF2F61343C124003FF481 /* InfoViewController.h */,
 				A90BF2F71343C124003FF481 /* InfoViewController.m */,
 				A90BF2F81343C124003FF481 /* InfoViewController.xib */,
@@ -1954,7 +1911,6 @@
 				451BCA0814621C4300FE308B /* Localization-ReadMe.txt in Resources */,
 				452DB9E91465DC0A0030F7C9 /* MutipleOrdersTableView.xib in Resources */,
 				452D3A0A14704A270058AA45 /* Settings.bundle in Resources */,
-				453105121482953C005781AF /* CoffeeRunSampleViewController.xib in Resources */,
 				45B095E814C1FF5800683132 /* Icon.png in Resources */,
 				45B095E914C1FF5800683132 /* Icon@2x.png in Resources */,
 				4583B04114CA15A400993AED /* LICENSE in Resources */,
@@ -2064,7 +2020,6 @@
 				459C560813183038008F6BDD /* CustomOrderViewController.m in Sources */,
 				45D450831325A08F004764C2 /* FavoritesTableViewController.m in Sources */,
 				45D1551B132723850082D87F /* FavoriteLocations.m in Sources */,
-				454AEA83132AE40E0029C0C1 /* ViewCurrentOrdersTableView.m in Sources */,
 				A9ED70D61332ACF900298AE6 /* ABTableViewCell.m in Sources */,
 				A9ED70D71332ACF900298AE6 /* NSArray+TKCategory.m in Sources */,
 				A9ED70D81332ACF900298AE6 /* NSDate+TKCategory.m in Sources */,
@@ -2110,13 +2065,9 @@
 				A9ED71001332ACF900298AE6 /* UIScrollview+TKCategory.m in Sources */,
 				A9ED71011332ACF900298AE6 /* UIToolbar+TKCategory.m in Sources */,
 				A9ED71021332ACF900298AE6 /* UIView+TKCategory.m in Sources */,
-				45C694A8133C376B00962D33 /* AttendeeOrderTableViewController.m in Sources */,
 				A90BF1B313438581003FF481 /* Order.m in Sources */,
 				A90BF2F91343C124003FF481 /* InfoViewController.m in Sources */,
 				45F67C8A139099EF00C1273C /* DashSummary.m in Sources */,
-				45F67DE61390B42F00C1273C /* ImageCache.m in Sources */,
-				45F67DE71390B42F00C1273C /* ImageCacheObject.m in Sources */,
-				45F67DE81390B42F00C1273C /* AsyncImageView2.m in Sources */,
 				4580F2271392D728007A281C /* SelectTimeView.m in Sources */,
 				4580F2DF1392F0FE007A281C /* DrinkOrders.m in Sources */,
 				45E6AC8513A126EE005410B5 /* SettingsView.m in Sources */,
@@ -2202,7 +2153,6 @@
 				452D3A1414707D050058AA45 /* NSString+MD5Addition.m in Sources */,
 				452D3A1514707D050058AA45 /* UIDevice+IdentifierAddition.m in Sources */,
 				45744BCA14796CC9001B257C /* MBProgressHUD.m in Sources */,
-				453105111482953C005781AF /* CoffeeRunSampleViewController.m in Sources */,
 				4583B04314CA15A400993AED /* SDImageCache.m in Sources */,
 				4583B04414CA15A400993AED /* SDWebImageDecoder.m in Sources */,
 				4583B04514CA15A400993AED /* SDWebImageDownloader.m in Sources */,

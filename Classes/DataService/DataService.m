@@ -15,7 +15,7 @@
 @implementation DataService
 
 //use to quickly turn off NSLogs
-#define IN_TESTING 0
+#define IN_TESTING 1
 #define TIMEOUT_SECONDS    60
 
     
@@ -53,7 +53,7 @@ static DataService* sharedDataService = nil;
     #endif
     NSDictionary *retJSON = [[ret JSONValue] retain];
     if(retJSON != NULL){
-        [[Order sharedOrder] setOrder:retJSON];      
+        [[Order sharedOrder] setOrder:[NSMutableDictionary dictionaryWithDictionary:retJSON]];      
         dataLoaded = YES;
     }else {
         [self performSelectorOnMainThread:@selector(popUpWithMessage:) withObject:@"Could not connect to server" waitUntilDone:NO];
@@ -107,15 +107,21 @@ static DataService* sharedDataService = nil;
 -(BOOL)startRunWithDict:(NSDictionary *)dash_dict
 {
     BOOL dataLoaded = NO;
+    // NSLog(@"dash_dict %@",dash_dict);
     
     NSString *urlString = [NSString stringWithFormat:@"%@/startrun.php",urlPrefix];   
     NSURL *url = [NSURL URLWithString:urlString];
     
     NSMutableArray *device_id_array = [[NSMutableArray alloc]init];
+    
+    
 	for(int i=0;i<[[dash_dict objectForKey:@"selected_friends"] count];i++)
 	{
 		[device_id_array addObject:[[[dash_dict objectForKey:@"selected_friends"] objectAtIndex:i]valueForKey:@"device_id"]];
 	}
+    NSLog(@"device_id_array %@",device_id_array);
+    
+    NSString *devices = [device_id_array componentsJoinedByString:@","];
     
     NSString *_address = [[[[dash_dict objectForKey:@"selected_location"] objectForKey:@"location"]objectForKey:@"address"]objectAtIndex:0];
 	NSString *_cityState = [NSString stringWithFormat:@"%@,%@",[[[dash_dict objectForKey:@"selected_location"] objectForKey:@"location"]objectForKey:@"city"],[[[dash_dict objectForKey:@"selected_location"] objectForKey:@"location"]objectForKey:@"state_code"]];
@@ -138,8 +144,29 @@ static DataService* sharedDataService = nil;
     [request setPostValue:image_url forKey:@"selected_url"];
     [request setPostValue:selected_yelp_id forKey:@"selected_yelp_id"];
     [request setPostValue:[NSDate date] forKey:@"date_added"];
-        
-    [request setTimeOutSeconds:TIMEOUT_SECONDS];
+    [request setPostValue:devices forKey:@"device_tokens"];
+    [request setPostValue:@"doOrder" forKey:@"push_type"];
+    
+    #if IN_TESTING
+    NSMutableString *postVars = [[NSMutableString alloc]init];
+    [postVars appendString:[NSString stringWithFormat:@"?first_name=%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"FIRSTNAME"]]];
+    [postVars appendString:[NSString stringWithFormat:@"&last_name=%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"LASTNAME"]]];
+    [postVars appendString:[NSString stringWithFormat:@"&deviceid=%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"]]];
+    [postVars appendString:[NSString stringWithFormat:@"&selected_date=%@",[dash_dict objectForKey:@"selected_date"]]];
+    [postVars appendString:[NSString stringWithFormat:@"&selected_name=%@",[[dash_dict objectForKey:@"selected_location"] objectForKey:@"name"]]];
+    [postVars appendString:[NSString stringWithFormat:@"&selected_address=%@",address]];
+    [postVars appendString:[NSString stringWithFormat:@"&selected_url=%@",image_url]];
+    [postVars appendString:[NSString stringWithFormat:@"&selected_yelp_id=%@",selected_yelp_id]];
+    [postVars appendString:[NSString stringWithFormat:@"&date_added=%@",[NSDate date]]];
+    [postVars appendString:[NSString stringWithFormat:@"&device_tokens=%@",devices]];
+    [postVars appendString:[NSString stringWithFormat:@"&push_type=%@",@"doOrder"]];
+    
+    NSLog(@"postVars %@",postVars);
+    
+    #endif
+    
+    NSLog(@"postBody %@",[request postBody]);
+      [request setTimeOutSeconds:TIMEOUT_SECONDS];
     [request startSynchronous];
     NSString *ret = [request responseString];
     
@@ -148,7 +175,7 @@ static DataService* sharedDataService = nil;
     NSLog(@"Return:%@",ret);
 #endif
     NSDictionary *retJSON = [[ret JSONValue] retain];
-    if([retJSON objectForKey:@"success"]){
+    if([[retJSON objectForKey:@"success"]boolValue]){
         dataLoaded = YES;
     }
     return dataLoaded;
@@ -205,11 +232,10 @@ static DataService* sharedDataService = nil;
 #endif
     NSDictionary *retJSON = [[ret JSONValue] retain];
     
-    if(retJSON != NULL){
-        [[Order sharedOrder] setOrder:retJSON];      
+    if([retJSON objectForKey:@"success"]){
         dataLoaded = YES;
     }else {
-        [self performSelectorOnMainThread:@selector(popUpWithMessage:) withObject:@"Could not connect to server" waitUntilDone:NO];
+        [self performSelectorOnMainThread:@selector(popUpWithMessage:) withObject:@"Run Ended\nYou cannot add an order to a run that has already ended" waitUntilDone:NO];
         dataLoaded = NO;
     }
     return dataLoaded;
@@ -234,7 +260,7 @@ static DataService* sharedDataService = nil;
     NSDictionary *retJSON = [[ret JSONValue] retain];
     
     if(retJSON != NULL){
-        [[Order sharedOrder] setOrder:retJSON];      
+        [[Order sharedOrder] setOrder:[NSMutableDictionary dictionaryWithDictionary:retJSON]];   
         dataLoaded = YES;
     }else {
         [self performSelectorOnMainThread:@selector(popUpWithMessage:) withObject:@"Could not connect to server" waitUntilDone:NO];
@@ -313,7 +339,7 @@ static DataService* sharedDataService = nil;
 #endif
     NSDictionary *retJSON = [[ret JSONValue] retain];
     if(retJSON != NULL){
-        [[Order sharedOrder] setOrder:retJSON];      
+        [[Order sharedOrder] setOrder:[NSMutableDictionary dictionaryWithDictionary:retJSON]];        
         dataLoaded = YES;
     }else {
         [self performSelectorOnMainThread:@selector(popUpWithMessage:) withObject:@"Could not connect to server" waitUntilDone:NO];
@@ -328,8 +354,10 @@ static DataService* sharedDataService = nil;
     self = [super init];
     if (self) {
         // Initialization code here.
-        //urlPrefix = [@"http://dev.javadash.com/JavaDash/php/" retain];
-        urlPrefix = [@"http://javadash.com/JavaDash/php" retain];
+        NSString *currentVersion = @"1_0";
+        urlPrefix = [@"http://dev.javadash.com/JavaDash/php" retain];
+        //urlPrefix = [[NSString stringWithFormat:@"http://javadash.com/app/%@/JavaDash/php",currentVersion] retain];
+        NSLog(@"urlPrefix %@",urlPrefix);
     }
     
     return self;

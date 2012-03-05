@@ -39,7 +39,7 @@
     NSDate* runDate = [[NSDate date] dateByAddingTimeInterval:self.dp.countDownDuration];
     NSDateFormatter *jsonFormat = [[[NSDateFormatter alloc] init]autorelease];
     [jsonFormat setDateFormat:@"yyyy-MM-dd hh:mm:ss ZZZ a"];
-    NSString *dateString = [jsonFormat stringFromDate:runDate];
+    //NSString *dateString = [jsonFormat stringFromDate:runDate];
     
     //NSLog(@"ts %f",[self.dp.date timeIntervalSince1970]);
     //NSLog(@"dateString %@",dateString);
@@ -53,8 +53,8 @@
 {
     NSDate* runDate = [[NSDate date] dateByAddingTimeInterval:self.dp.countDownDuration];
     NSString *dateString = [newFormatter stringFromDate:runDate];
-    NSLog(@"ts %f",[self.dp.date timeIntervalSince1970]);
-    NSLog(@"dateString %@",dateString);
+    //NSLog(@"ts %f",[self.dp.date timeIntervalSince1970]);
+    //NSLog(@"dateString %@",dateString);
     date_str.text = dateString;
 
 }

@@ -60,7 +60,7 @@
         
         [edit_order_dict setObject:text_view.text forKey:@"CustomOrder"];
         DrinkOrders *drink_orders = [DrinkOrders instance];
-        NSLog(@"drink_orders %@",drink_orders);
+        //NSLog(@"drink_orders %@",drink_orders);
         
     
         Order *order = [Order sharedOrder];

@@ -31,7 +31,6 @@
 }
 -(void)done:(id)sender
 {
-	printf("done");
 	[self.navigationController dismissModalViewControllerAnimated:YES];
 }
 

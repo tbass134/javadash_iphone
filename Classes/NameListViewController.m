@@ -75,29 +75,12 @@
     // Loop through the items and create our keys
     for (NSDictionary *item in coffee_dict)
     {
-        /*
-        NSMutableArray *temp = [[NSMutableArray alloc]init]; 
-        //NSLog(@"item %@",item);
-        for(NSDictionary *items in [coffee_dict objectForKey:item])
-        {
-            [temp addObject:items];
-        }
-        NSSortDescriptor *sortOrder = [NSSortDescriptor sortDescriptorWithKey: @"self" ascending: YES];
-        [temp sortUsingDescriptors:[NSArray arrayWithObject: sortOrder]];
-         
-        [itemsInSection addObject:temp];
-         */
         [sections addObject:item];
     }
     
     NSSortDescriptor *sortOrder = [NSSortDescriptor sortDescriptorWithKey: @"self" ascending: YES];
 	[sections sortUsingDescriptors:[NSArray arrayWithObject: sortOrder]];
-    
-   
-        
-    
-    NSLog(@"sections %@",sections);
-    NSLog(@"itemsInSection %@",itemsInSection);
+
     
     [table_view reloadData];
 }
@@ -161,8 +144,6 @@
     //NSString *drink = [[coffee_dict allKeys] objectAtIndex:indexPath.section];
     NSString *drink = [sections objectAtIndex:indexPath.section];
     
-    NSLog(@"beverage %@",beverage);
-    NSLog(@"drink %@",drink);
     NSDictionary *drink_dict = [[NSDictionary alloc]initWithObjectsAndKeys:companyName,@"companyName",drink_type,@"drink_type",beverage,@"beverage",drink,@"drink",nil];
     
     
@@ -173,14 +154,6 @@
     [drink_dict release];
 	[listView release];
 }
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations.
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.

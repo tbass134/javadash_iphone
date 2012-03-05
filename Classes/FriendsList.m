@@ -42,7 +42,6 @@
 
 -(IBAction)addFriends
 {
-	printf("addFriends");
 	DashSummary *dash = [DashSummary instance];
 	[[dash getDict]setValue:selected_friends  forKey:@"selected_friends"];	
 	[self.navigationController popViewControllerAnimated:YES];

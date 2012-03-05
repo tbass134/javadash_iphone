@@ -20,9 +20,9 @@
 	
     [FlurryAnalytics logEvent:@"Friend Added"];
 	BOOL success = NO;
-	printf("insertFriendData");
-	[Utils printDict:dict];
-	printf("\n");
+	//printf("insertFriendData");
+	//[Utils printDict:dict];
+	//printf("\n");
 	
 	NSManagedObjectContext *context = [self managedObjectContext];    
 	NSEntityDescription *friendsEntity = [NSEntityDescription entityForName:@"Friends" inManagedObjectContext:context];

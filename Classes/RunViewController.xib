@@ -546,14 +546,6 @@
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
-					<string key="className">AsyncImageView2</string>
-					<string key="superclassName">UIImageView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/AsyncImageView2.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
 					<string key="className">RunViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
@@ -567,7 +559,7 @@
 						<string key="table_view">UITableView</string>
 						<string key="view_run_table">UITableView</string>
 						<string key="view_run_view">UIView</string>
-						<string key="yelp_img">AsyncImageView2</string>
+						<string key="yelp_img">UIImageView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="NoOrdersMessage">
@@ -612,7 +604,7 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="yelp_img">
 							<string key="name">yelp_img</string>
-							<string key="candidateClassName">AsyncImageView2</string>
+							<string key="candidateClassName">UIImageView</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">

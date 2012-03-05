@@ -17,7 +17,6 @@
 #import "AdViewController.h"
 
 
-@class CoffeeRunSampleViewController;
 
 @interface CoffeeRunSampleAppDelegate : NSObject <UIApplicationDelegate,UITabBarControllerDelegate,FBRequestDelegate,
 FBDialogDelegate,
@@ -30,7 +29,6 @@ FBSessionDelegate,AdWhirlDelegate> {
 
 	UIImageView *bg;
     UIWindow *window;
-    CoffeeRunSampleViewController *viewController;
 	UITabBarController*  myTabBarController;
     DBSignupViewController *dbSignupViewController;
 	NSString *deviceToken;
@@ -62,7 +60,6 @@ FBSessionDelegate,AdWhirlDelegate> {
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet CoffeeRunSampleViewController *viewController;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 @property (nonatomic, retain) NSString *deviceToken;
 @property (nonatomic, retain) NSString *deviceAlias;

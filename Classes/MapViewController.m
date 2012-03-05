@@ -17,7 +17,6 @@
 #import "DashSummary.h"
 #import "OAuthConsumer.h"
 
-#import "AsyncImageView2.h"
 #import "UIImageView+WebCache.h"
 
 #define kYelpSearchTerm @"Coffee & Tea"
@@ -111,13 +110,11 @@
 -(IBAction)changeSegment:(id)sender
 {
 	if(seg_control.selectedSegmentIndex == 1){
-		printf("showMap");
 		tableView.hidden = YES;
 		mapView.hidden =NO;
         
 	}
 	if(seg_control.selectedSegmentIndex == 0){
-		printf("Show list");
 		tableView.hidden = NO;
 		mapView.hidden = YES;
 	}
@@ -125,7 +122,6 @@
 }
 -(IBAction)reloadLocation:(id)sender
 {
-	printf("reloadLocation");
 	[locationManager startUpdatingLocation];
 }
 -(IBAction)showFavorites:(id)sender
@@ -158,7 +154,7 @@
     //if (self.currentLocation == nil || self.currentLocation.horizontalAccuracy > newLocation.horizontalAccuracy) {
         // store the location as the "best effort"
         self.currentLocation = newLocation;
-        NSLog(@",self.currentLocation %@",self.currentLocation);
+        //NSLog(@",self.currentLocation %@",self.currentLocation);
 		
 		[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopUpdatingLocation:) object:nil];
         // test the measurement to see if it meets the desired accuracy
@@ -275,8 +271,8 @@
                                                                       realm:realm
                                                           signatureProvider:provider];
     [request prepare];
-    printf("calling yelp\n");
-    NSLog(@"request %@",[request URL]);
+    //printf("calling yelp\n");
+    //NSLog(@"request %@",[request URL]);
     
     _yelpResponseData = [[NSMutableData alloc] init];
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -466,10 +462,11 @@
 	if([annotation isKindOfClass:[ParkPlaceMark class]])
     {
 		
-        AsyncImageView2 *asyncImageView = [[[AsyncImageView2 alloc] initWithFrame:CGRectMake(5, 5, 30, 30)] autorelease];
+        UIImageView *asyncImageView = [[[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 30, 30)] autorelease];
         if([annotation.location_dict objectForKey:@"image_url"] != NULL)
 		{
-			[asyncImageView loadImageFromURL:[NSURL URLWithString:[annotation.location_dict objectForKey:@"image_url"]]];
+			[asyncImageView setImageWithURL:[NSURL URLWithString:[annotation.location_dict objectForKey:@"image_url"]]placeholderImage:[UIImage imageNamed:@"blank_location.png"] ];
+            
         }
         else
             asyncImageView.image = [UIImage imageNamed:@"blank_location.png"];
@@ -1019,7 +1016,6 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-	printf("viewWillAppear");
 	//[self.tableView setDelegate:self];
 	//[self.tableView reloadData];
 }
@@ -1070,7 +1066,7 @@
 
 
 - (void)dealloc {
-    printf("dealloc called");
+    [self removeObserver:self];
     [super dealloc];
 	//[conn release];
 	//[self.currentLocation release];

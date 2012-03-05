@@ -119,5 +119,6 @@
 - (void)animateView:(NSUInteger)tag;
 - (void)checkBarButton:(NSUInteger)tag;
 - (void)signup:(id)sender;
+-(void)doSignUp;
 
 @end

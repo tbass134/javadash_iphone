@@ -88,6 +88,7 @@
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:fb];
     [self presentModalViewController:nav animated:YES];
     [nav release];
+    [fb release];
 }
 -(IBAction)goHelp:(id)sender
 {
@@ -97,6 +98,7 @@
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:helpView];
     [self.navigationController presentModalViewController:nav animated:YES];
     [nav release];
+    [helpView release];
 }
 #pragma mark Remove Ads
 #pragma mark
@@ -159,7 +161,7 @@
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:dbSignupViewController];
     
     [self presentModalViewController:nav animated:YES];
-    //gotoContactInfo
+    [nav release];
 }
 -(void)configBump{
 	[bumpObject configAPIKey:@"679ba65f39d5420ea78c4934e44640ec"];//put your api key here. Get an api key from http://bu.mp

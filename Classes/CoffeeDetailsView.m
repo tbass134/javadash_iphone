@@ -52,6 +52,7 @@
     bg.frame = CGRectMake(0, -40, self.view.frame.size.width, self.view.frame.size.height);
     [mainView addSubview:bg];
     [mainView release];
+    [bg release];
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -211,6 +212,7 @@
             [switch_array addObject:tempDict];
             [switchView addSubview:_switch];
             [_switch release];
+            [tempDict release];
             switchTagInt++;
             
             CGRect switchViewframe = switchView.frame;
@@ -218,6 +220,8 @@
             switchView.frame = switchViewframe;     
              
             [mainView addSubview:switchView];
+            [switchLabel release];
+            [switchView release];
         }
     }
 
@@ -266,6 +270,7 @@
 	[favView addSubview:setFav_switch];
 	[setFav_switch release];
     [mainView addSubview:favView];
+    [setFav_switch release];
     
 
     
@@ -299,6 +304,12 @@
         bottom_padding = 150;
     else
         bottom_padding = 200;
+    
+    [optionsView release];
+    [favView release];
+    [mainView release];
+    
+    
     [scroll setContentSize:CGSizeMake(self.view.frame.size.width,contentSize+bottom_padding)];
     [super viewDidLoad];
 }
@@ -316,10 +327,8 @@
 - (IBAction)selectedIndexChanged:(id)sender {
     
     MyUISegmentController *segmentedControl = (MyUISegmentController *)sender;
-#if debug
-    NSLog(@"sender %@",segmentedControl.selected_key);
-    NSLog(@"value %@", [[sender segmentTitles] objectAtIndex:[sender selectedIndex]]);
-#endif    
+    //NSLog(@"sender %@",segmentedControl.selected_key);
+    //NSLog(@"value %@", [[sender segmentTitles] objectAtIndex:[sender selectedIndex]]);
     //self.valueLabel.text = [[sender segmentTitles] objectAtIndex:[sender selectedIndex]];
     
     
@@ -348,7 +357,7 @@
         }
     }
 
-    NSLog(@"savedDrink %@",savedDrink);
+   // NSLog(@"savedDrink %@",savedDrink);
 }
 -(void)setValueForSegment:(id)sender
 {
@@ -397,13 +406,11 @@
 	//Save the drink into the DrinkOrders Class
 	DrinkOrders *drink_orders = [DrinkOrders instance];
 	[[drink_orders getArray]addObject:savedDrink];
-    #if debug
-    NSLog(@"drink %@",[drink_orders getArray]);
-#endif
+    //NSLog(@"drink %@",[drink_orders getArray]);
     
     if(editLocalOrder)
     {
-        NSLog(@"Edit Local Order"); 
+        //NSLog(@"Edit Local Order"); 
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }
@@ -444,7 +451,6 @@
 
 //implementation
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    printf("textFieldDidBeginEditing");
     svos = scroll.contentOffset;
     CGPoint pt;
     CGRect rc = [textField bounds];

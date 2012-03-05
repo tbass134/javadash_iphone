@@ -64,19 +64,16 @@
 }
 -(void)getOrders
 {
-    printf("getOrders\n");
     [HUD hide:YES];
     if([[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"] == NULL)
         [Utils createUniqueDeviceID];
     
     BOOL dataLoaded = [[DataService sharedDataService]getOrders];
-    NSLog(@"dataLoaded %d",dataLoaded);
     if(dataLoaded)
     {
         Order *order = [Order sharedOrder];
         if(![[[order currentOrder] objectForKey:@"run"]objectForKey:@"id"])
         {
-            printf("NO Orders");
             
             current_orders_table.hidden = YES;
             if(self.navigationItem.rightBarButtonItem == addOrder_btn)
@@ -193,7 +190,6 @@
 }
 -(void)OrderEdited:(id)sender
 {
-	printf("Order has been edited");
 	
 	HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.navigationController.view addSubview:HUD];
@@ -205,7 +201,6 @@
 
 -(void)loadOrderData
 {
-    printf("calling loadData\n");
     //Clear drink orders array
     DrinkOrders *drink_orders = [DrinkOrders instance];
     [drink_orders clearArray];
@@ -219,7 +214,7 @@
     }
     
 	NSDictionary *user_order = [[[[Order sharedOrder] currentOrder]objectForKey:@"run"]retain];
-	NSLog(@"user_order %@",user_order);
+	//NSLog(@"user_order %@",user_order);
 	
 	
 	run_array = [[NSMutableArray alloc]init];
@@ -228,7 +223,7 @@
 		[run_array addObject:items];
 	}
     
-	NSLog(@"count %i",[run_array count]);
+	//NSLog(@"count %i",[run_array count]);
 	static NSString *CellIdentifier = @"Cell";	
 	cells = [[NSMutableArray alloc] init];
     
@@ -252,7 +247,6 @@
 	//If the device is a ATTENDEE, show the run info
 	if([[user_order objectForKey:@"is_runner"] intValue] == 0)
 	{
-        printf("Its a runner\n");
 		TKLabelTextViewCell *cell1 = [[TKLabelTextViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier];
         
         UIView *v = [[[UIView alloc] init] autorelease];
@@ -290,7 +284,7 @@
         
     }
 	int orders_count = [[user_order objectForKey:@"orders"]count];
-    NSLog(@"orders_count %i",orders_count);
+    //NSLog(@"orders_count %i",orders_count);
 	
 	if(orders_count >0)
 	{
@@ -311,7 +305,7 @@
 		for(int i=0;i<orders_count;i++)
 		{
 			
-			NSString *deviceID = [[[user_order objectForKey:@"orders"]objectAtIndex:i]objectForKey:@"deviceid"];
+			//NSString *deviceID = [[[user_order objectForKey:@"orders"]objectAtIndex:i]objectForKey:@"deviceid"];
 			TKLabelTextViewCell *cell1 = [[TKLabelTextViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier];
             
             UIView *v = [[[UIView alloc] init] autorelease];
@@ -324,7 +318,6 @@
 			NSArray *current_drink = [[[user_order objectForKey:@"orders"]objectAtIndex:i]objectForKey:@"drink"];		
             if(current_drink == (id)[NSNull null])
             {
-                printf("its null");
                 continue;
             }
             
@@ -385,14 +378,13 @@
     //    return;
     
     BOOL isShowing = [self.view.subviews containsObject:noOrdersView];
-    NSLog(@"isShowing %d",isShowing);
+    //NSLog(@"isShowing %d",isShowing);
     
     if(isShowing)
         [noOrdersView removeFromSuperview];
     
     if(show)
     {
-        printf("show it");
         [self.view addSubview:noOrdersView];
         NoOrdersTitle.text = title;
         NoOrdersMessage.text = message;
@@ -465,7 +457,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-	NSLog(@"indexPath.section %i",indexPath.section);
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if(order_ended)
@@ -587,7 +578,6 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
     [self.navigationController.view addSubview:HUD];
     HUD.delegate = self;
     [HUD show:YES];
-    printf("call sendOrders");
     [self sendOrders];
     //[self sendOrders];
     //[HUD showWhileExecuting:@selector(sendOrders) onTarget:self withObject:nil animated:YES];
@@ -616,7 +606,6 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
                                                           order:[Utils urlencode:theString]
                                                     updateOrder:nil
                                                          orderID:nil];
-        NSLog(@"orderSent %d",orderSent);
         if(orderSent)
         {
             [FlurryAnalytics logEvent:@"Order Added"];
@@ -695,7 +684,6 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
     BOOL removeOrder = [[DataService sharedDataService]deleteOrder:[order objectForKey:@"order_id"]];
     if(removeOrder)
     {
-        printf("updateDeletedRow");
         [[[[[Order sharedOrder] currentOrder]objectForKey:@"run"]objectForKey:@"orders"] removeObject:order];
         [current_orders_table reloadData];
         //[self checkForOrders];
@@ -703,43 +691,8 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
 
     }
     
-    /*
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    printf("delete Order");
-    //This is the data that got returned from the server when we first went to view the run.. Called  getOrder.php from CurrentRunViewController
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/deleteOrder.php?order_id=%i",baseDomain,[[order objectForKey:@"order_id"]intValue]]]
-                                                       cachePolicy:NSURLCacheStorageNotAllowed
-                                                   timeoutInterval:60.0];
-
-
-    NSError *requestError;
-    NSURLResponse *urlResponse = nil;
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    if (response == nil) {
-        if (requestError != nil) {
-            [Utils showAlert:@"Could not connect to server" withMessage:@"Please try again" inView:self.view];
-        }
-    }
-    else
-    {
-        [self performSelectorOnMainThread:@selector(updateDeletedRow:)
-                               withObject:order
-                            waitUntilDone:NO];
-    } 
-    [pool release];
-     */
+   
 }
-/*
--(void)updateDeletedRow:(NSDictionary *)order
-{
-    printf("updateDeletedRow");
-    [[[[[Order sharedOrder] currentOrder]objectForKey:@"run"]objectForKey:@"orders"] removeObject:order];
-    [current_orders_table reloadData];
-    //[self checkForOrders];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
-}
-*/
 /*
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -768,7 +721,6 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
     
     if(self.navigationItem.rightBarButtonItem == send_order)
     {
-        NSLog(@"Drink Order %@",[[DrinkOrders instance]getArray]);
         if([[[DrinkOrders instance]getArray]count]>0)
         {
             send_order.enabled = YES;

@@ -97,8 +97,8 @@
                                                                       realm:realm
                                                           signatureProvider:provider];
     [request prepare];
-    printf("calling yelp\n");
-    NSLog(@"request %@",[request URL]);
+    //printf("calling yelp\n");
+    //NSLog(@"request %@",[request URL]);
     
     _yelpResponseData = [[NSMutableData alloc] init];
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -115,7 +115,7 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    NSLog(@"Error: %@, %@", [error localizedDescription], [error localizedFailureReason]);
+    //NSLog(@"Error: %@, %@", [error localizedDescription], [error localizedFailureReason]);
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {

@@ -66,7 +66,7 @@
     }
 	[plist removeObject:data];
 	success =  [plist writeToFile:path atomically:YES];
-	NSLog(@"success %d",success);
+	//NSLog(@"success %d",success);
 	return success;	
 	
 }

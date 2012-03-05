@@ -48,9 +48,6 @@
 	if([self.type isEqualToString:@"favorites"])
 	{
 		self.coffee_orders_array = [SavedDrinksList getAllDrinks];
-		NSLog(@"getAllDrinks %@",[SavedDrinksList getAllDrinks]);
-		//NSLog(@"coffee_orders_array %@",coffee_orders_array);
-		
 	}
 	else
 	{
@@ -82,12 +79,10 @@
 			NSArray *order_dict = [self.coffee_orders_array objectAtIndex:i];
             if(order_dict == (id)[NSNull null])
             {
-                printf("its null");
                 continue;
             }
             if([order_dict  isKindOfClass:[NSDictionary class]])
 			{
-                printf("is Dict");
                 NSArray *keys = [order_dict allKeys];
                 if([keys count]>0)
                 {
@@ -105,9 +100,9 @@
             }
             else if([order_dict isKindOfClass:[NSArray class]])
 			{
-				printf("array");
+				//printf("array");
 				int drinks_count = [order_dict count];
-				NSLog(@"drinks count %i", drinks_count);
+				//NSLog(@"drinks count %i", drinks_count);
 				for(int i=0;i<drinks_count;i++)
 				{
 					[str appendString:[NSString stringWithFormat:@"\nOrder #%i\n",i+1]];
@@ -228,7 +223,6 @@
             if([SavedDrinksList removeFromList:order])
             {
                 self.coffee_orders_array = [SavedDrinksList getAllDrinks];  
-                NSLog(@"getAllDrinks %@",[SavedDrinksList getAllDrinks]);
             }
         }
         else
@@ -272,7 +266,6 @@
     if([self.type isEqualToString:@"favorites"])
     {
         NSDictionary *order = [self.coffee_orders_array  objectAtIndex:indexPath.row];
-        NSLog(@"order %@",order);
         
         DrinkOrders *drink_orders = [DrinkOrders instance];
         [[drink_orders getArray]addObject:order];

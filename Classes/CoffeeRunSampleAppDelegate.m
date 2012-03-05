@@ -17,10 +17,13 @@
 
 
 
+//Dev PUSH
+//#define kApplicationKey @"V1IdApIgQ_WuhReygjVqBg"
+//#define kApplicationSecret @"lMYfECKyQGypK1MzGOf6Ew"
 
-#define kApplicationKey @"V1IdApIgQ_WuhReygjVqBg"
-#define kApplicationSecret @"lMYfECKyQGypK1MzGOf6Ew"
-
+//Production PUSH
+#define kApplicationKey @"4fh8xUNQT1apEm9hSPoo7A"
+#define kApplicationSecret @"kzEtWLZnRBSld0813S1cNQ"
 
 //AdWhirl Constants
 #define kSampleAppKey @"ec8e031962fe4384837daf3c8905045c"
@@ -38,7 +41,6 @@ static NSString* kAppId = @"189714094427611";
 @implementation CoffeeRunSampleAppDelegate
 
 @synthesize window;
-@synthesize viewController;
 @synthesize deviceToken;
 @synthesize deviceAlias;
 @synthesize tabBarController;
@@ -68,7 +70,7 @@ static NSString* kAppId = @"189714094427611";
     NSDate *expirationDate = [prefs valueForKey:@"facebook-expirationDate"];
     #if debug
     NSLog(@"expirationDate %@",expirationDate);
-#endif
+    #endif
     _facebook.accessToken = accessToken;
     _facebook.expirationDate = expirationDate;
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
@@ -80,29 +82,25 @@ static NSString* kAppId = @"189714094427611";
    
     
     
-    id test = [[NSUserDefaults standardUserDefaults] objectForKey:@"enable_push_notifications"];
-    if (test == NULL) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"enable_push_notifications"];
+    if (![[NSUserDefaults standardUserDefaults] valueForKey:@"enable_push_notifications"]) {
+        [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:YES] forKey:@"enable_push_notifications"];
     }
 
+    NSLog(@"%d",[[[NSUserDefaults standardUserDefaults] valueForKey:@"enable_push_notifications"]boolValue]);
 
-    if([[NSUserDefaults standardUserDefaults] objectForKey:@"enable_push_notifications"])
-    {
-        //Register for notifications
+    //if([[[NSUserDefaults standardUserDefaults] valueForKey:@"enable_push_notifications"]boolValue])
+    //{
+        printf("Register for notifications");
         [[UIApplication sharedApplication]
          registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
                                              UIRemoteNotificationTypeSound |
                                              UIRemoteNotificationTypeAlert)];
-    }
+   /* }
     else
     {
         [Utils createUniqueDeviceID];
     }
-    /*
-	#if TARGET_IPHONE_SIMULATOR
-        [self initTesting];
-    #endif
-    */
+*/
    
 	if(![Utils checkIfContactAdded])
 	{
@@ -128,7 +126,6 @@ static NSString* kAppId = @"189714094427611";
 }
 -(void)userDataAdded
 {
-	printf("userDataAddeds");
     [[NSUserDefaults standardUserDefaults]setValue:[NSNumber numberWithBool:1] forKey:@"user_added"];
 	[dbSignupViewController.view removeFromSuperview];
 	[self loadUI];
@@ -141,7 +138,6 @@ static NSString* kAppId = @"189714094427611";
     bgFrame.origin.y = -40;
     bg.frame = bgFrame;
     [self.window addSubview:bg];
-    printf("callubng loadUI");
     
     
 	NSMutableArray *localViewControllersArray = [[NSMutableArray alloc]initWithCapacity:1];
@@ -232,7 +228,7 @@ static NSString* kAppId = @"189714094427611";
 {
     
     // not supported on iOS4    
-    UITabBar *tabBar = [myTabBarController tabBar];
+    //UITabBar *tabBar = [myTabBarController tabBar];
     if ([[[UIDevice currentDevice] systemVersion] floatValue] > 4.9)
     {
         UIImage *navBarImage = [UIImage imageNamed:@"menu-bar.png"];
@@ -274,7 +270,7 @@ static NSString* kAppId = @"189714094427611";
     else
     {
         printf("IOS4 code");
-        UIImage *navBarImage = [UIImage imageNamed:@"menu-bar.png"];
+        //UIImage *navBarImage = [UIImage imageNamed:@"menu-bar.png"];
         // ios 4 code here
     }
      
@@ -294,8 +290,8 @@ static NSString* kAppId = @"189714094427611";
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)_deviceToken {
 	
-    if(![[NSUserDefaults standardUserDefaults] objectForKey:@"enable_push_notifications"])
-        return;
+    //if(![[NSUserDefaults standardUserDefaults] objectForKey:@"enable_push_notifications"])
+    //    return;
     
 	// Get a hex string from the device token with no spaces or < >
     self.deviceToken = [[[[_deviceToken description]
@@ -374,7 +370,7 @@ static NSString* kAppId = @"189714094427611";
 	
 	// Please refer to the following Apple documentation for full details on handling the userInfo payloads
 	// http://developer.apple.com/library/ios/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/ApplePushService/ApplePushService.html#//apple_ref/doc/uid/TP40008194-CH100-SW1
-	
+	/*
 	NSString *message =@"";
 	if ([[userInfo allKeys] containsObject:@"order"])
 	{
@@ -389,9 +385,9 @@ static NSString* kAppId = @"189714094427611";
 
         [UIApplication sharedApplication].applicationIconBadgeNumber++;
 	}
-    
+    */
    // printf("Should be called Reload Data");
-	NSLog(@"message %@",message);
+	//NSLog(@"message %@",message);
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
 	
 /*	
@@ -473,7 +469,6 @@ static NSString* kAppId = @"189714094427611";
 }
 - (void)friendDataLoaded:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
 {
-    printf("UserData Loaded");
     if(!UILoaded)
     {
         [self loadUI];
@@ -512,9 +507,6 @@ static NSString* kAppId = @"189714094427611";
 	}
 	NSURL *storeUrl = [NSURL fileURLWithPath: [[self applicationDocumentsDirectory]
 											   stringByAppendingPathComponent: @"CoffeeRunSample.sqlite"]];
-	#if debug
-	NSLog(@"storeUrl %@",storeUrl);
-#endif
 	NSError *error = nil;
 	persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc]
 								  initWithManagedObjectModel:[self managedObjectModel]];
@@ -621,7 +613,6 @@ static NSString* kAppId = @"189714094427611";
  * Called when the user has logged in successfully.
  */
 - (void)fbDidLogin {
-    printf("fbDidLogin");
     NSString *accessToken = _facebook.accessToken;
     NSDate *expirationDate = _facebook.expirationDate;
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
@@ -681,7 +672,7 @@ static NSString* kAppId = @"189714094427611";
         else if([fb_tag isEqualToString:@"me"])
         {
             fb_me = result;
-            NSLog(@"fb_me %@",fb_me);
+            //NSLog(@"fb_me %@",fb_me);
             [[NSNotificationCenter defaultCenter] postNotificationName:@"getUserInfo" object:nil];
 
         }
@@ -705,7 +696,7 @@ static NSString* kAppId = @"189714094427611";
  * Called when a UIServer Dialog successfully return.
  */
 - (void)dialogDidComplete:(FBDialog *)dialog {
-    NSLog(@"publish successfully");
+    //NSLog(@"publish successfully");
 }
 
 
@@ -730,7 +721,6 @@ static NSString* kAppId = @"189714094427611";
 
 
 - (void)dealloc {
-    [viewController release];
     [window release];
 	[deviceAlias release];
 	[deviceToken release];

@@ -103,9 +103,9 @@
 		[seg_view addSubview:segment_scroll];
 		
 		
-		NSString *companyName = [Utils getCompanyName:[[[[order currentOrder] objectForKey:@"run"]objectForKey:@"location"]objectForKey:@"name"]];
-		NSString *beverage  =[order_dict objectForKey:@"beverage"];
-		NSArray *item_dict =[[[[plistDictionary objectForKey:companyName]objectForKey:@"Drinks"]objectForKey:beverage]objectForKey:theKey];
+		//NSString *companyName = [Utils getCompanyName:[[[[order currentOrder] objectForKey:@"run"]objectForKey:@"location"]objectForKey:@"name"]];
+		//NSString *beverage  =[order_dict objectForKey:@"beverage"];
+		//NSArray *item_dict =[[[[plistDictionary objectForKey:companyName]objectForKey:@"Drinks"]objectForKey:beverage]objectForKey:theKey];
 		
 		
 	
@@ -208,7 +208,6 @@
     float bottomEdge = scrollView.contentOffset.y + scrollView.frame.size.height;
     if (bottomEdge >= scrollView.contentSize.height) {
         // we are at the end
-        printf("we are at the end");
     }
     
 }
@@ -251,7 +250,6 @@
 }
 -(void)save:(id)sender
 {
-	printf("Save");
     Order *order = [Order sharedOrder];
     
     if([order_dict objectForKey:@"CustomOrder"] !=NULL)
@@ -281,49 +279,8 @@
     }
 
    
-	/*
-	//call a script to edit the order
-	int ts = [[NSDate date] timeIntervalSince1970];
-	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/placeorder.php?ts=%i",baseDomain,ts]]
-														   cachePolicy:NSURLCacheStorageNotAllowed
-													   timeoutInterval:60.0];
 	
-	[request setHTTPMethod:@"POST"];
-	
-	
-	NSString *post_str = [NSString stringWithFormat:@"device_id=%@&run_id=%@&order=%@&updateOrder=1",[[NSUserDefaults standardUserDefaults] valueForKey:@"_UALastDeviceToken"],	[[[order currentOrder]objectForKey:@"run"]objectForKey:@"id"],order_str];
-	[request setHTTPBody:[post_str dataUsingEncoding:NSUTF8StringEncoding]]; 
-	NSLog(@"post_str %@",post_str);
-	NSLog(@"url %@", [request URL]);
-	
-	conn = [[URLConnection alloc]init];
-	conn.tag =@"editOrder";
-	[conn setDelegate:self];
-	[conn initWithRequest:request];
-     */
 }
-/*
-- (void)processSuccessful:(BOOL)success withTag:(NSString *)tag andData:(NSMutableData *)data
-{
-	
-	NSLog(@"data %@",[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
-	
-	//[[NSNotificationCenter defaultCenter] postNotificationName:@"OrderEdited" object:self];
-	UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Order Saved" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK",nil];
-	[alert show];
-	[alert release];
-    [self.navigationController popViewControllerAnimated:YES];
-}
-*/
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations.
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
-
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];

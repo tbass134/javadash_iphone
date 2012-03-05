@@ -16,7 +16,6 @@
 
 #import "Order.h"
 #import "DrinkOrders.h"
-#import "AsyncImageView2.h"
 #import "TapkuLibrary.h"
 
 #import "TapkuLibrary.h"
@@ -112,7 +111,6 @@
                 [self startRun];
                 return;
             }
-            printf("calling gotoScreen");
             [self gotoScreen];
         }
 
@@ -123,7 +121,6 @@
 #pragma mark -
 -(void)startRun
 {
-    printf("startRun");
     [self showNoOrdersView:NO withTitle:nil andMessage:nil];
     //make sure the other view is not showing
     if(view_run_view.superview)
@@ -181,13 +178,11 @@
 	{
 		if([[[order currentOrder] objectForKey:@"run"]objectForKey:@"id"])
 		{
-            printf("VIEW RUN");
             [self viewRun];
 		}
 		else
 		{
 			//if there is a run already started, populate the Orders class with the info			
-			printf("START RUN");
 			[self startRun];
 			
 		}
@@ -244,7 +239,7 @@
         
         //showOptionsBtn.enabled = YES;
 		orders_cells = [[NSMutableArray alloc] init];
-        NSLog(@"orders %@\n",[user_order objectForKey:@"orders"]);
+        //NSLog(@"orders %@\n",[user_order objectForKey:@"orders"]);
         
 		if([user_order objectForKey:@"orders"] == (id)[NSNull null] || [user_order objectForKey:@"orders"] == NULL)
         {
@@ -422,10 +417,18 @@
     
     [HUD hide:YES];
     BOOL leaveRun = [[DataService sharedDataService]leaverun:[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"] runID:[[[[Order sharedOrder] currentOrder] objectForKey:@"run"]objectForKey:@"id"]];
-    
+    NSLog(@"leaveRun %d",leaveRun);
     if(leaveRun)
     {
-       [self checkForOrders];        
+        [Utils showAlert:nil withMessage:@"Order Completed" inView:self.view];
+        //[self checkForOrders];
+        
+        //Clear the drink orders array
+        DrinkOrders *drink_orders = [DrinkOrders instance];
+        [drink_orders clearArray];
+        
+        [self checkForOrders];
+        
     }
     
 }
@@ -584,10 +587,6 @@
     noRuns_view.frame = f;
     
     BOOL isShowing = [self.view.subviews containsObject:noRuns_view];
-    NSLog(@"isShowing %d",isShowing);
-    NSLog(@"title %@",title);
-    NSLog(@"message %@",message);
-    printf("\n");
     if(isShowing)
         [noRuns_view removeFromSuperview];
     
@@ -612,27 +611,7 @@
 	
     if(dash_dict == NULL)
 		return;
-    /*
-    NSString *_address = [[[[dash_dict objectForKey:@"selected_location"] objectForKey:@"location"]objectForKey:@"address"]objectAtIndex:0];
-	NSString *_cityState = [NSString stringWithFormat:@"%@,%@",[[[dash_dict objectForKey:@"selected_location"] objectForKey:@"location"]objectForKey:@"city"],[[[dash_dict objectForKey:@"selected_location"] objectForKey:@"location"]objectForKey:@"state_code"]];
-    
-	NSString *address = [NSString stringWithFormat:@"%@\n%@",_address,_cityState];
-	NSString *selected_yelp_id = [[dash_dict objectForKey:@"selected_location"] objectForKey:@"id"];
-    NSString *image_url = @"";
-    
-    if([[dash_dict objectForKey:@"selected_location"] objectForKey:@"image_url"] != NULL)
-        image_url = [[dash_dict objectForKey:@"selected_location"] objectForKey:@"image_url"];
-    
-	
-    
-	NSMutableArray *device_id_array = [[NSMutableArray alloc]init];
-	for(int i=0;i<[[dash_dict objectForKey:@"selected_friends"] count];i++)
-	{
-		[device_id_array addObject:[[[dash_dict objectForKey:@"selected_friends"] objectAtIndex:i]valueForKey:@"device_id"]];
-	}
-	NSLog(@"device_id_array %@",device_id_array);
-    */
-	
+  	
     //Make sure we have data before we send it
     if(![self isRunDataFilledOut])
     {
@@ -831,8 +810,6 @@
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     NSURL *picture_url = [NSURL URLWithString:img_str];
-    
-    NSLog(@"picture_url %@",picture_url);
     if(picture_url != NULL)
     {
         UIImage * img = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:picture_url]];

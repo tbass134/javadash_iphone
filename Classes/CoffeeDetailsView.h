@@ -42,8 +42,8 @@
 @property(nonatomic,assign)int selected_index;
 @property(nonatomic,assign)BOOL editLocalOrder;
 
-@property (nonatomic, retain) IBOutlet SCRSegmentedControl *oneRowControl, *twoRowControl, *threeRowControl;
-@property (nonatomic, retain) IBOutlet UILabel *valueLabel;
+//@property (nonatomic, retain) IBOutlet SCRSegmentedControl *oneRowControl, *twoRowControl, *threeRowControl;
+//@property (nonatomic, retain) IBOutlet UILabel *valueLabel;
 
 - (IBAction)selectedIndexChanged:(id)sender;
 

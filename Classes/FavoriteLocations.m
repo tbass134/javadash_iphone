@@ -16,7 +16,7 @@
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	NSString *path = [documentsDirectory stringByAppendingPathComponent:@"LocationFavorites.plist"];
-	NSLog(@"path %@",path);
+	//NSLog(@"path %@",path);
 }
 +(BOOL)writeDataToFile:(NSString *)str
 {
@@ -25,7 +25,6 @@
 	NSString *path = [documentsDirectory stringByAppendingPathComponent:@"LocationFavorites.plist"];
 	
     BOOL success = NO;
-    printf("Add it to the list");
     NSMutableArray *plist = [NSMutableArray arrayWithContentsOfFile:path];
     if (plist == nil) plist = [NSMutableArray array];
     [plist addObject:str];

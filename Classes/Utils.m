@@ -107,9 +107,7 @@
 + (NSDate *)dateToGMT:(NSDate *)sourceDate {
     NSTimeZone* destinationTimeZone = [NSTimeZone systemTimeZone];
     NSInteger destinationGMTOffset = [destinationTimeZone secondsFromGMTForDate:sourceDate];
-    #if debug
-	NSLog(@"destinationGMTOffset %i",destinationGMTOffset);
-    #endif
+    
     
     NSDate* destinationDate = [[[NSDate alloc] initWithTimeInterval:destinationGMTOffset sinceDate:sourceDate] autorelease];
     return destinationDate;
@@ -154,7 +152,6 @@
 
 // for Debug -- prints contents of NSDictionary
 +(void)printDict:(NSDictionary *)ddict {
-	NSLog(@"---printing Dictionary---");
 	NSArray *keys = [ddict allKeys];
 	for (id key in keys) {
         #if debug

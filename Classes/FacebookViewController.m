@@ -63,7 +63,7 @@
     HUD.delegate = self;
     [HUD show:YES];
     NSDictionary *allFBUsers = [[DataService sharedDataService]getFacebookUsersOfApp];
-    NSLog(@"allFBUsers %@",allFBUsers);
+    //NSLog(@"allFBUsers %@",allFBUsers);
     if(![allFBUsers objectForKey:@"success"])
     {
         [HUD hide:YES];
@@ -84,7 +84,6 @@
                 //NSLog(@"jdFriendID %i",jdFriendID);
                 if(fbID == jdFriendID)
                 {
-                    printf("FOund Frined");
                     [users addObject:jdFriend];
                     break;
                 }
@@ -139,7 +138,6 @@
 
         if(!noUsers)
         {
-            printf("no users found");
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"No Users Found" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
             [alert show];
             [alert release];
@@ -157,7 +155,6 @@
 
 -(void)facebookDidLogin:(NSNotification *) notification
 {
-    printf("facebookDidLogin");
     UIAppDelegate.fb_tag = @"me/friends";
     [UIAppDelegate.facebook requestWithGraphPath:@"me/friends" andDelegate:UIAppDelegate];
     
@@ -172,7 +169,6 @@
 {
     if(!dbDataLoaded)
     {
-        printf("getFriendsList");
         friends = [UIAppDelegate.fb_friends retain];
         [self loadFromServer];
         dbDataLoaded = YES;
@@ -206,7 +202,7 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     
     NSDictionary *friendDict = [users objectAtIndex:indexPath.row];
-    NSLog(@"friendDict %@",friendDict);
+    //NSLog(@"friendDict %@",friendDict);
 
     
     UIImage *bg = [UIImage imageNamed:@"wood_btn.png"]; 
@@ -305,7 +301,6 @@
     
     if ([[user objectForKey:@"name"] rangeOfCharacterFromSet:set].location != NSNotFound) {
     
-        printf("found space");
         //Split the names by the space for the first and last name
         NSArray *name = [[user objectForKey:@"name"] componentsSeparatedByString:@" "];
         if([name count]>1)

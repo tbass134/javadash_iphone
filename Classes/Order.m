@@ -60,7 +60,6 @@ static Order *sharedInstance = nil;
 
 - (id)init
 {
-	printf("order init");
 	@synchronized(self) {
 		[super init];	
 		current_order = nil; //need to load the data here
@@ -92,7 +91,6 @@ static Order *sharedInstance = nil;
 }
 -(void)clearOrders
 {
-    printf("Calling clearOrders\n");
     if([[current_order objectForKey:@"run"]objectForKey:@"orders"] != NULL)
         [[[current_order objectForKey:@"run"]objectForKey:@"orders"] removeAllObjects];
 }
