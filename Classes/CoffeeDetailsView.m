@@ -8,6 +8,7 @@
 
 #import "CoffeeRunSampleAppDelegate.h"
 #import "CoffeeDetailsView.h"
+#import "OrdersViewController.h"
 #import "Order.h"
 #import "MyUISegmentController.h"
 #import "DrinkOrders.h"
@@ -16,6 +17,7 @@
 
 #import "JSON.h"
 #import "DataService.h"
+#import "FlurryAnalytics.h"
 
 
 #define UITEXTVIEWTAG 101
@@ -32,7 +34,7 @@
 @synthesize editLocalOrder;
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-/*
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -40,27 +42,14 @@
     }
     return self;
 }
-*/
 
-
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-	
-	UIView *mainView = [[UIView alloc]initWithFrame:[[UIScreen mainScreen] applicationFrame]];
-	self.view = mainView;
-    UIImageView *bg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bg.png"]];
-    bg.frame = CGRectMake(0, -40, self.view.frame.size.width, self.view.frame.size.height);
-    [mainView addSubview:bg];
-    [mainView release];
-    [bg release];
-}
 -(void)viewDidAppear:(BOOL)animated
 {
     
 }
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
-    
+
     
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(addOrder:)]autorelease];
 	
@@ -194,8 +183,7 @@
          
           ;}
 	}
-    for (id theKey in coffee_dict) 
-    {
+    for (id theKey in coffee_dict) {
         if(![[coffee_dict objectForKey:theKey] isKindOfClass:[NSArray class]])
         {
             UIView *switchView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
@@ -270,7 +258,6 @@
 	[favView addSubview:setFav_switch];
 	[setFav_switch release];
     [mainView addSubview:favView];
-    [setFav_switch release];
     
 
     
@@ -310,13 +297,10 @@
     [mainView release];
     
     
-    [scroll setContentSize:CGSizeMake(self.view.frame.size.width,contentSize+bottom_padding)];
+    [scroll setContentSize:CGSizeMake(self.view.frame.size.width,(contentSize+bottom_padding))];
     [super viewDidLoad];
 }
  
-         
-         
-         
          
 -(UIColor *) randomColor {
   CGFloat red =  (CGFloat)random()/(CGFloat)RAND_MAX;
@@ -344,8 +328,7 @@
 	else
 		[savedDrink setObject:item forKey:key];
 }
--(void)autoSelectFirstValue
-{
+-(void)autoSelectFirstValue{
     for (id theKey in coffee_dict)
     {
         if([[coffee_dict objectForKey:theKey] isKindOfClass:[NSArray class]])
@@ -359,8 +342,7 @@
 
    // NSLog(@"savedDrink %@",savedDrink);
 }
--(void)setValueForSegment:(id)sender
-{
+-(void)setValueForSegment:(id)sender{
 	UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
 	NSString *key = [segmentedControl selected_key];
 	NSString *item = [segmentedControl titleForSegmentAtIndex:[segmentedControl selectedSegmentIndex]];
@@ -375,8 +357,7 @@
 		[savedDrink setObject:item forKey:key];
 }
 
--(void)addOrder:(id)sender
-{
+-(void)addOrder:(id)sender{
 	//save the dictionary to a DB or txtFile	
 	NSString *timestamp = [NSString stringWithFormat:@"%0.0f", [[NSDate date] timeIntervalSince1970]];	
 	UISwitch *_fav = (UISwitch *)[self.view viewWithTag:FAVESWITCHTAG];	
@@ -444,12 +425,59 @@
     }
     else
     {
-        [self.navigationController dismissModalViewControllerAnimated:YES];
+        printf("adding new order");
+        HUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.navigationController.view addSubview:HUD];
+        HUD.delegate = self;
+        [HUD show:YES];
+        [self sendOrders];
+
+        //[self.navigationController dismissModalViewControllerAnimated:YES];
     }
-       
 }
 
-//implementation
+-(void)sendOrders{
+    
+    [HUD hide:YES];
+    SBJSON *parser = [[SBJSON alloc] init];
+	NSMutableString* theString = [NSMutableString string];
+    DrinkOrders *drink_orders = [DrinkOrders instance];
+	NSMutableArray *drink_orders_array  = [drink_orders getArray];
+    NSLog(@"drink_orders_array %@",drink_orders_array);
+	for(int i=0;i<[drink_orders_array count];i++)
+	{
+		NSDictionary *drink_dict = [drink_orders_array objectAtIndex:i];    
+		NSString *drink_str = [parser stringWithObject:drink_dict];
+		if([drink_orders_array count] >1)
+			[theString appendString:[NSString stringWithFormat:@"json=%@",drink_str]];
+		else
+			[theString appendString:drink_str];
+	}
+    [parser release];
+	if(theString != NULL && ![theString isEqualToString:@""])
+	{
+        
+        
+        BOOL orderSent = [[DataService sharedDataService]placeOrder:
+                          [[[[Order sharedOrder] currentOrder]objectForKey:@"run"]objectForKey:@"id"] 
+                                                              order:[Utils urlencode:theString]
+                                                        updateOrder:nil
+                                                            orderID:nil];
+        
+        if(orderSent)
+        {
+            [FlurryAnalytics logEvent:@"Order Added"];
+            self.navigationItem.leftBarButtonItem = nil;
+            DrinkOrders *drink_orders = [DrinkOrders instance];
+            [drink_orders clearArray];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
+            [self.navigationController dismissModalViewControllerAnimated:YES];
+            
+        }
+    }
+    
+}
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     svos = scroll.contentOffset;
     CGPoint pt;
@@ -460,7 +488,6 @@
     pt.y -= 60;
     [scroll setContentOffset:pt animated:YES];           
 }
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [scroll setContentOffset:svos animated:YES]; 
     [textField resignFirstResponder];
@@ -468,6 +495,23 @@
 }
 
 
+-(void)popToMainMenu
+{
+    printf("popToMainMenu");
+    [self.navigationController  popToRootViewControllerAnimated:YES];
+    return;
+    UIViewController *mainMenu;
+    for(int i=0;i<[[self.navigationController viewControllers] count];i++)
+    {
+        if([[[self.navigationController viewControllers] objectAtIndex:i] isKindOfClass:[OrdersViewController class]])
+        {
+            mainMenu =[[self.navigationController viewControllers] objectAtIndex:i];
+            break;
+            
+        }
+    }
+    [self.navigationController popToViewController:mainMenu animated:YES];
+}
 /*
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

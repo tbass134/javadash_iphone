@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MBProgressHUD.h"
 @class SCRSegmentedControl;
 
-@interface CoffeeDetailsView : UIViewController<UITextFieldDelegate> {
+@interface CoffeeDetailsView : UIViewController<UITextFieldDelegate,MBProgressHUDDelegate> {
 
 @private
 	UILabel *_valueLabel;
@@ -33,6 +34,7 @@
     
     NSMutableArray *options_array;
     BOOL editLocalOrder;
+     MBProgressHUD *HUD;
     
 	
 }

@@ -376,44 +376,26 @@
         //[self.tableDataSource addObject:items];
         [locations_array addObject:items];
         
-        location = [[CoffeeLocation alloc]init];
+        //location = [[CoffeeLocation alloc]init];
         NSMutableDictionary *obj = items;
-        //NSLog(@"obj.name %@", [obj objectForKey:@"name"]);
-        
-        location.rating_img_url			= [obj objectForKey:@"rating_img_url"];
-        location.country_code			= [obj objectForKey:@"country_code"];
-        location.id						= [obj objectForKey:@"id"];
-        location.is_closed				= [obj objectForKey:@"is_closed"];
-        location.city					= [[obj objectForKey:@"location"]objectForKey:@"city"];
-        location.mobile_url				= [obj objectForKey:@"mobile_url"];
-        location.review_count			= [obj objectForKey:@"review_count"];
-        location.zip					= [obj objectForKey:@"zip"];
-        location.state					= [obj objectForKey:@"state"];
-        location.latitude				= [[[obj objectForKey:@"location"]objectForKey:@"coordinate"]objectForKey:@"latitude"];
-        location.rating_img_url_small	= [obj objectForKey:@"rating_img_url_small"];
-        location.address1				= [obj objectForKey:@"address1"];
-        location.address2				= [obj objectForKey:@"address2"];
-        location.address3				= [obj objectForKey:@"address3"];
-        location.phone					= [obj objectForKey:@"phone"];
-        location.state_code				= [[obj objectForKey:@"location"]objectForKey:@"state_code"];
-        location.photo_url				= [obj objectForKey:@"photo_url"];
-        location.distance				= [obj objectForKey:@"distance"];
-        location.name					= [obj objectForKey:@"name"];
-        location.url					= [obj objectForKey:@"url"];
-        location.avg_rating				= [obj objectForKey:@"avg_rating"];
-        location.longitude				= [[[obj objectForKey:@"location"]objectForKey:@"coordinate"]objectForKey:@"longitude"];
-        location.nearby_url				= [obj objectForKey:@"nearby_url"];
-        location.photo_url_small		= [obj objectForKey:@"photo_url_small"];
+        NSString *location_id						= [obj objectForKey:@"id"];
+        NSString *latitude				= [[[obj objectForKey:@"location"]objectForKey:@"coordinate"]objectForKey:@"latitude"];
+         NSString *name					= [obj objectForKey:@"name"];
+        //location.url					= [obj objectForKey:@"url"];
+        //location.avg_rating				= [obj objectForKey:@"avg_rating"];
+         NSString *longitude				= [[[obj objectForKey:@"location"]objectForKey:@"coordinate"]objectForKey:@"longitude"];
+        //location.nearby_url				= [obj objectForKey:@"nearby_url"];
+        //location.photo_url_small		= [obj objectForKey:@"photo_url_small"];
         
         
-        float lat = [location.latitude floatValue];
-        float lng = [location.longitude floatValue];
+        float lat = [latitude floatValue];
+        float lng = [longitude floatValue];
         
         CLLocation *tempLocation = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
         ParkPlaceMark *placemark=[[[ParkPlaceMark alloc] initWithCoordinate:[tempLocation coordinate]]retain];
-        placemark.cam_title = location.name;
-        placemark.cam_subtitle = location.name;
-        placemark.location_id = location.id;
+        placemark.cam_title = name;
+        placemark.cam_subtitle = name;
+        placemark.location_id = location_id;
         placemark.location_dict = obj;
         [mapView addAnnotation:placemark];
         [placemark release];
@@ -1066,7 +1048,6 @@
 
 
 - (void)dealloc {
-    [self removeObserver:self];
     [super dealloc];
 	//[conn release];
 	//[self.currentLocation release];

@@ -121,6 +121,7 @@
 			}
             
             cell1.textView.text = str;
+            [str release];
             [orders_cells addObject:cell1];
 			[cell1 release];
             
@@ -285,6 +286,7 @@
         
         CoffeeDetailsView *listView   = [[CoffeeDetailsView alloc]initWithNibName:nil bundle:nil];
         listView.drink = options_dict;
+        [options_dict release];
         listView.edit_order_dict = selected_drink;
         
         listView.orderType = self.type;

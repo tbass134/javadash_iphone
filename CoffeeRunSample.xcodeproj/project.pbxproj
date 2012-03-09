@@ -175,6 +175,7 @@
 		45B7CAA81459F14C00A1F24B /* UIColor+AdWhirlConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B7CA8E1459F14C00A1F24B /* UIColor+AdWhirlConfig.m */; };
 		45B7D99213FDED470002BAF0 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B7D99113FDED460002BAF0 /* iAd.framework */; };
 		45B8880D13A81B0100C7BD9B /* CoffeeDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B8880C13A81B0100C7BD9B /* CoffeeDetailsView.m */; };
+		45BFAA97150998BA004E1116 /* CoffeeDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45BFAA96150998BA004E1116 /* CoffeeDetailsView.xib */; };
 		45CD35B914FEFCC400407139 /* Drink_Selection_View.png in Resources */ = {isa = PBXBuildFile; fileRef = 45CD35B314FEFCC400407139 /* Drink_Selection_View.png */; };
 		45CD35BA14FEFCC400407139 /* Order_Options_View.png in Resources */ = {isa = PBXBuildFile; fileRef = 45CD35B414FEFCC400407139 /* Order_Options_View.png */; };
 		45CD35BB14FEFCC400407139 /* Orders_View.png in Resources */ = {isa = PBXBuildFile; fileRef = 45CD35B514FEFCC400407139 /* Orders_View.png */; };
@@ -655,6 +656,7 @@
 		45B7D99113FDED460002BAF0 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		45B8880B13A81B0100C7BD9B /* CoffeeDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoffeeDetailsView.h; sourceTree = "<group>"; };
 		45B8880C13A81B0100C7BD9B /* CoffeeDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoffeeDetailsView.m; sourceTree = "<group>"; };
+		45BFAA96150998BA004E1116 /* CoffeeDetailsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoffeeDetailsView.xib; sourceTree = "<group>"; };
 		45CAC7C4144E1DB00053BFE3 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
 		45CD35B314FEFCC400407139 /* Drink_Selection_View.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Drink_Selection_View.png; sourceTree = "<group>"; };
 		45CD35B414FEFCC400407139 /* Order_Options_View.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Order_Options_View.png; sourceTree = "<group>"; };
@@ -1696,6 +1698,7 @@
 				A9A1FBA012E89E6300390640 /* NameListViewController.xib */,
 				45B8880B13A81B0100C7BD9B /* CoffeeDetailsView.h */,
 				45B8880C13A81B0100C7BD9B /* CoffeeDetailsView.m */,
+				45BFAA96150998BA004E1116 /* CoffeeDetailsView.xib */,
 				458D1D5A13A950FD00243581 /* MyUISegmentController.h */,
 				458D1D5B13A950FD00243581 /* MyUISegmentController.m */,
 			);
@@ -1989,6 +1992,7 @@
 				45CD35BC14FEFCC400407139 /* Run_View.png in Resources */,
 				45CD35BD14FEFCC400407139 /* Run_View2.png in Resources */,
 				45CD35BE14FEFCC400407139 /* Settings_View.png in Resources */,
+				45BFAA97150998BA004E1116 /* CoffeeDetailsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

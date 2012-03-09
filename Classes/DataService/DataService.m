@@ -36,9 +36,8 @@ static DataService* sharedDataService = nil;
 -(BOOL)getOrders
 {
     BOOL dataLoaded = NO;
-    int ts = [[NSDate date] timeIntervalSince1970];
  
-    NSString *urlString = [NSString stringWithFormat:@"%@/getorders.php?deviceid=%@&ts=%i",urlPrefix,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"],ts];
+    NSString *urlString = [NSString stringWithFormat:@"%@/getorders.php?deviceid=%@",urlPrefix,[[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"]];
    
     NSURL *url = [NSURL URLWithString:urlString];
     ASIFormDataRequest  *request = [[ASIFormDataRequest alloc] initWithURL:url];
@@ -46,6 +45,7 @@ static DataService* sharedDataService = nil;
     [request setTimeOutSeconds:TIMEOUT_SECONDS];
     [request startSynchronous];
     NSString *ret = [request responseString];
+    [request release];
     
     #if IN_TESTING
     NSLog(@"urlString %@",urlString);
@@ -90,6 +90,7 @@ static DataService* sharedDataService = nil;
     [request setTimeOutSeconds:TIMEOUT_SECONDS];
     [request startSynchronous];
     NSString *ret = [request responseString];
+    [request release];
     
 #if IN_TESTING
     NSLog(@"urlString %@",urlString);
@@ -162,13 +163,14 @@ static DataService* sharedDataService = nil;
     [postVars appendString:[NSString stringWithFormat:@"&push_type=%@",@"doOrder"]];
     
     NSLog(@"postVars %@",postVars);
+    [postVars release];
     
     #endif
     
-    NSLog(@"postBody %@",[request postBody]);
-      [request setTimeOutSeconds:TIMEOUT_SECONDS];
+    [request setTimeOutSeconds:TIMEOUT_SECONDS];
     [request startSynchronous];
     NSString *ret = [request responseString];
+    [request release];
     
 #if IN_TESTING
     NSLog(@"urlString %@",urlString);
@@ -200,6 +202,7 @@ static DataService* sharedDataService = nil;
     [request setTimeOutSeconds:TIMEOUT_SECONDS];
     [request startSynchronous];
     NSString *ret = [request responseString];
+    [request release];
     
 #if IN_TESTING
     NSLog(@"urlString %@",urlString);
@@ -225,6 +228,7 @@ static DataService* sharedDataService = nil;
     [request setTimeOutSeconds:TIMEOUT_SECONDS];
     [request startSynchronous];
     NSString *ret = [request responseString];
+    [request release];
     
 #if IN_TESTING
     NSLog(@"urlString %@",urlString);
@@ -244,7 +248,7 @@ static DataService* sharedDataService = nil;
 -(BOOL)leaverun:(NSString *)deviceid runID:(NSString *)run_id
 {
     BOOL dataLoaded = NO;
-    NSString *urlString = [NSString stringWithFormat:@"%@/completerun.php?deviceid=%@&run_id=%@",urlPrefix,deviceid,run_id];
+    NSString *urlString = [NSString stringWithFormat:@"%@/leaverun.php?deviceid=%@&run_id=%@",urlPrefix,deviceid,run_id];
     
     NSURL *url = [NSURL URLWithString:urlString];
     ASIFormDataRequest  *request = [[ASIFormDataRequest alloc] initWithURL:url];
@@ -252,15 +256,14 @@ static DataService* sharedDataService = nil;
     [request setTimeOutSeconds:TIMEOUT_SECONDS];
     [request startSynchronous];
     NSString *ret = [request responseString];
-    
+    [request release];
 #if IN_TESTING
     NSLog(@"urlString %@",urlString);
     NSLog(@"Login Return:%@",ret);
 #endif
     NSDictionary *retJSON = [[ret JSONValue] retain];
     
-    if(retJSON != NULL){
-        [[Order sharedOrder] setOrder:[NSMutableDictionary dictionaryWithDictionary:retJSON]];   
+    if([retJSON objectForKey:@"success"]){
         dataLoaded = YES;
     }else {
         [self performSelectorOnMainThread:@selector(popUpWithMessage:) withObject:@"Could not connect to server" waitUntilDone:NO];
@@ -278,7 +281,7 @@ static DataService* sharedDataService = nil;
     [request setTimeOutSeconds:TIMEOUT_SECONDS];
     [request startSynchronous];
     NSString *ret = [request responseString];
-    
+    [request release];
 #if IN_TESTING
     NSLog(@"urlString %@",urlString);
     NSLog(@"Return:%@",ret);
@@ -305,7 +308,7 @@ static DataService* sharedDataService = nil;
     [request setTimeOutSeconds:TIMEOUT_SECONDS];
     [request startSynchronous];
     NSString *ret = [request responseString];
-    
+    [request release];
     #if IN_TESTING
     NSLog(@"urlString %@",urlString);
     NSLog(@"Login Return:%@",ret);
@@ -317,7 +320,7 @@ static DataService* sharedDataService = nil;
     }else {
         [self performSelectorOnMainThread:@selector(popUpWithMessage:) withObject:@"Could not connect to server" waitUntilDone:NO];
     }
-    return fb;\
+    return fb;
 }
 
 -(BOOL)purchaseApp
@@ -332,7 +335,7 @@ static DataService* sharedDataService = nil;
     [request setTimeOutSeconds:TIMEOUT_SECONDS];
     [request startSynchronous];
     NSString *ret = [request responseString];
-    
+    [request release];
 #if IN_TESTING
     NSLog(@"urlString %@",urlString);
     NSLog(@"Login Return:%@",ret);
