@@ -11,13 +11,6 @@
 
 @implementation FavoriteLocations
 //@synthesize path;
-+(void)getFavoritesPlist
-{
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	NSString *documentsDirectory = [paths objectAtIndex:0];
-	NSString *path = [documentsDirectory stringByAppendingPathComponent:@"LocationFavorites.plist"];
-	//NSLog(@"path %@",path);
-}
 +(BOOL)writeDataToFile:(NSString *)str
 {
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

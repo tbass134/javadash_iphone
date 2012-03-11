@@ -14,7 +14,7 @@
 	//NSString *path;
 }
 //å@property(nonatomic,retain)NSString *path;
-+(void)getFavoritesPlist;
+
 +(BOOL)writeDataToFile:(NSString *)str;
 +(NSMutableArray *)getLastFavoriteLocation;
 +(NSMutableArray *)getAllFavoriteLocations;

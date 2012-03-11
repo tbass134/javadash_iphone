@@ -18,12 +18,12 @@
 
 
 //Dev PUSH
-//#define kApplicationKey @"V1IdApIgQ_WuhReygjVqBg"
-//#define kApplicationSecret @"lMYfECKyQGypK1MzGOf6Ew"
+#define kApplicationKey @"V1IdApIgQ_WuhReygjVqBg"
+#define kApplicationSecret @"lMYfECKyQGypK1MzGOf6Ew"
 
 //Production PUSH
-#define kApplicationKey @"4fh8xUNQT1apEm9hSPoo7A"
-#define kApplicationSecret @"kzEtWLZnRBSld0813S1cNQ"
+//#define kApplicationKey @"4fh8xUNQT1apEm9hSPoo7A"
+//#define kApplicationSecret @"kzEtWLZnRBSld0813S1cNQ"
 
 //AdWhirl Constants
 #define kSampleAppKey @"ec8e031962fe4384837daf3c8905045c"
@@ -112,6 +112,7 @@ static NSString* kAppId = @"189714094427611";
 		// Add the tab bar controller's current view as a subview of the window
 		[window addSubview:nav.view];
 		[window makeKeyAndVisible];	
+        [nav release];
  	}
 	else {
 		[self loadUI];
@@ -298,9 +299,7 @@ static NSString* kAppId = @"189714094427611";
 						  stringByReplacingOccurrencesOfString: @"<" withString: @""] 
 						 stringByReplacingOccurrencesOfString: @">" withString: @""] 
 						stringByReplacingOccurrencesOfString: @" " withString: @""];
-    #if TARGET_IPHONE_SIMULATOR
 	NSLog(@"Device Token: %@", self.deviceToken);
-    #endif
 	if ([application enabledRemoteNotificationTypes] == UIRemoteNotificationTypeNone) {
 		NSLog(@"Notifications are disabled for this application. Not registering with Urban Airship");
         
@@ -459,11 +458,13 @@ static NSString* kAppId = @"189714094427611";
                                    
         if([friends insertFriendData:my_dict])
             printf("My Data Added");
+        [my_dict release];
         
         //Test Friend
         NSDictionary *temp_dict = [[NSDictionary alloc]initWithObjectsAndKeys:@"Tony",@"FIRSTNAME",@"home",@"LASTNAME",@"tbass134@yahoo.com", @"EMAIL",@"b76cc8ae0270c31e99112e8ec823711a41bec4e508a9d74b76edcc290a5b7f45",@"TOKEN",[NSNumber numberWithBool:YES],@"ENABLE_EMAIL", nil];
         if([friends insertFriendData:temp_dict])
             [[NSUserDefaults standardUserDefaults]setValue:[NSNumber numberWithBool:1] forKey:@"user_added"];
+        [temp_dict release];
     }
 	[friends release];
 }

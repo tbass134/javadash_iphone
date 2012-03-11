@@ -571,6 +571,7 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
     [self initViewCurrentOrders];
     
 }
+/*
 -(void)sendOrder:(id)sender
 {
     modalViewDidAppear = YES;
@@ -618,6 +619,7 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
     }
     
 }
+ */
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	if(buttonIndex == 1) {
 		
@@ -702,6 +704,7 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
 */
 -(void)viewDidAppear:(BOOL)animated
 {
+    
     if(!modalViewDidAppear)
     {
         if(orders_cells != NULL)
@@ -719,18 +722,19 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
             [self gotoScreen];
     }
     
+    
     if(self.navigationItem.rightBarButtonItem == send_order)
     {
         if([[[DrinkOrders instance]getArray]count]>0)
         {
             send_order.enabled = YES;
-            [self sendOrder:nil];
         }
         else
         {
             send_order.enabled = NO;
         }
     }
+     
 
     modalViewDidAppear = NO;
    /* 

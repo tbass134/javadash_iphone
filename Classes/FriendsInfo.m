@@ -182,7 +182,7 @@
 
 -(NSArray *)getAllFriends
 {
-	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	NSFetchRequest *fetchRequest = [[[NSFetchRequest alloc] init]autorelease];
 	NSManagedObjectContext *context = [self managedObjectContext];    
 	NSEntityDescription *friendsEntity = [NSEntityDescription entityForName:@"Friends" inManagedObjectContext:context];
 	[fetchRequest setEntity:friendsEntity];

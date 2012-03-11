@@ -59,7 +59,7 @@
     {
         
         [edit_order_dict setObject:text_view.text forKey:@"CustomOrder"];
-        DrinkOrders *drink_orders = [DrinkOrders instance];
+        //DrinkOrders *drink_orders = [DrinkOrders instance];
         //NSLog(@"drink_orders %@",drink_orders);
         
     
@@ -96,6 +96,7 @@
         [[drink_orders getArray]addObject:savedDrink];
         
         [self.navigationController popViewControllerAnimated:YES];
+        [savedDrink release];
     }
      
 	
