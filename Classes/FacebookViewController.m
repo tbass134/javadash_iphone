@@ -342,7 +342,7 @@
 	else
 		[Utils showAlert:nil withMessage:@"User has already been added to friends list" inView:self.view];	
 
-    
+    [user_dict release];
     followAll_clicked = NO;
 
 }

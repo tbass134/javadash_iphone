@@ -40,6 +40,7 @@
 - (void)viewDidLoad {
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(save:)];
 
+    /*
 	NSDictionary *plistDictionary = [[NSUserDefaults standardUserDefaults]dictionaryForKey:@"plistDictionary"];
 	if(!plistDictionary)
 	{
@@ -52,6 +53,7 @@
 			[standardUserDefaults setObject:plistDictionary forKey:@"plistDictionary"];
 		
 	}
+     */
 	
 	
 	

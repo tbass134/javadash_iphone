@@ -152,7 +152,8 @@
                 oneRowControl.columnCount = 2;
             }
 
-            oneRowControl.segmentTitles = keys;            
+            oneRowControl.segmentTitles = keys; 
+            [keys release];
             CGRect oneRowControlFrame = oneRowControl.frame;
             oneRowControlFrame.size.height = oneRowControl.rowCount* 36;
             [seg_view addSubview:oneRowControl];
@@ -180,6 +181,7 @@
             
             [oneRowControl release];
             [mainView addSubview:seg_view];
+            [seg_view release];
          
           ;}
 	}
@@ -208,7 +210,7 @@
             switchView.frame = switchViewframe;     
              
             [mainView addSubview:switchView];
-            [switchLabel release];
+            //[switchLabel release];
             [switchView release];
         }
     }

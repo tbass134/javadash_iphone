@@ -71,6 +71,8 @@
 		452EA99E14FE783F00C8FF71 /* HelpViewControllerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 452EA99C14FE783F00C8FF71 /* HelpViewControllerViewController.xib */; };
 		4531C40E13DB431F00BD246C /* DBSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4531C40813DB431F00BD246C /* DBSignupViewController.m */; };
 		4531C40F13DB431F00BD246C /* DBSignupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4531C40913DB431F00BD246C /* DBSignupViewController.xib */; };
+		4533F7CD150D43170079E0C7 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4533F7CB150D43170079E0C7 /* Default.png */; };
+		4533F7CE150D43170079E0C7 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4533F7CC150D43170079E0C7 /* Default@2x.png */; };
 		453A88DF13DFB7240044DD5E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 453A88DE13DFB7240044DD5E /* CFNetwork.framework */; };
 		4553D2FA12C9368100B27375 /* CoffeeLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4553D2F912C9368100B27375 /* CoffeeLocation.m */; };
 		4553D35012C93DF400B27375 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 4553D34512C93DF400B27375 /* NSObject+SBJSON.m */; };
@@ -251,6 +253,7 @@
 		45FBA0F414E8A09E00FA8BFC /* back-big@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45FBA0F214E8A09D00FA8BFC /* back-big@2x.png */; };
 		45FBA0F714E8A0AF00FA8BFC /* Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 45FBA0F514E8A0AE00FA8BFC /* Back.png */; };
 		45FBA0F814E8A0AF00FA8BFC /* Back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45FBA0F614E8A0AE00FA8BFC /* Back@2x.png */; };
+		45FE7DED150D31C700C05104 /* CoffeeDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45FE7DEC150D31C700C05104 /* CoffeeDetailsView.xib */; };
 		A90BF1B313438581003FF481 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = A90BF1B213438581003FF481 /* Order.m */; };
 		A90BF2F91343C124003FF481 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A90BF2F71343C124003FF481 /* InfoViewController.m */; };
 		A90BF2FA1343C124003FF481 /* InfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A90BF2F81343C124003FF481 /* InfoViewController.xib */; };
@@ -458,6 +461,8 @@
 		4531C40713DB431F00BD246C /* DBSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBSignupViewController.h; sourceTree = "<group>"; };
 		4531C40813DB431F00BD246C /* DBSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBSignupViewController.m; sourceTree = "<group>"; };
 		4531C40913DB431F00BD246C /* DBSignupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBSignupViewController.xib; sourceTree = "<group>"; };
+		4533F7CB150D43170079E0C7 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		4533F7CC150D43170079E0C7 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		453A88DE13DFB7240044DD5E /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		4553D2F812C9368100B27375 /* CoffeeLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoffeeLocation.h; sourceTree = "<group>"; };
 		4553D2F912C9368100B27375 /* CoffeeLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoffeeLocation.m; sourceTree = "<group>"; };
@@ -740,6 +745,7 @@
 		45FBA0F214E8A09D00FA8BFC /* back-big@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-big@2x.png"; sourceTree = "<group>"; };
 		45FBA0F514E8A0AE00FA8BFC /* Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Back.png; sourceTree = "<group>"; };
 		45FBA0F614E8A0AE00FA8BFC /* Back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Back@2x.png"; sourceTree = "<group>"; };
+		45FE7DEC150D31C700C05104 /* CoffeeDetailsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoffeeDetailsView.xib; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* CoffeeRunSample-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoffeeRunSample-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		A90BF1B113438581003FF481 /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
 		A90BF1B213438581003FF481 /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
@@ -936,6 +942,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4533F7CB150D43170079E0C7 /* Default.png */,
+				4533F7CC150D43170079E0C7 /* Default@2x.png */,
 				45FBA06A14E87CCC00FA8BFC /* images */,
 				45B095E614C1FF5800683132 /* Icon.png */,
 				45B095E714C1FF5800683132 /* Icon@2x.png */,
@@ -1696,6 +1704,7 @@
 				A9A1FBA012E89E6300390640 /* NameListViewController.xib */,
 				45B8880B13A81B0100C7BD9B /* CoffeeDetailsView.h */,
 				45B8880C13A81B0100C7BD9B /* CoffeeDetailsView.m */,
+				45FE7DEC150D31C700C05104 /* CoffeeDetailsView.xib */,
 				458D1D5A13A950FD00243581 /* MyUISegmentController.h */,
 				458D1D5B13A950FD00243581 /* MyUISegmentController.m */,
 			);
@@ -1989,6 +1998,9 @@
 				45CD35BC14FEFCC400407139 /* Run_View.png in Resources */,
 				45CD35BD14FEFCC400407139 /* Run_View2.png in Resources */,
 				45CD35BE14FEFCC400407139 /* Settings_View.png in Resources */,
+				45FE7DED150D31C700C05104 /* CoffeeDetailsView.xib in Resources */,
+				4533F7CD150D43170079E0C7 /* Default.png in Resources */,
+				4533F7CE150D43170079E0C7 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

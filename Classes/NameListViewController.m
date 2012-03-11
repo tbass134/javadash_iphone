@@ -151,7 +151,7 @@
     CoffeeDetailsView *listView   = [[CoffeeDetailsView alloc]initWithNibName:@"CoffeeDetailsView" bundle:nil];
 	listView.drink = drink_dict;    
 	[self.navigationController pushViewController:listView animated:YES];
-    //[drink_dict release];
+    [drink_dict release];
 	[listView release];
 }
 
