@@ -58,6 +58,8 @@
     
     NSMutableArray *locations_array;
     BOOL currentLocationLoaded;
+    
+    BOOL viewIsVisible;
 
 }
 @property (retain,nonatomic) MKMapView *mapView;

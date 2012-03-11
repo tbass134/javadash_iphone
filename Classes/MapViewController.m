@@ -195,6 +195,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
+    if(!self.view.window)return;
 	NSLog(@"could not retrive Location %@",error);
     [locationManager stopUpdatingLocation];
     #ifdef  TARGET_IPHONE_SIMULATOR
@@ -226,6 +227,7 @@
 }
 -(void)loadData:(NSString *)term loc:(NSString *)l
 {
+    if(!self.view.window)return;
     seg_control.enabled = YES;
     if([term isEqualToString:@""])
         term = kYelpSearchTerm;
@@ -241,6 +243,8 @@
 #pragma mark YELP API
 - (void)loadYelp:(NSString *)term loc:(NSString *)l {
     
+    printf("Calling Load Yelp\n");
+    if(!self.view.window)return;
     // OAuthConsumer doesn't handle pluses in URL, only percent escapes
     // OK: http://api.yelp.com/v2/search?term=restaurants&location=new%20york
     // FAIL: http://api.yelp.com/v2/search?term=restaurants&location=new+york
@@ -284,10 +288,14 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    if(!self.view.window)return;
+
     [_yelpResponseData setLength:0];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    if(!self.view.window)return;
+
     [_yelpResponseData appendData:data];
 }
 
@@ -306,17 +314,8 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     
-    if([self.tableView respondsToSelector:@selector(reloadData)])
-    {
-        printf("OK");
-    }
-    else
-    {
-        printf("Fail");
-        return;
-    }
-        
-     loadingView.hidden = YES;
+    if(!self.view.window)return;
+    loadingView.hidden = YES;
     noResultsFound.hidden = YES;
     
     //self.tableView.hidden = NO;
@@ -1066,7 +1065,6 @@
 
 
 - (void)dealloc {
-    [self removeObserver:self];
     [super dealloc];
 	//[conn release];
 	//[self.currentLocation release];
