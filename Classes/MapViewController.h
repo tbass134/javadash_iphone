@@ -24,6 +24,7 @@
     UIBarButtonItem *cancel_btn;
 
 	NSMutableDictionary *yelp_dict;
+    BOOL yelpLoading;
 	CLLocationManager *locationManager;
 	MKPlacemark *mPlacemark;
     

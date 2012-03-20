@@ -39,6 +39,7 @@
 
 - (void)viewDidLoad {
     
+    self.tableView.backgroundColor = [UIColor clearColor];
     self.favorites_array = [[NSMutableArray alloc]init];
     self.yelp_id_array = [FavoriteLocations getAllFavoriteLocations];
     

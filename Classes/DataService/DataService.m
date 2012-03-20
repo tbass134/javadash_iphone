@@ -120,7 +120,9 @@ static DataService* sharedDataService = nil;
 	{
 		[device_id_array addObject:[[[dash_dict objectForKey:@"selected_friends"] objectAtIndex:i]valueForKey:@"device_id"]];
 	}
+    #if IN_TESTING
     NSLog(@"device_id_array %@",device_id_array);
+    #endif
     
     NSString *devices = [device_id_array componentsJoinedByString:@","];
     
@@ -358,8 +360,8 @@ static DataService* sharedDataService = nil;
     if (self) {
         // Initialization code here.
         NSString *currentVersion = @"1_0";
-        urlPrefix = [@"http://dev.javadash.com/JavaDash/php" retain];
-        //urlPrefix = [[NSString stringWithFormat:@"http://javadash.com/app/%@/JavaDash/php",currentVersion] retain];
+        //urlPrefix = [@"http://dev.javadash.com/JavaDash/php" retain];
+        urlPrefix = [[NSString stringWithFormat:@"http://javadash.com/app/%@/JavaDash/php",currentVersion] retain];
         NSLog(@"urlPrefix %@",urlPrefix);
     }
     

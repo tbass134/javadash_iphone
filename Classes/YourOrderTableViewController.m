@@ -13,6 +13,8 @@
 #import "Utils.h"
 #import "CoffeeDetailsView.h"
 #import "Order.h"
+#import "DataService.h"
+#import "SBJSON.h"
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 320.0f
@@ -43,8 +45,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.coffee_orders_array = [[NSMutableArray alloc]init];
+	[self.tableView initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    
+    
     self.tableView.backgroundColor = [UIColor clearColor];
-	//[self.tableView initWithFrame:CGRectZero style:UITableViewStyleGrouped];
 	if([self.type isEqualToString:@"favorites"])
 	{
 		self.coffee_orders_array = [SavedDrinksList getAllDrinks];
@@ -74,6 +78,9 @@
 		for(int i=0;i<orders_count;i++)
 		{
             TKLabelTextViewCell *cell1 = [[TKLabelTextViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier];
+            UIView *cellView = [[[UIView alloc] init] autorelease];
+            cellView.backgroundColor = [UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1];
+            cell1.selectedBackgroundView = cellView;
 			NSMutableString *str = [[NSMutableString alloc]init];
             
 			NSArray *order_dict = [self.coffee_orders_array objectAtIndex:i];
@@ -266,12 +273,37 @@
     
     if([self.type isEqualToString:@"favorites"])
     {
-        NSDictionary *order = [self.coffee_orders_array  objectAtIndex:indexPath.row];
+        NSDictionary *selected_order = [self.coffee_orders_array  objectAtIndex:indexPath.row];
         
+        /*
         DrinkOrders *drink_orders = [DrinkOrders instance];
         [[drink_orders getArray]addObject:order];
         [Utils showAlert:@"Order Added" withMessage:nil inView:self.view];
         [self.navigationController popViewControllerAnimated:YES];
+        */
+        
+        
+        
+        SBJSON *parser = [[SBJSON alloc] init];	
+        NSString *order_str = [parser stringWithObject:selected_order];
+        [parser release];
+        
+   
+        
+        
+        BOOL orderPlaced = [[DataService sharedDataService]placeOrder:
+                          [[[[Order sharedOrder] currentOrder]objectForKey:@"run"]objectForKey:@"id"] 
+                                                              order:order_str
+                                                        updateOrder:nil
+                                                            orderID:nil];
+        if(orderPlaced)
+        {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+
+        
+        
     }
     else
     {

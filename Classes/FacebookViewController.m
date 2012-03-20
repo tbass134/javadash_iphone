@@ -63,8 +63,8 @@
     HUD.delegate = self;
     [HUD show:YES];
     NSDictionary *allFBUsers = [[DataService sharedDataService]getFacebookUsersOfApp];
-    //NSLog(@"allFBUsers %@",allFBUsers);
-    if(![allFBUsers objectForKey:@"success"])
+    NSLog(@"allFBUsers %@",allFBUsers);
+    if(allFBUsers !=NULL)
     {
         [HUD hide:YES];
         loading_txt.hidden = YES;

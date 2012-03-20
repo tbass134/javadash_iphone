@@ -75,6 +75,7 @@
     
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * text_array.count, 0);
 
+    [text_array release];
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 }

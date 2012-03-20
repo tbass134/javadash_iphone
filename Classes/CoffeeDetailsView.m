@@ -399,53 +399,36 @@
     }
     if(edit_order_dict !=NULL)
     {
-        Order *order = [Order sharedOrder];
-        SBJSON *parser = [[SBJSON alloc] init];	
-        NSString *order_str = [parser stringWithObject:savedDrink];
-        [parser release];
         
-        NSDictionary *selected_drink = [[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"]objectAtIndex:selected_index];
-        
-        
-        
-        BOOL orderPlaced = [[DataService sharedDataService]placeOrder:
-                                                            [[[order currentOrder]objectForKey:@"run"]objectForKey:@"id"]
-                                                                order:order_str
-                                                          updateOrder:@"1"
-                                                              orderID:[selected_drink objectForKey:@"order_id"]
-                                                            ];
-        
-        if(orderPlaced)
-        {
-            //clear the drink orders array
-            [[DrinkOrders instance]clearArray];
-            //[Utils showAlert:@"Order Updated" withMessage:nil inView:self.view];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-        
+        printf("adding new order");
+        HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+        [self.navigationController.view addSubview:HUD];
+        // Regiser for HUD callbacks so we can remove it from the window at the right time
+        HUD.delegate = self;
+        // Show the HUD while the provided method executes in a new thread
+        [HUD showWhileExecuting:@selector(editOrder) onTarget:self withObject:nil animated:YES];
     }
     else
     {
         printf("adding new order");
-        HUD = [[MBProgressHUD alloc] initWithView:self.view];
+        HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
         [self.navigationController.view addSubview:HUD];
+        // Regiser for HUD callbacks so we can remove it from the window at the right time
         HUD.delegate = self;
-        [HUD show:YES];
-        [self sendOrders];
-
-        //[self.navigationController dismissModalViewControllerAnimated:YES];
+        // Show the HUD while the provided method executes in a new thread
+        [HUD showWhileExecuting:@selector(sendOrders) onTarget:self withObject:nil animated:YES];
     }
 }
 
+#pragma mark ADD ORDER
 -(void)sendOrders{
     
-    [HUD hide:YES];
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     SBJSON *parser = [[SBJSON alloc] init];
 	NSMutableString* theString = [NSMutableString string];
     DrinkOrders *drink_orders = [DrinkOrders instance];
 	NSMutableArray *drink_orders_array  = [drink_orders getArray];
-    NSLog(@"drink_orders_array %@",drink_orders_array);
+   //NSLog(@"drink_orders_array %@",drink_orders_array);
 	for(int i=0;i<[drink_orders_array count];i++)
 	{
 		NSDictionary *drink_dict = [drink_orders_array objectAtIndex:i];    
@@ -468,19 +451,65 @@
         
         if(orderSent)
         {
-            [FlurryAnalytics logEvent:@"Order Added"];
-            self.navigationItem.leftBarButtonItem = nil;
-            DrinkOrders *drink_orders = [DrinkOrders instance];
-            [drink_orders clearArray];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
-            [self.navigationController dismissModalViewControllerAnimated:YES];
+            [self performSelectorOnMainThread:@selector(orderAdded)
+                                   withObject:nil
+                                waitUntilDone:YES];
+            
             
         }
-    }
+    }    
+    [pool release];
+}
+-(void)orderAdded{
+    [FlurryAnalytics logEvent:@"Order Added"];
+    self.navigationItem.leftBarButtonItem = nil;
+    DrinkOrders *drink_orders = [DrinkOrders instance];
+    [drink_orders clearArray];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
     
+    [self.navigationController dismissModalViewControllerAnimated:YES];
 }
 
+#pragma mark EDIT ORDER
+-(void)editOrder{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    Order *order = [Order sharedOrder];
+    SBJSON *parser = [[SBJSON alloc] init];	
+    NSString *order_str = [parser stringWithObject:savedDrink];
+    [parser release];
+    
+    NSDictionary *selected_drink = [[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"]objectAtIndex:selected_index];
+    
+    
+    
+    BOOL orderPlaced = [[DataService sharedDataService]placeOrder:
+                        [[[order currentOrder]objectForKey:@"run"]objectForKey:@"id"]
+                                                            order:order_str
+                                                      updateOrder:@"1"
+                                                          orderID:[selected_drink objectForKey:@"order_id"]
+                        ];
+    
+    if(orderPlaced)
+    {
+        [self performSelectorOnMainThread:@selector(orderEdited)
+                               withObject:nil
+                            waitUntilDone:YES];
+        
+    }
+    [pool release];
+}
+-(void)orderEdited{
+     if(!self.view.window)return; 
+    //clear the drink orders array
+    [[DrinkOrders instance]clearArray];
+    //[Utils showAlert:@"Order Updated" withMessage:nil inView:self.view];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
+     if(!self.view.window)return;
     svos = scroll.contentOffset;
     CGPoint pt;
     CGRect rc = [textField bounds];
@@ -491,6 +520,7 @@
     [scroll setContentOffset:pt animated:YES];           
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+     if(!self.view.window)return;
     [scroll setContentOffset:svos animated:YES]; 
     [textField resignFirstResponder];
     return YES;
@@ -514,6 +544,18 @@
     }
     [self.navigationController popToViewController:mainMenu animated:YES];
 }
+
+#pragma mark -
+#pragma mark MBProgressHUDDelegate methods
+
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+     if(!self.view.window)return;
+    // Remove HUD from screen when the HUD was hidded
+    [HUD removeFromSuperview];
+    [HUD release];
+	HUD = nil;
+}
+
 /*
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

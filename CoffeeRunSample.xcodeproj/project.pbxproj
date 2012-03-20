@@ -929,7 +929,6 @@
 			isa = PBXGroup;
 			children = (
 				452B4CC314DEE3DB000794EF /* libxml2.dylib */,
-				456D1DB814D5C03E007143BD /* MobileCoreServices.framework */,
 				45D7298D14C33B23002469AE /* CoffeeRunSample.entitlements */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -960,6 +959,7 @@
 			isa = PBXGroup;
 			children = (
 				45CAC7C4144E1DB00053BFE3 /* libGoogleAnalytics.a */,
+				456D1DB814D5C03E007143BD /* MobileCoreServices.framework */,
 				45B717D11405D8F6001E526D /* StoreKit.framework */,
 				45B717D31405D91D001E526D /* Security.framework */,
 				451BCC9813FF4545004378F9 /* SystemConfiguration.framework */,
@@ -2269,7 +2269,7 @@
 					armv7,
 					armv6,
 				);
-				CODE_SIGN_IDENTITY = "iPhone Developer: Tony Hung (QRKXMQ42RZ)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Tony Hung";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2291,7 +2291,7 @@
 					"\"$(SRCROOT)/Classes\"",
 				);
 				PRODUCT_NAME = CoffeeRunSample;
-				PROVISIONING_PROFILE = "4966230D-9910-40AF-A340-B19BB8C9CF50";
+				PROVISIONING_PROFILE = "604B5075-3206-48E1-B07B-97EB5288C6C1";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};

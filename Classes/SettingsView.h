@@ -12,8 +12,9 @@
 #import "Bumper.h"
 #import "CoffeeRunSampleAppDelegate.h"
 #import "FriendsInfo.h"
+#import "MBProgressHUD.h"
 
-@interface SettingsView : UIViewController<BumpAPIDelegate,UITableViewDelegate, UITableViewDataSource> {
+@interface SettingsView : UIViewController<BumpAPIDelegate,UITableViewDelegate, UITableViewDataSource,MBProgressHUDDelegate> {
 
     IBOutlet UIView *mainView;
     IBOutlet UIScrollView *scrollView;
@@ -23,7 +24,7 @@
     IBOutlet UIImageView *profile_image;
     IBOutlet UILabel *profile_name;
     IBOutlet UILabel *no_friends_txt;
-	
+	MBProgressHUD *HUD;
 	
 	//Core Data
 	NSFetchedResultsController *fetchedResultsController;

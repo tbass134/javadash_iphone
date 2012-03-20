@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "CoffeeRunSampleAppDelegate.h"
+#import "MBProgressHUD.h"
 
-@interface CustomOrderViewController : UIViewController<UITextViewDelegate> {
+@interface CustomOrderViewController : UIViewController<UITextViewDelegate,MBProgressHUDDelegate>{
 
+    MBProgressHUD *HUD;
 	IBOutlet UITextView *text_view;
 	IBOutlet UILabel *label;
 	IBOutlet UIButton *saveBtn;

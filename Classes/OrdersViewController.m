@@ -55,22 +55,24 @@
 
 -(void)checkForOrders
 {
+    /*
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.navigationController.view addSubview:HUD];
     // Regiser for HUD callbacks so we can remove it from the window at the right time
     HUD.delegate = self;
 	[HUD show:YES];
+    */
     [self getOrders];
 }
 -(void)getOrders
 {
-    [HUD hide:YES];
+    //[HUD hide:YES];
     if([[NSUserDefaults standardUserDefaults]valueForKey:@"_UALastDeviceToken"] == NULL)
         [Utils createUniqueDeviceID];
     
-    BOOL dataLoaded = [[DataService sharedDataService]getOrders];
-    if(dataLoaded)
-    {
+    //BOOL dataLoaded = [[DataService sharedDataService]getOrders];
+    //if(dataLoaded)
+    //{
         Order *order = [Order sharedOrder];
         if(![[[order currentOrder] objectForKey:@"run"]objectForKey:@"id"])
         {
@@ -85,11 +87,11 @@
         current_orders_table.hidden = NO;
         [self gotoScreen];
 
-    }
+    /*}
     else
     {
         [self showNoOrdersView:YES withTitle:@"Could not connect to server" andMessage:nil];
-    }
+    }*/
     
 }
 -(void)viewCurrentOrders
@@ -115,6 +117,7 @@
 	{
         printf("No Runs Available");
         [self showNoOrdersView:YES withTitle:@"No Runs Available" andMessage:nil];
+        addOrder_btn.enabled = NO;
 		return;
 	}
     DrinkOrders *drink_orders = [DrinkOrders instance];
@@ -164,6 +167,7 @@
 #pragma mark ViewCurrentOrders
 -(void)initViewCurrentOrders
 {
+    self.navigationItem.leftBarButtonItem = nil;
 	self.navigationItem.rightBarButtonItem = addOrder_btn;
     [self loadOrderData];
 }
@@ -571,55 +575,6 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
     [self initViewCurrentOrders];
     
 }
-/*
--(void)sendOrder:(id)sender
-{
-    modalViewDidAppear = YES;
-    HUD = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.navigationController.view addSubview:HUD];
-    HUD.delegate = self;
-    [HUD show:YES];
-    [self sendOrders];
-    //[self sendOrders];
-    //[HUD showWhileExecuting:@selector(sendOrders) onTarget:self withObject:nil animated:YES];
-}
--(void)sendOrders
-{
-    [HUD hide:YES];
-    SBJSON *parser = [[SBJSON alloc] init];
-	NSMutableString* theString = [NSMutableString string];
-    DrinkOrders *drink_orders = [DrinkOrders instance];
-	NSMutableArray *drink_orders_array  = [drink_orders getArray];
-	for(int i=0;i<[drink_orders_array count];i++)
-	{
-		NSDictionary *drink_dict = [drink_orders_array objectAtIndex:i];    
-		NSString *drink_str = [parser stringWithObject:drink_dict];
-		if([drink_orders_array count] >1)
-			[theString appendString:[NSString stringWithFormat:@"json=%@",drink_str]];
-		else
-			[theString appendString:drink_str];
-	}
-	if(theString != NULL && ![theString isEqualToString:@""])
-	{
-
-        BOOL orderSent = [[DataService sharedDataService]placeOrder:
-                          [[[[Order sharedOrder] currentOrder]objectForKey:@"run"]objectForKey:@"id"] 
-                                                          order:[Utils urlencode:theString]
-                                                    updateOrder:nil
-                                                         orderID:nil];
-        if(orderSent)
-        {
-            [FlurryAnalytics logEvent:@"Order Added"];
-            self.navigationItem.leftBarButtonItem = nil;
-            DrinkOrders *drink_orders = [DrinkOrders instance];
-            [drink_orders clearArray];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
-
-        }
-    }
-    
-}
- */
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	if(buttonIndex == 1) {
 		
@@ -754,12 +709,13 @@ commitEditingStyle: (UITableViewCellEditingStyle) editingStyle
     CoffeeRunSampleAppDelegate *appDelegate  = (CoffeeRunSampleAppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate showAdView];
 }
+/*
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
+    [super didReceiveMemsoryWarning];
     // Release any cached data, images, etc. that aren't in use.
 }
+ */
 
 - (void)viewDidUnload {
 

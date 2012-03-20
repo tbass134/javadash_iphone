@@ -105,6 +105,7 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
+    printf("signup viewdidload\n");
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(getUserInfo) 
                                                  name:@"getUserInfo"
@@ -412,17 +413,24 @@
 #pragma mark - Others
 -(IBAction)connectFacebook:(id)sender
 {
-    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    
+    HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.navigationController.view addSubview:HUD];	
     HUD.delegate = self;	
     [HUD show:YES];
+    
+    
     if([UIAppDelegate.facebook isSessionValid])
     {
+        printf("FB Vaild");
         UIAppDelegate.fb_tag = @"me";
         [UIAppDelegate.facebook requestWithGraphPath:@"me" andDelegate:UIAppDelegate];
     }
     else
+    {
+        printf("FB authorize");
         [UIAppDelegate.facebook authorize:UIAppDelegate.permissions];
+    }
 }
 #pragma mark - FaceBook
 -(void)facebookDidLogin

@@ -80,6 +80,7 @@ FBSessionDelegate,AdWhirlDelegate> {
 -(void)resetAdView;
 -(void)showAdView;
 -(void)hideAdView;
+-(void)adjustViewWithOutAds;
 @property (nonatomic,assign) BOOL adsLoaded;
 @property (nonatomic, retain) NSString *adWhirlKey;
 

@@ -116,18 +116,32 @@
 #endif        
         //tell the server about the purchase.
         //Send a push to all devices
-        BOOL didPurchaseApp = [[DataService sharedDataService]purchaseApp];
-        if(didPurchaseApp)
-        {
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Purchase Sucessful" message:@"Thanks for your purchase!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-            [alert show];
-            [alert release];
-            [self appPurchased];
-        }
-    } 
+        HUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.navigationController.view addSubview:HUD];
+        // Regiser for HUD callbacks so we can remove it from the window at the right time
+        HUD.delegate = self;
+        [HUD show:YES];
+        [self purchaseApp];
+
+        
+        
+            } 
     onCancelled:^ { 
     NSLog(@"User Cancelled Transaction"); 
     }];
+}
+-(void)purchaseApp
+{
+    [HUD hide:YES];
+    BOOL didPurchaseApp = [[DataService sharedDataService]purchaseApp];
+    
+    if(didPurchaseApp)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Purchase Sucessful" message:@"Thanks for your purchase!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        [alert show];
+        [alert release];
+        [self appPurchased];
+    }
 
 }
 -(void)appPurchased
@@ -139,6 +153,8 @@
     [appDelegate checkForAppPurchase];
    // [self.view setNeedsDisplay];
     [self viewDidAppear:YES];
+    
+    [appDelegate adjustViewWithOutAds];
 
 }
 

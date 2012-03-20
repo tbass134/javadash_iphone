@@ -62,45 +62,101 @@
         //DrinkOrders *drink_orders = [DrinkOrders instance];
         //NSLog(@"drink_orders %@",drink_orders);
         
-    
-        Order *order = [Order sharedOrder];
-        SBJSON *parser = [[SBJSON alloc] init];	
-        NSString *order_str = [parser stringWithObject:edit_order_dict];
-        [parser release];
-         NSDictionary *selected_drink = [[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"]objectAtIndex:selected_index];
-        
-        
-        
-        BOOL orderPlaced = [[DataService sharedDataService]placeOrder:
-                            [[[order currentOrder]objectForKey:@"run"]objectForKey:@"id"]
-                                                                order:order_str
-                                                          updateOrder:@"1"
-                                                              orderID:[selected_drink objectForKey:@"order_id"]
-                            ];
-        
-        if(orderPlaced)
-        {
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-        
+        HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+        [self.navigationController.view addSubview:HUD];
+        // Regiser for HUD callbacks so we can remove it from the window at the right time
+        HUD.delegate = self;
+        // Show the HUD while the provided method executes in a new thread
+        [HUD showWhileExecuting:@selector(editOrder) onTarget:self withObject:nil animated:YES];
     }
     else
     {
-        printf("saveOrder");
-        NSMutableDictionary *savedDrink = [[NSMutableDictionary alloc]init];
-        NSString *timestamp = [NSString stringWithFormat:@"%0.0f", [[NSDate date] timeIntervalSince1970]];
-        [savedDrink setObject:timestamp forKey:@"timestamp"];
-        [savedDrink setObject:text_view.text forKey:@"CustomOrder"];
-        
-        DrinkOrders *drink_orders = [DrinkOrders instance];
-        [[drink_orders getArray]addObject:savedDrink];
-        
-        [self.navigationController popViewControllerAnimated:YES];
-        [savedDrink release];
+        printf("add order");
+        HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+        [self.navigationController.view addSubview:HUD];
+        // Regiser for HUD callbacks so we can remove it from the window at the right time
+        HUD.delegate = self;
+        // Show the HUD while the provided method executes in a new thread
+        [HUD showWhileExecuting:@selector(addOrder) onTarget:self withObject:nil animated:YES];
     }
-     
-	
 }
+#pragma mark EDIT ORDER
+-(void)editOrder{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    Order *order = [Order sharedOrder];
+    SBJSON *parser = [[SBJSON alloc] init];	
+    NSString *order_str = [parser stringWithObject:edit_order_dict];
+    [parser release];
+    NSDictionary *selected_drink = [[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"]objectAtIndex:selected_index];
+    
+    
+    
+    BOOL orderPlaced = [[DataService sharedDataService]placeOrder:
+                        [[[order currentOrder]objectForKey:@"run"]objectForKey:@"id"]
+                                                            order:order_str
+                                                      updateOrder:@"1"
+                                                          orderID:[selected_drink objectForKey:@"order_id"]
+                        ];
+    
+    if(orderPlaced)
+    {
+        [self performSelectorOnMainThread:@selector(orderEdited)
+                               withObject:nil
+                            waitUntilDone:YES];
+    }
+    [pool release];
+}
+-(void)orderEdited{
+    //clear the drink orders array
+    [[DrinkOrders instance]clearArray];
+    //[Utils showAlert:@"Order Updated" withMessage:nil inView:self.view];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark ADD ORDER
+-(void)addOrder{
+     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    NSMutableDictionary *savedDrink = [[NSMutableDictionary alloc]init];
+    NSString *timestamp = [NSString stringWithFormat:@"%0.0f", [[NSDate date] timeIntervalSince1970]];
+    [savedDrink setObject:timestamp forKey:@"timestamp"];
+    [savedDrink setObject:text_view.text forKey:@"CustomOrder"];
+    
+    Order *order = [Order sharedOrder];
+    SBJSON *parser = [[SBJSON alloc] init];	
+    NSString *order_str = [parser stringWithObject:savedDrink];
+    [parser release];
+    NSDictionary *selected_drink = [[[[order currentOrder]objectForKey:@"run"]objectForKey:@"orders"]objectAtIndex:selected_index];
+    
+    
+    
+    BOOL orderPlaced = [[DataService sharedDataService]placeOrder:
+                        [[[order currentOrder]objectForKey:@"run"]objectForKey:@"id"]
+                                                            order:order_str
+                                                      updateOrder:NULL
+                                                          orderID:[selected_drink objectForKey:@"order_id"]
+                        ];
+    
+    if(orderPlaced)
+    {
+        
+        [self performSelectorOnMainThread:@selector(orderAdded)
+                               withObject:nil
+                            waitUntilDone:YES];
+    }
+    
+    [pool release];
+}
+-(void)orderAdded{
+    //clear the drink orders array
+    [[DrinkOrders instance]clearArray];
+    //[Utils showAlert:@"Order Updated" withMessage:nil inView:self.view];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
+    [self.navigationController popViewControllerAnimated:YES];
+    
+
+}
+
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range  replacementText:(NSString *)text
 {
 	if (range.length==0) {

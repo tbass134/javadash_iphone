@@ -245,6 +245,7 @@
     
     printf("Calling Load Yelp\n");
     if(!self.view.window)return;
+    yelpLoading = YES;
     // OAuthConsumer doesn't handle pluses in URL, only percent escapes
     // OK: http://api.yelp.com/v2/search?term=restaurants&location=new%20york
     // FAIL: http://api.yelp.com/v2/search?term=restaurants&location=new+york
@@ -302,14 +303,16 @@
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     NSLog(@"Error: %@, %@", [error localizedDescription], [error localizedFailureReason]);
     
-    [Utils showAlert:@"Could not load data" withMessage:nil inView:self.view];
-    noResultsFound.hidden = NO;
-    loadingView.hidden = YES;
-    self.tableView.hidden = NO;
-    self.mapView.hidden = YES;
-    [self.mapView removeAnnotations:self.mapView.annotations];
-    [self.view sendSubviewToBack:search_view];
-     
+    if(!yelpLoading)
+    {
+        [Utils showAlert:@"Could not load data" withMessage:nil inView:self.view];
+        noResultsFound.hidden = NO;
+        loadingView.hidden = YES;
+        self.tableView.hidden = NO;
+        self.mapView.hidden = YES;
+        [self.mapView removeAnnotations:self.mapView.annotations];
+        [self.view sendSubviewToBack:search_view];
+    }
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
@@ -317,6 +320,7 @@
     if(!self.view.window)return;
     loadingView.hidden = YES;
     noResultsFound.hidden = YES;
+    yelpLoading = NO;
     
     //self.tableView.hidden = NO;
     //self.mapView.hidden = NO;
@@ -464,7 +468,7 @@
 }
 - (void) mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
-    /*
+    
 	if([view.annotation isKindOfClass:[ParkPlaceMark class]])
     {
 		ParkPlaceMark* theAnnotation;
@@ -477,7 +481,7 @@
 		NSLog(@"dash %@", [dash getDict]);
 		[self.navigationController popViewControllerAnimated:YES];
 	}
-     */
+     
 
 	
 }
@@ -782,31 +786,30 @@
         // number of rows in the section.
         //
         UIImage *rowBackground;
-        UIImage *selectionBackground;
         NSInteger sectionRows = [self.tableView numberOfRowsInSection:[indexPath section]];
         NSInteger row = [indexPath row];
         if (row == 0 && row == sectionRows - 1)
         {
             rowBackground = [UIImage imageNamed:@"topAndBottomRow.png"];
-            selectionBackground = [UIImage imageNamed:@"topAndBottomRowSelected.png"];
         }
         else if (row == 0)
         {
             rowBackground = [UIImage imageNamed:@"topRow.png"];
-            selectionBackground = [UIImage imageNamed:@"topRowSelected.png"];
         }
         else if (row == sectionRows - 1)
         {
             rowBackground = [UIImage imageNamed:@"bottomRow.png"];
-            selectionBackground = [UIImage imageNamed:@"bottomRowSelected.png"];
         }
         else
         {
             rowBackground = [UIImage imageNamed:@"middleRow.png"];
-            selectionBackground = [UIImage imageNamed:@"middleRowSelected.png"];
         }
         ((UIImageView *)cell.backgroundView).image = rowBackground;
-        ((UIImageView *)cell.selectedBackgroundView).image = selectionBackground;
+        
+        
+        UIView *backgroundView = [[[UIView alloc] init] autorelease];
+        backgroundView.backgroundColor = [UIColor colorWithRed:108.0f/255.0f green:58.0f/255.0f blue:23.0f/255.0f alpha:1];
+        cell.selectedBackgroundView = backgroundView;
         
         return cell;
     }

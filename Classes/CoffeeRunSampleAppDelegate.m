@@ -18,12 +18,12 @@
 
 
 //Dev PUSH
-#define kApplicationKey @"V1IdApIgQ_WuhReygjVqBg"
-#define kApplicationSecret @"lMYfECKyQGypK1MzGOf6Ew"
+//#define kApplicationKey @"V1IdApIgQ_WuhReygjVqBg"
+//#define kApplicationSecret @"lMYfECKyQGypK1MzGOf6Ew"
 
 //Production PUSH
-//#define kApplicationKey @"4fh8xUNQT1apEm9hSPoo7A"
-//#define kApplicationSecret @"kzEtWLZnRBSld0813S1cNQ"
+#define kApplicationKey @"4fh8xUNQT1apEm9hSPoo7A"
+#define kApplicationSecret @"kzEtWLZnRBSld0813S1cNQ"
 
 //AdWhirl Constants
 #define kSampleAppKey @"ec8e031962fe4384837daf3c8905045c"
@@ -88,19 +88,19 @@ static NSString* kAppId = @"189714094427611";
 
     NSLog(@"%d",[[[NSUserDefaults standardUserDefaults] valueForKey:@"enable_push_notifications"]boolValue]);
 
-    //if([[[NSUserDefaults standardUserDefaults] valueForKey:@"enable_push_notifications"]boolValue])
-    //{
+    if([[[NSUserDefaults standardUserDefaults] valueForKey:@"enable_push_notifications"]boolValue])
+    {
         printf("Register for notifications");
         [[UIApplication sharedApplication]
          registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
                                              UIRemoteNotificationTypeSound |
                                              UIRemoteNotificationTypeAlert)];
-   /* }
+    }
     else
     {
         [Utils createUniqueDeviceID];
     }
-*/
+
    
 	if(![Utils checkIfContactAdded])
 	{
@@ -110,7 +110,9 @@ static NSString* kAppId = @"189714094427611";
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:dbSignupViewController];
 		
 		// Add the tab bar controller's current view as a subview of the window
-		[window addSubview:nav.view];
+		//[window addSubview:nav.view];
+        
+        [window setRootViewController:nav];
 		[window makeKeyAndVisible];	
         [nav release];
  	}
@@ -544,6 +546,10 @@ static NSString* kAppId = @"189714094427611";
         if(self.adsLoaded)
             myTabBarController.view.frame =  CGRectMake(0,70, 320, 461-50); 
     }
+}
+-(void)adjustViewWithOutAds
+{
+    myTabBarController.view.frame =  CGRectMake(0,15, 320, 466); 
 }
 - (NSString *)adWhirlApplicationKey {
     return kSampleAppKey;
