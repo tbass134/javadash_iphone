@@ -360,8 +360,8 @@ static DataService* sharedDataService = nil;
     if (self) {
         // Initialization code here.
         NSString *currentVersion = @"1_0";
-        //urlPrefix = [@"http://dev.javadash.com/JavaDash/php" retain];
-        urlPrefix = [[NSString stringWithFormat:@"http://javadash.com/app/%@/JavaDash/php",currentVersion] retain];
+        urlPrefix = [@"http://dev.javadash.com/JavaDash/php" retain];
+        //urlPrefix = [[NSString stringWithFormat:@"http://javadash.com/app/%@/JavaDash/php",currentVersion] retain];
         NSLog(@"urlPrefix %@",urlPrefix);
     }
     

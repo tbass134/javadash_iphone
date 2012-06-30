@@ -520,10 +520,14 @@
     [scroll setContentOffset:pt animated:YES];           
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-     if(!self.view.window)return;
-    [scroll setContentOffset:svos animated:YES]; 
-    [textField resignFirstResponder];
-    return YES;
+    if(self.view.window)
+    {
+        [scroll setContentOffset:svos animated:YES];
+        [textField resignFirstResponder];
+        return YES;
+    }
+    else
+        return NO;
 }
 
 

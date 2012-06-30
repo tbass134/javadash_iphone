@@ -40,12 +40,12 @@
 - (void)getAd {
   ADBannerView *iAdView = [[ADBannerView alloc] initWithFrame:CGRectZero];
   kADBannerContentSizeIdentifierPortrait =
-    &ADBannerContentSizeIdentifierPortrait != nil ?
-      ADBannerContentSizeIdentifierPortrait :
+    &kADBannerContentSizeIdentifierPortrait != nil ?
+      kADBannerContentSizeIdentifierPortrait :
       ADBannerContentSizeIdentifier320x50;
   kADBannerContentSizeIdentifierLandscape =
     &ADBannerContentSizeIdentifierLandscape != nil ?
-      ADBannerContentSizeIdentifierLandscape :
+      kADBannerContentSizeIdentifierLandscape :
       ADBannerContentSizeIdentifier480x32;
   iAdView.requiredContentSizeIdentifiers = [NSSet setWithObjects:
                                             kADBannerContentSizeIdentifierPortrait,

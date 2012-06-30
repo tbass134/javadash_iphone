@@ -342,18 +342,21 @@
 }
 
 - (void)updateTimer:(NSTimer *)myTimer{
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    int unitFlags = NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
-    NSDateComponents *components = [gregorian components:unitFlags fromDate:[NSDate date] toDate:run_date options:0];
-    run_time_txt.text = [NSString stringWithFormat:@"Time to Dash:\nHours:%02d Mins:%02d Seconds:%02d",components.hour, components.minute, components.second ];
-
-    if(components.day<=0 && components.hour <=0 && components.minute <=0 && components.second <=0)
-    {
-        run_time_txt.text = @"Order Ended";
-        orderEnded = YES;
-        [self stopTimer];
-    }
     
+    if(run_date != nil)
+    {
+        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        int unitFlags = NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+        NSDateComponents *components = [gregorian components:unitFlags fromDate:[NSDate date] toDate:run_date options:0];
+        run_time_txt.text = [NSString stringWithFormat:@"Time to Dash:\nHours:%02d Mins:%02d Seconds:%02d",components.hour, components.minute, components.second ];
+
+        if(components.day<=0 && components.hour <=0 && components.minute <=0 && components.second <=0)
+        {
+            run_time_txt.text = @"Order Ended";
+            orderEnded = YES;
+            [self stopTimer];
+        }
+    }
     
 }
 -(void)showOptions:(id)sender{

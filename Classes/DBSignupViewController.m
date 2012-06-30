@@ -303,6 +303,8 @@
     self.nameTextField.text = @"JavaDash";
     self.lastNameTextField.text = @"User";
     
+    
+    
     [[NSUserDefaults standardUserDefaults]setValue:self.nameTextField.text forKey:@"FIRSTNAME"];
     [[NSUserDefaults standardUserDefaults]setValue:self.lastNameTextField.text forKey:@"LASTNAME"];
     
